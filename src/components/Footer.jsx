@@ -3,7 +3,6 @@ import { FaFacebook, FaInstagramSquare } from "react-icons/fa";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { IoLogoTiktok } from "react-icons/io5";
 
-
 function Footer() {
   return (
     <>
@@ -21,9 +20,12 @@ function Footer() {
           <AiFillTwitterCircle />
           <IoLogoTiktok />
         </div>
-        <p className="text-center text-xs pt-4
-        pb-4">
-          COPYRIGHT<span> &copy;</span> 2023 <span className="font-bold">BioBaumBauer. </span>
+        <p
+          className="text-center text-xs pt-4
+        pb-4"
+        >
+          COPYRIGHT<span> &copy;</span> 2023{" "}
+          <span className="font-bold">BioBaumBauer. </span>
           ALL RIGHTS RESERVED
         </p>
       </div>
