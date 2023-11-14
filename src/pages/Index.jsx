@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const Index = () => {
   return (
     <div>
@@ -10,7 +11,7 @@ const Index = () => {
         <Outlet />
       </main>
       <footer>
-        <p>this is the footer</p>
+        <Footer />
       </footer>
     </div>
   );
