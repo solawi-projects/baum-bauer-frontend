@@ -25,7 +25,7 @@ const MobileNavbar = () => {
     position: isNavbarVisible ? "sticky" : "fixed",
     top: "0",
     width: "100%",
-    zIndex: 1000,
+    zIndex: 9,
   };
 
   const toggleMenu = () => {
@@ -37,7 +37,7 @@ const MobileNavbar = () => {
   };
 
   return (
-    <div id="outer-container">
+    <nav id="outer-container">
       {isNavbarVisible && <AuthNavbar />}
       <div
         className="w-full h-[60px] bg-bg-header-footer flex justify-start items-center px-2"
@@ -60,7 +60,7 @@ const MobileNavbar = () => {
         ></div>
       )}
 
-      {/* MobileNavbar Menu with Link */}
+      {/* MobileNavbar Menu with Links */}
       <Menu
         isOpen={isMenuOpen}
         onStateChange={({ isOpen }) => setIsMenuOpen(isOpen)}
@@ -138,7 +138,7 @@ const MobileNavbar = () => {
           Contact
         </Link>
       </Menu>
-    </div>
+    </nav>
   );
 };
 
