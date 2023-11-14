@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import DesktopNavbar from "../components/DesktopNavbar";
 import MobileNavbar from "../components/MobileNavbar";
+import Footer from "../components/Footer";
 
 const Index = () => {
   const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth < 768); // 768px is a common breakpoint for mobile screens
@@ -25,7 +26,7 @@ const Index = () => {
         <Outlet />
       </main>
       <footer>
-        <p>this is the footer</p>
+        <Footer />
       </footer>
     </div>
   );
