@@ -1,8 +1,10 @@
+import HeroSection from "../components/HeroSection";
+
 const Home = () => {
   return (
     <div>
-      <h1 className="font-main-font text-4xl">Title of Hero section</h1>
-      <h2 className="text-font-family-color p-4 bg-bg-header-footer">
+      <HeroSection />
+      <h2 className="text-font-family-color p-4 bg-white-color h-[500px]">
         This is the Home Page Title
       </h2>
     </div>
