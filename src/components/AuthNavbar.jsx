@@ -4,7 +4,7 @@ import authBgImage from "../assets/images/biobaum_landing_top_nav_img.png";
 
 const AuthNavbar = () => {
   return (
-    <header
+    <nav
       className="flex justify-end items-end pb-2 px-6 font-general-font text-white-color text-[1rem] md:text-[1.2rem]"
       style={{
         backgroundImage: `url(${authBgImage})`,
@@ -23,7 +23,7 @@ const AuthNavbar = () => {
           <span className="font-semibold">Register</span>
         </Link>
       </div>
-    </header>
+    </nav>
   );
 };
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div
+    <section
       className="relative w-full h-[650px] xs:h-[700px] sm:h-[600px] md:h-[800px] bg-cover bg-left-bottom"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
@@ -33,14 +33,14 @@ const HeroSection = () => {
             remaining essentially unchanged.{" "}
           </p>
           <Link
-            to="/about"
+            to="/sponsor"
             className="mt-4 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[50px]"
           >
             Learn More...
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
