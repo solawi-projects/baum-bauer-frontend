@@ -1,0 +1,19 @@
+.Faq-container{
+    height: 100vh;
+    display: flex;
+flex-direction: column;
+padding-top: 10rem;
+align-items: center;
+background-color: #dfdacb;
+gap:2rem
+}
+h1{
+    font-size: 2rem;
+}
+.Accord-container{
+    width:50%;
+
+}
+.Panel{
+height: 5rem;}
+

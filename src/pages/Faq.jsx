@@ -1,5 +1,6 @@
 import 'flowbite';
 import { Accordion } from 'flowbite-react';
+import '../components/Faq.css';
 
 const Faq = () => {
   const data = [
@@ -15,14 +16,24 @@ const Faq = () => {
       Question: "Q3: Can I choose the location for my sponsored tree?",
       Answer: "A: Depending on the program, some sponsors may have the option to choose a general location for their tree. However, specific locations are often determined by environmental considerations and the organization's planting strategy."
     },
+    {
+      Question: "Q3: Can I choose the location for my sponsored tree?",
+      Answer: "A: Depending on the program, some sponsors may have the option to choose a general location for their tree. However, specific locations are often determined by environmental considerations and the organization's planting strategy."
+    },
+    {
+      Question: "Q3: Can I choose the location for my sponsored tree?",
+      Answer: "A: Depending on the program, some sponsors may have the option to choose a general location for their tree. However, specific locations are often determined by environmental considerations and the organization's planting strategy."
+    },
     // Add more questions and answers as needed
   ];
 
   return (
-    <div>
-      <h1>FAQ</h1><Accordion>
+    <div className='Faq-container'>
+      <h1>FAQ</h1>
+      
       {data.map((item, index) => (
-        <Accordion.Panel key={index}>
+        <Accordion className='Accord-container' key={index}>
+        <Accordion.Panel className='Panel' >
           <Accordion.Title>{item.Question}</Accordion.Title>
           <Accordion.Content>
             <p className="mb-2 text-gray-500 dark:text-gray-400">
@@ -31,8 +42,8 @@ const Faq = () => {
             
           </Accordion.Content>
         </Accordion.Panel>
-        
-      ))}</Accordion>
+        </Accordion>
+      ))}
     </div>
   );
 };
