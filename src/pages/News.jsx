@@ -129,7 +129,7 @@ const News = () => {
           </div>
         </div>
         <img
-          className=" h-full "
+          className="bg-bg-page-color "
           src="src/assets/images/leaves_background_01.png"
           alt=""
         />
