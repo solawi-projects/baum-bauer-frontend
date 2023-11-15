@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import authBgImage from "../assets/images/biobaum_landing_top_nav_img.png";
+import { FaUser } from "react-icons/fa";
 
 const AuthNavbar = () => {
   return (
@@ -16,10 +17,21 @@ const AuthNavbar = () => {
     >
       {/* Auth Navbar Links */}
       <div className="flex space-x-4">
-        <Link to="/login" aria-label="Login page">
+        <Link
+          to="/login"
+          className="flex items-center hover:scale-110 transition-transform duration-400 ease-linear"
+          aria-label="Login page"
+        >
+          <span className="pr-2">
+            <FaUser />
+          </span>{" "}
           <span>Login</span>
         </Link>
-        <Link to="/register" aria-label="Register page">
+        <Link
+          to="/register"
+          className="hover:scale-110 transition-transform duration-400 ease-linear"
+          aria-label="Register page"
+        >
           <span className="font-semibold">Register</span>
         </Link>
       </div>
