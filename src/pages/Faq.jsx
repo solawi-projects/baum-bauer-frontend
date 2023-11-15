@@ -27,7 +27,7 @@ const Faq = () => {
     // Add more questions and answers as needed
   ];
 
-  return (
+  return (<div>
     <div className='Faq-container'>
       <h2 className='text-7xl font-thin '>FAQ</h2>
       <h5 className='text-4xl text-font-family-color'>How can we help you?</h5>
@@ -44,6 +44,40 @@ const Faq = () => {
         </Accordion.Panel>
         </Accordion>
       ))}
+    </div>
+    <div className="relative  overflow-hidden email">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-1">
+          <div className="max-w-xl lg:max-w-lg">
+            <h2 className="text-5xl   text-white ">
+Do you have More Questions?            </h2>
+            <p className="mt-4 text-xl leading-8 text-gray-300">
+write us here!! we will contact shortly through Email !!          </p>
+            <div className="mt-6 flex max-w-md gap-x-4">
+              <label  className="sr-only">
+Enter Message              </label>
+              <textarea
+                id="text-area"
+                name="message"
+                type="message"
+                autoComplete="message"
+                required
+                className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10    focus:outline-none 
+              
+                 sm:text-sm sm:leading-6"
+                placeholder="Enter the message..."
+              />
+              <button
+                type="submit"
+                className="flex-none rounded-md bg-bg-page-color px-3.5 py-2.5 text-sm font-semibold text-font-family-color shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };
