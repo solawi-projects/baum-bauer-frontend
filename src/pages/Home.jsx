@@ -7,7 +7,7 @@ const Home = () => {
     <main>
       {/* Hero Section */}
       <HeroSection />
-      <section className="relative flex flex-col items-center justify-center p-0 md:flex-row md:justify-between xl:p-20">
+      <section className="relative flex flex-col items-center justify-center p-0 md:flex-row md:justify-between md:p-10 xl:p-20">
         {/* Overlay with background image and opacity */}
         <div
           className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-center bg-bg-header-footer"
@@ -43,12 +43,18 @@ const Home = () => {
               alt="Sapling Tree"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
+              width="100%"
+              height="100%"
+              loading="lazy"
             />
             <img
               src="src/assets/images/biobaum_sapling_02.png"
               alt="Sapling Tree"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
+              width="100%"
+              height="100%"
+              loading="lazy"
             />
           </div>
         </article>
@@ -77,12 +83,18 @@ const Home = () => {
               alt="Sapling Tree"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
+              width="100%"
+              height="100%"
+              loading="lazy"
             />
             <img
               src="src/assets/images/biobaum_sapling_04.png"
               alt="Sapling Tree"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
+              width="100%"
+              height="100%"
+              loading="lazy"
             />
           </div>
         </article>
@@ -91,6 +103,9 @@ const Home = () => {
       <img
         src="src/assets/images/biobaum_landing_footer_img.png"
         alt="Footer Image"
+        width="100%"
+        height="100%"
+        loading="lazy"
       />
     </main>
   );

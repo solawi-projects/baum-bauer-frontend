@@ -98,16 +98,17 @@ const Contact = () => {
           </div>
         </section>
         <section className="max-w-md md:w-1/2 sm:w-1 lg:w-1/2 flex flex-row justify-center items-center">
-          <form className="w-full flex flex-col gap-3">
-          <div>
+          <form className="w-full flex flex-col gap-4">
+            <div>
               <div className="mb-2 block">
                 <Label htmlFor="firstname" value="First Name" />
               </div>
               <TextInput
+                aria-label="Type here your first name"
                 id="firstname"
                 type="text"
                 icon={IoMdPerson}
-                placeholder="Mice"
+                placeholder="Like: Mice"
                 required
                 shadow
               />
@@ -117,10 +118,19 @@ const Contact = () => {
                 <Label htmlFor="lastname" value="Last Name" />
               </div>
               <TextInput
+                aria-label="Type here your last name"
                 id="lastname"
                 type="text"
                 icon={IoMdPerson}
-                placeholder="Mice Polocy"
+                placeholder="Like: Polocy"
+                helperText={
+                  <span>
+                    Full Name should look like,&nbsp;
+                    <span className="bg-white-color px-2 py-1 rounded-md">
+                      Mice Polocy
+                    </span>
+                  </span>
+                }
                 required
                 shadow
               />
@@ -130,6 +140,7 @@ const Contact = () => {
                 <Label htmlFor="emailAddress" value="Email Address" />
               </div>
               <TextInput
+                aria-label="Type here your email address"
                 id="emailAddress"
                 icon={MdEmail}
                 type="email"
@@ -143,6 +154,7 @@ const Contact = () => {
                 <Label htmlFor="comment" value="Your message" />
               </div>
               <Textarea
+                aria-label="Type here your your message"
                 id="comment"
                 placeholder="write your message here..."
                 required
@@ -155,13 +167,20 @@ const Contact = () => {
                 I agree with the&nbsp;
                 <Link
                   href="#"
-                  className="text-cyan-600 hover:underline dark:text-cyan-500"
+                  className="text-font-family-color hover:underline hover"
                 >
                   terms and conditions
                 </Link>
               </Label>
             </div>
-            <Button type="submit">send your message</Button>
+            <Button
+              outline
+              gradientDuoTone="whiteToOrange"
+              className="bg-font-family-color hover:bg-bg-header-footer hover:text-white-color hover:border-white-color"
+              type="submit"
+            >
+              send your message
+            </Button>
           </form>
         </section>
       </div>
