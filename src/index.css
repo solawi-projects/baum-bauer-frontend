@@ -50,3 +50,8 @@ Heading general styles- End
 .bm-overlay {
   display: none;
 }
+
+/*  */
+.scale-origin-left {
+  transform-origin: left center;
+}

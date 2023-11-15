@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { fallDown as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
+import { fallDown as Menu } from "react-burger-menu";
 import AuthNavbar from "./AuthNavbar";
 import closeMenu from "../assets/images/close_menu.svg";
 import openMenu from "../assets/images/hamburger_menu.svg";
@@ -83,7 +83,7 @@ const MobileNavbar = () => {
         {/* Links */}
         <Link
           to="/"
-          className="menu-item pt-[100px] border-b border-white text-font-family-color hover:text-dark-gray transition-transform duration-400 ease-linear"
+          className="menu-item border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray pt-[100px]"
           onClick={handleLinkClick}
           aria-label="Home page"
         >
@@ -91,7 +91,7 @@ const MobileNavbar = () => {
         </Link>
         <Link
           to="/sponsor"
-          className="menu-item pt-4 border-b border-white text-font-family-color hover:text-dark-gray transition-transform duration-400 ease-linear"
+          className="menu-item pt-4 border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray"
           onClick={handleLinkClick}
           aria-label="Sponsor page"
         >
@@ -99,7 +99,7 @@ const MobileNavbar = () => {
         </Link>
         <Link
           to="/news"
-          className="menu-item pt-4 border-b border-white text-font-family-color hover:text-dark-gray transition-transform duration-400 ease-linear"
+          className="menu-item pt-4 border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray"
           onClick={handleLinkClick}
           aria-label="News page"
         >
@@ -107,7 +107,7 @@ const MobileNavbar = () => {
         </Link>
         <Link
           to="/about"
-          className="menu-item pt-4 border-b border-white text-font-family-color hover:text-dark-gray transition-transform duration-400 ease-linear"
+          className="menu-item pt-4 border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray"
           onClick={handleLinkClick}
           aria-label="About page"
         >
@@ -115,7 +115,7 @@ const MobileNavbar = () => {
         </Link>
         <Link
           to="/gallery"
-          className="menu-item pt-4 border-b border-white text-font-family-color hover:text-dark-gray transition-transform duration-400 ease-linear"
+          className="menu-item pt-4 border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray"
           onClick={handleLinkClick}
           aria-label="Gallery page"
         >
@@ -123,7 +123,7 @@ const MobileNavbar = () => {
         </Link>
         <Link
           to="/faq"
-          className="menu-item pt-4 border-b border-white text-font-family-color hover:text-dark-gray transition-transform duration-400 ease-linear"
+          className="menu-item pt-4 border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray"
           onClick={handleLinkClick}
           aria-label="FAQ page"
         >
@@ -131,7 +131,7 @@ const MobileNavbar = () => {
         </Link>
         <Link
           to="/contact"
-          className="menu-item pt-4 border-b border-white text-font-family-color hover:text-dark-gray transition-transform duration-400 ease-linear hover:text-te"
+          className="menu-item pt-4 border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray"
           onClick={handleLinkClick}
           aria-label="Contact page"
         >
