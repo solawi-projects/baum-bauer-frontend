@@ -1,4 +1,4 @@
-import backgroundImage from "../assets/images/leaves_background_02.png";
+import backgroundImage from "../assets/images/leaves_background_02.webp";
 
 const About = () => {
   return (
@@ -77,13 +77,13 @@ const About = () => {
           {/* Image section */}
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
             <img
-              src="src/assets/images/biobaum_sapling_01.png"
+              src="src/assets/images/biobaum_sapling_01.webp"
               alt="Sapling Tree"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
             />
             <img
-              src="src/assets/images/biobaum_sapling_02.png"
+              src="src/assets/images/biobaum_sapling_02.webp"
               alt="Sapling Tree"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
@@ -145,15 +145,16 @@ const About = () => {
             to join us in this journey towards a greener, more sustainable
             future.
           </p>
+          {/* Image section */}
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
             <img
-              src="src/assets/images/biobaum_sapling_03.png"
+              src="src/assets/images/biobaum_sapling_03.webp"
               alt="Sapling Tree"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
             />
             <img
-              src="src/assets/images/biobaum_sapling_04.png"
+              src="src/assets/images/biobaum_sapling_04.webp"
               alt="Sapling Tree"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
@@ -163,7 +164,7 @@ const About = () => {
       </section>
       {/* Footer Image */}
       <img
-        src="src/assets/images/biobaum_about_footer_img.png"
+        src="src/assets/images/biobaum_about_footer_img.webp"
         alt="Footer Image"
         className="w-full mt-10"
       />
