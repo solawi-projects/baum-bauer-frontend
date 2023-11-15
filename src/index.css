@@ -22,7 +22,7 @@ body,
 html {
   font-family: "Chicle", serif;
   font-family: "Open Sans", sans-serif;
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
   scroll-behavior: smooth;
   line-height: 1.5;
@@ -44,4 +44,14 @@ Heading general styles- End
 
 .page {
   min-height: calc(100vh - (12rem + 14rem));
+}
+
+/*  */
+.bm-overlay {
+  display: none;
+}
+
+/*  */
+.scale-origin-left {
+  transform-origin: left center;
 }
