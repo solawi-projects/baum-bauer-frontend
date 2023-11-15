@@ -28,7 +28,7 @@ const Faq = () => {
   ];
 
   return (
-    <div className='Faq-container bg-bg-page-color'>
+    <div className='Faq-container'>
       <h1 className='text-7xl font-thin '>FAQ</h1>
       
       {data.map((item, index) => (
