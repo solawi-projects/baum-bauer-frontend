@@ -7,10 +7,11 @@ padding-bottom: 10rem;
 align-items: center;
 gap:2rem;
 background: url('../assets/BackgroudFaq.png') center/cover no-repeat rgb(16, 16, 16,.1)}
-h1{
+h2{
     font-family: "Chicle", serif;
     color:#5a6448;
 }
+
 .texts{
     font-family: "Open Sans", sans-serif;
     color:#82817e

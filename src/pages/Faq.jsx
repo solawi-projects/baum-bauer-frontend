@@ -33,20 +33,20 @@ const Faq = () => {
   ];
 
   return (
-    <div className="Faq-container bg-bg-page-color">
-      <h1 className="text-7xl font-thin ">FAQ</h1>
-
+    <div className='Faq-container'>
+      <h2 className='text-7xl font-thin '>FAQ</h2>
+      <h5 className='text-4xl text-font-family-color'>How can we help you?</h5>
       {data.map((item, index) => (
-        <Accordion className="Accord-container" key={index}>
-          <Accordion.Panel className="Panel">
-            <Accordion.Title className="texts title">
-              <img className="imageicon" src={treeicon}></img>
-              <div>{item.Question}</div>
-            </Accordion.Title>
-            <Accordion.Content>
-              <p className="mb-2 texts">{item.Answer}</p>
-            </Accordion.Content>
-          </Accordion.Panel>
+        <Accordion collapseAll className= 'Accord-container' key={index}>
+        <Accordion.Panel className='Panel' >
+          <Accordion.Title className='texts title'><img className='imageicon' src={treeicon}></img><div>{item.Question}</div></Accordion.Title>
+          <Accordion.Content>
+            <p className="mb-2 texts">
+              {item.Answer}
+            </p>
+            
+          </Accordion.Content>
+        </Accordion.Panel>
         </Accordion>
       ))}
     </div>
