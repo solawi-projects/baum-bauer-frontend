@@ -88,8 +88,8 @@ const Gallery = () => {
         ></div>
 
         <div className="relative z-9">
-          <h2 className="text-4xl md:text-5xl mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] mb-[15px] text-center font-main-font tracking-widest text-[#5a6448]">
-            GALLERY
+          <h2 className="text-5xl md:text-7xl mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] mb-[15px] text-center font-main-font tracking-wide text-[#5a6448]">
+            Gallery
           </h2>
 
           {/* Gallery Page Description */}
