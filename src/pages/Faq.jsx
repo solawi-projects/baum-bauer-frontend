@@ -29,10 +29,10 @@ const Faq = () => {
 
   return (
     <div className='Faq-container'>
-      <h1 className='text-7xl font-thin '>FAQ</h1>
-      
+      <h2 className='text-7xl font-thin '>FAQ</h2>
+      <h5 className='text-4xl text-font-family-color'>How can we help you?</h5>
       {data.map((item, index) => (
-        <Accordion className= 'Accord-container' key={index}>
+        <Accordion collapseAll className= 'Accord-container' key={index}>
         <Accordion.Panel className='Panel' >
           <Accordion.Title className='texts title'><img className='imageicon' src={treeicon}></img><div>{item.Question}</div></Accordion.Title>
           <Accordion.Content>
