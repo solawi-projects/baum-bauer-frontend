@@ -11,6 +11,8 @@ const Navbar = () => {
     >
       <Link to="/">Home</Link>
       <Link to="/sponsor">Sponsor</Link>
+      <Link to="/Faq">FAQ</Link>
+
     </div>
   );
 };
