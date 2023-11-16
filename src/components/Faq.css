@@ -31,13 +31,8 @@ h2{
     width: 2rem;
 }
 .email{
-    width: 100vw;
-    height: 30vh;
-    padding: 5rem 0rem;
-    background: url('../assets/FaqBottomBg.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: 100% auto; /* 100% width, maintain aspect ratio for height */
+    background: #5a6448;
+    padding: 5rem 0 ; /* 100% width, maintain aspect ratio for height */
     display: flex;
     z-index: 200;
 }
