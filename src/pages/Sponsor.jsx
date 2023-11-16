@@ -1,9 +1,11 @@
 import Apple from "../assets/Trees/Apples.jpg";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
-
+import { IoIosArrowDown } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
-import { Dropdown } from 'flowbite-react';
+import { useState } from "react";
+import { IoIosArrowDropleftCircle } from "react-icons/io";
+import { IoIosArrowDroprightCircle } from "react-icons/io";
 
 import "../components/Tress.css";
 const Sponsor = () => {
@@ -78,7 +80,12 @@ const Sponsor = () => {
       currency: "€",
       image: Apple,
     },
-  ];
+  ];const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+  
   return (
     <div> <Breadcrumb
     aria-label=""
@@ -109,15 +116,34 @@ const Sponsor = () => {
           </div>
         </div>
       </div>
-      <Dropdown  label="Dropdown" inline >
-      <Dropdown.Item>Dashboard</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Earnings</Dropdown.Item>
-      <Dropdown.Item>Sign out</Dropdown.Item>
-    </Dropdown>
-      <div className=" flex  justify-center items-center flex-wrap gap-10 pt-40">
+     
+      <div className="h-auto relative dropdown">
+      <div
+        id="dropdown-button "
+        onClick={toggleDropdown}
+        className="select-none border h-auto absolute top-10 right-40 w-40 border-gray-400 rounded px-5 py-2 cursor-pointer flex justify-between"
+      >
+        Options
+        <IoIosArrowDown />
+      </div>
+      <div
+        id="dropdown-menu"
+        className={`${
+          isDropdownOpen ? 'block' : 'hidden'
+        } absolute top-50 absolute top-20 h-auto right-40 w-400 border border-gray-300 bg-white shadow-md mt-2 transition-all duration-300`}
+       
+        >
+        <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">popularity</div>
+        <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">Latest</div>
+        <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">Price:Low-High</div>
+
+        <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">Price:High-Low</div>
+
+      </div>
+    </div>
+      <div className=" flex  justify-center flex-wrap gap-10 pt-40 pb-40 ml-40 mr-40">
         {data.map((item, index) => (
-          <div key={index} className="flex  items-center ">
+          <div key={index} className="flex  pr items-center ">
             <div className="w-60 p-10 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
               <img
                 className="w-40 h-40 object-cover rounded-t-md"
@@ -128,11 +154,11 @@ const Sponsor = () => {
                 <h2 className="text-2xl font-bold text-gray-700">
                   {item.name}
                 </h2>
+                <button className="block text-xl font-semibold text-gray-700 cursor-auto">{`$${item.price}`}</button>
 
-                <div className="mt-2 mb-1 flex justify-between pl-1 pr-1">
-                  <button className="block text-xl font-semibold text-gray-700 cursor-auto">{`$${item.price}`}</button>
+                <div className="mt-2 mb-1 flex justify-between ">
                   <button className=" Sponsorbutton text-lg block font-semibold py-2 px-4 text-green-100 hover:text-white rounded-lg shadow hover:shadow-md transition duration-300">
-                    Buy
+                    Sponsor
                   </button>
                 </div>
               </div>
@@ -140,6 +166,90 @@ const Sponsor = () => {
           </div>
         ))}
       </div>
+      <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+      <div className="flex flex-1 justify-between sm:hidden">
+        <a
+          href="#"
+          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        >
+          Previous
+        </a>
+        <a
+          href="#"
+          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        >
+          Next
+        </a>
+      </div>
+      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div>
+          <p className="text-sm text-gray-700">
+            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span> of{' '}
+            <span className="font-medium">97</span> results
+          </p>
+        </div>
+        <div>
+          <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+            <a
+              href="#"
+              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            >
+              <span className="sr-only">Previous</span>
+              <IoIosArrowDropleftCircle className="h-5 w-5" aria-hidden="true" />
+            </a>
+            {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
+            <a
+              href="#"
+              aria-current="page"
+              className="relative z-10 inline-flex items-center bg-green-900 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              1
+            </a>
+            <a
+              href="#"
+              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            >
+              2
+            </a>
+            <a
+              href="#"
+              className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+            >
+              3
+            </a>
+            <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
+              ...
+            </span>
+            <a
+              href="#"
+              className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+            >
+              8
+            </a>
+            <a
+              href="#"
+              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            >
+              9
+            </a>
+            <a
+              href="#"
+              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            >
+              10
+            </a>
+            <a
+              href="#"
+              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            >
+              <span className="sr-only">Next</span>
+              <IoIosArrowDroprightCircle 
+ className="h-5 w-5" aria-hidden="true" />
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };
