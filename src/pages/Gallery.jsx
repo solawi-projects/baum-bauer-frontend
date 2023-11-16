@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import backgroundImage from "../assets/images/leaves_background_03.png";
 import closeMenu from "../assets/images/close_menu.svg";
 import { Fade } from "react-awesome-reveal";
+import { Breadcrumb } from "flowbite-react";
+import { HiHome } from "react-icons/hi";
 
 const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
@@ -80,6 +82,15 @@ const Gallery = () => {
 
   return (
     <main>
+      <Breadcrumb
+        aria-label=""
+        className="bg-gray-50 px-5 py-3 dark:bg-gray-800"
+      >
+        <Breadcrumb.Item href="/" icon={HiHome}>
+          Home
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>Gallery</Breadcrumb.Item>
+      </Breadcrumb>
       <div className="relative w-full mx-auto p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px]">
         {/* Overlay with background image and opacity */}
         <div
