@@ -15,7 +15,8 @@ const News = () => {
       </Breadcrumb>
 
       <div className="bg-bg-page-color">
-        <h2 className="font-main-font  text-5xl flex justify-center pt-10 pb-14 ">
+
+        <h2 className="font-main-font text-[#5a6448] text-5xl flex justify-center pt-10 pb-14 ">
           Blog News
         </h2>
 
@@ -34,19 +35,22 @@ const News = () => {
                   alt=""
                 />
               </a>
+         
               <div className="p-5">
                 <a href="#">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Noteworthy technology acquisitions 2021
                   </h5>
+
                 </a>
+                <p className="text-xs text-font-family-color pt-4 pb-2">July 2023</p>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   Here are the biggest enterprise technology acquisitions of
                   2021 so far, in reverse chronological order.
                 </p>
                 <a
                   href="#"
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-cyan-600 hover:underline dark:text-cyan-500"
+                  className="inline-flex items-center py-1 text-sm font-medium text-center text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                   Read more{" "}
                   <span className="pt-1">
@@ -74,13 +78,14 @@ const News = () => {
                     Noteworthy technology acquisitions 2021
                   </h5>
                 </a>
+                <p className="text-xs text-font-family-color pt-4 pb-2">April 2023</p>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   Here are the biggest enterprise technology acquisitions of
                   2021 so far, in reverse chronological order.
                 </p>
                 <a
                   href="#"
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-cyan-600 hover:underline dark:text-cyan-500"
+                  className="inline-flex items-center py-1 text-sm font-medium text-center text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                   Read more{" "}
                   <span className="pt-1">
@@ -108,13 +113,14 @@ const News = () => {
                     Noteworthy technology acquisitions 2021
                   </h5>
                 </a>
+                <p className="text-xs text-font-family-color pt-4 pb-2">March 2023</p>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   Here are the biggest enterprise technology acquisitions of
                   2021 so far, in reverse chronological order.
                 </p>
                 <a
                   href="#"
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-cyan-600 hover:underline dark:text-cyan-500"
+                  className="inline-flex items-center py-1 text-sm font-medium text-center text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                   Read more{" "}
                   <span className="pt-1">
