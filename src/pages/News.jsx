@@ -26,7 +26,7 @@ const News = () => {
           <div className=" flex flex-wrap justify-center gap-5 pl-2 pr-2 pb-5">
             {/* the first card */}
 
-            <div className=" max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-white-color shadow-md hover:shadow-lg hover:rounded-lg">
+            <div className=" max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-white-color hover:shadow-lg hover:rounded-lg">
               <a href="#">
                 <img
                   className="rounded-t-lg"
