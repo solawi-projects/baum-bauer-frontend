@@ -5,7 +5,7 @@ import { Breadcrumb } from "flowbite-react";
 const PageBreadcrumb = (props) => {
   const { activeLinks, deActiveLink } = props;
   return (
-    <div className="container mx-auto">
+    <div className="">
       <Breadcrumb
         aria-label="This is Breadcrumb showing the location of current page"
         className="bg-gray-50 px-5 py-3 dark:bg-gray-800"

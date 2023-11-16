@@ -180,7 +180,7 @@ const Contact = () => {
           </form>
         </section>
       </div>
-      <div className="container mx-auto">
+      <div className="">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2427.6327705419662!2d13.410731076522424!3d52.521984636082806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84e1f1ef51c1f%3A0x81d2865ac4d6253a!2sAlexanderstra%C3%9Fe%204%2C%2010178%20Berlin!5e0!3m2!1sen!2sde!4v1700057987685!5m2!1sen!2sde"
           className="w-full h-[650px] border-0 rounded-sm"
