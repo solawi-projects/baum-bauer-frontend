@@ -56,7 +56,6 @@ Heading general styles- End
   transform-origin: left center;
 }
 
-/*  */
 .scale-0 {
   transform: scale(0);
 }
@@ -64,3 +63,4 @@ Heading general styles- End
 .scale-100 {
   transform: scale(1);
 }
+
