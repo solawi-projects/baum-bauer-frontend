@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logoImage from "../assets/images/BioBaumBauer_Logo.svg";
 import backgroundImage from "../assets/images/biobaum_landing_background_img.png";
-import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -15,13 +15,15 @@ const HeroSection = () => {
           src={logoImage}
           alt="BioBaumBauer Logo"
           className="h-[200px] w-[200px] md:h-[350px] md:w-[350px]"
+          width="100%"
+          height="100%"
         />
       </div>
 
       {/* Hero Text and Button */}
       <div className="w-[90%] md:w-[80%] lg:w-[60%] xl:w-[40%] m-auto">
         <div className="flex flex-col justify-center items-center mt-8">
-          <h1 className="text-2xl md:text-4xl font-bold text-white">
+          <h1 className="text-4xl md:text-5xl text-white font-main-font tracking-widest">
             Hero Title
           </h1>
           <p className="mt-2 text-[1rem] md:text-[1.2rem] text-white">
@@ -34,7 +36,8 @@ const HeroSection = () => {
           </p>
           <Link
             to="/sponsor"
-            className="mt-4 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[50px]"
+            className="mt-4 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[50px] hover:scale-110 hover:border border-[#9c988e] transition duration-4000 ease-linear"
+            aria-label="Sponsor page"
           >
             Learn More...
           </Link>

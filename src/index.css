@@ -43,10 +43,24 @@ Heading general styles- End
 */
 
 .page {
-  min-height: calc(100vh - (12rem + 14rem));
+  min-height: calc(100vh - (12rem + 10rem));
 }
 
 /*  */
 .bm-overlay {
   display: none;
+}
+
+/*  */
+.scale-origin-left {
+  transform-origin: left center;
+}
+
+/*  */
+.scale-0 {
+  transform: scale(0);
+}
+
+.scale-100 {
+  transform: scale(1);
 }
