@@ -3,8 +3,8 @@
 const EachPageHeader = (props) => {
   const { title, subtitle } = props;
   return (
-    <div className="container mx-auto flex flex-col justify-center items-center h-32 bg-white-color mt-1 py-24">
-      <h2 className="font-main-font text-6xl mb-5">{title}</h2>
+    <div className="flex flex-col justify-center items-center h-32 mt-1 py-24">
+      <h2 className="font-main-font md:text-7xl text-5xl mb-5">{title}</h2>
       <p className="font-general-font text-3xl">{subtitle}</p>
     </div>
   );

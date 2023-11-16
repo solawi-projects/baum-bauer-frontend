@@ -43,7 +43,7 @@ Heading general styles- End
 */
 
 .page {
-  min-height: calc(100vh - (12rem + 14rem));
+  min-height: calc(100vh - (12rem + 10rem));
 }
 
 /*  */
