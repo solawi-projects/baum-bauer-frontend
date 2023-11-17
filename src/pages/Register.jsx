@@ -17,7 +17,9 @@ import { SiGooglestreetview } from "react-icons/si";
 import { FaHouse } from "react-icons/fa6";
 
 import { Link } from "react-router-dom";
+import EachPageHeader from "../components/EachPageHeader";
 const Register = () => {
+  const titles =['Register Now', 'Please enter your personal information in the form below']
   return (
     <>
       <Breadcrumb
@@ -29,11 +31,12 @@ const Register = () => {
         </Breadcrumb.Item>
         <Breadcrumb.Item>Registeration Form</Breadcrumb.Item>
       </Breadcrumb>
-      <h2 className="text-5xl flex justify-center p-2 mt-5">Register Now</h2>
+      <EachPageHeader title={titles[0]} subtitle={titles[1]} />
+     
 
       {/* registration form */}
 
-      <section className="flex justify-center m-10">
+      <section className="flex justify-center m-8">
         <form className="max-w-xl w-full px-6 py-6 border rounded-lg shadow-md  ">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 p-7">
             <div>{/* first,last and username fields container */}
@@ -68,6 +71,7 @@ const Register = () => {
                   required
                   shadow
                   style={{fontSize:12}} 
+         
                 />
               </div>
 
@@ -85,6 +89,7 @@ const Register = () => {
                   required
                   shadow
                   style={{fontSize:12}} 
+          
                 />
               </div>
             </div>
@@ -104,6 +109,7 @@ const Register = () => {
                   required
                   shadow
                   style={{fontSize:12}} 
+                  className="text-base"
                 />
               </div>
 
@@ -145,9 +151,9 @@ const Register = () => {
           </div>
 
           {/* address fields */}
-          <p className="ml-7">Address</p>
-          <div className=" flex flex-col items-center">
-            <div className=" flex flex-col sm:flex-row gap-7 mt-3">{/* house number and street container */}
+          <p className="ml-6">Address</p>
+          <div className=" grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-5 mt-2 pl-6 pr-6 ">
+            <div className=" flex flex-col gap-4 mt-1">{/* house number and street container */}
               {/* house number field */}
               <div>
                 <div className="mb-1 block">
@@ -162,6 +168,7 @@ const Register = () => {
                   placeholder="Enter your House Number"
                   required
                   shadow
+           
                
 
                 />
@@ -181,11 +188,12 @@ const Register = () => {
                   required
                   shadow
                   style={{fontSize:12}} 
+
                 />
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-7 mt-3 mb-2">   {/* city and country container */}
+            <div className="flex flex-col gap-4 mt-1 mb-2">   {/* city and country container */}
            
               <div> {/* city field */}
                 <div className="mb-1">
@@ -201,7 +209,7 @@ const Register = () => {
                   required
                   shadow
                   style={{fontSize:12}} 
-                  className="text-base"
+   
                 />
               </div>
               <div>  {/* coutry field */}
@@ -224,9 +232,9 @@ const Register = () => {
           </div>
           <div>
             {/* terms an conditions */}
-            <div className="flex items-center gap-2 ml-6 mt-2 mb-2">
+            <div className="flex items-center ml-6 gap-2">
               <Checkbox id="agree" />
-              <Label htmlFor="agree" className="flex">
+              <Label htmlFor="agree" className="">
                 I agree with the&nbsp;
                 <Link
                   href="#"
