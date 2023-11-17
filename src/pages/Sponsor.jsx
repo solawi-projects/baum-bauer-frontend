@@ -182,7 +182,7 @@ const Sponsor = () => {
 
       </div>
     </div>
-      <div className=" flex  justify-center flex-wrap gap-20 pt-40 pb-40 ml-60 mr-60">
+      <div className=" flex  justify-center flex-wrap gap-10 pt-40 pb-40 ml-20 mr-20">
         {data.map((item, index) => (
           <div key={index} className="flex  pr items-center ">
             <div className="w-60 p-10 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
