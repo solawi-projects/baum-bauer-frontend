@@ -3,13 +3,11 @@ import { HiHome } from "react-icons/hi";
 import { IoMdPerson } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot, FaYoutube } from "react-icons/fa6";
 import { AiTwotoneMail } from "react-icons/ai";
-import { FaPhoneSquareAlt } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa6";
+import { FaPhoneSquareAlt, FaLinkedin, FaTiktok } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { BsTwitterX } from "react-icons/bs";
-import { FaTiktok } from "react-icons/fa";
 import EachPageHeader from "../components/EachPageHeader";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 
@@ -57,6 +55,14 @@ const Contact = () => {
               <span className="text-lg">+4917290838934</span>
             </p>
             <p className="flex flex-row justify-center items-center bg-white-color shadow-md rounded-md p-4 hover:shadow-lg hover:rounded-lg gap-5">
+              <a
+                href="http://"
+                className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedin />
+              </a>
               <a
                 href="http://"
                 className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
