@@ -21,8 +21,8 @@ Global variables for colors
 }
 body,
 html {
-  font-family: "Chicle", serif;
-  font-family: "Open Sans", sans-serif;
+  font-family: url("../src/assets/Fonts/Chicle/Chicle-Regular.ttf");
+  font-family:url("../src/assets/Fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf");
   min-height: 100vh;
   overflow-x: hidden;
   scroll-behavior: smooth;

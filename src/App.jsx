@@ -7,7 +7,7 @@ import {
 
 // Importing our pages
 import Home from "./pages/Home";
-import Sponsor from "./pages/Sponsor";
+import Trees from "./pages/Trees";
 import Index from "./pages/Index";
 import News from "./pages/News";
 import About from "./pages/About";
@@ -22,7 +22,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Index />}>
         <Route index element={<Home />} />
-        <Route path="/sponsor" element={<Sponsor />} />
+        <Route path="/trees" element={<Trees />} />
         <Route path="/news" element={<News />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />

@@ -65,7 +65,7 @@ const DesktopNavbar = () => {
           <div className="border-r px-2 sm:px-4 lg:px-8 xl:px-14 flex items-center hover:scale-110 transition-transform duration-400 ease-linear hover:text-dark-gray">
             <NavLink
               className="flex gap-1 justify-center items-center hover:border-b-2"
-              to="/sponsor"
+              to="/trees"
               style={({ isActive }) =>
                 isActive
                   ? {
