@@ -13,6 +13,7 @@ export default {
         "white-color": "var(--white-color)",
         "font-family-color": "var(--font-family-color)",
         "dark-gray": "rgb(60, 60, 60)",
+        "darkgreen-color": "var(--darkgreen-color)"
       },
       fontFamily: {
         "main-font": ["Chicle", "serif"],
@@ -24,7 +25,7 @@ export default {
       },
     },
   },
-  plugins: [     
+  plugins: [
     // eslint-disable-next-line no-undef
     require('flowbite/plugin')
   ]
