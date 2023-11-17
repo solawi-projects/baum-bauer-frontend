@@ -90,12 +90,12 @@ const MobileNavbar = () => {
           Home
         </Link>
         <Link
-          to="/sponsor"
+          to="/trees"
           className="menu-item pt-4 border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray"
           onClick={handleLinkClick}
           aria-label="Sponsor page"
         >
-          Sponsor
+          Trees
         </Link>
         <Link
           to="/news"

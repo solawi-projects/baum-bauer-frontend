@@ -1,7 +1,12 @@
-import "flowbite";
-import { Accordion } from "flowbite-react";
-import "../components/Faq.css";
-import treeicon from "../assets/tree.png";
+
+import 'flowbite';
+import { Accordion } from 'flowbite-react';
+import { Breadcrumb } from "flowbite-react";
+import { HiHome } from "react-icons/hi";
+
+import '../components/Faq.css';
+import treeicon from '../assets/tree.png'
+
 const Faq = () => {
   const data = [
     {
@@ -32,23 +37,67 @@ const Faq = () => {
     // Add more questions and answers as needed
   ];
 
-  return (
-    <div className="Faq-container bg-bg-page-color">
-      <h1 className="text-7xl font-thin ">FAQ</h1>
+  return (<div>      <Breadcrumb
+    aria-label=""
+    className="bg-gray-50 px-5 py-3 dark:bg-gray-800"
+  >
+    <Breadcrumb.Item href="/" icon={HiHome}>
+      Home
+    </Breadcrumb.Item>
+    <Breadcrumb.Item>FAQ</Breadcrumb.Item>
+  </Breadcrumb>
 
+
+    <div className='Faq-container'>
+      <h2 className='text-7xl font-thin '>FAQ</h2>
+      <h5 className='text-4xl text-font-family-color'>How can we help you?</h5>
       {data.map((item, index) => (
-        <Accordion className="Accord-container" key={index}>
-          <Accordion.Panel className="Panel">
-            <Accordion.Title className="texts title">
-              <img className="imageicon" src={treeicon}></img>
-              <div>{item.Question}</div>
-            </Accordion.Title>
-            <Accordion.Content>
-              <p className="mb-2 texts">{item.Answer}</p>
-            </Accordion.Content>
-          </Accordion.Panel>
+        <Accordion collapseAll className= 'Accord-container' key={index}>
+        <Accordion.Panel className='Panel' >
+          <Accordion.Title className='texts title'><img className='imageicon' src={treeicon}></img><div className='text-3xl font-thin' >{item.Question}</div></Accordion.Title>
+          <Accordion.Content>
+            <p className="mb-2 texts">
+              {item.Answer}
+            </p>
+            
+          </Accordion.Content>
+        </Accordion.Panel>
         </Accordion>
       ))}
+    </div>
+    <div className="relative  overflow-hidden email">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-1">
+          <div className="max-w-xl lg:max-w-lg">
+            <h2 className="text-5xl   text-white ">
+Do you have More Questions?            </h2>
+            <p className="mt-4 text-2xl leading-8 text-gray-300">
+write us here!! we will contact shortly through Email !!          </p>
+            <div className="mt-6 flex max-w-md gap-x-4">
+              <label  className="sr-only">
+Enter Message              </label>
+              <textarea
+                id="text-area"
+                name="message"
+                type="message"
+                autoComplete="message"
+                required
+                className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10    focus:outline-none 
+              
+                 sm:text-sm sm:leading-6"
+                placeholder="Enter the message..."
+              />
+              <button
+                type="submit"
+                className="flex-none rounded-md bg-bg-page-color px-4 py-2 text-sm font-semibold text-font-family-color shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };

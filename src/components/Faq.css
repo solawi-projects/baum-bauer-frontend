@@ -6,11 +6,13 @@ padding-top: 10rem;
 padding-bottom: 10rem;
 align-items: center;
 gap:2rem;
-background: url('../assets/BackgroudFaq.png') center/cover no-repeat rgb(16, 16, 16,.1)}
-h1{
+background: url('../assets/BackgroudFaq.png') center/cover no-repeat rgb(16, 16, 16,.1);
+z-index:1}
+h2{
     font-family: "Chicle", serif;
     color:#5a6448;
 }
+
 .texts{
     font-family: "Open Sans", sans-serif;
     color:#82817e
@@ -28,4 +30,9 @@ h1{
 .imageicon{
     width: 2rem;
 }
-
+.email{
+    background: #5a6448;
+    padding: 5rem 0 ; /* 100% width, maintain aspect ratio for height */
+    display: flex;
+    z-index: 200;
+}

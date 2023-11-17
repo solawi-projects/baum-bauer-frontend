@@ -10,6 +10,7 @@ Global variables for colors
   --bg-page-color: #ededec;
   --white-color: #fcfdfd;
   --font-family-color: #82817e;
+  --darkgreen-color: #5a6448;
 }
 *,
 ::after,
@@ -43,7 +44,7 @@ Heading general styles- End
 */
 
 .page {
-  min-height: calc(100vh - (12rem + 14rem));
+  min-height: calc(100vh - (12rem + 10rem));
 }
 
 /*  */
@@ -55,3 +56,12 @@ Heading general styles- End
 .scale-origin-left {
   transform-origin: left center;
 }
+
+.scale-0 {
+  transform: scale(0);
+}
+
+.scale-100 {
+  transform: scale(1);
+}
+
