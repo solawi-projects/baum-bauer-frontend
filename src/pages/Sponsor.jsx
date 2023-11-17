@@ -1,4 +1,9 @@
-import Apple from "../assets/Trees/Apples.jpg";
+import Apple from "../assets/Trees/Apple.jpg";
+import Apricot from "../assets/Trees/Apricot.jpg";
+import Cherry from "../assets/Trees/Cherry.jpg";
+import Peach from "../assets/Trees/Peach.jpg";
+import Plums from "../assets/Trees/Plums.jpg";
+
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import { IoIosArrowDown } from "react-icons/io";
@@ -19,31 +24,31 @@ const Sponsor = () => {
     },
     {
       id: 2,
-      name: "Apple Tree",
+      name: "Apricot Tree",
       price: 19.99,
       currency: "€",
-      image: Apple,
+      image: Apricot,
     },
     {
       id: 3,
-      name: "Apple Tree",
+      name: "Cherry Tree",
       price: 19.99,
       currency: "€",
-      image: Apple,
+      image: Cherry,
     },
     {
       id: 4,
-      name: "Apple Tree",
+      name: "Peach Tree",
       price: 19.99,
       currency: "€",
-      image: Apple,
+      image: Peach,
     },
     {
       id: 5,
-      name: "Apple Tree",
+      name: "Plums Tree",
       price: 19.99,
       currency: "€",
-      image: Apple,
+      image: Plums,
     },
     {
       id: 6,
@@ -54,32 +59,68 @@ const Sponsor = () => {
     },
     {
       id: 7,
-      name: "Apple Tree",
+      name: "Apricot Tree",
       price: 19.99,
       currency: "€",
-      image: Apple,
+      image: Apricot,
     },
     {
       id: 8,
-      name: "Apple Tree",
+      name: "Cherry Tree",
       price: 19.99,
       currency: "€",
-      image: Apple,
+      image: Cherry,
     },
     {
       id: 9,
+      name: "Peach Tree",
+      price: 19.99,
+      currency: "€",
+      image: Peach,
+    },
+    {
+      id: 10,
+      name: "Plums Tree",
+      price: 19.99,
+      currency: "€",
+      image: Plums,
+    },
+    {
+      id: 11,
       name: "Apple Tree",
       price: 19.99,
       currency: "€",
       image: Apple,
     },
     {
-      id: 10,
-      name: "Apple Tree",
+      id: 12,
+      name: "Apricot Tree",
       price: 19.99,
       currency: "€",
-      image: Apple,
+      image: Apricot,
     },
+    {
+      id: 13,
+      name: "Cherry Tree",
+      price: 19.99,
+      currency: "€",
+      image: Cherry,
+    },
+    {
+      id:14,
+      name: "Peach Tree",
+      price: 19.99,
+      currency: "€",
+      image: Peach,
+    },
+    {
+      id: 15,
+      name: "Plums Tree",
+      price: 19.99,
+      currency: "€",
+      image: Plums,
+    },
+   
   ];const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -141,7 +182,7 @@ const Sponsor = () => {
 
       </div>
     </div>
-      <div className=" flex  justify-center flex-wrap gap-10 pt-40 pb-40 ml-40 mr-40">
+      <div className=" flex  justify-center flex-wrap gap-20 pt-40 pb-40 ml-60 mr-60">
         {data.map((item, index) => (
           <div key={index} className="flex  pr items-center ">
             <div className="w-60 p-10 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
