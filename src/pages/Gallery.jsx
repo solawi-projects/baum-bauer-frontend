@@ -12,22 +12,22 @@ const Gallery = () => {
 
   /* Image Urls */
   const imageUrls = [
-    "src/assets/images/biobaum_sapling_01.png",
-    "src/assets/images/biobaum_sapling_02.png",
-    "src/assets/images/biobaum_sapling_03.png",
-    "src/assets/images/biobaum_sapling_04.png",
-    "src/assets/images/biobaum_sapling_01.png",
-    "src/assets/images/biobaum_sapling_02.png",
-    "src/assets/images/biobaum_sapling_03.png",
-    "src/assets/images/biobaum_sapling_04.png",
-    "src/assets/images/biobaum_sapling_01.png",
-    "src/assets/images/biobaum_sapling_02.png",
-    "src/assets/images/biobaum_sapling_03.png",
-    "src/assets/images/biobaum_sapling_04.png",
-    "src/assets/images/biobaum_sapling_01.png",
-    "src/assets/images/biobaum_sapling_02.png",
-    "src/assets/images/biobaum_sapling_03.png",
-    "src/assets/images/biobaum_sapling_04.png",
+    "src/assets/images/galleryImages/biobaum_gallery_img_01.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_02.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_03.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_04.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_05.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_06.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_07.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_08.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_09.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_10.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_11.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_12.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_13.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_14.webp",
+    "src/assets/images/galleryImages/biobaum_gallery_img_15.webp",
+    "src/assets/images/biobaum_sapling_03.webp",
   ];
 
   /* Image Titles */
@@ -180,7 +180,7 @@ const Gallery = () => {
                     <img src={closeMenu} alt="Close Menu" />
                   </button>
                 </div>
-                <img src={selectedImg} alt="" className="w-full h-auto" />
+                <img src={selectedImg} alt="" className="w-full h-[800px]" />
                 {/* Image Title */}
                 <div className="text-center p-2 absolute bottom-0 left-0 right-0">
                   <p className="bg-white bg-opacity-80 p-4 text-dark-gray">

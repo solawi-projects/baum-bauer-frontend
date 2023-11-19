@@ -40,7 +40,7 @@ const MobileNavbar = () => {
     <nav id="outer-container">
       {isNavbarVisible && <AuthNavbar />}
       <div
-        className="w-full h-[60px] bg-bg-header-footer flex justify-start items-center px-2"
+        className="w-full h-[60px] bg-bg-header-footer flex justify-start items-center px-2 z-[999999]"
         style={mobileNavbarStyle}
       >
         {/* Open Menu Button */}
