@@ -5,14 +5,14 @@ import { Breadcrumb } from "flowbite-react";
 const PageBreadcrumb = (props) => {
   const { activeLinks, deActiveLink } = props;
   return (
-    <div className="">
+    <div className="mt-0 mb-0">
       <Breadcrumb
         aria-label="This is Breadcrumb showing the location of current page"
         className="bg-gray-50 px-5 py-3 dark:bg-gray-800"
       >
         {activeLinks.map((aLink) => (
           <span key={aLink.linkText}>
-            <Breadcrumb.Item href="/" icon={aLink.linkIcon}>
+            <Breadcrumb.Item href={aLink.linkTo} icon={aLink.linkIcon}>
               {aLink.linkText}
             </Breadcrumb.Item>
           </span>

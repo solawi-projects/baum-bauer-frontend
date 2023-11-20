@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
 import authBgImage from "../assets/images/biobaum_landing_top_nav_img.png";
