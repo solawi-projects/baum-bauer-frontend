@@ -1,8 +1,12 @@
 import backgroundImage from "../assets/images/leaves_background_02.webp";
-
+import PageBreadcrumb from "../components/PageBreadcrumb";
+import { HiHome } from "react-icons/hi";
 const About = () => {
+  const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
+  const daLinkValues = { linkText: "About Page" };
   return (
     <main className="relative text-font-family-color">
+      <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       {/* About Us title, positioned absolutely */}
       <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 text-3xl lg:text-4xl py-8 lg:py-12 xl:py-16 text-center font-bold z-10">
         About Us

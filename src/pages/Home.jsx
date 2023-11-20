@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import HeroSection from "../components/HeroSection";
 import backgroundImage from "../assets/images/leaves_background_03.png";

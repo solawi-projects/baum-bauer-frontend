@@ -20,84 +20,82 @@ const Contact = () => {
     <div className="bg-bg-page-color text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-      <div className="container mx-auto flex flex-wrap columns-2 justify-center items-center gap-28 py-32">
-        <section className="max-w-md md:w-1/2 sm:w-1 lg:w-1/2 flex flex-col justify-center items-center">
-          <div className="w-full flex flex-col justify-center gap-3">
-            <h2 className="text-2xl border-b-1 w-auto py-1 border-b-2 mb-3">
-              GET IN TOUCH
-            </h2>
-            <p className="flex flex-row items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-2">
-              <span className="text-lg">
-                <FaLocationDot />
-              </span>
-              <span className="text-lg">
-                10679 Berlin, Germany <br /> Rudolf-Str. 43
-              </span>
-            </p>
-            <p className="flex flex-row items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-1">
-              <span className="text-lg">
-                <AiTwotoneMail />
-              </span>
-              <span className="text-lg">
-                <a
-                  href="mailto:solawi.biobaumbauer@gmail.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  solawi.biobaumbauer@gmail.com
-                </a>
-              </span>
-            </p>
-            <p className="flex flex-row items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-1">
-              <span className="text-lg">
-                <FaPhoneSquareAlt />
-              </span>
-              <span className="text-lg">+4917290838934</span>
-            </p>
-            <p className="flex flex-row justify-center items-center bg-white-color shadow-md rounded-md p-4 hover:shadow-lg hover:rounded-lg gap-5">
+      <div className="container mx-auto flex flex-wrap columns-2 justify-center items-center mt-10 mb-14 gap-16">
+        <section className="flex flex-col items-center gap-3 px-3">
+          <h2 className="text-2xl border-b-1 w-full py-1 border-b-2">
+            GET IN TOUCH
+          </h2>
+          <p className="flex flex-row w-full items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-2">
+            <span className="text-lg">
+              <FaLocationDot />
+            </span>
+            <span className="text-lg">
+              10679 Berlin, Germany <br /> Rudolf-Str. 43
+            </span>
+          </p>
+          <p className="flex flex-row w-full items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-1">
+            <span className="text-lg">
+              <AiTwotoneMail />
+            </span>
+            <span className="text-lg">
               <a
-                href="http://"
-                className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
+                href="mailto:solawi.biobaumbauer@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaLinkedin />
+                solawi.biobaumbauer@gmail.com
               </a>
-              <a
-                href="http://"
-                className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaYoutube />
-              </a>
-              <a
-                href="http://"
-                className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IoLogoWhatsapp />
-              </a>
+            </span>
+          </p>
+          <p className="flex flex-row w-full items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-1">
+            <span className="text-lg">
+              <FaPhoneSquareAlt />
+            </span>
+            <span className="text-lg">+4917290838934</span>
+          </p>
+          <p className="flex flex-row w-full justify-center items-center bg-white-color shadow-md rounded-md p-4 hover:shadow-lg hover:rounded-lg gap-5">
+            <a
+              href="http://"
+              className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin />
+            </a>
+            <a
+              href="http://"
+              className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaYoutube />
+            </a>
+            <a
+              href="http://"
+              className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <IoLogoWhatsapp />
+            </a>
 
-              <a
-                href="http://"
-                className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <BsTwitterX />
-              </a>
-              <a
-                href="http://"
-                className="rounded-full p-2 border-2 border-font-family-color bg-white-color text-font-family-color hover:bg-font-family-color hover:text-white-color"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTiktok />
-              </a>
-            </p>
-          </div>
+            <a
+              href="http://"
+              className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <BsTwitterX />
+            </a>
+            <a
+              href="http://"
+              className="rounded-full p-2 border-2 border-font-family-color bg-white-color text-font-family-color hover:bg-font-family-color hover:text-white-color"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTiktok />
+            </a>
+          </p>
         </section>
         <section className="max-w-md md:w-1/2 sm:w-1 lg:w-1/2 flex flex-row justify-center items-center">
           <form className="w-full flex flex-col gap-4">
