@@ -1,50 +1,73 @@
+/* eslint-disable no-empty-pattern */
 import { Accordion } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
-
+import axios from "../utils/axiosInstance";
 import "../components/Faq.css";
 import treeicon from "../assets/tree.png";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
+import { useState, useEffect } from "react";
 
 const Faq = () => {
   const titles = ["FAQ", "We have summarized your inquiries as following"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "FAQ" };
-  const data = [
-    {
-      Question: " What is a tree sponsorship program?",
-      Answer:
-        "A tree sponsorship program allows individuals or organizations to contribute towards the planting and maintenance of trees. Sponsors typically support environmental initiatives by funding the growth and care of trees.",
-    },
-    {
-      Question: " How does tree sponsorship work?",
-      Answer:
-        " Tree sponsorship involves making a financial contribution to support the planting and maintenance of a tree. Sponsors may receive updates on the tree's growth, its environmental impact, and other related information.",
-    },
-    {
-      Question: " Can I choose the location for my sponsored tree?",
-      Answer:
-        " Depending on the program, some sponsors may have the option to choose a general location for their tree. However, specific locations are often determined by environmental considerations and the organization's planting strategy.",
-    },
-    {
-      Question: " Can I choose the location for my sponsored tree?",
-      Answer:
-        " Depending on the program, some sponsors may have the option to choose a general location for their tree. However, specific locations are often determined by environmental considerations and the organization's planting strategy.",
-    },
-    {
-      Question: " Can I choose the location for my sponsored tree?",
-      Answer:
-        " Depending on the program, some sponsors may have the option to choose a general location for their tree. However, specific locations are often determined by environmental considerations and the organization's planting strategy.",
-    },
-    // Add more questions and answers as needed
-  ];
+
+  const limit = 2;
+  const [skip, setSkip] = useState(0);
+  const [faqs, setFaqs] = useState([]);
+  const [err, setErr] = useState("");
+  const [total, setTotal] = useState(0);
+
+  const handlePrev = () => {
+    const newSkip = skip - limit;
+    if (newSkip <= 0) {
+      setSkip(0);
+    }
+    setSkip(newSkip);
+  };
+  const handleNex = () => {
+    setSkip(limit + skip);
+  };
+
+  const getFaqs = () => {
+    try {
+      axios
+        .get(`/api/faq/all?limit=${limit}&skip=${skip}`)
+        .then((response) => {
+          console.log("Res:", response);
+          if (response.status === 200) {
+            setFaqs(response.data.data);
+            setTotal(response.data.count);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 500) {
+            setErr("Data was not brought");
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching FAQs:", error.message);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    getFaqs();
+  }, [skip]);
 
   return (
     <div className="bg-bg-page-color text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
+      <div className="container mx-auto text-2xl">
+        <h2>
+          Showing {limit} to {skip + limit} of {total} FAQs
+        </h2>
+        <p>{err}</p>
+      </div>
       <div className="faq-container">
-        {data.map((item, index) => (
+        {faqs.map((item, index) => (
           <Accordion collapseAll className="Accord-container" key={index}>
             <Accordion.Panel className="Panel">
               <Accordion.Title className="texts title">
@@ -52,12 +75,18 @@ const Faq = () => {
                 <div className="text-3xl font-thin">{item.Question}</div>
               </Accordion.Title>
               <Accordion.Content>
-                <p className="mb-2 texts">{item.Answer}</p>
+                <p className="mb-2 texts">{item.Answers}</p>
               </Accordion.Content>
             </Accordion.Panel>
           </Accordion>
         ))}
+        <br />
+        <div className="mx-auto text-2xl flex gap-7">
+          <button onClick={handlePrev}>Previous</button>
+          <button onClick={handleNex}>Next</button>
+        </div>
       </div>
+
       <div className="relative overflow-hidden email">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-1">
