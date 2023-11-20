@@ -35,7 +35,7 @@ const HeroSection = () => {
             remaining essentially unchanged.{" "}
           </p>
           <Link
-            to="/sponsor"
+            to="/trees"
             className="mt-4 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[50px] hover:scale-110 hover:border border-[#9c988e] transition duration-4000 ease-linear"
             aria-label="Sponsor page"
           >

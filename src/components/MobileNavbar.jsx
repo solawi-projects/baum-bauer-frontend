@@ -40,7 +40,7 @@ const MobileNavbar = () => {
     <nav id="outer-container">
       {isNavbarVisible && <AuthNavbar />}
       <div
-        className="w-full h-[60px] bg-bg-header-footer flex justify-start items-center px-2"
+        className="w-full h-[60px] bg-bg-header-footer flex justify-start items-center px-2 z-[999999]"
         style={mobileNavbarStyle}
       >
         {/* Open Menu Button */}
@@ -90,12 +90,12 @@ const MobileNavbar = () => {
           Home
         </Link>
         <Link
-          to="/sponsor"
+          to="/trees"
           className="menu-item pt-4 border-b border-white text-font-family-color scale-origin-left transition-transform duration-400 ease-linear hover:text-dark-gray"
           onClick={handleLinkClick}
           aria-label="Sponsor page"
         >
-          Sponsor
+          Trees
         </Link>
         <Link
           to="/news"
