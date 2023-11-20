@@ -11,6 +11,7 @@ Global variables for colors
   --white-color: #fcfdfd;
   --font-family-color: #82817e;
   --secondary-color: #5a6448;
+  --darkgreen-color: #5a6448;
 }
 *,
 ::after,
@@ -21,8 +22,8 @@ Global variables for colors
 }
 body,
 html {
-  font-family: "Chicle", serif;
-  font-family: "Open Sans", sans-serif;
+  font-family: url("../src/assets/Fonts/Chicle/Chicle-Regular.ttf");
+  font-family:url("../src/assets/Fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf");
   min-height: 100vh;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -57,7 +58,6 @@ Heading general styles- End
   transform-origin: left center;
 }
 
-/*  */
 .scale-0 {
   transform: scale(0);
 }
@@ -149,3 +149,4 @@ input:-ms-input-placeholder {
 .navIcon:hover .ani {
   transform: rotate(360deg);
 }
+
