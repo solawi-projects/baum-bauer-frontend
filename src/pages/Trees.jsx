@@ -1,22 +1,27 @@
-import Apple from "../assets/images/trees_images/Apple.jpg";
+/* import Apple from "../assets/images/trees_images/Apple.jpg";
 import Apricot from "../assets/images/trees_images/Apricot.jpg";
 import Cherry from "../assets/images/trees_images/Cherry.jpg";
 import Peach from "../assets/images/trees_images/Peach.jpg";
 import Plums from "../assets/images/trees_images/Plums.jpg";
-
+ */
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import { HiHome } from "react-icons/hi";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import axios from "../utils/axiosInstance";
+
 
 import "../components/Tress.css";
 const Sponsor = () => {
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Trees" };
-  const data = [
+  const [tree,setTree] = useState([]);
+  const [err, setErr] = useState("");
+
+ /*  const data = [
     {
       id: 1,
       name: "Apple Tree",
@@ -122,16 +127,42 @@ const Sponsor = () => {
       currency: "€",
       image: Plums,
     },
-  ];
+  ]; */
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+  const getTrees = () => {
+    try {
+      axios
+        .get(`/api/Tree/get`)
+        .then((response) => {
+          console.log("Res:", response);
+          if (response.status === 200) {
+            console.log(response.data)
+            setTree(response.data);
+          }
+        })
+        .catch((Err) => {
+          if (Err.response.status === 500) {
+            setErr("Data was not brought");
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching Trees:", error.message);
+      throw error;
+    }
+    
+  };
+  useEffect(() => {
+    getTrees();
+  }, []);
 
   return (
     <div>
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
+            <p>{err}</p>
       <div className=" backdrop-search"></div>
       <div className="py-10 h-20 bg-gray-100 px-2">
         <div className="max-w-auto mx-auto rounded-lg overflow-hidden md:max-w-xl md:max-h-m sm:max-w-xs">
@@ -183,7 +214,7 @@ const Sponsor = () => {
         </div>
       </div>
       <div className=" flex  justify-center flex-wrap gap-10 pt-40 pb-40 ml-20 mr-20">
-        {data.map((item, index) => (
+        {tree.map((item, index) => (
           <div key={index} className="flex  pr items-center ">
             <div className="w-60 p-10 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
               <img
