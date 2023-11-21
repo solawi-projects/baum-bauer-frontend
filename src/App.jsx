@@ -23,7 +23,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 import UserSponsorships from "./pages/UserSponsorships";
 import PasswordChange from "./pages/PasswordChange";
 import Signout from "./pages/Signout";
-
+import NewsArticle from "./pages/NewsArticle";
 
 function App() {
   const bioBaumRouter = createBrowserRouter(
@@ -32,6 +32,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/trees" element={<Trees />} />
         <Route path="/news" element={<News />} />
+        <Route path="/news/:articleId" element={<NewsArticle />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/faq" element={<Faq />} />
