@@ -25,6 +25,7 @@ import PasswordChange from "./pages/PasswordChange";
 import Signout from "./pages/Signout";
 import SingleTreePage from "./pages/SingleTreePage";
 import TreeList from "./pages/TreeList";
+import NewsArticle from "./pages/NewsArticle";
 
 function App() {
   const bioBaumRouter = createBrowserRouter(
@@ -35,6 +36,7 @@ function App() {
         <Route path="/trees" element={<Trees />} />
         <Route path="/tree/:id" element={<SingleTreePage />} />
         <Route path="/news" element={<News />} />
+        <Route path="/news/:articleId" element={<NewsArticle />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/faq" element={<Faq />} />
