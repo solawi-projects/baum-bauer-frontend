@@ -35,22 +35,22 @@ const Gallery = () => {
 
   /* Image Titles */
   const imageTitles = [
-    "Title for image 1",
-    "Title for image 2",
-    "Title for image 3",
-    "Title for image 4",
-    "Title for image 5",
-    "Title for image 6",
-    "Title for image 7",
-    "Title for image 8",
-    "Title for image 9",
-    "Title for image 10",
-    "Title for image 11",
-    "Title for image 12",
-    "Title for image 13",
-    "Title for image 14",
-    "Title for image 15",
-    "Title for image 16",
+    "Planting Hope: The First Sapling",
+    "Sustainable Futures: Planting the Seeds of Change",
+    "Nurturing Nature: Young Trees in Caring Hands",
+    "Eco Warriors: Volunteers Growing a Greener Tomorrow",
+    "Shades of Green: People and Saplings in Perfect Harmony",
+    "Seeds of Change: Individuals Making a Forest Impact",
+    "Sustainable Steps: Walking Towards a Greener Tomorrow",
+    "Sapling Stories: Each Tree Tells a Tale of Hope",
+    "Eco-Heroes Unite: Planting Trees for Generations to Come",
+    "United for Green: People and Saplings in Solidarity",
+    "Budding Bonds: Planting Friendship, Growing Trees",
+    "Raising Green Champions: Community Tree Planting",
+    "Tree of Life: A Symphony of Saplings and Smiles",
+    "Earth's Symphony: People and Saplings in Harmony",
+    "Green Pawsitivity: Cats Spreading Joy, One Sapling at a Time",
+    "Shaping Tomorrow: Individuals Crafting a Forest Legacy",
   ];
 
   /* Handele ShowAllImages and ShowFewerImages on Screens <= 1024 */
