@@ -23,14 +23,17 @@ import UpdateProfile from "./pages/UpdateProfile";
 import UserSponsorships from "./pages/UserSponsorships";
 import PasswordChange from "./pages/PasswordChange";
 import Signout from "./pages/Signout";
-
+import SingleTreePage from "./pages/SingleTreePage";
+import TreeList from "./pages/TreeList";
 
 function App() {
   const bioBaumRouter = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Index />}>
         <Route index element={<Home />} />
+        <Route path="/tree" element={<TreeList />} />
         <Route path="/trees" element={<Trees />} />
+        <Route path="/tree/:id" element={<SingleTreePage />} />
         <Route path="/news" element={<News />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />

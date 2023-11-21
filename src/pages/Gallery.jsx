@@ -6,7 +6,7 @@ import { Fade } from "react-awesome-reveal";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
-import EachPageHeader from "../components/EachPageHeader";
+import Feedback from "../components/Feedback";
 
 const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
@@ -88,7 +88,7 @@ const Gallery = () => {
   return (
     <div className="bg-bg-page-color text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
-      <div className="relative w-full mx-auto p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px]">
+      <div className="relative w-full mx-auto p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex">
         {/* Overlay with background image and opacity */}
         <div
           className="absolute top-0 left-0 w-full h-full bg-contain bg-no-repeat bg-top"
@@ -189,6 +189,7 @@ const Gallery = () => {
           </div>
         )}
       </div>{" "}
+      <Feedback />
       {/* Footer Image */}
       <img
         src="src/assets/images/biobaum_gallery_footer_img.png"
