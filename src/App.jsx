@@ -23,6 +23,8 @@ import UpdateProfile from "./pages/UpdateProfile";
 import UserSponsorships from "./pages/UserSponsorships";
 import PasswordChange from "./pages/PasswordChange";
 import Signout from "./pages/Signout";
+import SingleTreePage from "./pages/SingleTreePage";
+import TreeList from "./pages/TreeList";
 import NewsArticle from "./pages/NewsArticle";
 
 function App() {
@@ -30,7 +32,9 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Index />}>
         <Route index element={<Home />} />
+        <Route path="/tree" element={<TreeList />} />
         <Route path="/trees" element={<Trees />} />
+        <Route path="/tree/:id" element={<SingleTreePage />} />
         <Route path="/news" element={<News />} />
         <Route path="/news/:articleId" element={<NewsArticle />} />
         <Route path="/about" element={<About />} />

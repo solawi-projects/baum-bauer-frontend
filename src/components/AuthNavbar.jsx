@@ -91,7 +91,7 @@ const AuthNavbar = () => {
           >
             <img
               className="ani"
-              src="src/assets/images/tree_icon.svg"
+              src="/src/assets/images/tree_icon.svg"
               alt=""
               style={{ width: "45px", height: "45px", borderRadius: "50%" }}
             />

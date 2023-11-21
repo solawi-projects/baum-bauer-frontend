@@ -23,7 +23,7 @@ Global variables for colors
 body,
 html {
   font-family: url("../src/assets/Fonts/Chicle/Chicle-Regular.ttf");
-  font-family:url("../src/assets/Fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf");
+  font-family: url("../src/assets/Fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf");
   min-height: 100vh;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -79,10 +79,9 @@ Heading general styles- End
 }
 
 .custom-button-style:hover {
-  background-color: var(--white-color) !important;
+  background-color: transparent !important;
   color: var(--secondary-color) !important;
   border: 1px solid var(--secondary-color) !important;
-  transform: scale(1.1);
 }
 
 .custom-button-style:focus {
@@ -149,4 +148,3 @@ input:-ms-input-placeholder {
 .navIcon:hover .ani {
   transform: rotate(360deg);
 }
-
