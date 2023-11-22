@@ -71,3 +71,27 @@ return ( <div> <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkVal
           <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">
             Price:Low-High
           </div>
+          <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">
+            Price:High-Low
+          </div>
+        </div>
+      </div>
+      <div className=" flex  justify-center flex-wrap gap-10 pt-40 pb-40 ml-20 mr-20">
+        {currentPosts.map((item, index) => (
+          <div key={index} className="flex  pr items-center ">
+            <div className="w-60 p-10 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
+              <img
+                className="w-40 h-40 object-cover rounded-t-md"
+                src={item.image}
+                alt={item.name}
+              />
+              <div className="mt-2">
+                <h2 className="text-2xl font-bold text-gray-700">
+                  {item.name}
+                </h2>
+                <button className="block text-xl font-semibold text-gray-700 cursor-auto">{`$${item.price}`}</button>
+
+                <div className="mt-2 mb-1 flex justify-between ">
+                  <button className=" Sponsorbutton text-lg block font-semibold py-2 px-4 text-green-100 hover:text-white rounded-lg shadow hover:shadow-md transition duration-300">
+                    Sponsor
+                  </button>
