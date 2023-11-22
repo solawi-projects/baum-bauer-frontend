@@ -7,3 +7,21 @@ console.log(totalpost)
     const pageNumbers=[]
     for(let i=1;i<=Math.ceil(totalpost/postPerPage);i++) {
         pageNumbers.push(i)
+
+      }       
+
+      const [activePage,setActivePage] = useState(1)
+      const handlePageClick=(number)=>{
+          setActivePage(number)
+          paginate(number)
+      }
+      const handleNext = () => {
+          const nextPage = currentPage + 1;
+          paginate(nextPage);
+          setActivePage(nextPage);
+        };
+        const handlePrev = () => {
+          const prevPage = currentPage - 1;
+          paginate(prevPage);
+          setActivePage(prevPage);
+        };
