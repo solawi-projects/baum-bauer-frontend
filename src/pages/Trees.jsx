@@ -53,3 +53,21 @@ const indexofFirstPost=indexofLastPost-postPerPage;
 const currentPosts=tree.slice(indexofFirstPost,indexofLastPost)
 const paginate=(pageNumber)=>setCurrentPage(pageNumber)
 return ( <div> <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} /> <p>{err}</p> <div className=" backdrop-search"></div> <div className="py-10 h-20 bg-gray-100 px-2"> <div className="max-w-auto mx-auto rounded-lg overflow-hidden md:max-w-xl md:max-h-m sm:max-w-xs"> <div className="md:flex"> <div className="w-full p-3 "> <div className="relative md:max-h-m"> <i className="absolute fa fa-search text-gray-100 top-5 left-4"></i> <input type="text" className="bg-white h-14 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer" name="" ></input> <span className="absolute top-4 right-5 border-l pl-4"> <IoIosSearch className="iconsearch" /> </span> </div> </div> </div> </div> </div> <div className="h-auto relative dropdown"> <div id="dropdown-button " onClick={toggleDropdown} className="select-none border h-auto absolute top-10 right-40 w-40 border-gray-400 rounded px-5 py-2 cursor-pointer flex justify-between" > Options
+
+<IoIosArrowDown />
+        </div>
+        <div
+          id="dropdown-menu"
+          className={`${
+            isDropdownOpen ? "block" : "hidden"
+          } absolute top-50 absolute top-20 h-auto right-40 w-400 border border-gray-300 bg-white shadow-md mt-2 transition-all duration-300`}
+        >
+          <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">
+            popularity
+          </div>
+          <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">
+            Latest
+          </div>
+          <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">
+            Price:Low-High
+          </div>
