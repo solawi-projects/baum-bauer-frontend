@@ -18,3 +18,37 @@ const Sponsor = () => {
   const [err, setErr] = useState("");
 const lasttree=currentPage*postPerPage;
 const firsttree=lasttree-postPerPage+1
+const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
+  const getTrees = async() => {
+    try {
+     await axios
+        .get(`/api/Tree/get`)
+        .then((response) => {
+          console.log("Res:", response);
+          if (response.status === 200) {
+            console.log(response.data)
+            setTree(response.data);
+          }
+        })
+        .catch((Err) => {
+          if (Err.response.status === 500) {
+            setErr("Data was not brought");
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching Trees:", error.message);
+      throw error;
+    }
+    
+  };
+  useEffect(() => {
+    getTrees();
+  }, []);
+  const indexofLastPost =currentPage*postPerPage;
+const indexofFirstPost=indexofLastPost-postPerPage;
+const currentPosts=tree.slice(indexofFirstPost,indexofLastPost)
+const paginate=(pageNumber)=>setCurrentPage(pageNumber)
