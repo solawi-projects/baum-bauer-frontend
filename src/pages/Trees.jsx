@@ -95,3 +95,14 @@ return ( <div> <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkVal
                   <button className=" Sponsorbutton text-lg block font-semibold py-2 px-4 text-green-100 hover:text-white rounded-lg shadow hover:shadow-md transition duration-300">
                     Sponsor
                   </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    <Pagination postPerPage={postPerPage} currentPage={currentPage} totalpost={tree.length} paginate={paginate} firsttree={firsttree} lasttree={lasttree}/>
+    </div>
+  );
+};
+export default Sponsor;
