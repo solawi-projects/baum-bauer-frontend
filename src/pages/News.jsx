@@ -39,6 +39,7 @@ const News = () => {
     },
   ];
 
+
   return (
     <div className="bg-bg-page-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
