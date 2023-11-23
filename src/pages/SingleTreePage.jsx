@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
+import { CartContext } from "../store/CartContext";
 
 const SingleTreePage = () => {
   const { id } = useParams();
   const [tree, setTree] = useState(null);
+  const { addTree } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTree = async () => {
@@ -22,6 +25,12 @@ const SingleTreePage = () => {
 
     fetchTree();
   }, [id]);
+
+  const handleAddToCart = () => {
+    addTree(id);
+    // Redirect to the cart page
+    navigate("/cart");
+  };
 
   if (!tree) {
     return <p>Loading...</p>;
@@ -100,6 +109,7 @@ const SingleTreePage = () => {
                 to="/trees"
                 className="mt-4 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[50px] border-bg-header-footer hover:border border-[#9c988e] hover:bg-transparent transition duration-4000 ease-linear mb-6"
                 aria-label="Sponsor page"
+                onClick={handleAddToCart}
               >
                 Add to Cart
               </button>
