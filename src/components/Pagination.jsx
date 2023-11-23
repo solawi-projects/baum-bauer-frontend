@@ -15,12 +15,17 @@ const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPa
     paginate(number);
   };
   const handleNext = () => {
-    const nextPage = currentPage + 1;
+    let nextPage=currentPage
+    if(currentPage<=totalpost/postPerPage){
+     nextPage = currentPage + 1;}
     paginate(nextPage);
     setActivePage(nextPage);
   };
   const handlePrev = () => {
-    const prevPage = currentPage - 1;
+    let prevPage=currentPage;
+    if(currentPage>1){
+     prevPage = currentPage - 1;}
+    
     paginate(prevPage);
     setActivePage(prevPage);
   };
@@ -79,7 +84,7 @@ const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPa
                 {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}{" "}
                 <ul className="flex">
                   {pageNumbers.map((number, index) => (
-                    <li key={index}>
+                    <li key={index} className="hover:bg-gray-200 active:bg-lime-800">
                       {" "}
                       <a
                         href="#"

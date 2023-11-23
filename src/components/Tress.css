@@ -5,7 +5,8 @@
 }
 
 .Sponsorbutton {
-  background-color: #5a6448;
+  border: 3px solid  #4f593f9d;
+  color: #5a6448;
 }
 .backdrop-search {
   height: 40vh;

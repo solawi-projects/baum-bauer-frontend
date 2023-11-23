@@ -4,8 +4,8 @@ import { HiHome } from "react-icons/hi";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
 import { useState,useEffect } from "react";
+import { TreeData } from "../components/TreeData";
 
-import axios from "../utils/axiosInstance";
 import Pagination from "../components/Pagination";
 
 import "../components/Tress.css";
@@ -23,31 +23,19 @@ const [isDropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-  const getTrees = async() => {
-    try {
-     await axios
-        .get(`/api/Tree/get`)
-        .then((response) => {
-          console.log("Res:", response);
-          if (response.status === 200) {
-            console.log(response.data)
-            setTree(response.data);
-          }
-        })
-        .catch((Err) => {
-          if (Err.response.status === 500) {
-            setErr("Data was not brought");
-          }
-        });
-    } catch (error) {
-      console.error("Error fetching Trees:", error.message);
-      throw error;
-    }
-    
-  };
   useEffect(() => {
+    const getTrees = async () => {
+      try {
+        const data = await TreeData();
+        setTree(data);
+      } catch (error) {
+        setErr("Data was not brought");
+      }
+    };
+
     getTrees();
   }, []);
+
   const indexofLastPost =currentPage*postPerPage;
 const indexofFirstPost=indexofLastPost-postPerPage;
 const currentPosts=tree.slice(indexofFirstPost,indexofLastPost)
@@ -89,11 +77,11 @@ return ( <div> <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkVal
                 <h2 className="text-2xl font-bold text-gray-700">
                   {item.name}
                 </h2>
-                <button className="block text-xl font-semibold text-gray-700 cursor-auto">{`$${item.price}`}</button>
+                <button className="block text-xl font-semibold text-gray-700 cursor-auto">{`€${parseFloat(item.price.$numberDecimal)}`}</button>
 
                 <div className="mt-2 mb-1 flex justify-between ">
-                  <button className=" Sponsorbutton text-lg block font-semibold py-2 px-4 text-green-100 hover:text-white rounded-lg shadow hover:shadow-md transition duration-300">
-                    Sponsor
+                  <button className=" Sponsorbutton text-lg block font-semibold py-2 px-4 hover:text-white hover:bg-lime-800 rounded-lg shadow hover:shadow-md transition duration-300">
+view more
                   </button>
                   </div>
               </div>
