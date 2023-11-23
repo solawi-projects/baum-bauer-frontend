@@ -65,6 +65,7 @@ const Contact = () => {
             });
 
             checkboxRef.current.checked = false;
+            setIsTermsAccepted(false);
             firsNameRef.current.value = "";
             lastNameRef.current.value = "";
             emailRef.current.value = "";
