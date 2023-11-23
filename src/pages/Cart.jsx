@@ -1,23 +1,82 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { LuPlus, LuMinus } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { CartContext } from "../store/CartContext";
+import axios from "axios";
 
 const Cart = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Apricot Tree",
-      price: 30.0,
-      image: "src/assets/images/biobaum_sapling_03.webp",
-    },
-    {
-      id: 1,
-      name: "Apple Tree",
-      price: 30.0,
-      image: "src/assets/images/biobaum_sapling_01.webp",
-    },
-  ];
+  const { cartTrees, addTree, removeTree, removeButton, clearCart } =
+    useContext(CartContext);
+  const [cartProducts, setCartProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (cartTrees.length > 0) {
+          const response = await axios.post(
+            "http://localhost:4000/api/tree/cart",
+            { ids: cartTrees }
+          );
+          console.log(response.data);
+          setCartProducts(response.data);
+        } else {
+          setCartProducts([]);
+        }
+      } catch (error) {
+        console.error("Error fetching cart products:", error);
+      }
+    };
+
+    fetchData();
+  }, [cartTrees]);
+
+  // Function to count occurrences of a specific tree ID in cartTrees
+  const getTreeQuantity = (treeId) => {
+    return cartTrees.filter((id) => id === treeId).length;
+  };
+
+  // Calculate the total price for each item
+  const getItemTotalPrice = (tree) => {
+    const quantity = getTreeQuantity(tree._id);
+    return quantity * parseFloat(tree.price.$numberDecimal);
+  };
+
+  // Calculate the overall total price
+  const calculateTotalPrice = () => {
+    return cartProducts.reduce((total, tree) => {
+      return total + getItemTotalPrice(tree);
+    }, 0);
+  };
+
+  // Tax rate is 5%
+  const TAX_RATE = 0.05;
+
+  // Calculate the overall total price including tax
+  const calculateGrandTotal = () => {
+    // Calculate total price without tax
+    const totalPriceWithoutTax = calculateTotalPrice();
+
+    // Calculate tax based on the total price
+    const totalTax = totalPriceWithoutTax * TAX_RATE;
+
+    // Calculate grand total by adding total price and tax
+    const grandTotal = totalPriceWithoutTax + totalTax;
+
+    return grandTotal;
+  };
+
+  // Modified addTree function to include available quantity check
+  const handleAddTree = (tree) => {
+    const treeQuantityInCart = getTreeQuantity(tree._id);
+    if (treeQuantityInCart < tree.availableQuantity) {
+      addTree(tree._id);
+    } else {
+      alert(
+        `Cannot add more ${tree.name}. Maximum available: ${tree.availableQuantity}`
+      );
+    }
+  };
 
   return (
     <main>
@@ -49,88 +108,110 @@ const Cart = () => {
           {/* Sponsor Cart */}
           <div className="flex flex-col-reverse lg:flex-row mt-10 gap-[1rem] sm:gap-[2rem]">
             {/* Tree Image with Name, Qty, Price, Remove Tree Button */}
-            <div className="w-full lg:w-[70%] flex flex-col sm:gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4 items-center">
-              {products.map((product) => (
-                <div
-                  key={product.id}
-                  className="flex flex-col sm:flex-row justify-between gap-[0.5rem] sm:gap-[2rem] items-center sm:items-start mt-auto mb-auto w-full"
-                >
-                  {/* Tree Photo and Name */}
-                  <div className="w-full sm:w-[25%] flex flex-col items-center sm:items-start mt-auto mb-auto">
-                    <div className="hidden sm:flex flex-row items-center text-xl font-main-font text-secondary-color tracking-wide pb-2">
-                      <img
-                        src="/src/assets/tree.png"
-                        alt="Tree Icon"
-                        className="w-[30px] h-[30px] mr-2"
-                      />
-                      Tree
-                    </div>
-                    <Link to="/">
-                      <div className="flex flex-col-reverse sm:flex-row items-center aspect-square">
+            {cartProducts.length > 0 ? (
+              <div className="w-full lg:w-[70%] flex flex-col sm:gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4 items-center">
+                {cartProducts.map((product) => (
+                  <div
+                    key={product._id}
+                    className="flex flex-col sm:flex-row justify-between gap-[0.5rem] sm:gap-[2rem] items-center sm:items-start mt-auto mb-auto w-full"
+                  >
+                    {/* Tree Photo and Name */}
+                    <div className="w-full sm:w-[25%] flex flex-col items-center sm:items-start mt-auto mb-auto">
+                      <div className="hidden sm:flex flex-row items-center text-xl font-main-font text-secondary-color tracking-wide pb-2">
                         <img
-                          src={product.image}
-                          alt="Tree Image"
-                          className="w-full h-full object-cover mr-0 sm:mr-2 rounded-[10px] mt-2 mb-6 sm:mb-0"
+                          src="/src/assets/tree.png"
+                          alt="Tree Icon"
+                          className="w-[30px] h-[30px] mr-2"
                         />
+                        Tree
+                      </div>
+                      <Link to="/">
+                        <div className="flex flex-col-reverse sm:flex-row items-center aspect-square">
+                          <img
+                            src={product.image}
+                            alt="Tree Image"
+                            className="w-full h-full object-cover mr-0 sm:mr-2 rounded-[10px] mt-2 mb-6 sm:mb-0"
+                          />
+                          <div
+                            className={`text-2xl sm:text-[1rem] font-main-font sm:font-general-font text-secondary-color sm:text-dark-gray`}
+                          >
+                            {product.name}
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
 
-                        <div
-                          className={`text-2xl sm:text-[1rem] font-main-font sm:font-general-font text-secondary-color sm:text-dark-gray`}
+                    {/* Tree Qty */}
+                    <div className="w-full sm:w-[25%] flex flex-col items-center mt-auto mb-auto sm:pt-4">
+                      <div className="hidden sm:flex-1 flex-row justify-center items-center text-xl font-main-font text-secondary-color tracking-wide pb-2">
+                        Qty
+                      </div>
+                      <div className="flex flex-row items-center justify-center border border-bg-header-footer rounded-[10px] p-[4px]">
+                        <button
+                          className="bg-transparent text-lg text-dark-gray p-2"
+                          aria-label="Remove Tree"
+                          onClick={() => removeTree(product._id)}
                         >
-                          {product.name}
+                          <LuMinus />
+                        </button>
+                        <span className="mx-2 text-lg">
+                          {getTreeQuantity(product._id)}
+                        </span>
+                        <button
+                          className="bg-transparent text-lg text-dark-gray p-2"
+                          aria-label="Add Tree"
+                          onClick={() => handleAddTree(product)}
+                        >
+                          <LuPlus />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Tree Price */}
+                    <div className="w-full sm:w-[25%] flex flex-col items-center mt-auto mb-auto">
+                      <div className="hidden sm:flex text-xl font-main-font text-secondary-color tracking-wide pb-2">
+                        Price
+                      </div>
+                      <div className="flex flex-col">
+                        <div className="text-dark-gray text-lg">
+                          € {getItemTotalPrice(product).toFixed(2)}
+                        </div>
+                        <div className="text-md">
+                          {" "}
+                          €{" "}
+                          {product.price && product.price.$numberDecimal
+                            ? product.price.$numberDecimal
+                            : "N/A"}{" "}
+                          each
                         </div>
                       </div>
-                    </Link>
-                  </div>
-
-                  {/* Tree Qty */}
-                  <div className="w-full sm:w-[25%] flex flex-col items-center mt-auto mb-auto sm:pt-4">
-                    <div className="hidden sm:flex-1 flex-row justify-center items-center text-xl font-main-font text-secondary-color tracking-wide pb-2">
-                      Qty
                     </div>
-                    <div className="flex flex-row items-center justify-center border border-bg-header-footer rounded-[10px] p-[4px]">
+
+                    {/* Remove Tree */}
+                    <div className="w-full sm:w-[25%] flex flex-col items-center mt-auto mb-12 sm:mb-auto">
                       <button
-                        className="bg-transparent text-lg text-dark-gray p-2"
+                        className="my-auto px-8 py-2 bg-bg-header-footer text-font-family-color border border-bg-header-footer rounded-[50px] hover:bg-white-color hover:border border-[#9c988e] transition duration-4000 ease-linear"
                         aria-label="Remove Tree"
+                        onClick={() => removeButton(product._id)}
                       >
-                        <LuMinus />
-                      </button>
-                      <span className="mx-2 text-lg">1</span>
-                      <button
-                        className="bg-transparent text-lg text-dark-gray p-2"
-                        aria-label="Add Tree"
-                      >
-                        <LuPlus />
+                        Remove
                       </button>
                     </div>
                   </div>
-
-                  {/* Tree Price */}
-                  <div className="w-full sm:w-[25%] flex flex-col items-center mt-auto mb-auto">
-                    <div className="hidden sm:flex text-xl font-main-font text-secondary-color tracking-wide pb-2">
-                      Price
-                    </div>
-                    <div className="flex flex-col">
-                      <div className="text-dark-gray text-lg">{`€ ${product.price.toFixed(
-                        2
-                      )}`}</div>
-                      <div className="text-md">{`€ ${product.price.toFixed(
-                        2
-                      )} each`}</div>
-                    </div>
-                  </div>
-
-                  {/* Remove Tree */}
-                  <div className="w-full sm:w-[25%] flex flex-col items-center mt-auto mb-12 sm:mb-auto">
-                    <button
-                      className="my-auto px-8 py-2 bg-bg-header-footer text-font-family-color border border-bg-header-footer rounded-[50px] hover:bg-white-color hover:border border-[#9c988e] transition duration-4000 ease-linear"
-                      aria-label="Sign Out and go to the Home page"
-                    >
-                      Remove
-                    </button>
-                  </div>
+                ))}
+                <div className="flex w-[60%] mx-auto">
+                  <button
+                    className="text-center w-full my-2 px-4 py-2 bg-secondary-color text-white-color rounded-[50px] hover:bg-white-color hover:text-secondary-color border border-secondary-color transition duration-4000 ease-linear"
+                    aria-label="Clear Cart"
+                    onClick={() => clearCart()}
+                  >
+                    Clear Cart
+                  </button>
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <p>Your cart is empty</p>
+            )}
 
             {/* Payment Information */}
             <div className="w-[100%] lg:w-[30%]">
@@ -141,7 +222,9 @@ const Cart = () => {
                     <div className="felx text-xl font-main-font text-secondary-color tracking-wide">
                       Total Price:
                     </div>
-                    <div className="flex text-md text-dark-gray">€ 25.00</div>
+                    <div className="flex text-md text-dark-gray">
+                      € {calculateTotalPrice().toFixed(2)}
+                    </div>
                   </div>
                 </div>
 
@@ -151,7 +234,9 @@ const Cart = () => {
                     <div className="felx text-xl font-main-font text-secondary-color tracking-wide">
                       Tax:
                     </div>
-                    <div className="flex text-md text-dark-gray">€ 5.00</div>
+                    <div className="flex text-md text-dark-gray">
+                      € {(calculateTotalPrice() * TAX_RATE).toFixed(2)}
+                    </div>
                   </div>
                 </div>
 
@@ -161,7 +246,9 @@ const Cart = () => {
                     <div className="felx text-xl font-main-font text-secondary-color tracking-wide">
                       Grand Total:
                     </div>
-                    <div className="flex text-md text-dark-gray">€ 35.00</div>
+                    <div className="flex text-md text-dark-gray">
+                      € {calculateGrandTotal().toFixed(2)}
+                    </div>
                   </div>
                 </div>
 

@@ -1,3 +1,5 @@
+import React from "react";
+import { CartContextProvider } from "./store/CartContext";
 import {
   Route,
   RouterProvider,
@@ -24,7 +26,6 @@ import UserSponsorships from "./pages/UserSponsorships";
 import PasswordChange from "./pages/PasswordChange";
 import Signout from "./pages/Signout";
 import SingleTreePage from "./pages/SingleTreePage";
-import TreeList from "./pages/TreeList";
 import NewsArticle from "./pages/NewsArticle";
 
 function App() {
@@ -32,9 +33,8 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Index />}>
         <Route index element={<Home />} />
-        <Route path="/tree" element={<TreeList />} />
         <Route path="/trees" element={<Trees />} />
-        <Route path="/tree/:id" element={<SingleTreePage />} />
+        <Route path="/trees/:id" element={<SingleTreePage />} />
         <Route path="/news" element={<News />} />
         <Route path="/news/:id" element={<NewsArticle />} />
         <Route path="/about" element={<About />} />
@@ -53,9 +53,12 @@ function App() {
       </Route>
     )
   );
+
   return (
     <div>
-      <RouterProvider router={bioBaumRouter} />
+      <CartContextProvider>
+        <RouterProvider router={bioBaumRouter} />
+      </CartContextProvider>
     </div>
   );
 }

@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import authBgImage from "../assets/images/biobaum_landing_top_nav_img.png";
 import { FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
+import { CartContext } from "../store/CartContext";
 
 const AuthNavbar = () => {
+  const { cartTrees } = useContext(CartContext);
+
   return (
     <nav
       className="flex justify-end items-center px-4 md:px-6 lg:px-10 font-general-font text-white-color text-[1rem] md:text-[1.2rem]"
@@ -99,7 +102,7 @@ const AuthNavbar = () => {
               className="absolute top-[0.2rem] right-[0.2rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
               style={{ transform: "translate(50%, -50%)" }}
             >
-              0
+              {cartTrees.length}
             </div>
           </div>
         </Link>
