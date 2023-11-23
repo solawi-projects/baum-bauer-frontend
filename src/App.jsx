@@ -36,7 +36,7 @@ function App() {
         <Route path="/trees" element={<Trees />} />
         <Route path="/tree/:id" element={<SingleTreePage />} />
         <Route path="/news" element={<News />} />
-        <Route path="/news/:articleId" element={<NewsArticle />} />
+        <Route path="/news/:id" element={<NewsArticle />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/faq" element={<Faq />} />

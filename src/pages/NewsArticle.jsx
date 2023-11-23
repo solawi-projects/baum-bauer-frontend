@@ -1,12 +1,13 @@
 import leavesBackground from "../assets/images/news_images/leaves_background.png";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "../utils/axiosInstance";
 import DOMPurify from "dompurify";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 
 const NewsArticle = () => {
-  const { articleId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,25 +15,19 @@ const NewsArticle = () => {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      setIsLoading(true);
       try {
-        // Placeholder for fetching data including logic
-        const response = await fakeFetchArticle(articleId);
-        setArticle(response);
-        document.title = response.title + " - Blog News";
-      } catch (err) {
-        setError("Failed to load article.");
+        const response = await axios.get(`/api/newsArticle/${id}`);
+        setArticle(response.data);
+      } catch (error) {
+        console.error("Error fetching article:", error);
+        setError("Error fetching article");
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchArticle();
-
-    return () => {
-      document.title = "Original Website Title";
-    };
-  }, [articleId]);
+  }, [id]);
 
   // Go back function
 
@@ -57,6 +52,13 @@ const NewsArticle = () => {
       </div>
     );
 
+  if (!article.writer)
+    return (
+      <div className="text-gray-500 text-center text-lg font-semibold mt-10">
+        Writer information is not available.
+      </div>
+    );
+
   // Breadcrumb links
   const breadcrumbLinks = [
     { linkTo: "/", linkText: "Home" },
@@ -73,27 +75,28 @@ const NewsArticle = () => {
       )}
       <EachPageHeader title={article.title} />
       <div className="max-w-4xl mx-auto p-4 md:p-8">
-        {/* Might need to delete later */}
-
-        {/* <h2 className="text-3xl md:text-4xl font-bold text-secondary-color text-center mb-4">
-          {article.title}
-        </h2> */}
         <img
           className="w-full h-auto rounded-lg mb-6"
           src={article.imageUrl}
           alt={article.title}
         />
         <p className="text-md text-gray-600 mb-2">
-          By <span className="font-semibold">{article.createdBy}</span> on{" "}
+          By{" "}
           <span className="font-semibold">
-            {new Date(article.datetime).toDateString()}
+            {article.writer.firstName} {article.writer.lastName}
+          </span>{" "}
+          on{" "}
+          <span className="font-semibold">
+            {new Date(article.dateCreated).toDateString()}
           </span>
         </p>
         <div
           className="prose lg:prose-lg max-w-none"
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.body) }}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(article.content),
+          }}
         />
-        {/* Rest of your article rendering */}
+        {/* Go back link */}
         <button
           onClick={goBack}
           className="mb-4 text-gray-800 hover:text-blue-800 transition duration-300"
@@ -105,20 +108,6 @@ const NewsArticle = () => {
       <img className="w-full" src={leavesBackground} alt="Footer background" />
     </div>
   );
-};
-
-// Fake fetch function for demonstration
-// Replace this actual data fetching logic
-const fakeFetchArticle = async (id) => {
-  // Simulate fetching an article
-  return {
-    id: id,
-    title: "Sample Article",
-    body: "<p>This is the body of the article</p>",
-    imageUrl: "https://via.placeholder.com/600x400", // Example image URL
-    createdBy: "Author Name",
-    datetime: "2023-04-12",
-  };
 };
 
 export default NewsArticle;
