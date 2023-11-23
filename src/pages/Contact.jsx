@@ -1,25 +1,103 @@
+import { useState, useRef } from "react";
 import { Label, TextInput, Checkbox, Button, Textarea } from "flowbite-react";
+import Swal from "sweetalert2";
 import { HiHome } from "react-icons/hi";
 import { IoMdPerson } from "react-icons/io";
-import { Link } from "react-router-dom";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdDoubleArrow } from "react-icons/md";
 import { FaLocationDot, FaYoutube } from "react-icons/fa6";
 import { AiTwotoneMail } from "react-icons/ai";
 import { FaPhoneSquareAlt, FaLinkedin, FaTiktok } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { BsTwitterX } from "react-icons/bs";
+
+import axios from "../utils/axiosInstance";
 import EachPageHeader from "../components/EachPageHeader";
 import PageBreadcrumb from "../components/PageBreadcrumb";
+
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const titles = ["Contact Page", "Below, our contact details provided!"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Contact Page" };
 
+  const [errorMsgs, setErrorMsgs] = useState([]);
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+  const checkboxRef = useRef(false);
+
+  const firsNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const messageRef = useRef(null);
+
+  const handleCheckboxChange = () => {
+    setIsTermsAccepted(checkboxRef.current.checked);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = await new FormData(event.target);
+
+    const data = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      emailAddress: formData.get("emailAddress"),
+      message: formData.get("message"),
+    };
+
+    if (formData.get("agreeToPolicies")) {
+      axios
+        .post("/api/contact/create", data)
+        .then((response) => {
+          if (response.status === 201) {
+            setErrorMsgs([]);
+            Swal.fire({
+              icon: "success",
+              title:
+                "Thanks for your inquiry, we will provide response for you soon",
+              showClass: {
+                popup: "animate__animated animate__fadeInDown",
+              },
+              hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+              },
+              confirmButtonColor: "#5cb85c",
+            });
+
+            checkboxRef.current.checked = false;
+            setIsTermsAccepted(false);
+            firsNameRef.current.value = "";
+            lastNameRef.current.value = "";
+            emailRef.current.value = "";
+            messageRef.current.value = "";
+          }
+        })
+        .catch((error) => {
+          setErrorMsgs([]);
+          // Handle errors that occurred during the POST request
+          if (error.response.status === 400) {
+            setErrorMsgs(error.response.data.errors);
+          }
+        });
+    }
+  };
+
   return (
     <div className="bg-bg-page-color text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
+      <div className="container mx-auto flex justify-center items-center">
+        <ul>
+          {errorMsgs.map((error, index) => (
+            <li
+              key={error.path + index}
+              className="flex items-center text-red-700"
+            >
+              <MdDoubleArrow /> <span>&nbsp;{error.msg}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="container mx-auto flex flex-wrap columns-2 justify-center items-center mt-10 mb-14 gap-16">
         <section className="flex flex-col items-center gap-3 px-3">
           <h2 className="text-2xl border-b-1 w-full py-1 border-b-2">
@@ -98,29 +176,32 @@ const Contact = () => {
           </p>
         </section>
         <section className="max-w-md md:w-1/2 sm:w-1 lg:w-1/2 flex flex-row justify-center items-center">
-          <form className="w-full flex flex-col gap-4">
+          <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="firstname" value="First Name" />
+                <Label htmlFor="firstName" value="First Name" />
               </div>
               <TextInput
                 aria-label="Type here your first name"
-                id="firstname"
+                id="firstName"
+                name="firstName"
                 type="text"
                 icon={IoMdPerson}
                 placeholder="Like: Mice"
-                required
+                ref={firsNameRef}
                 shadow
               />
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="lastname" value="Last Name" />
+                <Label htmlFor="lastName" value="Last Name" />
               </div>
               <TextInput
                 aria-label="Type here your last name"
-                id="lastname"
+                id="lastName"
                 type="text"
+                name="lastName"
+                ref={lastNameRef}
                 icon={IoMdPerson}
                 placeholder="Like: Polocy"
                 helperText={
@@ -131,7 +212,6 @@ const Contact = () => {
                     </span>
                   </span>
                 }
-                required
                 shadow
               />
             </div>
@@ -143,27 +223,34 @@ const Contact = () => {
                 aria-label="Type here your email address"
                 id="emailAddress"
                 icon={MdEmail}
+                ref={emailRef}
                 type="email"
+                name="emailAddress"
                 placeholder="mice.plocy@gmail.com"
-                required
                 shadow
               />
             </div>
             <div className="max-w-md">
               <div className="mb-2 block">
-                <Label htmlFor="comment" value="Your message" />
+                <Label htmlFor="message" value="Your message" />
               </div>
               <Textarea
                 aria-label="Type here your your message"
-                id="comment"
+                id="message"
                 placeholder="write your message here..."
-                required
+                name="message"
                 rows={4}
+                ref={messageRef}
               />
             </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="agree" />
-              <Label htmlFor="agree" className="flex">
+            <div className="flex items-center gap-2 ">
+              <Checkbox
+                id="agree"
+                name="agreeToPolicies"
+                ref={checkboxRef}
+                onChange={handleCheckboxChange}
+              />
+              <Label htmlFor="agree" className="flex border-red-800">
                 I agree with the&nbsp;
                 <Link
                   href="#"
@@ -173,14 +260,26 @@ const Contact = () => {
                 </Link>
               </Label>
             </div>
-            <Button
-              outline
-              gradientDuoTone="whiteToOrange"
-              className="bg-font-family-color hover:bg-bg-header-footer hover:text-white-color hover:border-white-color"
-              type="submit"
-            >
-              send your message
-            </Button>
+            {isTermsAccepted ? (
+              <Button
+                outline
+                gradientDuoTone="whiteToOrange"
+                className="bg-font-family-color hover:bg-bg-header-footer hover:text-white-color hover:border-white-color"
+                type="submit"
+              >
+                send your message
+              </Button>
+            ) : (
+              <Button
+                disabled
+                outline
+                gradientDuoTone="whiteToOrange"
+                className="bg-font-family-color hover:bg-bg-header-footer hover:text-white-color hover:border-white-color"
+                type="submit"
+              >
+                send your message
+              </Button>
+            )}
           </form>
         </section>
       </div>
