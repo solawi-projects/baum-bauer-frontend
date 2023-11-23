@@ -1,13 +1,13 @@
 import leavesBackground from "../assets/images/news_images/leaves_background.png";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import DOMPurify from "dompurify";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 
 const NewsArticle = () => {
-  const { articleId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,25 +15,19 @@ const NewsArticle = () => {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      console.log(`Fetching article with ID: ${articleId}`);
-
-      setIsLoading(true);
       try {
-        const response = await axios.get(
-          `http://localhost:4000/api/newsArticles/${articleId}`
-        );
-        setArticle(response.data); // Access the 'data' property
-        document.title = response.data.title + " - Blog News";
-      } catch (err) {
-        setError("Failed to load article.");
-        console.error(err.response || err.message);
+        const response = await axios.get(`/api/newsArticle/${id}`);
+        setArticle(response.data);
+      } catch (error) {
+        console.error("Error fetching article:", error);
+        setError("Error fetching article");
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchArticle();
-  }, [articleId]);
+  }, [id]);
 
   // Go back function
 
