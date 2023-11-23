@@ -12,11 +12,11 @@ import {
 import { FcFaq } from "react-icons/fc";
 import { MdContacts } from "react-icons/md";
 
-const DesktopNavbar = ({ isNavbarVisible, setIsNavbarVisible }) => {
+const DesktopNavbar = ({ isNavbarFixed, setIsNavbarFixed }) => {
   /* Handle DesktopNavbar on Scroll */
   useEffect(() => {
     const handleScroll = () => {
-      setIsNavbarVisible(window.scrollY <= 80);
+      setIsNavbarFixed(window.scrollY >= 80);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -24,16 +24,15 @@ const DesktopNavbar = ({ isNavbarVisible, setIsNavbarVisible }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [ setIsNavbarFixed ]);
 
   const desktopNavbarStyle = {
-    position: isNavbarVisible ? "sticky" : "fixed",
+    position: isNavbarFixed ? "fixed" : "static",
     top: "0",
     width: "100%",
     zIndex: 1000,
   };
 
-  console.log(isNavbarVisible);
   return (
     <>
       <AuthNavbar />

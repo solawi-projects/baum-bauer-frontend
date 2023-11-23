@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 
 const Index = () => {
   const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth < 768); // 768px is a common breakpoint for mobile screens
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [isNavbarFixed, setIsNavbarFixed] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,7 +21,7 @@ const Index = () => {
   }, []);
 
   const mainStyle = {
-    paddingTop: isNavbarVisible ? "0" : "70px"
+    paddingTop: isNavbarFixed ? "70px" : "0"
   };
 
   return (
@@ -30,8 +30,8 @@ const Index = () => {
         { isMobileScreen 
             ? <MobileNavbar /> 
             : <DesktopNavbar 
-                isNavbarVisible={isNavbarVisible} 
-                setIsNavbarVisible={setIsNavbarVisible} 
+                isNavbarFixed={isNavbarFixed} 
+                setIsNavbarFixed={setIsNavbarFixed} 
               />
         }
       </header>
