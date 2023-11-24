@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { HiHome } from "react-icons/hi";
@@ -19,9 +19,7 @@ const News = () => {
     const fetchNewsArticles = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(
-          "http://localhost:4000/api/newsArticle"
-        );
+        const response = await axios.get("/api/newsArticle");
         setNewsItems(response.data);
       } catch (err) {
         setError("Failed to load news articles");
