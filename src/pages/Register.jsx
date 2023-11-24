@@ -18,19 +18,14 @@ import { FaHouse } from "react-icons/fa6";
 
 import { Link } from "react-router-dom";
 import EachPageHeader from "../components/EachPageHeader";
+import PageBreadcrumb from "../components/PageBreadcrumb";
 const Register = () => {
-  const titles =['Register Now', 'Please enter your personal information in the form below']
+  const titles =['Register Now', 'Please Enter your Personal Information in the Form below']
+  const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
+  const daLinkValues = { linkText: "Registration Form" };
   return (
     <>
-      <Breadcrumb
-        aria-label=""
-        className="bg-gray-50 px-5 py-3 dark:bg-gray-800"
-      >
-        <Breadcrumb.Item href="/" icon={HiHome}>
-          Home
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>Registeration Form</Breadcrumb.Item>
-      </Breadcrumb>
+      <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
      
 

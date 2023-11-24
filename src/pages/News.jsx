@@ -35,6 +35,7 @@ const News = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+
   return (
     <div className="bg-bg-page-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
