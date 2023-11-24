@@ -27,6 +27,7 @@ import PasswordChange from "./pages/PasswordChange";
 import Signout from "./pages/Signout";
 import SingleTreePage from "./pages/SingleTreePage";
 import NewsArticle from "./pages/NewsArticle";
+import AddToGallery from "./pages/AddToGallery";
 
 function App() {
   const bioBaumRouter = createBrowserRouter(
@@ -49,6 +50,7 @@ function App() {
         <Route path="/user_sponsorships" element={<UserSponsorships />} />
         <Route path="/password_change" element={<PasswordChange />} />{" "}
         <Route path="/signout" element={<Signout />} />
+        <Route path="/addImageToGallery" element={<AddToGallery />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     )
