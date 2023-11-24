@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import AuthNavbar from "./AuthNavbar";
 
@@ -12,23 +12,22 @@ import {
 import { FcFaq } from "react-icons/fc";
 import { MdContacts } from "react-icons/md";
 
-const DesktopNavbar = () => {
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-
+const DesktopNavbar = ({ isNavbarFixed, setIsNavbarFixed }) => {
   /* Handle DesktopNavbar on Scroll */
   useEffect(() => {
     const handleScroll = () => {
-      setIsNavbarVisible(window.scrollY <= 0);
+      setIsNavbarFixed(window.scrollY >= 80);
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [ setIsNavbarFixed ]);
 
   const desktopNavbarStyle = {
-    position: isNavbarVisible ? "sticky" : "fixed",
+    position: isNavbarFixed ? "fixed" : "static",
     top: "0",
     width: "100%",
     zIndex: 1000,
@@ -36,7 +35,7 @@ const DesktopNavbar = () => {
 
   return (
     <>
-      {isNavbarVisible && <AuthNavbar />}
+      <AuthNavbar />
       <nav
         className="flex justify-center items-center bg-bg-header-footer h-[70px] font-general-font text-font-family-color text-[1rem]"
         style={desktopNavbarStyle}
