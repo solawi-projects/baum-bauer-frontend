@@ -6,12 +6,11 @@ import { Fade } from "react-awesome-reveal";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
-import Feedback from "../components/Feedback";
 
 const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [showAllImages, setShowAllImages] = useState(window.innerWidth > 1024);
-  const [selectedIndex, setSelectedIndex] = useState(null); // Add this line
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   /* Image Urls */
   const imageUrls = [
@@ -149,7 +148,7 @@ const Gallery = () => {
           {/* Toggle Button for Show All/Fewer Images */}
           <button
             onClick={toggleShowAllImages}
-            className="block lg:hidden mx-auto px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[50px] hover:scale-110 hover:border border-[#9c988e] transition duration-4000 ease-linear"
+            className="block lg:hidden mx-auto px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
             aria-label="Show All/Fewer Images"
           >
             {showAllImages ? "Show Fewer Photos" : "Show All Images"}
@@ -177,7 +176,11 @@ const Gallery = () => {
                     <img src={closeMenu} alt="Close Menu" />
                   </button>
                 </div>
-                <img src={selectedImg} alt="" className="w-full h-[800px]" />
+                <img
+                  src={selectedImg}
+                  alt=""
+                  className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px]"
+                />
                 {/* Image Title */}
                 <div className="text-center p-2 absolute bottom-0 left-0 right-0">
                   <p className="bg-white bg-opacity-80 p-4 text-dark-gray">
@@ -189,7 +192,6 @@ const Gallery = () => {
           </div>
         )}
       </div>{" "}
-      <Feedback />
       {/* Footer Image */}
       <img
         src="src/assets/images/biobaum_gallery_footer_img.png"

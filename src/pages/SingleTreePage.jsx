@@ -107,7 +107,7 @@ const SingleTreePage = () => {
               {/* Add to Cart Button */}
               <button
                 to="/trees"
-                className="mt-4 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[50px] border-bg-header-footer hover:border border-[#9c988e] hover:bg-transparent transition duration-4000 ease-linear mb-6"
+                className="text-center w-full my-2 px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear"
                 aria-label="Sponsor page"
                 onClick={handleAddToCart}
               >

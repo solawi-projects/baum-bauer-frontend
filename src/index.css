@@ -7,11 +7,16 @@ Global variables for colors
 */
 :root {
   --bg-header-footer: #dfdacb;
+  --lighter-primary: #f8f7f4;
   --bg-page-color: #ededec;
   --white-color: #fcfdfd;
   --font-family-color: #82817e;
   --secondary-color: #5a6448;
+  --darker-secondary: #888f7a;
+  --lighter-secondary: #f4f5f3;
   --darkgreen-color: #5a6448;
+  --red-color: #ff6961;
+  --light-bg: #f8f5f4;
 }
 *,
 ::after,
@@ -68,10 +73,10 @@ Heading general styles- End
 
 /* Overwrite the default "flowbite-react" package Styles */
 .custom-button-style {
-  background-color: var(--secondary-color) !important;
+  background-color: var(--darker-secondary) !important;
   color: var(--white-color) !important;
-  border: 1px solid var(--secondary-color) !important;
-  border-radius: 9999px !important;
+  border: none !important;
+  border-radius: 10px !important;
   padding: 4px 16px !important;
   transition: all 0.4s linear;
   outline: none;
@@ -79,9 +84,9 @@ Heading general styles- End
 }
 
 .custom-button-style:hover {
-  background-color: transparent !important;
+  background-color: var(--lighter-secondary) !important;
   color: var(--secondary-color) !important;
-  border: 1px solid var(--secondary-color) !important;
+  border: none !important;
 }
 
 .custom-button-style:focus {
@@ -92,7 +97,13 @@ Heading general styles- End
 /* Target the input fields during autofill */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
+input:-webkit-autofill:focus,
+#password:-webkit-autofill,
+#password:-webkit-autofill:hover,
+#password:-webkit-autofill:focus,
+#email:-webkit-autofill,
+#email:-webkit-autofill:hover,
+#email:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 1000px #f4f5f3 inset !important;
   box-shadow: 0 0 0 1000px #f4f5f3 inset !important;
   -webkit-text-fill-color: var(--font-family-color) !important;
@@ -106,10 +117,22 @@ input:-ms-input-placeholder {
 
 /* Override the background color during autofill for Firefox */
 @-moz-document url-prefix() {
+  #password,
+  #email,
   input {
     background-color: #f4f5f3 !important;
     color: var(--font-family-color) !important;
   }
+}
+
+/* Your global styles or a specific CSS file */
+#password:focus,
+#password:active,
+#email:focus,
+#email:active {
+  outline: none !important; /* Use !important to override any other styles */
+  border: 2px solid var(--secondary-color) !important; /* Set your custom border color */
+  box-shadow: none !important; /* Remove any box shadow */
 }
 
 /* Hide Label values */

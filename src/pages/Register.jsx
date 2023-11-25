@@ -1,12 +1,4 @@
-
-import {
-  Breadcrumb,
-  Label,
-  TextInput,
-  Checkbox,
-  Button,
-
-} from "flowbite-react";
+import { Breadcrumb, Label, TextInput, Checkbox, Button } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
@@ -19,7 +11,10 @@ import { FaHouse } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import EachPageHeader from "../components/EachPageHeader";
 const Register = () => {
-  const titles =['Register Now', 'Please enter your personal information in the form below']
+  const titles = [
+    "Register Now",
+    "Please enter your personal information in the form below",
+  ];
   return (
     <>
       <Breadcrumb
@@ -32,14 +27,24 @@ const Register = () => {
         <Breadcrumb.Item>Registeration Form</Breadcrumb.Item>
       </Breadcrumb>
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-     
 
       {/* registration form */}
 
       <section className="flex justify-center m-8">
         <form className="max-w-xl w-full px-6 py-6 border rounded-lg shadow-md  ">
+          <p className="text-center">
+            Already have an account? Then please{" "}
+            <Link
+              to="/login"
+              className="text-secondary-color underline font-bold"
+            >
+              sign in
+            </Link>
+            .
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 p-7">
-            <div>{/* first,last and username fields container */}
+            <div>
+              {/* first,last and username fields container */}
               {/*first name field  */}
               <div className="mb-2">
                 <div className="mb-1 block">
@@ -53,7 +58,7 @@ const Register = () => {
                   placeholder="Enter your Name"
                   required
                   shadow
-                  style={{fontSize:12}} 
+                  style={{ fontSize: 12 }}
                 />
               </div>
 
@@ -70,8 +75,7 @@ const Register = () => {
                   placeholder="Enter your Lastname"
                   required
                   shadow
-                  style={{fontSize:12}} 
-         
+                  style={{ fontSize: 12 }}
                 />
               </div>
 
@@ -88,14 +92,14 @@ const Register = () => {
                   placeholder="Enter your username"
                   required
                   shadow
-                  style={{fontSize:12}} 
-          
+                  style={{ fontSize: 12 }}
                 />
               </div>
             </div>
 
-            <div>    {/* email field */}
-          
+            <div>
+              {" "}
+              {/* email field */}
               <div className="mb-2">
                 <div className="mb-1 block">
                   <Label htmlFor="emailAddress" value="Email Address" />
@@ -108,11 +112,10 @@ const Register = () => {
                   placeholder="Enter your Email"
                   required
                   shadow
-                  style={{fontSize:12}} 
+                  style={{ fontSize: 12 }}
                   className="text-base"
                 />
               </div>
-
               {/* password field */}
               <div className="mb-2">
                 <div className="mb-1 block">
@@ -126,10 +129,9 @@ const Register = () => {
                   placeholder="Enter your Password"
                   required
                   shadow
-                  style={{fontSize:12}} 
+                  style={{ fontSize: 12 }}
                 />
               </div>
-
               {/* confirm password field */}
               <div className="mb-2">
                 <div className="mb-1 block">
@@ -143,8 +145,7 @@ const Register = () => {
                   placeholder="Repeat your Password"
                   required
                   shadow
-                  style={{fontSize:12}} 
-                  
+                  style={{ fontSize: 12 }}
                 />
               </div>
             </div>
@@ -153,14 +154,19 @@ const Register = () => {
           {/* address fields */}
           <p className="ml-6">Address</p>
           <div className=" grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-5 mt-2 pl-6 pr-6 ">
-            <div className=" flex flex-col gap-4 mt-1">{/* house number and street container */}
+            <div className=" flex flex-col gap-4 mt-1">
+              {/* house number and street container */}
               {/* house number field */}
               <div>
                 <div className="mb-1 block">
-                  <Label htmlFor="houseNumber" className="text-xs" value="House Number" />
+                  <Label
+                    htmlFor="houseNumber"
+                    className="text-xs"
+                    value="House Number"
+                  />
                 </div>
                 <TextInput
-                style={{fontSize:12}} 
+                  style={{ fontSize: 12 }}
                   aria-label=""
                   id="houseNumber"
                   type="text"
@@ -168,14 +174,12 @@ const Register = () => {
                   placeholder="Enter your House Number"
                   required
                   shadow
-           
-               
-
                 />
               </div>
 
-              <div>   {/* street field */}
-             
+              <div>
+                {" "}
+                {/* street field */}
                 <div className="mb-1">
                   <Label htmlFor="street" className="text-xs" value="Street" />
                 </div>
@@ -187,18 +191,19 @@ const Register = () => {
                   placeholder="Enter your Street"
                   required
                   shadow
-                  style={{fontSize:12}} 
-
+                  style={{ fontSize: 12 }}
                 />
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 mt-1 mb-2">   {/* city and country container */}
-           
-              <div> {/* city field */}
+            <div className="flex flex-col gap-4 mt-1 mb-2">
+              {" "}
+              {/* city and country container */}
+              <div>
+                {" "}
+                {/* city field */}
                 <div className="mb-1">
-                 
-                  <Label htmlFor="city" className="text-xs"  value="City" />
+                  <Label htmlFor="city" className="text-xs" value="City" />
                 </div>
                 <TextInput
                   aria-label=""
@@ -208,24 +213,28 @@ const Register = () => {
                   placeholder="Enter your City"
                   required
                   shadow
-                  style={{fontSize:12}} 
-   
+                  style={{ fontSize: 12 }}
                 />
               </div>
-              <div>  {/* coutry field */}
+              <div>
+                {" "}
+                {/* coutry field */}
                 <div className="mb-1">
-                
-                  <Label htmlFor="country" className="text-xs" value="Country" />
+                  <Label
+                    htmlFor="country"
+                    className="text-xs"
+                    value="Country"
+                  />
                 </div>
                 <TextInput
                   aria-label=""
                   id="country"
                   type="text"
-                  icon={FaMapLocation }
+                  icon={FaMapLocation}
                   placeholder="Enter your Country"
                   required
                   shadow
-                  style={{fontSize:12}} 
+                  style={{ fontSize: 12 }}
                 />
               </div>
             </div>

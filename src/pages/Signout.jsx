@@ -13,15 +13,22 @@ const Signout = () => {
         ></div>
 
         <div className="flex flex-col justify-center items-center gap-[2rem] w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%] bg-white rounded-[15px] p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px]">
-          <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-            Sign Out
-          </h3>
+          <div className="flex items-center mb-4">
+            <img
+              src="/src/assets/tree.png"
+              alt="Tree Icon"
+              className="w-[40px] h-[40px] mr-2"
+            />{" "}
+            <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+              Sign Out
+            </h3>
+          </div>
           <p className="text-3xl text-secondary-color font-main-font tracking-wide mt-6 text-center">
             Are you sure you want to sign out?
           </p>
           <Link
             to="/"
-            className="mt-4 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[50px] hover:scale-110 border border-[#9c988e] transition duration-4000 ease-linear"
+            className="text-center w-full my-2 px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
             aria-label="Sign Out and go to the Home page"
           >
             Sign Out

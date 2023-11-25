@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import backgroundImage from "../assets/images/leaves_background_02.webp";
 
@@ -39,29 +40,71 @@ const Login = () => {
         style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
       ></div>
       <div className="z-10 p-8 bg-white bg-opacity-95 rounded-2xl shadow-xl max-w-md w-full space-y-6 mb-20">
-        <h2 className="text-3xl lg:text-4xl text-center font-extrabold text-gray-700">
-          Login
-        </h2>
+        <div className="flex items-center mb-4">
+          <img
+            src="/src/assets/tree.png"
+            alt="Tree Icon"
+            className="w-[40px] h-[40px] mr-2"
+          />{" "}
+          <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+            Sign In
+          </h3>
+        </div>
+        <p>
+          If you have not created an account yet, then please{" "}
+          <Link
+            to="/register"
+            className="text-secondary-color underline font-bold"
+          >
+            sign up
+          </Link>{" "}
+          first.
+        </p>
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <Label htmlFor="email" value="Your email" />
+            <Label
+              htmlFor="email"
+              value="Your email"
+              className="visually-hidden"
+            />
             <TextInput
               id="email"
               type="email"
-              placeholder="name@flowbite.com"
+              placeholder="name@flowbite.com *"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              style={{
+                backgroundColor: "var(--bg-white-color)",
+                borderColor: "var(--bg-header-footer)",
+                outlineColor: "var(--secondary-color)",
+                padding: "1.15rem",
+                color: "var(--font-family-color)",
+                fontSize: "1rem",
+              }}
             />
           </div>
           <div>
-            <Label htmlFor="password" value="Your password" />
+            <Label
+              htmlFor="password"
+              value="Your password"
+              className="visually-hidden"
+            />
             <TextInput
               id="password"
               type="password"
+              placeholder="Your Password *"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              style={{
+                backgroundColor: "var(--bg-white-color)",
+                borderColor: "var(--bg-header-footer)",
+                outlineColor: "var(--secondary-color)",
+                padding: "1.15rem",
+                color: "var(--font-family-color)",
+                fontSize: "1rem",
+              }}
             />
           </div>
           <div className="flex items-center gap-2">
@@ -71,8 +114,13 @@ const Login = () => {
               onChange={() => setRememberMe(!rememberMe)}
             />
             <Label htmlFor="remember">Remember me</Label>
+            <Link to="" className="ml-10 text-secondary-color underline">
+              Forgot Password?
+            </Link>
           </div>
-          <Button type="submit">Log in</Button>
+          <Button type="submit" className="custom-button-style">
+            Sign In
+          </Button>
         </form>
       </div>
       <img

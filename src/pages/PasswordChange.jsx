@@ -61,13 +61,14 @@ const PasswordChange = () => {
               </div>
               <div className="grid grid-cols-1 gap:2 lg:gap-4 mt-10">
                 <div className="mb-4">
-                  <Label htmlFor="currentPassword" className="visually-hidden">
+                  <Label htmlFor="password" className="visually-hidden">
                     Current Password
                   </Label>
                   <TextInput
-                    id="currentPassword"
+                    required
+                    id="password"
                     type="password"
-                    placeholder="Current Password*"
+                    placeholder="Current Password *"
                     value={passwords.currentPassword}
                     onChange={(e) =>
                       setPasswords({
@@ -86,13 +87,14 @@ const PasswordChange = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="newPassword" className="visually-hidden">
+                  <Label htmlFor="password" className="visually-hidden">
                     New Password
                   </Label>
                   <TextInput
-                    id="newPassword"
+                    required
+                    id="password"
                     type="password"
-                    placeholder="New Password*"
+                    placeholder="New Password *"
                     value={passwords.newPassword}
                     onChange={(e) =>
                       setPasswords({
@@ -111,16 +113,14 @@ const PasswordChange = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label
-                    htmlFor="confirmNewPassword"
-                    className="visually-hidden"
-                  >
+                  <Label htmlFor="password" className="visually-hidden">
                     Confirm New Password
                   </Label>
                   <TextInput
-                    id="confirmNewPassword"
+                    required
+                    id="password"
                     type="password"
-                    placeholder="Confirm New Password*"
+                    placeholder="Confirm New Password *"
                     value={passwords.confirmNewPassword}
                     onChange={(e) =>
                       setPasswords({
