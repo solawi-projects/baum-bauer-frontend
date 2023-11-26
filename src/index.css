@@ -125,14 +125,12 @@ input:-ms-input-placeholder {
   }
 }
 
-/* Your global styles or a specific CSS file */
-#password:focus,
-#password:active,
-#email:focus,
-#email:active {
-  outline: none !important; /* Use !important to override any other styles */
-  border: 2px solid var(--secondary-color) !important; /* Set your custom border color */
-  box-shadow: none !important; /* Remove any box shadow */
+/*  */
+input:focus,
+input:active {
+  outline: none !important;
+  border: 2px solid var(--secondary-color) !important;
+  box-shadow: none !important;
 }
 
 /* Hide Label values */

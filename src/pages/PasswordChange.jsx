@@ -61,12 +61,12 @@ const PasswordChange = () => {
               </div>
               <div className="grid grid-cols-1 gap:2 lg:gap-4 mt-10">
                 <div className="mb-4">
-                  <Label htmlFor="password" className="visually-hidden">
+                  <Label htmlFor="currentPassword" className="visually-hidden">
                     Current Password
                   </Label>
                   <TextInput
                     required
-                    id="password"
+                    id="currentPassword"
                     type="password"
                     placeholder="Current Password *"
                     value={passwords.currentPassword}
@@ -76,6 +76,7 @@ const PasswordChange = () => {
                         currentPassword: e.target.value,
                       })
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -87,12 +88,12 @@ const PasswordChange = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="password" className="visually-hidden">
+                  <Label htmlFor="newPassword" className="visually-hidden">
                     New Password
                   </Label>
                   <TextInput
                     required
-                    id="password"
+                    id="newPassword"
                     type="password"
                     placeholder="New Password *"
                     value={passwords.newPassword}
@@ -102,6 +103,7 @@ const PasswordChange = () => {
                         newPassword: e.target.value,
                       })
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -113,12 +115,15 @@ const PasswordChange = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="password" className="visually-hidden">
+                  <Label
+                    htmlFor="confirmNewPassword"
+                    className="visually-hidden"
+                  >
                     Confirm New Password
                   </Label>
                   <TextInput
                     required
-                    id="password"
+                    id="confirmNewPassword"
                     type="password"
                     placeholder="Confirm New Password *"
                     value={passwords.confirmNewPassword}
@@ -128,6 +133,7 @@ const PasswordChange = () => {
                         confirmNewPassword: e.target.value,
                       })
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -138,6 +144,18 @@ const PasswordChange = () => {
                     }}
                   />
                 </div>
+              </div>
+              <div className="text-dark-gray">
+                <p className="font-bold">Password Requirements:</p>
+                <p>Minimum length of 6 characters</p>
+                <p>At least one number</p>
+                <p>At least one number</p>
+                <p>At least one capital letter</p>
+                <p>At least one special symbol</p>
+                <p>
+                  (&#33; &#64; &#35; &#36; &#37; &#94; &#38; &#42; &#95; &#43;
+                  &#123; &#125; &#58; &lt; &gt; &#63;)
+                </p>
               </div>
               {/* Change Password Button */}
               <div className="text-center flex justify-center mb-6">

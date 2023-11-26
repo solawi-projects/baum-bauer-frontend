@@ -84,11 +84,13 @@ const UpdateProfile = () => {
                   <TextInput
                     required
                     id="firstName"
+                    type="text"
                     placeholder="First Name *"
                     value={formValues.firstName}
                     onChange={(e) =>
                       handleInputChange("firstName", e.target.value)
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -106,11 +108,13 @@ const UpdateProfile = () => {
                   <TextInput
                     required
                     id="lastName"
+                    type="text"
                     placeholder="Last Name *"
                     value={formValues.lastName}
                     onChange={(e) =>
                       handleInputChange("lastName", e.target.value)
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -134,6 +138,7 @@ const UpdateProfile = () => {
                     placeholder="Email Address *"
                     value={formValues.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -151,11 +156,14 @@ const UpdateProfile = () => {
                   <TextInput
                     required
                     id="phoneNumber"
+                    type="tel"
+                    name="phone"
                     placeholder="Phone Number *"
                     value={formValues.phoneNumber}
                     onChange={(e) =>
                       handleInputChange("phoneNumber", e.target.value)
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -175,11 +183,13 @@ const UpdateProfile = () => {
                   <TextInput
                     required
                     id="addressLine1"
+                    type="text"
                     placeholder="Address Line 1 *"
                     value={formValues.addressLine1}
                     onChange={(e) =>
                       handleInputChange("addressLine1", e.target.value)
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -196,11 +206,13 @@ const UpdateProfile = () => {
                   </Label>
                   <TextInput
                     id="addressLine2"
+                    type="text"
                     placeholder="Address Line 2"
                     value={formValues.addressLine2}
                     onChange={(e) =>
                       handleInputChange("addressLine2", e.target.value)
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -220,9 +232,11 @@ const UpdateProfile = () => {
                   <TextInput
                     required
                     id="city"
+                    type="text"
                     placeholder="City *"
                     value={formValues.city}
                     onChange={(e) => handleInputChange("city", e.target.value)}
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -240,11 +254,13 @@ const UpdateProfile = () => {
                   <TextInput
                     required
                     id="postcode"
+                    type="text"
                     placeholder="Postcode *"
                     value={formValues.postcode}
                     onChange={(e) =>
                       handleInputChange("postcode", e.target.value)
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -263,11 +279,13 @@ const UpdateProfile = () => {
                   </Label>
                   <TextInput
                     id="stateCountry"
+                    type="text"
                     placeholder="State/Country"
                     value={formValues.stateCountry}
                     onChange={(e) =>
                       handleInputChange("stateCountry", e.target.value)
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -285,11 +303,13 @@ const UpdateProfile = () => {
                   <TextInput
                     required
                     id="country"
+                    type="text"
                     placeholder="Country *"
                     value={formValues.country}
                     onChange={(e) =>
                       handleInputChange("country", e.target.value)
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
