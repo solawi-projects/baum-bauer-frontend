@@ -7,7 +7,7 @@ import { TreeData } from "../components/TreeData";
 
 import Search from '../components/Search'
 
-import "../components/Tress.css";
+import "../components/Trees.css";
 import { Link } from "react-router-dom";
 
 const Sponsor = () => {
@@ -28,7 +28,7 @@ const Sponsor = () => {
         const data = await TreeData();
         setTree(data);
       } catch (error) {
-        setErr("Data was not brought");
+        setErr("Failed to load tree Data");
       }
     };
 
@@ -43,17 +43,16 @@ const Sponsor = () => {
         activeLinks={aLinkValues}
         deActiveLink={daLinkValues}
       />{" "}
-      <p>{err}</p>     
-        <Search updateTree={setTree}/>
 
+      <p>{err}</p> <div className=" backdrop-search"></div>
+        
+        <Search updateTree={setTree}/>
       <div className="h-auto relative dropdown">
-        {" "}
         <div
-          id="dropdown-button "
+          id="dropdown-button"
           onClick={toggleDropdown}
-          className="select-none border h-auto absolute top-10 right-40 w-40 border-gray-400 rounded px-5 py-2 cursor-pointer flex justify-between"
+          className="select-none border h-auto absolute top-10 right-40 w-40 border-gray-400 rounded-lg px-5 py-2 cursor-pointer flex justify-between shadow-sm"
         >
-          {" "}
           Options
           <IoIosArrowDown />
         </div>
@@ -61,7 +60,7 @@ const Sponsor = () => {
           id="dropdown-menu"
           className={`${
             isDropdownOpen ? "block" : "hidden"
-          } absolute top-50 absolute top-20 h-auto right-40 w-400 border border-gray-300 bg-white shadow-md mt-2 transition-all duration-300`}
+          } absolute top-20 right-40 w-400 border border-gray-300 bg-white shadow-md rounded-md mt-2 transition-all duration-300`}
         >
           <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">
             popularity
@@ -77,6 +76,7 @@ const Sponsor = () => {
           </div>
         </div>
       </div>
+
       <div className=" flex  justify-center flex-wrap gap-10 pt-40 pb-40 ml-20 mr-20">
         {tree.map((item, index) => (
           <div key={index} className="flex  pr items-center ">
