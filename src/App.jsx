@@ -27,6 +27,8 @@ import PasswordChange from "./pages/PasswordChange";
 import Signout from "./pages/Signout";
 import SingleTreePage from "./pages/SingleTreePage";
 import NewsArticle from "./pages/NewsArticle";
+import Checkout from "./pages/Checkout";
+import Order from "./pages/Order";
 import AddToGallery from "./pages/AddToGallery";
 import AddToNewArticle from "./pages/AddToNewsArticle";
 import AddNewTree from "./pages/AddNewTree";
@@ -44,7 +46,9 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/contact" element={<Contact />} />{" "}
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart />} />{" "}
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order/place_order" element={<Order />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />{" "}
         <Route path="/dashboard" element={<Dashboard />} />

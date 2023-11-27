@@ -23,7 +23,7 @@ const HeroSection = () => {
       {/* Hero Text and Button */}
       <div className="w-[90%] md:w-[80%] lg:w-[60%] xl:w-[40%] m-auto">
         <div className="flex flex-col justify-center items-center mt-8">
-          <h1 className="text-4xl md:text-5xl text-white font-main-font tracking-widest">
+          <h1 className="text-4xl md:text-6xl text-white font-main-font tracking-wide">
             Hero Title
           </h1>
           <p className="mt-2 text-[1rem] md:text-[1.2rem] text-white">
@@ -36,7 +36,7 @@ const HeroSection = () => {
           </p>
           <Link
             to="/trees"
-            className="mt-4 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[50px] hover:scale-110 hover:border border-[#9c988e] transition duration-4000 ease-linear"
+            className="mx-auto px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
             aria-label="Sponsor page"
           >
             Learn More...

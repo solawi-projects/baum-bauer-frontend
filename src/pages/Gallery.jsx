@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import backgroundImage from "../assets/images/gallery_images/leaves_background_03.png";
 import closeMenu from "../assets/images/close_menu.svg";
@@ -7,14 +6,12 @@ import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import Feedback from "../components/Feedback";
 import axios from "../utils/axiosInstance";
-
 const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [showAllImages, setShowAllImages] = useState(window.innerWidth > 1024);
   const [selectedIndex, setSelectedIndex] = useState(null); // Add this line
   const [gallery, setGallery] = useState([]);
   const [error, setError] = useState("");
-
   /* Getting Gallery from Database! */
   const getGalleryImage = () => {
     try {
@@ -35,7 +32,6 @@ const Gallery = () => {
       throw error;
     }
   };
-
   /* Handele ShowAllImages and ShowFewerImages on Screens <= 1024 */
   useEffect(() => {
     getGalleryImage();
@@ -46,27 +42,21 @@ const Gallery = () => {
         setShowAllImages(false);
       }
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [showAllImages]);
-
   const toggleShowAllImages = () => {
     setShowAllImages(!showAllImages);
   };
-
   const filteredGallery = showAllImages ? gallery : gallery.slice(0, 3);
-
   /* Handle Open Image */
   const openImage = (img) => {
     setSelectedImg(img);
   };
-
   /* Handle Close Image */
   const closeImage = () => {
     setSelectedImg(null);
   };
-
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Gallery" };
   return (
@@ -78,12 +68,10 @@ const Gallery = () => {
           className="absolute top-0 left-0 w-full h-full bg-contain bg-no-repeat bg-top"
           style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.1 }}
         ></div>
-
         <div className="relative z-9">
-          <h2 className="text-5xl md:text-7xl mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] mb-[15px] text-center font-main-font tracking-wide text-[#5a6448]">
+          <h2 className="text-5xl md:text-7xl mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] mb-[15px] text-center font-main-font tracking-wide text-[#5A6448]">
             Gallery
           </h2>
-
           {/* Gallery Page Description */}
           <p className="text-justify w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] mx-auto text-font-family-color text-md lg:text-xl xl:text-2xl mb-[25px] md:mb-[40px] lg:mb-[50px] xl:mb-[60px]">
             Welcome to our gallery, where each tree tells a story of growth,
@@ -94,7 +82,6 @@ const Gallery = () => {
             us and witness the remarkable transformation of each tree, fostered
             by the care and dedication of our community of sponsors.
           </p>
-
           {/* Image content */}
           <Fade delay={100} cascade damping={0.1} duration={3000}>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:px-10 lg:px-20 xl:px-40">
@@ -129,17 +116,15 @@ const Gallery = () => {
               ))}
             </div>
           </Fade>
-
           {/* Toggle Button for Show All/Fewer Images */}
           <button
             onClick={toggleShowAllImages}
-            className="block lg:hidden mx-auto px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[50px] hover:scale-110 hover:border border-[#9c988e] transition duration-4000 ease-linear"
+            className="block lg:hidden mx-auto px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[50px] hover:scale-110 hover:border border-[#9C988E] transition duration-4000 ease-linear"
             aria-label="Show All/Fewer Images"
           >
             {showAllImages ? "Show Fewer Photos" : "Show All Images"}
           </button>
         </div>
-
         {/* Modal for Selected Image */}
         {selectedImg && (
           <div
@@ -164,7 +149,7 @@ const Gallery = () => {
                 <img
                   src={selectedImg.image}
                   alt={`Selected Image ${selectedImg.title}`}
-                  className="w-full h-[800px]"
+                  className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px]"
                   onDoubleClick={closeImage}
                 />
                 {/* Image Title */}
@@ -190,5 +175,4 @@ const Gallery = () => {
     </div>
   );
 };
-
 export default Gallery;

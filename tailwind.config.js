@@ -14,7 +14,12 @@ export default {
         "font-family-color": "var(--font-family-color)",
         "dark-gray": "rgb(60, 60, 60)",
         "secondary-color": "var(--secondary-color)",
-        "darkgreen-color": "var(--darkgreen-color)"
+        "darkgreen-color": "var(--darkgreen-color)",
+        "red-color": "var(--red-color)",
+        "light-bg": "var(--light-bg)",
+        "darker-secondary": "var(--darker-secondary)",
+        "lighter-secondary": "var(--lighter-secondary)",
+        "lighter-primary": "var(--lighter-primary)",
       },
       fontFamily: {
         "main-font": ["Chicle", "serif"],

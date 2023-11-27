@@ -65,9 +65,10 @@ const PasswordChange = () => {
                     Current Password
                   </Label>
                   <TextInput
+                    required
                     id="currentPassword"
                     type="password"
-                    placeholder="Current Password*"
+                    placeholder="Current Password *"
                     value={passwords.currentPassword}
                     onChange={(e) =>
                       setPasswords({
@@ -75,6 +76,7 @@ const PasswordChange = () => {
                         currentPassword: e.target.value,
                       })
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -90,9 +92,10 @@ const PasswordChange = () => {
                     New Password
                   </Label>
                   <TextInput
+                    required
                     id="newPassword"
                     type="password"
-                    placeholder="New Password*"
+                    placeholder="New Password *"
                     value={passwords.newPassword}
                     onChange={(e) =>
                       setPasswords({
@@ -100,6 +103,7 @@ const PasswordChange = () => {
                         newPassword: e.target.value,
                       })
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -118,9 +122,10 @@ const PasswordChange = () => {
                     Confirm New Password
                   </Label>
                   <TextInput
+                    required
                     id="confirmNewPassword"
                     type="password"
-                    placeholder="Confirm New Password*"
+                    placeholder="Confirm New Password *"
                     value={passwords.confirmNewPassword}
                     onChange={(e) =>
                       setPasswords({
@@ -128,6 +133,7 @@ const PasswordChange = () => {
                         confirmNewPassword: e.target.value,
                       })
                     }
+                    className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -138,6 +144,18 @@ const PasswordChange = () => {
                     }}
                   />
                 </div>
+              </div>
+              <div className="text-dark-gray">
+                <p className="font-bold">Password Requirements:</p>
+                <p>Minimum length of 6 characters</p>
+                <p>At least one number</p>
+                <p>At least one number</p>
+                <p>At least one capital letter</p>
+                <p>At least one special symbol</p>
+                <p>
+                  (&#33; &#64; &#35; &#36; &#37; &#94; &#38; &#42; &#95; &#43;
+                  &#123; &#125; &#58; &lt; &gt; &#63;)
+                </p>
               </div>
               {/* Change Password Button */}
               <div className="text-center flex justify-center mb-6">
