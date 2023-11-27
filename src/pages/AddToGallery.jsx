@@ -17,6 +17,7 @@ const AddToGallery = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log("Try :", res.response);
       if (res.status === 201) {
         setErrors([]);
         Swal.fire({
@@ -34,10 +35,10 @@ const AddToGallery = () => {
         gallImage.current.value = "";
       }
     } catch (error) {
-      console.log(error.response.data.errors);
       setErrors([]);
       if (error.response.status === 400) {
         setErrors(error.response.data.errors);
+        console.log("E:-", error.response.data.errors);
       }
     }
   };
@@ -88,15 +89,10 @@ const AddToGallery = () => {
             ref={gallImage}
             id="file"
             multiple={false}
-            helperText="Upload image less than IMB"
+            helperText="Upload image less than 3MB"
           />
         </div>
-        <Button
-          outline
-          gradientDuoTone="whiteToOrange"
-          className="bg-font-family-color hover:bg-bg-header-footer hover:text-white-color hover:border-white-color"
-          type="submit"
-        >
+        <Button className="custom-button-style" type="submit">
           Upload
         </Button>
       </form>
