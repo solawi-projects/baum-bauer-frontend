@@ -67,11 +67,11 @@ const News = () => {
    if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>; 
 
-
   return (
     <div className="bg-bg-page-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
+
       <div className="container mx-auto text-2xl">
         <h2>
           Showing {skip + 1} to {Math.min(skip + limit, totalNews)} of{" "}
@@ -93,26 +93,40 @@ const News = () => {
               />
             </Link>
             <div className="p-5">
+
               <Link to={`/news/${item._id}`}>
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  {item.title}
-                </h5>
+                <img
+                  className="w-full h-48 object-cover" // Fixed height for all news thumbnail images
+                  src={item.imageUrl}
+                  alt={item.title}
+                />
               </Link>
-              <p className="text-xs text-font-family-color pt-4 pb-2">
-                {new Date(item.dateCreated).toLocaleDateString()}
-              </p>
-              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                {item.description}
-              </p>
-              <Link
-                to={`/news/${item._id}`}
-                className="inline-flex items-center py-1 text-sm font-medium text-center text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                Read more <IoIosArrowForward />
-              </Link>
+              <div className="flex flex-col justify-between p-5 h-full">
+                <div>
+                  <Link to={`/news/${item._id}`}>
+                    <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      {item.title}
+                    </h5>
+                  </Link>
+                  <p className="text-s py-2 text-gray-600 pt-1">
+                    {new Date(item.dateCreated).toLocaleDateString()}
+                  </p>
+                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    {item.description.length > 100
+                      ? `${item.description.slice(0, 100)}...`
+                      : item.description}
+                  </p>
+                </div>
+                <Link
+                  to={`/news/${item._id}`}
+                  className="inline-flex items-center py-1 text-s font-medium text-center text-secondary-color hover:underline mt-4"
+                >
+                  Continue Reading <IoIosArrowForward />
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* pagination buttons */}
@@ -126,10 +140,11 @@ const News = () => {
       </div>
 
       {/* footer image */}
+
       <img
         className="bg-bg-page-color w-full"
         src="src/assets/images/news_images/leaves_background.png"
-        alt=""
+        alt="News Footer Image"
       />
     </div>
   );
