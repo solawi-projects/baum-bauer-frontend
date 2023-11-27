@@ -7,7 +7,10 @@ import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 
 const News = () => {
-  const titles = ["Blog News", ""];
+  const titles = [
+    "Blog News",
+    "Discover the Latest Stories and Updates from Our Tree Sponsorship Program!",
+  ];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "News" };
 
@@ -34,7 +37,6 @@ const News = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-
 
   return (
     <div className="bg-bg-page-color">

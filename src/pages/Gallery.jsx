@@ -69,11 +69,11 @@ const Gallery = () => {
           style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.1 }}
         ></div>
         <div className="relative z-9">
-          <h2 className="text-5xl md:text-7xl mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] mb-[15px] text-center font-main-font tracking-wide text-[#5A6448]">
+          <h2 className="text-5xl md:text-7xl mt-[38px] md:mt-[68px] lg:mt-[88px] xl:mt-[108px] mb-[15px] text-center font-main-font tracking-wide text-[#5A6448]">
             Gallery
           </h2>
           {/* Gallery Page Description */}
-          <p className="text-justify w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] mx-auto text-font-family-color text-md lg:text-xl xl:text-2xl mb-[25px] md:mb-[40px] lg:mb-[50px] xl:mb-[60px]">
+          <p className="text-center w-[90%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] mx-auto text-font-family-color text-md lg:text-xl xl:text-2xl mb-[25px] md:mb-[40px] lg:mb-[50px] xl:mb-[60px]">
             Welcome to our gallery, where each tree tells a story of growth,
             resilience, and the enduring bond between nature and us. This
             collection of images captures the heart of our tree sponsorship

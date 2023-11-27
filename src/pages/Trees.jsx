@@ -49,7 +49,7 @@ const Sponsor = () => {
         deActiveLink={daLinkValues}
       />{" "}
       <p>{err}</p> <div className=" backdrop-search"></div>{" "}
-      <div className="py-10 h-20 bg-gray-100 px-2">
+      <div className="py-10 h-20 bg-lighter-primary px-2">
         {" "}
         <div className="max-w-auto mx-auto rounded-lg overflow-hidden md:max-w-xl md:max-h-m sm:max-w-xs">
           {" "}
@@ -62,7 +62,7 @@ const Sponsor = () => {
                 <i className="absolute fa fa-search text-gray-100 top-5 left-4"></i>{" "}
                 <input
                   type="text"
-                  className="bg-white h-14 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
+                  className="bg-white h-14 w-full px-12 rounded-lg outline-focus:outline-secondary-color input hover:cursor-pointer "
                   name=""
                 ></input>{" "}
                 <span className="absolute top-4 right-5 border-l pl-4">
@@ -89,7 +89,7 @@ const Sponsor = () => {
           id="dropdown-menu"
           className={`${
             isDropdownOpen ? "block" : "hidden"
-          } absolute top-50 absolute top-20 h-auto right-40 w-400 border border-gray-300 bg-white shadow-md mt-2 transition-all duration-300`}
+          } absolute top-50  top-20 h-auto right-40 w-400 border border-gray-300 bg-white shadow-md mt-2 transition-all duration-300`}
         >
           <div className="py-4 px-4 cursor-pointer hover:bg-gray-100">
             popularity
@@ -118,7 +118,7 @@ const Sponsor = () => {
                 <h2 className="text-2xl font-bold text-gray-700">
                   {item.name}
                 </h2>
-                <button className="block text-xl font-semibold text-gray-700 cursor-auto">{`€${parseFloat(
+                <button className="block text-xl font-semibold text-gray-700 cursor-auto">{`€ ${parseFloat(
                   item.price.$numberDecimal
                 )}`}</button>
 
