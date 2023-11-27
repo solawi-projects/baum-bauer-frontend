@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from "react";
 import axios from "../utils/axiosInstance";
 import { Link } from "react-router-dom";
@@ -14,32 +16,69 @@ const News = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [totalNews, setTotalNews] = useState(0);
+  //pagination
+  const limit = 6;
+  const [skip, setSkip] = useState(0);
+
+
+  const handlePrev = () => {
+    const newSkip = skip - limit;
+    if (newSkip <= 0) {
+      setSkip(0);
+    }
+    setSkip(newSkip);
+  };
+
+  const handleNex = () => {
+    setSkip(limit + skip);
+  };
+  const getNewsArticles = () => {
+    try {
+      axios
+        .get(`/api/newsArticle/?limit=${limit}&skip=${skip}`)
+        .then((response) => {
+          console.log("Response is:", response);
+          if (response.status === 200) {
+            setNewsItems(response.data.articles);
+            setTotalNews(response.data.total);
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 500) {
+            setError("Data was not fetched from the DB");
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching NewsArticles:", error.message);
+
+
+    }
+    finally{
+      setIsLoading(false)
+    }
+  };
 
   useEffect(() => {
-    const fetchNewsArticles = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get("/api/newsArticle");
-        setNewsItems(response.data);
-      } catch (err) {
-        setError("Failed to load news articles");
-        console.error(err.response || err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    setIsLoading(true);
+    getNewsArticles();
+  }, [skip]); // Trigger useEffect when skip changes
 
-    fetchNewsArticles();
-  }, []);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+   if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>; 
 
 
   return (
     <div className="bg-bg-page-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
+      <div className="container mx-auto text-2xl">
+        <h2>
+          Showing {skip + 1} to {Math.min(skip + limit, totalNews)} of{" "}
+          {totalNews} News Articles
+        </h2>
+        <p>{error}</p>
+      </div>
       <div className="flex flex-wrap justify-center gap-5 pl-2 pr-2 pb-5">
         {newsItems.map((item) => (
           <div
@@ -75,6 +114,18 @@ const News = () => {
           </div>
         ))}
       </div>
+
+      {/* pagination buttons */}
+      <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
+        <button onClick={handlePrev} disabled={skip === 0}>
+          Previous
+        </button>
+        <button onClick={handleNex} disabled={skip + limit >= totalNews}>
+          Next
+        </button>
+      </div>
+
+      {/* footer image */}
       <img
         className="bg-bg-page-color w-full"
         src="src/assets/images/news_images/leaves_background.png"
