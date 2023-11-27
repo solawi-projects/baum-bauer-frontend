@@ -5,7 +5,6 @@ import { IoIosSearch } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { TreeData } from "../components/TreeData";
 
-import Pagination from "../components/Pagination";
 
 import "../components/Tress.css";
 import { Link } from "react-router-dom";
@@ -14,11 +13,9 @@ const Sponsor = () => {
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Trees" };
   const [tree, setTree] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(4);
+ 
   const [err, setErr] = useState("");
-  const lasttree = currentPage * postPerPage;
-  const firsttree = lasttree - postPerPage + 1;
+ 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -37,10 +34,7 @@ const Sponsor = () => {
     getTrees();
   }, []);
 
-  const indexofLastPost = currentPage * postPerPage;
-  const indexofFirstPost = indexofLastPost - postPerPage;
-  const currentPosts = tree.slice(indexofFirstPost, indexofLastPost);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+ 
   return (
     <div>
       {" "}
@@ -106,7 +100,7 @@ const Sponsor = () => {
         </div>
       </div>
       <div className=" flex  justify-center flex-wrap gap-10 pt-40 pb-40 ml-20 mr-20">
-        {currentPosts.map((item, index) => (
+        {tree.map((item, index) => (
           <div key={index} className="flex  pr items-center ">
             <div className="w-60 p-10 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
               <img
@@ -135,14 +129,7 @@ const Sponsor = () => {
           </div>
         ))}
       </div>
-      <Pagination
-        postPerPage={postPerPage}
-        currentPage={currentPage}
-        totalpost={tree.length}
-        paginate={paginate}
-        firsttree={firsttree}
-        lasttree={lasttree}
-      />
+     
     </div>
   );
 };
