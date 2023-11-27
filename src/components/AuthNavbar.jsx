@@ -40,27 +40,7 @@ const AuthNavbar = () => {
             </div>
           </div>
         </Link>
-        <Link
-          to="/register"
-          className="navIcon transition-transform duration-75 ease-linear"
-          aria-label="Register page"
-        >
-          {" "}
-          <div className="flex items-center transition-transform duration-75 ease-linear">
-            <div
-              className="rounded-full bg-bg-header-footer w-[50px] h-[50px]"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span className="ani font-semibold text-secondary-color text-2xl">
-                R
-              </span>{" "}
-            </div>
-          </div>
-        </Link>{" "}
+
         <Link
           to="/signout"
           className="navIcon flex items-center transition-transform duration-75 ease-linear"
