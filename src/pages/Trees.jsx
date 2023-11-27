@@ -158,7 +158,7 @@ const Sponsor = () => {
                   <div className="mt-2 mb-1 flex justify-start">
                     <Link
                       to={`/trees/${item._id}`}
-                      className="text-center w-full px-4 py-2 bg-lighter-primary text-font-family-color rounded-[10px]   hover:bg-bg-header-footer transition duration-4000 ease-linear mt-4 sm:mt-0"
+                      className="text-center w-full px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear mt-4 sm:mt-0"
                     >
                       view more
                     </Link>

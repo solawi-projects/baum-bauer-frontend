@@ -65,7 +65,7 @@ const Pagination = ({
             {" "}
             <div>
               {" "}
-              <p className="text-sm text-gray-700">
+              <p className="text-md text-font-family-color">
                 {" "}
                 Showing <span className="font-medium">{firsttree}</span> to{" "}
                 <span className="font-medium">{lasttree}</span> of{" "}
@@ -95,13 +95,13 @@ const Pagination = ({
                   {pageNumbers.map((number, index) => (
                     <li
                       key={index}
-                      className="hover:bg-gray-200 active:bg-lime-800"
+                      className="hover:bg-lighter-primary active:bg-bg-header-footer"
                     >
                       {" "}
                       <a
                         href="#"
                         aria-current="page"
-                        className="relative z-10 inline-flex items-center bg-white-900 px-4 py-2 text-sm font-semibold text-gray-500 focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                        className="relative z-10 inline-flex items-center bg-white-900 px-4 py-2 text-md text-font-family-color focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                         onClick={() => {
                           handlePageClick(number);
                           paginate(number);
