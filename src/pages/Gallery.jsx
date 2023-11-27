@@ -3,58 +3,42 @@ import React, { useState, useEffect } from "react";
 import backgroundImage from "../assets/images/gallery_images/leaves_background_03.png";
 import closeMenu from "../assets/images/close_menu.svg";
 import { Fade } from "react-awesome-reveal";
-import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import Feedback from "../components/Feedback";
+import axios from "../utils/axiosInstance";
 
 const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [showAllImages, setShowAllImages] = useState(window.innerWidth > 1024);
   const [selectedIndex, setSelectedIndex] = useState(null); // Add this line
+  const [gallery, setGallery] = useState([]);
+  const [error, setError] = useState("");
 
-  /* Image Urls */
-  const imageUrls = [
-    "src/assets/images/galleryImages/biobaum_gallery_img_01.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_02.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_03.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_04.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_05.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_06.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_07.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_08.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_09.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_10.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_11.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_12.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_13.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_14.webp",
-    "src/assets/images/galleryImages/biobaum_gallery_img_15.webp",
-    "src/assets/images/biobaum_sapling_03.webp",
-  ];
-
-  /* Image Titles */
-  const imageTitles = [
-    "Planting Hope: The First Sapling",
-    "Sustainable Futures: Planting the Seeds of Change",
-    "Nurturing Nature: Young Trees in Caring Hands",
-    "Eco Warriors: Volunteers Growing a Greener Tomorrow",
-    "Shades of Green: People and Saplings in Perfect Harmony",
-    "Seeds of Change: Individuals Making a Forest Impact",
-    "Sustainable Steps: Walking Towards a Greener Tomorrow",
-    "Sapling Stories: Each Tree Tells a Tale of Hope",
-    "Eco-Heroes Unite: Planting Trees for Generations to Come",
-    "United for Green: People and Saplings in Solidarity",
-    "Budding Bonds: Planting Friendship, Growing Trees",
-    "Raising Green Champions: Community Tree Planting",
-    "Tree of Life: A Symphony of Saplings and Smiles",
-    "Earth's Symphony: People and Saplings in Harmony",
-    "Green Pawsitivity: Cats Spreading Joy, One Sapling at a Time",
-    "Shaping Tomorrow: Individuals Crafting a Forest Legacy",
-  ];
+  /* Getting Gallery from Database! */
+  const getGalleryImage = () => {
+    try {
+      axios
+        .get(`/api/gallery`)
+        .then((response) => {
+          if (response.status === 200) {
+            setGallery(response.data);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 500) {
+            setError("Data was not brought");
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching Images:", error.message);
+      throw error;
+    }
+  };
 
   /* Handele ShowAllImages and ShowFewerImages on Screens <= 1024 */
   useEffect(() => {
+    getGalleryImage();
     const handleResize = () => {
       if (window.innerWidth > 1000 && !showAllImages) {
         setShowAllImages(true);
@@ -71,11 +55,11 @@ const Gallery = () => {
     setShowAllImages(!showAllImages);
   };
 
-  const displayedImages = showAllImages ? imageUrls : imageUrls.slice(0, 6);
+  const filteredGallery = showAllImages ? gallery : gallery.slice(0, 3);
 
   /* Handle Open Image */
-  const openImage = (imgSrc) => {
-    setSelectedImg(imgSrc);
+  const openImage = (img) => {
+    setSelectedImg(img);
   };
 
   /* Handle Close Image */
@@ -101,11 +85,11 @@ const Gallery = () => {
           </h2>
 
           {/* Gallery Page Description */}
-          <p className="w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] mx-auto text-center text-font-family-color text-md lg:text-xl xl:text-2xl mb-[25px] md:mb-[40px] lg:mb-[50px] xl:mb-[60px]">
+          <p className="text-justify w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] mx-auto text-font-family-color text-md lg:text-xl xl:text-2xl mb-[25px] md:mb-[40px] lg:mb-[50px] xl:mb-[60px]">
             Welcome to our gallery, where each tree tells a story of growth,
             resilience, and the enduring bond between nature and us. This
             collection of images captures the heart of our tree sponsorship
-            program – a testament to the positive impact we can make on the
+            program - a testament to the positive impact we can make on the
             environment and future generations. Journey through the seasons with
             us and witness the remarkable transformation of each tree, fostered
             by the care and dedication of our community of sponsors.
@@ -114,13 +98,13 @@ const Gallery = () => {
           {/* Image content */}
           <Fade delay={100} cascade damping={0.1} duration={3000}>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:px-10 lg:px-20 xl:px-40">
-              {displayedImages.map((url, index) => (
+              {filteredGallery.map((image, index) => (
                 <div
                   key={index}
                   className="aspect-square relative cursor-pointer border border-bg-header-footer overflow-hidden"
-                  onClick={() => openImage(url)}
+                  onClick={() => openImage(image)}
                   style={{
-                    backgroundImage: `url(${url})`,
+                    backgroundImage: `url(${image.image})`,
                     backgroundSize: "cover",
                     borderWidth: "2px",
                   }}
@@ -128,8 +112,8 @@ const Gallery = () => {
                   onMouseLeave={() => setSelectedIndex(null)}
                 >
                   <img
-                    src={url}
-                    alt={`Image ${imageTitles[index]}`}
+                    src={image.image}
+                    alt={`Image ${image.image}`}
                     className="w-full h-full object-cover transition-all duration-300"
                   />
                   <div
@@ -137,8 +121,8 @@ const Gallery = () => {
                       selectedIndex === index ? "scale-100" : "scale-0"
                     }`}
                   >
-                    <p className="text-white text-center text-sm md:text-base lg:text-lg whitespace-normal">
-                      {imageTitles[index]}
+                    <p className="text-white text-center text-xl md:text-base lg:text-lg whitespace-normal">
+                      {image.title}
                     </p>
                   </div>
                 </div>
@@ -177,23 +161,28 @@ const Gallery = () => {
                     <img src={closeMenu} alt="Close Menu" />
                   </button>
                 </div>
-                <img src={selectedImg} alt="" className="w-full h-[800px]" />
+                <img
+                  src={selectedImg.image}
+                  alt={`Selected Image ${selectedImg.title}`}
+                  className="w-full h-[800px]"
+                  onDoubleClick={closeImage}
+                />
                 {/* Image Title */}
                 <div className="text-center p-2 absolute bottom-0 left-0 right-0">
-                  <p className="bg-white bg-opacity-80 p-4 text-dark-gray">
-                    {imageTitles[imageUrls.indexOf(selectedImg)]}
+                  <p className="bg-white bg-opacity-80 p-4 text-dark-gray text-xl">
+                    {selectedImg.title}
                   </p>
                 </div>
               </div>
             </Fade>
           </div>
         )}
-      </div>{" "}
+      </div>
       <Feedback />
       {/* Footer Image */}
       <img
-        src="src/assets/images/biobaum_gallery_footer_img.png"
-        alt="Footer Image"
+        src="src/assets/images/gallery_images/biobaum_gallery_footer_img.webp"
+        alt="Footer Image of Gallery "
         width="100%"
         height="100%"
         loading="lazy"

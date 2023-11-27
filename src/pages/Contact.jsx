@@ -261,22 +261,11 @@ const Contact = () => {
               </Label>
             </div>
             {isTermsAccepted ? (
-              <Button
-                outline
-                gradientDuoTone="whiteToOrange"
-                className="bg-font-family-color hover:bg-bg-header-footer hover:text-white-color hover:border-white-color"
-                type="submit"
-              >
+              <Button className="custom-button-style" type="submit">
                 send your message
               </Button>
             ) : (
-              <Button
-                disabled
-                outline
-                gradientDuoTone="whiteToOrange"
-                className="bg-font-family-color hover:bg-bg-header-footer hover:text-white-color hover:border-white-color"
-                type="submit"
-              >
+              <Button disabled className="custom-button-style" type="submit">
                 send your message
               </Button>
             )}
