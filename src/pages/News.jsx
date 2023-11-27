@@ -7,7 +7,7 @@ import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 
 const News = () => {
-  const titles = ["Blog News", ""];
+  const titles = ["Bio Blog News", ""];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "News" };
 
