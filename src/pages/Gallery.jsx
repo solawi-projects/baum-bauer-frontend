@@ -6,12 +6,14 @@ import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import Feedback from "../components/Feedback";
 import axios from "../utils/axiosInstance";
+
 const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [showAllImages, setShowAllImages] = useState(window.innerWidth > 1024);
   const [selectedIndex, setSelectedIndex] = useState(null); // Add this line
   const [gallery, setGallery] = useState([]);
   const [error, setError] = useState("");
+
   /* Getting Gallery from Database! */
   const getGalleryImage = () => {
     try {
@@ -32,6 +34,7 @@ const Gallery = () => {
       throw error;
     }
   };
+
   /* Handele ShowAllImages and ShowFewerImages on Screens <= 1024 */
   useEffect(() => {
     getGalleryImage();
@@ -45,20 +48,25 @@ const Gallery = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [showAllImages]);
+
   const toggleShowAllImages = () => {
     setShowAllImages(!showAllImages);
   };
+
   const filteredGallery = showAllImages ? gallery : gallery.slice(0, 3);
   /* Handle Open Image */
   const openImage = (img) => {
     setSelectedImg(img);
   };
+
   /* Handle Close Image */
   const closeImage = () => {
     setSelectedImg(null);
   };
+
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Gallery" };
+
   return (
     <div className="bg-bg-page-color text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
