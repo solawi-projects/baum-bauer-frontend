@@ -18,6 +18,21 @@ const Tree = () => {
   const [tree, setTree] = useState([]);
 
   const [err, setErr] = useState("");
+  const [totalTree, setTotalTree] = useState(0);
+  const limit = 4;
+  const [skip, setSkip] = useState(0);
+
+  const handlePrev = () => {
+    const newSkip = skip - limit;
+    if (newSkip <= 0) {
+      setSkip(0);
+    }
+    setSkip(newSkip);
+  };
+
+  const handleNex = () => {
+    setSkip(limit + skip);
+  };
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -25,18 +40,20 @@ const Tree = () => {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  useEffect(() => {
-    const getTrees = async () => {
-      try {
-        const data = await TreeData();
-        setTree(data);
-      } catch (error) {
-        setErr("Failed to load tree Data");
-      }
-    };
+  const getTrees = async () => {
+    try {
+      const data = await TreeData(limit, skip);
+      console.log(data.trees);
 
+      setTree(data.trees);
+      setTotalTree(data.total);
+    } catch (error) {
+      setErr("Data was not brought");
+    }
+  };
+  useEffect(() => {
     getTrees();
-  }, []);
+  }, [skip]);
 
   return (
     <div>
@@ -62,14 +79,14 @@ const Tree = () => {
           </div>
         </div>
 
-        <div className="relative w-full mx-auto p-4  md:pb-[40px] lg:pb-[100px] xl:pb-[120px]  border-t-2 border-bg-header-footer flex  justify-center flex-wrap gap-10 pt-40 pb-40">
+        <div className="relative w-full mx-auto p-4  md:pb-[40px] lg:pb-[100px] xl:pb-[120px]  border-t-2 border-bg-header-footer flex flex-col  justify-center flex-wrap gap-10 pt-40 pb-40">
           {/* Overlay with background image and opacity */}
           <div
             className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
             style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.1 }}
           ></div>
+
           <div className=" h-auto absolute top-[0px] right-[-80px] dropdown z-[8]">
-            {" "}
             <div
               id="dropdown-button "
               onClick={toggleDropdown}
@@ -102,43 +119,59 @@ const Tree = () => {
               </div>
             </div>
           </div>
-          {tree.map((item, index) => (
-            <div key={index} className="flex  pr items-center ">
-              <div className="w-60 p-4 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
-                <img
-                  className="w-full h-[220px] object-cover rounded-[10px] mb-10"
-                  src={item.image}
-                  alt={item.name}
-                />
-                <div className="mt-2">
-                  <div className="flex items-center mb-4">
-                    <img
-                      src="/src/assets/tree.png"
-                      alt="Tree Icon"
-                      className="w-[30px] h-[30px] mr-2"
-                    />{" "}
-                    <h3 className="text-2xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                      {item.name}
-                    </h3>
-                  </div>
-                  <button className="block text-md text-secondary-color cursor-auto">{`€ ${parseFloat(
-                    item.price.$numberDecimal
-                  )}`}</button>
 
-                  <div className="mt-2 mb-1 flex justify-start">
-                    <Link
-                      to={`/trees/${item._id}`}
-                      className="text-center w-full px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear mt-4 sm:mt-0"
-                    >
-                      view more
-                    </Link>
+          <h2 className="container mx-auto my-5 pt-16 text-2xl flex justify-center items-center">
+            Showing {limit - limit + skip} to {skip + limit} of {totalTree} FAQs
+          </h2>
+
+          <div className="flex justify-center items-center gap-8">
+            {tree.map((item, index) => (
+              <div key={index} className="flex items-center">
+                <div className=" w-60 p-4 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
+                  <img
+                    className="w-full h-[220px] object-cover rounded-[10px] mb-10"
+                    src={item.image}
+                    alt={item.name}
+                  />
+                  <div className="mt-2">
+                    <div className="flex items-center mb-4">
+                      <img
+                        src="/src/assets/tree.png"
+                        alt="Tree Icon"
+                        className="w-[30px] h-[30px] mr-2"
+                      />{" "}
+                      <h3 className="text-2xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+                        {item.name}
+                      </h3>
+                    </div>
+                    <button className="block text-md text-secondary-color cursor-auto">{`€ ${parseFloat(
+                      item.price.$numberDecimal
+                    )}`}</button>
+
+                    <div className="mt-2 mb-1 flex justify-start">
+                      <Link
+                        to={`/trees/${item._id}`}
+                        className="text-center w-full px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear mt-4 sm:mt-0"
+                      >
+                        view more
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>{" "}
+        <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
+          <button onClick={handlePrev} disabled={skip === 0}>
+            Previous
+          </button>
+          <button onClick={handleNex} disabled={skip + limit >= totalTree}>
+            Next
+          </button>
+        </div>
+      </div>
+      {/* pagination buttons */}
       <img
         src={footerImage}
         alt="Footer Image"

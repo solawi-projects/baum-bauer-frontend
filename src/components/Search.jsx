@@ -7,14 +7,18 @@ export default function Search({ updateTree }) {
   const [searchParam, setSearchParam] = useState("");
   const searchHandler = async () => {
     try {
-      const response = await axios.get(`/api/tree/search/${searchParam}`);
+      console.log(searchParam);
+
+      const response = searchParam
+        ? await axios.get(`/api/tree/search/${searchParam}`)
+        : await axios.get(`/api/tree/get`);
       console.log("Search Item Front:", response.data);
       if (response.status === 200) {
         console.log(response.data);
         updateTree(response.data);
       }
     } catch (error) {
-      console.error("Error fetching Trees:", error.message);
+      console.error("Error fetching Trees:", error.response.data.error); // Access the custom error message
       throw error;
     }
   };
@@ -34,7 +38,10 @@ export default function Search({ updateTree }) {
                   className="bg-white h-14 w-full px-12 rounded-lg border-darker-primary input hover:cursor-pointer text-xl italic !important"
                   name=""
                   defaultValue={searchParam}
-                  onChange={(event) => setSearchParam(event.target.value)}
+                  onChange={(event) => {
+                    setSearchParam(event.target.value);
+                    // Call the search function on every change
+                  }}
                 ></input>
                 <button
                   className="absolute top-4 right-5 border-l pl-4 cursor-pointer"
