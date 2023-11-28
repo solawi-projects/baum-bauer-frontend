@@ -65,7 +65,7 @@ const Sponsor = () => {
       />{" "}
       <p>{err}</p>     
            <Search updateTree={setTree}/>
-  
+          
       <div className="h-auto relative dropdown">
         {" "}
         <div
@@ -97,7 +97,12 @@ const Sponsor = () => {
           </div>
         </div>
       </div>
-      <div className=" flex  justify-center flex-wrap gap-10 pt-40 pb-40 ml-20 mr-20">
+      <div></div>
+      <h2 className="container mx-auto my-5 pt-16 text-2xl">
+          Showing {limit-limit+skip} to {skip + limit} of {totalTree} FAQs
+        </h2>
+      <div className=" flex  justify-center flex-wrap gap-10 pt-4 pb-40 ml-20 mr-20">
+      
         {tree.map((item, index) => (
           <div key={index} className="flex  pr items-center ">
             <div className="w-60 p-10 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
@@ -127,14 +132,12 @@ const Sponsor = () => {
           </div>
         ))}
       </div>
-      {/* pagination buttons */}<h2>
-          Showing {limit} to {skip + limit} of {totalTree} FAQs
-        </h2>
+      {/* pagination buttons */}
       <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
-        <button onClick={handlePrev} >
+        <button onClick={handlePrev} disabled={skip === 0}>
           Previous
         </button>
-        <button onClick={handleNex}>
+        <button onClick={handleNex} disabled={skip + limit >= totalTree}>
           Next
         </button>
       </div>
