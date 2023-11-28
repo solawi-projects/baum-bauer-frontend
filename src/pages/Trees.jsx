@@ -120,7 +120,7 @@ const Tree = () => {
             </div>
           </div>
 
-          <h2 className="container mx-auto my-5 pt-16 text-2xl flex justify-center items-center">
+          <h2 className="container mx-auto my-5  text-2xl flex justify-center items-center">
             Showing {limit - limit + skip} to {skip + limit} of {totalTree} FAQs
           </h2>
 

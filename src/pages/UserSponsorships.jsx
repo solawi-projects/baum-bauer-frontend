@@ -2,10 +2,16 @@ import React from "react";
 import DashboardLinks from "../components/DashboardLinks";
 import MobileDashboardLinks from "../components/MobileDashboardLinks";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
+import { HiHome } from "react-icons/hi";
+import PageBreadcrumb from "../components/PageBreadcrumb";
 
 const UserSponsorships = () => {
+  const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
+  const daLinkValues = { linkText: "Sponsorships" };
+
   return (
     <main>
+      <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center">
         {/* Overlay with background image and opacity */}
         <div

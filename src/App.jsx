@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CartContextProvider } from "./store/CartContext";
 import {
+  BrowserRouter as Router,
   Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
+  Routes,
+  useLocation,
 } from "react-router-dom";
 
 // Importing our pages
@@ -33,41 +33,50 @@ import AddToGallery from "./pages/AddToGallery";
 import AddToNewArticle from "./pages/AddToNewsArticle";
 import AddNewTree from "./pages/AddNewTree";
 
-function App() {
-  const bioBaumRouter = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<Index />}>
-        <Route index element={<Home />} />
-        <Route path="/trees" element={<Trees />} />
-        <Route path="/trees/:id" element={<SingleTreePage />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/news/:id" element={<NewsArticle />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/contact" element={<Contact />} />{" "}
-        <Route path="/cart" element={<Cart />} />{" "}
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/order/place_order" element={<Order />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />{" "}
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/update_profile" element={<UpdateProfile />} />
-        <Route path="/user_sponsorships" element={<UserSponsorships />} />
-        <Route path="/password_change" element={<PasswordChange />} />{" "}
-        <Route path="/signout" element={<Signout />} />
-        <Route path="/addImageToGallery" element={<AddToGallery />} />
-        <Route path="/addToNewArticle" element={<AddToNewArticle />} />
-        <Route path="/addNewTree" element={<AddNewTree />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    )
-  );
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+function App() {
   return (
     <div>
       <CartContextProvider>
-        <RouterProvider router={bioBaumRouter} />
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Index />}>
+              <Route index element={<Home />} />
+              <Route path="/trees" element={<Trees />} />
+              <Route path="/trees/:id" element={<SingleTreePage />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/news/:id" element={<NewsArticle />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/order/place_order" element={<Order />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/update_profile" element={<UpdateProfile />} />
+              <Route path="/user_sponsorships" element={<UserSponsorships />} />
+              <Route path="/password_change" element={<PasswordChange />} />
+              <Route path="/signout" element={<Signout />} />
+              <Route path="/addImageToGallery" element={<AddToGallery />} />
+              <Route path="/addToNewArticle" element={<AddToNewArticle />} />
+              <Route path="/addNewTree" element={<AddNewTree />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Router>
       </CartContextProvider>
     </div>
   );
