@@ -2,7 +2,7 @@
 import { Accordion } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import axios from "../utils/axiosInstance";
-import "../components/Faq.css";
+import "../assets/styles/Faq.css";
 import treeicon from "../assets/tree.png";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
@@ -13,7 +13,7 @@ const Faq = () => {
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "FAQ" };
 
-  const limit = 2;
+  const limit = 5;
   const [skip, setSkip] = useState(0);
   const [faqs, setFaqs] = useState([]);
   const [err, setErr] = useState("");
@@ -59,14 +59,14 @@ const Faq = () => {
   return (
     <div className="bg-bg-page-color text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
-      <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-      <div className="container mx-auto text-2xl">
-        <h2>
-          Showing {limit} to {skip + limit} of {total} FAQs
-        </h2>
-        <p>{err}</p>
-      </div>
       <div className="faq-container">
+        <EachPageHeader title={titles[0]} subtitle={titles[1]} />
+        <div className="container mx-auto text-2xl">
+          <h2>
+            Showing {limit} to {skip + limit} of {total} FAQs
+          </h2>
+          <p>{err}</p>
+        </div>
         {faqs.map((item, index) => (
           <Accordion collapseAll className="Accord-container" key={index}>
             <Accordion.Panel className="Panel">

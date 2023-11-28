@@ -2,11 +2,11 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 10rem;
+  /* padding-top: 10rem; */
   padding-bottom: 10rem;
   align-items: center;
   gap: 2rem;
-  background: url("../assets/BackgroudFaq.png") center/cover no-repeat
+  background: url("../BackgroudFaq.png") center/cover no-repeat
     rgb(16, 16, 16, 0.1);
   z-index: 1;
 }

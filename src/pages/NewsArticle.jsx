@@ -1,11 +1,13 @@
 import leavesBackground from "../assets/images/news_images/leaves_background.png";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { HiHome } from "react-icons/hi";
+import { FaRegNewspaper } from "react-icons/fa";
 import axios from "../utils/axiosInstance";
 import DOMPurify from "dompurify";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
-import { Button, Checkbox, Label, TextInput, Breadcrumb } from "flowbite-react";
+import { Breadcrumb } from "flowbite-react";
 
 const NewsArticle = () => {
   const { id } = useParams();
@@ -60,19 +62,23 @@ const NewsArticle = () => {
       </div>
     );
 
-  // Breadcrumb links
-  const breadcrumbLinks = [
-    { linkTo: "/", linkText: "Home" },
-    { linkTo: "/news", linkText: "News" },
-  ];
-
   return (
     <div className="bg-bg-page-color">
       {article && (
-        <PageBreadcrumb
-          activeLinks={breadcrumbLinks}
-          deActiveLink={{ linkText: article.title }}
-        />
+        <div className="mt-0 mb-0">
+          <Breadcrumb
+            aria-label="This is Breadcrumb showing the location of current page"
+            className="bg-gray-50 px-5 py-3 dark:bg-gray-800"
+          >
+            <Breadcrumb.Item href="/" icon={HiHome}>
+              Home
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/news" icon={FaRegNewspaper}>
+              News
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>{article.title}</Breadcrumb.Item>
+          </Breadcrumb>
+        </div>
       )}
       <EachPageHeader title={article.title} />
       <div className="max-w-4xl mx-auto p-4 md:p-8 bg-white rounded-xl shadow-lg my-10">
@@ -88,11 +94,11 @@ const NewsArticle = () => {
                 {article.title}
               </h1>
               <p className="text-md text-gray-600 mb-4">
-                By{" "}
+                &nbsp;By&nbsp;
                 <span className="font-semibold">
                   {article.writer.firstName} {article.writer.lastName}
                 </span>
-                on{" "}
+                &nbsp;on &nbsp;
                 <span className="font-semibold">
                   {new Date(article.dateCreated).toDateString()}
                 </span>
