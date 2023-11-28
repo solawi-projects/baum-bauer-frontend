@@ -103,7 +103,7 @@ const Tree = () => {
             </div>
           </div>
           {tree.map((item, index) => (
-            <div key={index} className="flex  pr items-center ">
+            <div key={index} className="flex  items-center ">
               <div className="w-60 p-4 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
                 <img
                   className="w-full h-[220px] object-cover rounded-[10px] mb-10"

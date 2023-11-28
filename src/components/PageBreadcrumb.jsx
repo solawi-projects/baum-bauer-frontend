@@ -13,7 +13,7 @@ const PageBreadcrumb = (props) => {
         {activeLinks.map((aLink) => (
           <span key={aLink.linkText}>
             <Breadcrumb.Item href={aLink.linkTo} icon={aLink.linkIcon}>
-              {aLink.linkText}
+              {aLink.linkText}&nbsp;&nbsp;
             </Breadcrumb.Item>
           </span>
         ))}
