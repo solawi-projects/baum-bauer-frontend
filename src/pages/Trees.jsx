@@ -51,15 +51,13 @@ const Tree = () => {
       setErr("Data was not brought");
     }
   };
-  let endvalue=Math.min(skip + limit, totalTree);
-  let startvalue=skip + 1
+  let endvalue=skip+limit;
+  let startvalue=skip+1
   if(endvalue>=totalTree){
     endvalue=totalTree
   }
 
-  if(tree.length<=limit){
-    endvalue=tree.length
-  }
+  
   useEffect(() => {
     getTrees();
   }, [skip]);
