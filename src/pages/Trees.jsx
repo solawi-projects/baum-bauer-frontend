@@ -21,7 +21,7 @@ const Tree = () => {
   const [totalTree, setTotalTree] = useState(0);
   const limit = 4;
   const [skip, setSkip] = useState(0);
-
+ 
   const handlePrev = () => {
     const newSkip = skip - limit;
     if (newSkip <= 0) {
@@ -51,6 +51,15 @@ const Tree = () => {
       setErr("Data was not brought");
     }
   };
+  let endvalue=skip+limit;
+  let startvalue=limit - limit + skip+1
+  if(endvalue>=totalTree){
+    endvalue=totalTree
+  }
+
+  if(tree.length<=limit){
+    endvalue=tree.length
+  }
   useEffect(() => {
     getTrees();
   }, [skip]);
@@ -63,7 +72,7 @@ const Tree = () => {
         deActiveLink={daLinkValues}
       />{" "}
       <p>{err}</p>
-      <Search updateTree={setTree} />
+      <Search updateTree={setTree} limit={limit} skip={skip}/>
       <div className=" flex  justify-center flex-wrap gap-10 pt-20 pb-40">
         <div className="flex flex-row justify-start">
           <div className="flex flex-row justify-start infinite-animation">
@@ -121,7 +130,7 @@ const Tree = () => {
           </div>
 
           <h2 className="container mx-auto my-5 pt-16 text-2xl flex justify-center items-center">
-            Showing {limit - limit + skip} to {skip + limit} of {totalTree} FAQs
+            Showing {startvalue} to {endvalue} of {totalTree} Trees
           </h2>
 
           <div className="flex justify-center items-center gap-8">

@@ -3,7 +3,7 @@ import { IoIosSearch } from "react-icons/io";
 import axios from "../utils/axiosInstance";
 
 // eslint-disable-next-line react/prop-types
-export default function Search({ updateTree }) {
+export default function Search({ updateTree,limit,skip }) {
   const [searchParam, setSearchParam] = useState("");
   const searchHandler = async () => {
     try {
@@ -11,11 +11,14 @@ export default function Search({ updateTree }) {
 
       const response = searchParam
         ? await axios.get(`/api/tree/search/${searchParam}`)
-        : await axios.get(`/api/tree/get`);
+        : await axios.get(`/api/tree/get?limit=${limit}&skip=${skip}`);
       console.log("Search Item Front:", response.data);
       if (response.status === 200) {
-        console.log(response.data);
-        updateTree(response.data);
+        if(searchParam){
+        updateTree(response.data);}
+        else{
+          updateTree(response.data.trees);
+        }
       }
     } catch (error) {
       console.error("Error fetching Trees:", error.response.data.error); // Access the custom error message
