@@ -8,6 +8,7 @@ Global variables for colors
 :root {
   --bg-header-footer: #dfdacb;
   --lighter-primary: #f8f7f4;
+  --darker-primary: #b2aea2;
   --bg-page-color: #ededec;
   --white-color: #fcfdfd;
   --font-family-color: #82817e;
@@ -168,4 +169,23 @@ input:active {
 
 .navIcon:hover .ani {
   transform: rotate(360deg);
+}
+
+/*  */
+input::placeholder {
+  color: var(--font-family-color);
+}
+@keyframes moveText {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.infinite-animation {
+  animation: moveText 10s linear infinite;
+  white-space: nowrap;
+  overflow: hidden;
 }

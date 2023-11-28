@@ -20,6 +20,7 @@ export default {
         "darker-secondary": "var(--darker-secondary)",
         "lighter-secondary": "var(--lighter-secondary)",
         "lighter-primary": "var(--lighter-primary)",
+        "darker-primary": "var(--darker-primary)",
       },
       fontFamily: {
         "main-font": ["Chicle", "serif"],

@@ -2,7 +2,14 @@ import { useState } from "react";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 // eslint-disable-next-line react/prop-types
-const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPage,}) => {
+const Pagination = ({
+  postPerPage,
+  totalpost,
+  paginate,
+  firsttree,
+  lasttree,
+  currentPage,
+}) => {
   console.log(totalpost);
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalpost / postPerPage); i++) {
@@ -15,17 +22,19 @@ const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPa
     paginate(number);
   };
   const handleNext = () => {
-    let nextPage=currentPage
-    if(currentPage<=totalpost/postPerPage){
-     nextPage = currentPage + 1;}
+    let nextPage = currentPage;
+    if (currentPage <= totalpost / postPerPage) {
+      nextPage = currentPage + 1;
+    }
     paginate(nextPage);
     setActivePage(nextPage);
   };
   const handlePrev = () => {
-    let prevPage=currentPage;
-    if(currentPage>1){
-     prevPage = currentPage - 1;}
-    
+    let prevPage = currentPage;
+    if (currentPage > 1) {
+      prevPage = currentPage - 1;
+    }
+
     paginate(prevPage);
     setActivePage(prevPage);
   };
@@ -56,7 +65,7 @@ const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPa
             {" "}
             <div>
               {" "}
-              <p className="text-sm text-gray-700">
+              <p className="text-md text-font-family-color">
                 {" "}
                 Showing <span className="font-medium">{firsttree}</span> to{" "}
                 <span className="font-medium">{lasttree}</span> of{" "}
@@ -84,12 +93,15 @@ const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPa
                 {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}{" "}
                 <ul className="flex">
                   {pageNumbers.map((number, index) => (
-                    <li key={index} className="hover:bg-gray-200 active:bg-lime-800">
+                    <li
+                      key={index}
+                      className="hover:bg-lighter-primary active:bg-bg-header-footer"
+                    >
                       {" "}
                       <a
                         href="#"
                         aria-current="page"
-                        className="relative z-10 inline-flex items-center bg-white-900 px-4 py-2 text-sm font-semibold text-gray-500 focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                        className="relative z-10 inline-flex items-center bg-white-900 px-4 py-2 text-md text-font-family-color focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                         onClick={() => {
                           handlePageClick(number);
                           paginate(number);
