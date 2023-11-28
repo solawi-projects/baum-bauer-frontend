@@ -69,7 +69,7 @@ const Cart = () => {
                       <Link to={`/trees/${product._id}`}>
                         <div className="flex flex-col-reverse sm:flex-row">
                           <img
-                            src="/src/assets/images/galleryImages/biobaum_gallery_img_01.webp"
+                            src={product.image}
                             alt={product.name}
                             className="w-full sm:w-[60px] h-[400px] sm:h-[60px] object-cover mr-0 sm:mr-2 rounded-[10px] mt-2 mb-6 sm:mb-0"
                           />

@@ -136,7 +136,7 @@ const Sponsor = () => {
             <div key={index} className="flex  pr items-center ">
               <div className="w-60 p-4 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
                 <img
-                  className="w-40 h-40 object-cover rounded-t-md"
+                  className="w-full h-[220px] object-cover rounded-[10px] mb-10"
                   src={item.image}
                   alt={item.name}
                 />
