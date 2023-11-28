@@ -7,6 +7,8 @@ import treeicon from "../assets/tree.png";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import { useState, useEffect } from "react";
+import { IoIosSend } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Faq = () => {
   const titles = ["FAQ", "We have summarized your inquiries as following!"];
@@ -97,25 +99,15 @@ const Faq = () => {
               <p className="mt-4 text-2xl leading-8 text-gray-300">
                 write us here!! we will contact shortly through Email !!{" "}
               </p>
-              <div className="mt-6 flex max-w-md gap-x-4">
-                <label className="sr-only">Enter Message </label>
-                <textarea
-                  id="text-area"
-                  name="message"
-                  type="message"
-                  autoComplete="message"
-                  required
-                  className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10    focus:outline-none 
-              
-                 sm:text-sm sm:leading-6"
-                  placeholder="Enter the message..."
-                />
-                <button
-                  type="submit"
-                  className="flex-none rounded-md bg-bg-page-color px-4 py-2 text-sm font-semibold text-font-family-color shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                >
-                  Send
-                </button>
+              <div className="mt-6 flex justify-center max-w-md gap-x-4">
+               
+               
+                <Link type="submit"
+                  className="flex flex-row gap-1 rounded-md bg-bg-page-color px-4 py-4 text-xl font-semibold text-font-family-color shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                        to={`/contact`}
+                    >
+                 <IoIosSend className="text-2xl"/> Send a message
+                      </Link>
               </div>
             </div>
           </div>
