@@ -4,12 +4,12 @@ import closeMenu from "../assets/images/close_menu.svg";
 import { Fade } from "react-awesome-reveal";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
-import Feedback from "../components/Feedback";
+
 import axios from "../utils/axiosInstance";
 
 const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
-  const [showAllImages, setShowAllImages] = useState(window.innerWidth > 1024);
+  const [showAllImages, setShowAllImages] = useState(window.innerWidth > 1000);
   const [selectedIndex, setSelectedIndex] = useState(null); // Add this line
   const [gallery, setGallery] = useState([]);
   const [error, setError] = useState("");
@@ -53,7 +53,7 @@ const Gallery = () => {
     setShowAllImages(!showAllImages);
   };
 
-  const filteredGallery = showAllImages ? gallery : gallery.slice(0, 3);
+  const filteredGallery = showAllImages ? gallery : gallery.slice(0, 6);
   /* Handle Open Image */
   const openImage = (img) => {
     setSelectedImg(img);
@@ -127,7 +127,7 @@ const Gallery = () => {
           {/* Toggle Button for Show All/Fewer Images */}
           <button
             onClick={toggleShowAllImages}
-            className="block lg:hidden mx-auto px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[50px] hover:scale-110 hover:border border-[#9C988E] transition duration-4000 ease-linear"
+            className="block lg:hidden mx-auto px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear"
             aria-label="Show All/Fewer Images"
           >
             {showAllImages ? "Show Fewer Photos" : "Show All Images"}
@@ -171,7 +171,7 @@ const Gallery = () => {
           </div>
         )}
       </div>
-      <Feedback />
+
       {/* Footer Image */}
       <img
         src="src/assets/images/gallery_images/biobaum_gallery_footer_img.webp"

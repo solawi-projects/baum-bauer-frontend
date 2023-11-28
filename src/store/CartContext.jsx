@@ -17,7 +17,11 @@ export function CartContextProvider({ children }) {
 
   useEffect(() => {
     if (ls && ls.getItem("cart")) {
-      setCartTrees(JSON.parse(ls.getItem("cart")));
+      const storedCart = JSON.parse(ls.getItem("cart"));
+      if (storedCart.length === 0) {
+        ls.removeItem("cart");
+      }
+      setCartTrees(storedCart);
     }
   }, []);
 
@@ -29,17 +33,32 @@ export function CartContextProvider({ children }) {
     setCartTrees((prev) => {
       const pos = prev.indexOf(treeId);
       if (pos !== -1) {
-        return prev.filter((value, index) => index !== pos);
+        const updatedCart = prev.filter((value, index) => index !== pos);
+
+        if (updatedCart.length === 0) {
+          ls?.removeItem("cart");
+        }
+
+        return updatedCart;
       }
       return prev;
     });
   }
 
   const removeButton = (treeId) => {
-    setCartTrees((prevCart) => prevCart.filter((id) => id !== treeId));
+    setCartTrees((prevCart) => {
+      const updatedCart = prevCart.filter((id) => id !== treeId);
+
+      if (updatedCart.length === 0) {
+        ls?.removeItem("cart");
+      }
+
+      return updatedCart;
+    });
   };
 
   function clearCart() {
+    localStorage.removeItem("cart");
     setCartTrees([]);
   }
 
