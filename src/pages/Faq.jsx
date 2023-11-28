@@ -65,8 +65,8 @@ const Faq = () => {
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />
         <div className="container mx-auto text-2xl">
           <h2>
-            Showing {limit} to {skip + limit} of {total} FAQs
-          </h2>
+          Showing {skip + 1} to {Math.min(skip + limit, total)} of{" "}
+          {total} FAQ         </h2>
           <p>{err}</p>
         </div>
         {faqs.map((item, index) => (
@@ -84,8 +84,8 @@ const Faq = () => {
         ))}
         <br />
         <div className="mx-auto text-2xl flex gap-7">
-          <button onClick={handlePrev}>Previous</button>
-          <button onClick={handleNex}>Next</button>
+          <button onClick={handlePrev} disabled={skip === 0}>Previous</button>
+          <button onClick={handleNex} disabled={skip + limit >= total}>Next</button>
         </div>
       </div>
 
