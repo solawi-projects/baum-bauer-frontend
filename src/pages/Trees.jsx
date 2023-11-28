@@ -45,7 +45,7 @@ const Tree = () => {
         activeLinks={aLinkValues}
         deActiveLink={daLinkValues}
       />{" "}
-      <p>{err}</p> <div className="w-full backdrop-search"></div>{" "}
+      <p>{err}</p>
       <Search updateTree={setTree} />
       <div className=" flex  justify-center flex-wrap gap-10 pt-20 pb-40">
         <div className="flex flex-row justify-start">
