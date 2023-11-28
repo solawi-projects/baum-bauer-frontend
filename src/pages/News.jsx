@@ -19,7 +19,7 @@ const News = () => {
   const [error, setError] = useState(null);
   const [totalNews, setTotalNews] = useState(0);
   //pagination
-  const limit = 6;
+  const limit = 8;
   const [skip, setSkip] = useState(0);
 
   const handlePrev = () => {
