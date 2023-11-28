@@ -8,7 +8,7 @@ import EachPageHeader from "../components/EachPageHeader";
 
 const News = () => {
   const titles = [
-    "Blog News",
+    "Bio Blog News",
     "Discover the Latest Stories and Updates from Our Tree Sponsorship Program!",
   ];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
@@ -17,23 +17,49 @@ const News = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [totalNews, setTotalNews] = useState(0);
+  //pagination
+  const limit = 6;
+  const [skip, setSkip] = useState(0);
+
+  const handlePrev = () => {
+    const newSkip = skip - limit;
+    if (newSkip <= 0) {
+      setSkip(0);
+    }
+    setSkip(newSkip);
+  };
+
+  const handleNex = () => {
+    setSkip(limit + skip);
+  };
+  const getNewsArticles = () => {
+    try {
+      axios
+        .get(`/api/newsArticle/?limit=${limit}&skip=${skip}`)
+        .then((response) => {
+          console.log("Response is:", response);
+          if (response.status === 200) {
+            setNewsItems(response.data.articles);
+            setTotalNews(response.data.total);
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 500) {
+            setError("Data was not fetched from the DB");
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching NewsArticles:", error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchNewsArticles = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get("/api/newsArticle");
-        setNewsItems(response.data);
-      } catch (err) {
-        setError("Failed to load news articles");
-        console.error(err.response || err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchNewsArticles();
-  }, []);
+    setIsLoading(true);
+    getNewsArticles();
+  }, [skip]); // Trigger useEffect when skip changes
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -42,45 +68,68 @@ const News = () => {
     <div className="bg-bg-page-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-      <div className="flex flex-wrap justify-center gap-5 pl-2 pr-2 pb-5">
-        {newsItems.map((item) => (
-          <div
-            key={item._id}
-            className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg hover:rounded-lg"
-          >
-            <Link to={`/news/${item._id}`}>
-              <img
-                className="rounded-t-lg"
-                src={item.imageUrl}
-                alt={item.title}
-              />
-            </Link>
-            <div className="p-5">
-              <Link to={`/news/${item._id}`}>
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  {item.title}
-                </h5>
-              </Link>
-              <p className="text-xs text-font-family-color pt-4 pb-2">
-                {new Date(item.dateCreated).toLocaleDateString()}
-              </p>
-              <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                {item.description}
-              </p>
-              <Link
-                to={`/news/${item._id}`}
-                className="inline-flex items-center py-1 text-sm font-medium text-center text-cyan-600 hover:underline dark:text-cyan-500"
-              >
-                Read more <IoIosArrowForward />
-              </Link>
-            </div>
-          </div>
-        ))}
+      <div className="container mx-auto text-2xl">
+        <h2>
+          Showing {skip + 1} to {Math.min(skip + limit, totalNews)} of{" "}
+          {totalNews} News Articles
+        </h2>
+        <p>{error}</p>
       </div>
+      <div className="container mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {newsItems.map((item) => (
+            <div
+              key={item._id}
+              className="flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg hover:rounded-lg overflow-hidden"
+            >
+              <Link to={`/news/${item._id}`}>
+                <img
+                  className="w-full h-48 object-cover" // Fixed height for all news thumbnail images
+                  src={item.imageUrl}
+                  alt={item.title}
+                />
+              </Link>
+              <div className="flex flex-col justify-between p-5 h-full">
+                <div>
+                  <Link to={`/news/${item._id}`}>
+                    <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      {item.title}
+                    </h5>
+                  </Link>
+                  <p className="text-s py-2 text-gray-600 pt-1">
+                    {new Date(item.dateCreated).toLocaleDateString()}
+                  </p>
+                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    {item.description.length > 100
+                      ? `${item.description.slice(0, 100)}...`
+                      : item.description}
+                  </p>
+                </div>
+                <Link
+                  to={`/news/${item._id}`}
+                  className="inline-flex items-center py-1 text-s font-medium text-center text-secondary-color hover:underline mt-4"
+                >
+                  Continue Reading <IoIosArrowForward />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* pagination buttons */}
+      <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
+        <button onClick={handlePrev} disabled={skip === 0}>
+          Previous
+        </button>
+        <button onClick={handleNex} disabled={skip + limit >= totalNews}>
+          Next
+        </button>
+      </div>
+      {/* Footer Image */}
       <img
         className="bg-bg-page-color w-full"
         src="src/assets/images/news_images/leaves_background.png"
-        alt=""
+        alt="News Footer Image"
       />
     </div>
   );

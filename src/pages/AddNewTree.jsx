@@ -15,31 +15,42 @@ import axios from "../utils/axiosInstance";
 const AddNewTree = () => {
   const [errors, setErrors] = useState([]);
   const [treeDescription, setTreeDescription] = useState("");
+  const [isAvailable, setIsAvailable] = useState(true);
   const treeName = useRef(null);
   const treePrice = useRef(null);
-  // const checkboxRef = useRef(null);
   const availableQuantity = useRef(null);
-  const newsImage = useRef(null);
+  const treeImage = useRef(null);
 
-  // const handleCheckboxChange = () => {
-
-  // };
+  const handleAvailability = (event) => {
+    if (event.target.value === "Available") {
+      setIsAvailable(true);
+    } else if (
+      event.target.value === "Sold Out" ||
+      event.target.value === "Backorder"
+    ) {
+      setIsAvailable(false);
+    }
+  };
   const handleEditorChange = (content) => {
-    console.log("Content was updated:", content);
     setTreeDescription(content);
   };
   const onSubmitForm = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     formData.append("description", treeDescription);
-    console.log("FormData: ", formData.get("content"));
+    // console.log("category: ", formData.get("category"));
+    // console.log("treeName: ", formData.get("treeName"));
+    // console.log("treePrice: ", formData.get("treePrice"));
+    // console.log("status: ", formData.get("status"));
+    // console.log("availableQuantity: ", formData.get("availableQuantity"));
+    // console.log("description: ", formData.get("description"));
+    // console.log("treeImage: ", formData.get("treeImage"));
     try {
       const res = await axios.post("/api/tree/create", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("RES :", res.response);
       if (res.status === 201) {
         setErrors([]);
         Swal.fire({
@@ -55,8 +66,8 @@ const AddNewTree = () => {
         });
         treeName.current.value = "";
         treePrice.current.value = "";
-        setTreeDescription("");
-        newsImage.current.value = "";
+        availableQuantity.current.value = null;
+        treeImage.current.value = "";
       }
     } catch (error) {
       setErrors([]);
@@ -106,7 +117,7 @@ const AddNewTree = () => {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="treeName" value="Type here name of tree" />
+            <Label htmlFor="treeName" value="Name of tree" />
           </div>
           <TextInput
             id="treeName"
@@ -118,11 +129,10 @@ const AddNewTree = () => {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="treePrice" value="Type here Price of tree" />
+            <Label htmlFor="treePrice" value="Price (in Euro)" />
           </div>
           <TextInput
             id="treePrice"
-            type="number"
             ref={treePrice}
             name="treePrice"
             placeholder="Enter the Price of Tree"
@@ -130,23 +140,36 @@ const AddNewTree = () => {
         </div>
         <div>
           <div className="flex flex-col items-start gap-2 mb-2">
-            <legend className="mb-4">Choose the availability</legend>
+            <legend className="mb-4">
+              <span>Choose the availability</span>
+            </legend>
             <div className="flex items-start gap-10">
               <div className="flex items-center gap-2">
                 <Radio
                   id="available"
                   name="status"
                   value="Available"
+                  onChange={handleAvailability}
                   defaultChecked
                 />
                 <Label htmlFor="available">Available</Label>
               </div>
               <div className="flex items-center gap-2">
-                <Radio id="sold" name="status" value="Sold Out" />
+                <Radio
+                  id="sold"
+                  name="status"
+                  value="Sold Out"
+                  onChange={handleAvailability}
+                />
                 <Label htmlFor="sold">Sold Out</Label>
               </div>
               <div className="flex items-center gap-2">
-                <Radio id="Backorder" name="status" value="Backorder" />
+                <Radio
+                  id="Backorder"
+                  name="status"
+                  value="Backorder"
+                  onChange={handleAvailability}
+                />
                 <Label htmlFor="Backorder">Backorder</Label>
               </div>
             </div>
@@ -164,6 +187,7 @@ const AddNewTree = () => {
             type="number"
             ref={availableQuantity}
             name="availableQuantity"
+            disabled={!isAvailable}
             placeholder="Enter the Amount of Availability"
           />
         </div>
@@ -194,7 +218,8 @@ const AddNewTree = () => {
         </div>
         <div id="fileUpload">
           <Label
-            htmlFor="dropzone-file"
+            htmlFor="tree_image"
+            name="treeImage"
             className="dark:hover:bg-bray-800 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
           >
             <div className="flex flex-col items-center justify-center pb-6 pt-5">
@@ -226,7 +251,7 @@ const AddNewTree = () => {
                 Image Size should be less than 3MB
               </p>
             </div>
-            <FileInput id="dropzone-file" className="hidden" />
+            <FileInput id="tree_image" name="treeImage" className="hidden" />
           </Label>
         </div>
         <Button className="custom-button-style" type="submit">
