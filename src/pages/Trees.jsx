@@ -51,8 +51,8 @@ const Tree = () => {
       setErr("Data was not brought");
     }
   };
-  let endvalue=skip+limit;
-  let startvalue=limit - limit + skip+1
+  let endvalue=Math.min(skip + limit, totalTree);
+  let startvalue=skip + 1
   if(endvalue>=totalTree){
     endvalue=totalTree
   }
