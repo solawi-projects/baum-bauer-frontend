@@ -2,8 +2,9 @@ import { useState } from "react";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 // eslint-disable-next-line react/prop-types
-const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPage,}) => {
-  console.log(totalpost);
+const Pagination = () => {
+/*   {postPerPage,totalpost,paginate,firsttree,lasttree,currentPage,}
+ */  /* console.log(totalpost);
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalpost / postPerPage); i++) {
     pageNumbers.push(i);
@@ -28,7 +29,7 @@ const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPa
     
     paginate(prevPage);
     setActivePage(prevPage);
-  };
+  }; */
   return (
     <>
       <div>
@@ -54,7 +55,7 @@ const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPa
           </div>{" "}
           <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             {" "}
-            <div>
+          {/*   <div>
               {" "}
               <p className="text-sm text-gray-700">
                 {" "}
@@ -62,7 +63,7 @@ const Pagination = ({postPerPage,totalpost,paginate,firsttree,lasttree,currentPa
                 <span className="font-medium">{lasttree}</span> of{" "}
                 <span className="font-medium">{totalpost}</span> results{" "}
               </p>{" "}
-            </div>{" "}
+            </div>{" "} */}
             <div>
               {" "}
               <nav

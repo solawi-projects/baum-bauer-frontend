@@ -16,24 +16,44 @@ const Sponsor = () => {
   const [tree, setTree] = useState([]);
  
   const [err, setErr] = useState("");
+  const [totalTree, setTotalTree] = useState(0);
+  const limit = 4;
+  const [skip, setSkip] = useState(0);
+
+  const handlePrev = () => {
+    const newSkip = skip - limit;
+    if (newSkip <= 0) {
+      setSkip(0);
+    }
+    setSkip(newSkip);
+  };
+
+  const handleNex = () => {
+    setSkip(limit + skip);
+  };
  
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-  useEffect(() => {
-    const getTrees = async () => {
-      try {
-        const data = await TreeData();
-        setTree(data);
-      } catch (error) {
-        setErr("Data was not brought");
-      }
-    };
+  
+  
+  const getTrees = async () => {
+    try {
+      const data = await TreeData(limit,skip);
+      console.log(data.trees)
 
+      setTree(data.trees);
+      setTotalTree(data.total);
+    } catch (error) {
+      setErr("Data was not brought");
+    }
+  };
+  useEffect(() => {
+    
     getTrees();
-  }, []);
+  },[skip]);
 
  
   return (
@@ -44,8 +64,8 @@ const Sponsor = () => {
         deActiveLink={daLinkValues}
       />{" "}
       <p>{err}</p>     
-        <Search updateTree={setTree}/>
-
+           <Search updateTree={setTree}/>
+  
       <div className="h-auto relative dropdown">
         {" "}
         <div
@@ -107,7 +127,18 @@ const Sponsor = () => {
           </div>
         ))}
       </div>
-     
+      {/* pagination buttons */}<h2>
+          Showing {limit} to {skip + limit} of {totalTree} FAQs
+        </h2>
+      <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
+        <button onClick={handlePrev} >
+          Previous
+        </button>
+        <button onClick={handleNex}>
+          Next
+        </button>
+      </div>
+
     </div>
   );
 };
