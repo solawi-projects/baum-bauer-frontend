@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { CartContext } from "../store/CartContext";
+import DOMPurify from "dompurify";
 
 const SingleTreePage = () => {
   const { id } = useParams();
@@ -17,7 +18,6 @@ const SingleTreePage = () => {
           `http://localhost:4000/api/tree/${id}`
         );
         setTree(response.data);
-        console.log("Image path:", response.data.images[0]);
       } catch (error) {
         console.error("Error fetching tree:", error);
       }
@@ -86,7 +86,12 @@ const SingleTreePage = () => {
                 </h3>
               </div>
 
-              <p>{tree.description}</p>
+              <div
+                className="prose lg:prose-lg mb-6"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(tree.description),
+                }}
+              />
 
               {/* Horizontal Line */}
               <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-2" />
