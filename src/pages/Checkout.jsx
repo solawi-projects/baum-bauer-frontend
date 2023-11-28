@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import treeIcon from "../assets/images/tree_icon.svg";
-import footerImage from "../assets/images/biobaum_gallery_footer_img.webp";
+import footerImage from "../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 import { TextInput, Label } from "flowbite-react";
 import { CartContext } from "../store/CartContext";
 import { Link } from "react-router-dom";
@@ -373,7 +373,7 @@ const Checkout = () => {
                     <Link to={`/trees/${product._id}`}>
                       <div className="flex flex-col-reverse sm:flex-row">
                         <img
-                          src="/src/assets/images/galleryImages/biobaum_gallery_img_01.webp"
+                          src={product.image}
                           alt={product.name}
                           className="w-full sm:w-[60px] h-[400px] sm:h-[60px] object-cover mr-0 sm:mr-2 rounded-[10px] mt-2 mb-6 sm:mb-0"
                         />

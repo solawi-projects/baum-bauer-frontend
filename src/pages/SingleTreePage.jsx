@@ -50,7 +50,7 @@ const SingleTreePage = () => {
           <div className="w-[100%] sm:w-[50%] aspect-square mr-[2rem]">
             <img
               className="w-full md:h-[500px] lg:h-full object-cover rounded-[10px]"
-              src={tree.images[0]}
+              src={tree.image}
               alt={tree.title}
             />
           </div>

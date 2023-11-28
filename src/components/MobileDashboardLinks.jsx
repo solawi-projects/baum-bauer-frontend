@@ -31,11 +31,7 @@ const MobileDashboardLinks = () => {
       {/* Mobile dropdown menu */}
       {isMobile && (
         <>
-          <div
-            className="fixed inset-0 bg-black opacity-50 z-10"
-            onClick={closeDropdown}
-          ></div>
-          <div className="w-[50%] absolute xs:top-[40px] top-[40px] xs:left-0 left-0 bg-white rounded-[10px] border border-bg-header-footer z-20">
+          <div className="w-[50%] absolute xs:top-[40px] top-[40px] xs:left-0 left-0 bg-white rounded-[10px] border border-bg-header-footer z-[1]">
             <div className="flex flex-col w-full">
               <NavLink
                 aria-label="Dashboard"

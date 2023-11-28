@@ -1,17 +1,20 @@
 import backgroundImage from "../assets/images/leaves_background_02.webp";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import { HiHome } from "react-icons/hi";
+import EachPageHeader from "../components/EachPageHeader";
+
 const About = () => {
+  const titles = ["About Us", ""];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "About Page" };
   return (
     <main className="relative text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       {/* About Us title, positioned absolutely */}
-      <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 text-3xl lg:text-4xl py-8 lg:py-12 xl:py-16 text-center font-bold z-10">
-        About Us
+      <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 py-10 text-center z-10">
+        <EachPageHeader title={titles[0]} subtitle={titles[1]} />
       </h2>
-      <section className="relative flex flex-col items-center justify-center pt-40 md:pt-44 xl:pt-48 p-0">
+      <section className="relative flex flex-col items-center justify-center pt-[100px] md:pt-[160px] lg:pt-[180px] xl:pt-[220px]">
         {/* Overlay with background image and opacity */}
         <div
           className="absolute top-0 left-0 w-full h-[25%] bg-cover bg-no-repeat bg-center"
@@ -23,12 +26,20 @@ const About = () => {
 
         {/* Content */}
         {/* Article - Sponsor a Tree: Our Mission */}
-        <article className="w-full flex flex-col items-center justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 shadow-lg">
-          <h2 className="text-2xl lg:text-3xl py-4 text-center font-bold">
-            Sponsor a Tree: Our Mission
-          </h2>
+        <article className="w-full flex flex-col items-center justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 shadow-lg ">
+          <div className="flex items-center mb-4">
+            <img
+              src="/src/assets/tree.png"
+              alt="Tree Icon"
+              className="w-[40px] h-[40px] mr-2"
+            />{" "}
+            <h3 className="text-2xl sm:text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+              Sponsor a Tree: Our Mission
+            </h3>
+          </div>
+
           <h3 className="text-xl lg:text-2xl py-2 text-center font-medium">
-            Embracing Nature, Enriching Lives
+            Etracing Nature, Enriching Lives
           </h3>
           <p className="text-md font-normal text-justify py-2">
             At the heart of our mission is a simple yet profound commitment: to
@@ -96,9 +107,17 @@ const About = () => {
         </article>
         {/* Article - About Us: Solawi Zabergäu */}
         <article className="w-full flex flex-col items-center justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 mt-10 shadow-lg">
-          <h2 className="text-2xl lg:text-3xl py-4 text-center font-bold">
-            About Us: Solawi Zabergäu
-          </h2>
+          <div className="flex items-center mb-4 pt-[0px] md:pt-[10px] lg:pt-[20px] xl:pt-[40px]">
+            <img
+              src="/src/assets/tree.png"
+              alt="Tree Icon"
+              className="w-[40px] h-[40px] mr-2"
+            />{" "}
+            <h3 className="text-2xl sm:text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+              About Us: Solawi Zabergäu
+            </h3>
+          </div>
+
           <h3 className="text-xl lg:text-2xl py-2 text-center font-medium">
             Cultivating Community and Sustainability
           </h3>

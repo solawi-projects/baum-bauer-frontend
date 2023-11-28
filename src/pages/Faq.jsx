@@ -9,7 +9,7 @@ import EachPageHeader from "../components/EachPageHeader";
 import { useState, useEffect } from "react";
 
 const Faq = () => {
-  const titles = ["FAQ", "We have summarized your inquiries as following"];
+  const titles = ["FAQ", "We have summarized your inquiries as following!"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "FAQ" };
 

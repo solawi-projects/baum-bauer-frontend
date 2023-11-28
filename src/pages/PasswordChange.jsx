@@ -158,7 +158,7 @@ const PasswordChange = () => {
                 </p>
               </div>
               {/* Change Password Button */}
-              <div className="text-center flex justify-center mb-6">
+              <div className="text-center flex justify-center mb-6 mt-6">
                 <Button
                   className="custom-button-style"
                   onClick={handlePasswordChange}
