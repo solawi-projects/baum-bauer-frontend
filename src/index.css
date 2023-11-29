@@ -176,7 +176,7 @@ input::placeholder {
   color: var(--font-family-color);
 }
 
-/* tree page animation */
+/* tree page animation 
 @keyframes moveText {
   from {
     transform: translateX(100%);
@@ -191,7 +191,7 @@ input::placeholder {
   white-space: nowrap;
   overflow: hidden;
 }
-
+*/
 /* sweet alert custom button */
 .btn-custom-class {
   background-color: var(--secondary-color);
