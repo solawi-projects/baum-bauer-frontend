@@ -1,10 +1,15 @@
-import React from "react";
+import {useContext} from "react";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Signout = () => {
+  const navigate = useNavigate();
+  const { setLoggedIn, setEmail } = useContext(AuthContext);
+
   return (
     <main>
       <Breadcrumb

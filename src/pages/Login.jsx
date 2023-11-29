@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import { Button, Checkbox, Label, TextInput, Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import backgroundImage from "../assets/images/leaves_background_02.webp";
+import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { setLoggedIn, setEmail } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
