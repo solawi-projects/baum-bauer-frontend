@@ -1,4 +1,5 @@
 import PageBreadcrumb from "../components/PageBreadcrumb";
+import { Fade } from "react-awesome-reveal";
 import { HiHome } from "react-icons/hi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
@@ -21,7 +22,7 @@ const Tree = () => {
   const [totalTree, setTotalTree] = useState(0);
   const limit = 4;
   const [skip, setSkip] = useState(0);
- 
+
   const handlePrev = () => {
     const newSkip = skip - limit;
     if (newSkip <= 0) {
@@ -51,13 +52,12 @@ const Tree = () => {
       setErr("Data was not brought");
     }
   };
-  let endvalue=skip+limit;
-  let startvalue=skip+1
-  if(endvalue>=totalTree){
-    endvalue=totalTree
+  let endvalue = skip + limit;
+  let startvalue = skip + 1;
+  if (endvalue >= totalTree) {
+    endvalue = totalTree;
   }
 
-  
   useEffect(() => {
     getTrees();
   }, [skip]);
@@ -70,19 +70,19 @@ const Tree = () => {
         deActiveLink={daLinkValues}
       />{" "}
       <p>{err}</p>
-      <Search updateTree={setTree} limit={limit} skip={skip}/>
-      <div className=" flex  justify-center flex-wrap gap-10 pt-20 pb-40">
+      <Search updateTree={setTree} limit={limit} skip={skip} />
+      <div className=" flex justify-center flex-wrap gap-10 pt-20 pb-40">
         <div className="flex flex-row justify-start">
-          <div className="flex flex-row justify-start infinite-animation">
-            <div className="text-3xl font-main-font text-secondary-color tracking-wide border-b-2 border-bg-header-footer inline-block ">
-              Stand with us for a greener world – sponsor a tree and grow a
-              legacy of environmental stewardship.
-            </div>
+          <div className="flex flex-row justify-start items-end">
             <img
               src="/src/assets/tree.png"
               alt="Small Photo"
-              className="w-[40px] h-[40px] ml-2"
+              className="w-[40px] h-[40px] mr-2"
             />
+            <div className="sm:text-4xl text-3xl font-main-font text-secondary-color tracking-wide border-bg-header-footer inline-block ">
+              Stand with us for a greener world – sponsor a tree and grow a
+              legacy of environmental stewardship.
+            </div>
           </div>
         </div>
 
@@ -130,44 +130,45 @@ const Tree = () => {
           <h2 className="container mx-auto my-5 pt-16 text-2xl flex justify-center items-center">
             Showing {startvalue} to {endvalue} of {totalTree} Trees
           </h2>
+          <Fade delay={100} cascade damping={0.1} duration={3000}>
+            <div className="flex justify-center items-center gap-8">
+              {tree.map((item, index) => (
+                <div key={index} className="flex items-center">
+                  <div className=" w-60 p-4 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
+                    <img
+                      className="w-full h-[220px] object-cover rounded-[10px] mb-10"
+                      src={item.image}
+                      alt={item.name}
+                    />
+                    <div className="mt-2">
+                      <div className="flex items-center mb-4">
+                        <img
+                          src="/src/assets/tree.png"
+                          alt="Tree Icon"
+                          className="w-[30px] h-[30px] mr-2"
+                        />{" "}
+                        <h3 className="text-2xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+                          {item.name}
+                        </h3>
+                      </div>
+                      <button className="block text-md text-secondary-color cursor-auto">{`€ ${parseFloat(
+                        item.price.$numberDecimal
+                      )}`}</button>
 
-          <div className="flex justify-center items-center gap-8">
-            {tree.map((item, index) => (
-              <div key={index} className="flex items-center">
-                <div className=" w-60 p-4 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
-                  <img
-                    className="w-full h-[220px] object-cover rounded-[10px] mb-10"
-                    src={item.image}
-                    alt={item.name}
-                  />
-                  <div className="mt-2">
-                    <div className="flex items-center mb-4">
-                      <img
-                        src="/src/assets/tree.png"
-                        alt="Tree Icon"
-                        className="w-[30px] h-[30px] mr-2"
-                      />{" "}
-                      <h3 className="text-2xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                        {item.name}
-                      </h3>
-                    </div>
-                    <button className="block text-md text-secondary-color cursor-auto">{`€ ${parseFloat(
-                      item.price.$numberDecimal
-                    )}`}</button>
-
-                    <div className="mt-2 mb-1 flex justify-start">
-                      <Link
-                        to={`/trees/${item._id}`}
-                        className="text-center w-full px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear mt-4 sm:mt-0"
-                      >
-                        view more
-                      </Link>
+                      <div className="mt-2 mb-1 flex justify-start">
+                        <Link
+                          to={`/trees/${item._id}`}
+                          className="text-center w-full px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear mt-4 sm:mt-0"
+                        >
+                          view more
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Fade>
         </div>
         <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
           <button onClick={handlePrev} disabled={skip === 0}>

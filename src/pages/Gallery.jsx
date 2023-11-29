@@ -4,7 +4,6 @@ import closeMenu from "../assets/images/close_menu.svg";
 import { Fade } from "react-awesome-reveal";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
-
 import axios from "../utils/axiosInstance";
 
 const Gallery = () => {
@@ -54,6 +53,7 @@ const Gallery = () => {
   };
 
   const filteredGallery = showAllImages ? gallery : gallery.slice(0, 6);
+
   /* Handle Open Image */
   const openImage = (img) => {
     setSelectedImg(img);

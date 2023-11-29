@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const CartContext = createContext({});
 
@@ -97,15 +98,25 @@ export function CartContextProvider({ children }) {
     return grandTotal;
   };
 
-  // Modified addTree function to include available quantity check
   const handleAddTree = (tree) => {
     const treeQuantityInCart = getTreeQuantity(tree._id);
     if (treeQuantityInCart < tree.availableQuantity) {
       addTree(tree._id);
     } else {
-      alert(
-        `Cannot add more ${tree.name}. Maximum available: ${tree.availableQuantity}`
-      );
+      Swal.fire({
+        text: `Cannot add more ${tree.name}. Maximum available: ${tree.availableQuantity}`,
+        icon: "error",
+        showClass: {
+          popup: "animate__animated animate__fadeInUp animate__faster",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutDown animate__faster",
+        },
+        customClass: {
+          confirmButton: "btn-custom-class",
+        },
+        buttonsStyling: false,
+      });
     }
   };
 
