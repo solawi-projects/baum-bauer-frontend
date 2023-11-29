@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import backgroundImage from "../assets/images/leaves_background_01.webp";
-import treeIcon from "../assets/images/tree_icon.svg";
-import footerImage from "../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
+import backgroundImage from "../../assets/images/leaves_background_01.webp";
+import treeIcon from "../../assets/images/tree_icon.svg";
+import footerImage from "../../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 import { TextInput, Label } from "flowbite-react";
-import { CartContext } from "../store/CartContext";
+import { CartContext } from "../../store/CartContext";
 import { Link } from "react-router-dom";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";

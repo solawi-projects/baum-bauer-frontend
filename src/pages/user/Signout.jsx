@@ -1,10 +1,23 @@
-import React from "react";
+import { useContext } from "react";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
-import backgroundImage from "../assets/images/leaves_background_01.webp";
+import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Signout = () => {
+  const { setLoggedIn, setEmail } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  /*
+  
+  1. access user loged out backend
+  2. when respose come Ok, 
+   2.1 setloged in fals and email "";
+   2.2 navigate to '/login'
+  
+  */
   return (
     <main>
       <Breadcrumb

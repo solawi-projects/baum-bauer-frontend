@@ -10,7 +10,7 @@ import { FaTreeCity } from "react-icons/fa6";
 import { SiGooglestreetview } from "react-icons/si";
 import { FaHouse } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import backgroundImage from "../assets/images/leaves_background_02.webp";
+import backgroundImage from "../../assets/images/leaves_background_02.webp";
 
 const Register = () => {
   return (

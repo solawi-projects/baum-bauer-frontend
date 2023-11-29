@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button, Checkbox, Label, TextInput, Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
-import backgroundImage from "../assets/images/leaves_background_02.webp";
+import backgroundImage from "../../assets/images/leaves_background_02.webp";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const { setLoggedIn, setEmail } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -18,7 +23,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password, rememberMe }),
+        body: JSON.stringify({ userEmail, password, rememberMe }),
       });
 
       if (!response.ok) {
@@ -85,8 +90,8 @@ const Login = () => {
                 type="email"
                 placeholder="name@flowbite.com *"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
                 style={{
                   backgroundColor: "var(--bg-white-color)",
                   borderColor: "var(--bg-header-footer)",

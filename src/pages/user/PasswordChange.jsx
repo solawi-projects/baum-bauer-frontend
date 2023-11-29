@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
-import DashboardLinks from "../components/DashboardLinks";
-import MobileDashboardLinks from "../components/MobileDashboardLinks";
-import backgroundImage from "../assets/images/leaves_background_01.webp";
+import DashboardLinks from "../../components/DashboardLinks";
+import MobileDashboardLinks from "../../components/MobileDashboardLinks";
+import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
-import PageBreadcrumb from "../components/PageBreadcrumb";
+import PageBreadcrumb from "../../components/PageBreadcrumb";
 
 const PasswordChange = () => {
   // State to manage password values

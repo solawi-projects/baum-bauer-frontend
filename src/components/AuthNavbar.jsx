@@ -5,8 +5,10 @@ import authBgImage from "../assets/images/biobaum_landing_top_nav_img.png";
 import { FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { CartContext } from "../store/CartContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const AuthNavbar = () => {
+  const { loggedIn, email } = useContext(AuthContext);
   const { cartTrees } = useContext(CartContext);
 
   return (

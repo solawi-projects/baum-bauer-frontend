@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import backgroundImage from "../assets/images/leaves_background_01.webp";
+import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { LuPlus, LuMinus } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import { CartContext } from "../store/CartContext";
+import { CartContext } from "../../store/CartContext";
 import { HiHome } from "react-icons/hi";
-import PageBreadcrumb from "../components/PageBreadcrumb";
+import PageBreadcrumb from "../../components/PageBreadcrumb";
 
 const Cart = () => {
   const {

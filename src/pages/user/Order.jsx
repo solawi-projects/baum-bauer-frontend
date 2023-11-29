@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import backgroundImage from "../assets/images/leaves_background_01.webp";
+import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { Link } from "react-router-dom";
-import { CartContext } from "../store/CartContext";
+import { CartContext } from "../../store/CartContext";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 
