@@ -126,7 +126,7 @@ input:-ms-input-placeholder {
   }
 }
 
-/*  */
+/* overwrite flowbite-react styles */
 input:focus,
 input:active {
   outline: none !important;
@@ -171,10 +171,12 @@ input:active {
   transform: rotate(360deg);
 }
 
-/*  */
+/* placeholder text color */
 input::placeholder {
   color: var(--font-family-color);
 }
+
+/* tree page animation */
 @keyframes moveText {
   from {
     transform: translateX(100%);
@@ -188,4 +190,21 @@ input::placeholder {
   animation: moveText 10s linear infinite;
   white-space: nowrap;
   overflow: hidden;
+}
+
+/* sweet alert custom button */
+.btn-custom-class {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  padding: 0.5rem 1rem;
+  border: 3px solid var(--darker-secondary);
+  border-radius: 10px;
+  transition: background-color 0.4s linear, border 0.4s linear,
+    color 0.4s linear;
+}
+
+.btn-custom-class:hover {
+  background-color: var(--lighter-secondary);
+  border: 3px solid var(--darker-secondary);
+  color: var(--secondary-color);
 }

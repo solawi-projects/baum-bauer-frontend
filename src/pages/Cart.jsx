@@ -3,6 +3,8 @@ import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { LuPlus, LuMinus } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { CartContext } from "../store/CartContext";
+import { HiHome } from "react-icons/hi";
+import PageBreadcrumb from "../components/PageBreadcrumb";
 
 const Cart = () => {
   const {
@@ -18,8 +20,12 @@ const Cart = () => {
     handleAddTree,
   } = useContext(CartContext);
 
+  const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
+  const daLinkValues = { linkText: "Cart" };
+
   return (
     <main>
+      <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center text-font-family-color">
         {/* Overlay with background image and opacity */}
         <div

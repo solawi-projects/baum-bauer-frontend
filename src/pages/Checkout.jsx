@@ -5,6 +5,8 @@ import footerImage from "../assets/images/gallery_images/biobaum_gallery_footer_
 import { TextInput, Label } from "flowbite-react";
 import { CartContext } from "../store/CartContext";
 import { Link } from "react-router-dom";
+import { Breadcrumb } from "flowbite-react";
+import { HiHome } from "react-icons/hi";
 
 const Checkout = () => {
   const { cartProducts, getTreeQuantity, getItemTotalPrice } =
@@ -36,6 +38,20 @@ const Checkout = () => {
 
   return (
     <main>
+      {cartProducts && (
+        <div className="mt-0 mb-0">
+          <Breadcrumb
+            aria-label="This is Breadcrumb showing the location of current page"
+            className="bg-gray-50 px-5 py-3 dark:bg-gray-800"
+          >
+            <Breadcrumb.Item href="/" icon={HiHome}>
+              Home
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/cart">Cart</Breadcrumb.Item>
+            <Breadcrumb.Item>Checkout</Breadcrumb.Item>
+          </Breadcrumb>
+        </div>
+      )}
       <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center text-font-family-color">
         {/* Overlay with background image and opacity */}
         <div
