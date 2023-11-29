@@ -3,6 +3,7 @@ import axios from "../utils/axiosInstance";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { HiHome } from "react-icons/hi";
+import { useMediaQuery } from "react-responsive";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import { Fade } from "react-awesome-reveal";
@@ -19,23 +20,45 @@ const News = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalNews, setTotalNews] = useState(0);
-  //pagination
-  const limit = 8;
-  const [skip, setSkip] = useState(0);
+  //pagination 
+   const [skip, setSkip] = useState(0);
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    useMediaQuery({ query: "(max-width: 768px)" })
+  );
+const limit= isSmallScreen ? 4:8;
 
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth <= 768);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize); // add an event listener for the resize event on the window object.
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const handlePrev = () => {
     const newSkip = skip - limit;
-    if (newSkip <= 0) {
+    if (newSkip < 0) {
       setSkip(0);
+    } else {
+      setSkip(newSkip);
     }
-    setSkip(newSkip);
   };
 
   const handleNex = () => {
-    setSkip(limit + skip);
+    const newSkip = skip + limit;
+    if (newSkip >= totalNews) {
+  
+      setSkip(skip);
+    } else {
+      setSkip(newSkip);
+    }
   };
   const getNewsArticles = () => {
-    try {
+    
+    try { 
+ 
       axios
         .get(`/api/newsArticle/?limit=${limit}&skip=${skip}`)
         .then((response) => {
@@ -59,8 +82,9 @@ const News = () => {
 
   useEffect(() => {
     setIsLoading(true);
+
     getNewsArticles();
-  }, [skip]); // Trigger useEffect when skip changes
+  }, [skip,isSmallScreen]); // this func is updated based on changes in skip and isSmallScreen
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
