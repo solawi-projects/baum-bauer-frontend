@@ -1,9 +1,9 @@
 import React from "react";
-import DashboardLinks from "../components/DashboardLinks";
-import MobileDashboardLinks from "../components/MobileDashboardLinks";
-import backgroundImage from "../assets/images/leaves_background_01.webp";
+import DashboardLinks from "../../components/DashboardLinks";
+import MobileDashboardLinks from "../../components/MobileDashboardLinks";
+import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
-import PageBreadcrumb from "../components/PageBreadcrumb";
+import PageBreadcrumb from "../../components/PageBreadcrumb";
 
 const UserSponsorships = () => {
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];

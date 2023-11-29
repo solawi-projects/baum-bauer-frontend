@@ -1,7 +1,6 @@
 import { useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import AuthNavbar from "./AuthNavbar";
-import { AuthContext } from "../contexts/AuthContext";
 
 import {
   FaHome,
@@ -14,8 +13,7 @@ import { FcFaq } from "react-icons/fc";
 import { MdContacts } from "react-icons/md";
 
 const DesktopNavbar = ({ isNavbarFixed, setIsNavbarFixed }) => {
-  // desstructure here
-  const { loggedIn, userName } = useContext(AuthContext);
+
   /* Handle DesktopNavbar on Scroll */
   useEffect(() => {
     const handleScroll = () => {
