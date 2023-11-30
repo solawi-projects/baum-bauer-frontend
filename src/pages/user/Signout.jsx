@@ -6,6 +6,7 @@ import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Signout = () => {
   const { setLoggedIn, setAuthUser } = useContext(AuthContext);
@@ -17,11 +18,35 @@ const Signout = () => {
         await axios.get("/api/users/logout");
         setLoggedIn(false);
         setAuthUser({});
+        // Display success message
+        Swal.fire({
+          icon: "success",
+          title: "Logout Successful!",
+          text: "You have successfully logged out.",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
         navigate("/login");
       } catch (error) {
         console.error("Logout failed", error);
+        // Display error message
+        Swal.fire({
+          icon: "error",
+          title: "Logout Failed",
+          text:
+            error.response?.data.message || "An error occurred during logout!",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
       }
     };
+
     handleLogout();
   }, [setLoggedIn, setAuthUser, navigate]);
 
