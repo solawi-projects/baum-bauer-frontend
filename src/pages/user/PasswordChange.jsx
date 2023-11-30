@@ -155,7 +155,6 @@ const PasswordChange = () => {
                 <p className="font-bold">Password Requirements:</p>
                 <p>Minimum length of 6 characters</p>
                 <p>At least one number</p>
-                <p>At least one number</p>
                 <p>At least one capital letter</p>
                 <p>At least one special symbol</p>
                 <p>

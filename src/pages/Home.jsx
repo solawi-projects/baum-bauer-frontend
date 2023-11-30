@@ -25,18 +25,13 @@ const Home = () => {
             Sponsor a Tree: Our Mission
           </h2>
           <p className="font-semibold">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            Join us in a green revolution with a simple act that leaves a
+            lasting impact. Our mission is to enrich the South German landscape
+            by planting a tree for every sponsorship we receive. Each tree
+            contributes to the biodiversity of the region, supports local
+            ecosystems, and combats climate change. When you sponsor a tree,
+            you're not just planting roots in the ground; you're growing a
+            legacy that will flourish for generations to come.
           </p>
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
             <img
@@ -65,18 +60,15 @@ const Home = () => {
             About Us: Solawi Zabergäu
           </h2>
           <p className="font-semibold">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            At Solawi Zabergäu, we're more than just farmers; we're stewards of
+            the earth. Nestled in the lush valleys of Southern Germany, our
+            community-supported agriculture initiative is dedicated to
+            sustainable farming practices that respect and nourish the land. Our
+            collective efforts focus on producing organic, locally-sourced food
+            while strengthening the bond between the people and the planet. By
+            supporting us, you become a part of a movement that cherishes
+            nature's bounty and upholds the values of ecological responsibility
+            and harmony.
           </p>{" "}
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
             <img
