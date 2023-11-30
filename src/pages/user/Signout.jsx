@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Signout = () => {
-  const { setLoggedIn, setEmail } = useContext(AuthContext);
+  const { setLoggedIn, setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,14 +16,14 @@ const Signout = () => {
       try {
         await axios.get("/api/logout");
         setLoggedIn(false);
-        setEmail("");
+        setAuthUser({});
         navigate("/login");
       } catch (error) {
         console.error("Logout failed", error);
       }
     };
     handleLogout();
-  }, [setLoggedIn, setEmail, navigate]);
+  }, [setLoggedIn, setAuthUser, navigate]);
 
   return (
     <main>

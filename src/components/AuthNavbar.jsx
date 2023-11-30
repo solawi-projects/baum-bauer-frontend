@@ -6,9 +6,10 @@ import { FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { CartContext } from "../store/CartContext";
 import { AuthContext } from "../contexts/AuthContext";
+import { Tooltip } from "flowbite-react";
 
 const AuthNavbar = () => {
-  const { loggedIn, email } = useContext(AuthContext);
+  const { loggedIn, authUser } = useContext(AuthContext);
   const { cartTrees } = useContext(CartContext);
 
   return (
@@ -23,71 +24,90 @@ const AuthNavbar = () => {
       }}
     >
       {/* Auth Navbar Links */}
-      <div className="flex space-x-2">
-        <Link
-          to="/login"
-          className="navIcon flex items-center transition-transform duration-75 ease-linear"
-          aria-label="Login page"
-        >
-          <div className="flex items-center transition-transform duration-75 ease-linear">
-            <div
-              className="rounded-full bg-bg-header-footer w-[50px] h-[50px]"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <FaUser className="ani text-secondary-color text-2xl" />
-            </div>
-          </div>
-        </Link>
-
-        <Link
-          to="/signout"
-          className="navIcon flex items-center transition-transform duration-75 ease-linear"
-          aria-label="Sign Out page"
-        >
-          <div className="flex items-center transition-transform duration-75 ease-linear">
-            <div
-              className="rounded-full bg-bg-header-footer w-[50px] h-[50px]"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <FiLogOut className="ani text-secondary-color text-2xl" />
-            </div>
-          </div>
-        </Link>
-        <Link
-          to="/cart"
-          className="navIcon transition-transform duration-75 ease-linear"
-          aria-label="Cart page"
-        >
-          <div
-            className="rounded-full bg-bg-header-footer w-[50px] h-[50px] relative transform origin-center hover:rotate-360"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+      <div className="flex space-x-4 items-center">
+        {!loggedIn && (
+          <Link
+            to="/login"
+            className="navIcon flex items-center transition-transform duration-75 ease-linear"
+            aria-label="Login page"
           >
-            <img
-              className="ani"
-              src="/src/assets/images/tree_icon.svg"
-              alt=""
-              style={{ width: "45px", height: "45px", borderRadius: "50%" }}
-            />
-            <div
-              className="absolute top-[0.2rem] right-[0.2rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
-              style={{ transform: "translate(50%, -50%)" }}
-            >
-              {cartTrees.length}
+            <Tooltip content="click here to login">
+              <div className="flex items-center transition-transform duration-75 ease-linear">
+                <div
+                  className="rounded-full bg-bg-header-footer w-[50px] h-[50px]"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <FaUser className="ani text-secondary-color text-2xl" />
+                </div>
+              </div>
+            </Tooltip>
+          </Link>
+        )}
+
+        {loggedIn && (
+          <Tooltip content="click here to go dashboard">
+            <Link to="/dashboard" aria-label="user email, link to dashboard">
+              {authUser.email}
+            </Link>
+          </Tooltip>
+        )}
+        {loggedIn && (
+          <Link
+            to="/signout"
+            className="navIcon flex items-center transition-transform duration-75 ease-linear"
+            aria-label="Sign Out page"
+          >
+            <div className="flex items-center transition-transform duration-75 ease-linear">
+              <Tooltip content="click here to logout">
+                <div
+                  className="rounded-full bg-bg-header-footer w-[50px] h-[50px]"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <FiLogOut className="ani text-secondary-color text-2xl" />
+                </div>
+              </Tooltip>
             </div>
-          </div>
-        </Link>
+          </Link>
+        )}
+        {loggedIn && (
+          <Link
+            to="/cart"
+            className="navIcon transition-transform duration-75 ease-linear"
+            aria-label="Cart page"
+          >
+            <Tooltip content="click here to your cart detail">
+              <div
+                className="rounded-full bg-bg-header-footer w-[50px] h-[50px] relative transform origin-center hover:rotate-360"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  className="ani"
+                  src="/src/assets/images/tree_icon.svg"
+                  alt=""
+                  style={{ width: "45px", height: "45px", borderRadius: "50%" }}
+                />
+                <div
+                  className="absolute top-[0.2rem] right-[0.2rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                  style={{ transform: "translate(50%, -50%)" }}
+                >
+                  {cartTrees.length}
+                </div>
+              </div>
+            </Tooltip>
+          </Link>
+        )}
       </div>
     </nav>
   );

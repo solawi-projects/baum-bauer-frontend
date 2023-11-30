@@ -18,10 +18,13 @@ axiosApiInstance.interceptors.response.use(config => {
     return config;
 }, error => {
     console.log("responded with Error", error.response);
-    if (error.response.status === 401) {
+    /*
+     if (error.response.status === 401) {
         console.log("401 error happened, token is not valid anymore");
         window.location = "/logout";
     }
+    */
+
     return Promise.reject(error);
 })
 
