@@ -48,7 +48,7 @@ function Footer() {
                   Bio Baum Bauer
                 </span>
               </p>
-              <p className="text-justify font-sans antialiased whitespace-normal text-lg">
+              <p className="text-justify font-sans antialiased whitespace-normal text-md sm:text-lg">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Deserunt iusto suscipit officiis id asperiores rerum, omnis
                 labore maxime. Ratione, magni quibusdam? Dolores facere minus
@@ -57,7 +57,7 @@ function Footer() {
               <p className="text-lg font-bold">Follow Us</p>
               <div className="flex justify-start gap-3 text-2xl pr-4 mt-2">
                 <a
-                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color"
+                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
                   href="http://"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -65,7 +65,7 @@ function Footer() {
                   <FaLinkedin />
                 </a>
                 <a
-                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color"
+                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
                   href="http://"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -73,7 +73,7 @@ function Footer() {
                   <FaYoutube />
                 </a>
                 <a
-                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color"
+                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
                   href="http://"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -81,7 +81,7 @@ function Footer() {
                   <IoLogoWhatsapp />
                 </a>
                 <a
-                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color"
+                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
                   href="http://"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -89,7 +89,7 @@ function Footer() {
                   <BsTwitterX />
                 </a>
                 <a
-                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color"
+                  className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
                   href="http://"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -105,49 +105,49 @@ function Footer() {
               <div className="flex flex-col gap-3">
                 <Link
                   to="/"
-                  className="flex items-center gap-1 transition transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear  "
                 >
                   <MdDoubleArrow />
                   <span>Home</span>
                 </Link>
                 <Link
                   to="/sponsor"
-                  className="flex items-center gap-1 transition transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
                   <span>Trees</span>
                 </Link>
                 <Link
                   to="/news"
-                  className="flex items-center gap-1 transition transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
                   <span>News</span>
                 </Link>
                 <Link
                   to="/about"
-                  className="flex items-center gap-1 transition transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
                   <span>About</span>
                 </Link>
                 <Link
                   to="/gallery"
-                  className="flex items-center gap-1 transition transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
                   <span>Gallery</span>
                 </Link>
                 <Link
                   to="/gap"
-                  className="flex items-center gap-1 transition transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
                   <span>FAQ</span>
                 </Link>
                 <Link
                   to="/contact"
-                  className="flex items-center gap-1 transition transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
                   <span>Contact</span>

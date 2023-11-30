@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { LuPlus, LuMinus } from "react-icons/lu";
 import { Link } from "react-router-dom";

@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Breadcrumb } from "flowbite-react";
+import axios from "../../utils/axiosInstance";
 import { HiHome } from "react-icons/hi";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { Link } from "react-router-dom";
@@ -7,17 +8,23 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Signout = () => {
-  const { setLoggedIn, setEmail } = useContext(AuthContext);
+  const { setLoggedIn, setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  /*
-  
-  1. access user loged out backend
-  2. when respose come Ok, 
-   2.1 setloged in fals and email "";
-   2.2 navigate to '/login'
-  
-  */
+  useEffect(() => {
+    const handleLogout = async () => {
+      try {
+        await axios.get("/api/logout");
+        setLoggedIn(false);
+        setAuthUser({});
+        navigate("/login");
+      } catch (error) {
+        console.error("Logout failed", error);
+      }
+    };
+    handleLogout();
+  }, [setLoggedIn, setAuthUser, navigate]);
+
   return (
     <main>
       <Breadcrumb
@@ -51,9 +58,9 @@ const Signout = () => {
             Are you sure you want to sign out?
           </p>
           <Link
-            to="/"
+            to="/login"
             className="text-center my-2 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
-            aria-label="Sign Out and go to the Home page"
+            aria-label="Sign Out and go to the Login page"
           >
             Sign Out
           </Link>
