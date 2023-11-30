@@ -151,7 +151,15 @@ function Footer() {
                   className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
+
                   <span>Contact</span>
+                </Link>
+                <Link
+                  to="/privacy"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
+                >
+                  <MdDoubleArrow />
+                  <span>Privacy</span>
                 </Link>
               </div>
             </div>
@@ -159,6 +167,7 @@ function Footer() {
               <h3 className="flex items-center gap-1 text-lg font-sans font-bold text-darkgreen-color">
                 <FaAddressBook /> <span>Address</span>
               </h3>
+
               <p>
                 10178 Berlin, Germany <br />
                 Alexanderstrasse. 4

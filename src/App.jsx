@@ -33,6 +33,7 @@ import Order from "./pages/user/Order";
 import AddToGallery from "./pages/AddToGallery";
 import AddToNewArticle from "./pages/AddToNewsArticle";
 import AddNewTree from "./pages/AddNewTree";
+import Privacy from "./pages/Privacy";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/trees/:id" element={<SingleTreePage />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/news/:id" element={<NewsArticle />} />
+                <Route path="/privacy" element={<Privacy />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/faq" element={<Faq />} />
