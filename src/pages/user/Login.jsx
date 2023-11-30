@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Button,
-  Checkbox,
   Label,
   TextInput,
   Breadcrumb,
@@ -19,7 +18,6 @@ const Login = () => {
   const { setLoggedIn, setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState([]);
   const [backError, setBackError] = useState("");
 
