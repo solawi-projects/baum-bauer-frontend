@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Breadcrumb, Label, TextInput, Checkbox, Button } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
@@ -11,8 +12,220 @@ import { SiGooglestreetview } from "react-icons/si";
 import { FaHouse } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import backgroundImage from "../../assets/images/leaves_background_02.webp";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobilePhone: "",
+    password: "",
+    passwordConfirmation: "",
+    address1: "",
+    address2: "",
+    city: "",
+    zipCode: "",
+    state: "",
+    country: "",
+    agree: false,
+  });
+
+  const navigate = useNavigate();
+
+  const [errors, setErrors] = useState({});
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCheckboxChange = (e) => {
+    setFormData({
+      ...formData,
+      agree: e.target.checked,
+    });
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = (data) => {
+    const errors = {};
+
+    // User Details
+    if (!data.firstName.trim()) {
+      errors.firstName = "First Name is required";
+    }
+
+    if (!data.lastName.trim()) {
+      errors.lastName = "Last Name is required";
+    }
+
+    if (!data.mobilePhone.trim()) {
+      errors.mobilePhone = "Phone Number is required";
+    } else if (!/^\+?\d+$/.test(data.mobilePhone)) {
+      errors.mobilePhone = "Invalid phone number";
+    }
+
+    if (!data.email.trim()) {
+      errors.email = "Email Address is required";
+    } else if (!isValidEmail(data.email)) {
+      errors.email = "Invalid email address";
+    }
+
+    if (!data.password.trim()) {
+      errors.password = "Password is required";
+    } else if (data.password.length < 6) {
+      errors.password = "Password must be at least 6 characters long";
+    } else {
+      if (!/[A-Z]/.test(data.password)) {
+        errors.password = "Password must include at least one uppercase letter";
+      } else if (!/[a-z]/.test(data.password)) {
+        errors.password = "Password must include at least one lowercase letter";
+      } else if (!/\d/.test(data.password)) {
+        errors.password = "Password must include at least one number";
+      } else if (!/[! @ # $ % ^ & * _ + { } : < > ?]/.test(data.password)) {
+        errors.password =
+          "Password must include at least one special character (! @ # $ % ^ & * _ + { } : < > ?)";
+      }
+    }
+
+    if (data.password !== data.passwordConfirmation) {
+      errors.passwordConfirmation = "Passwords do not match";
+    }
+
+    // Address
+    if (!data.address1.trim()) {
+      errors.address1 = "Address Line 1 is required";
+    }
+
+    if (!data.city.trim()) {
+      errors.city = "City is required";
+    }
+
+    if (!data.zipCode.trim()) {
+      errors.zipCode = "Zip Code is required";
+    } else if (!/^\d+$/.test(data.zipCode)) {
+      errors.zipCode = "Invalid Zip Code";
+    }
+
+    // Terms and Conditions
+    if (!data.agree) {
+      errors.agree = "You must agree to the terms and conditions";
+    }
+
+    return errors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      // Display error messages
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        html: formatErrorMessages(validationErrors),
+        customClass: {
+          confirmButton: "btn-custom-class",
+          title: "title-class",
+        },
+        buttonsStyling: false,
+      });
+      return;
+    }
+
+    //  passwords match
+    if (formData.password !== formData.passwordConfirmation) {
+      // Display password mismatch
+      Swal.fire({
+        icon: "error",
+        title: "Password Mismatch",
+        text: "Passwords do not match!",
+        customClass: {
+          confirmButton: "btn-custom-class",
+          title: "title-class",
+        },
+        buttonsStyling: false,
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/users/create-user",
+        formData
+      );
+
+      if (response.status === 201) {
+        // Display success message
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful!",
+          text: "You have successfully registered.",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+        navigate("/login");
+      } else {
+        // Handle other server response statuses
+        console.error("Error creating user:", response.data.message);
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text:
+            response.data.message || "An error occurred during registration!",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      }
+    } catch (error) {
+      console.error("Error creating user:", error);
+
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text:
+          error.response?.data.message ||
+          "An error occurred during registration!",
+        customClass: {
+          confirmButton: "btn-custom-class",
+          title: "title-class",
+        },
+        buttonsStyling: false,
+      });
+    }
+  };
+
+  // Function to format error messages
+  const formatErrorMessages = (errors) => {
+    let errorMessage = "<ul>";
+
+    for (const key in errors) {
+      errorMessage += `<li>${errors[key]}</li>`;
+    }
+
+    errorMessage += "</ul>";
+
+    return errorMessage;
+  };
+
   return (
     <main>
       <Breadcrumb
@@ -32,7 +245,10 @@ const Register = () => {
           style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
         ></div>
 
-        <div className="flex flex-col justify-start items-start gap-[2rem] w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] bg-white rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] xs:py-12 py-10">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col justify-start items-start gap-[2rem] w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] bg-white rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] xs:py-12 py-10"
+        >
           <div className="flex items-center">
             <img
               src="/src/assets/tree.png"
@@ -65,17 +281,18 @@ const Register = () => {
               {/* first name field */}
               <div className="mb-4 w-full ">
                 <Label
-                  htmlFor="firstname"
+                  htmlFor="firstName"
                   value="First Name"
                   className="visually-hidden"
                 />
                 <TextInput
                   aria-label="Type your first name here"
-                  id="firstname"
+                  id="firstName"
                   type="text"
+                  name="firstName"
                   icon={IoMdPerson}
                   placeholder="First Name *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -87,23 +304,25 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
 
               {/* last name field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="lastname"
+                  htmlFor="lastName"
                   value="Last Name"
                   className="visually-hidden"
                 />
                 <TextInput
                   aria-label="Type your last name here"
-                  id="lastname"
+                  id="lastName"
                   type="text"
+                  name="lastName"
                   icon={IoMdPerson}
                   placeholder="Last Name *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -115,6 +334,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -124,14 +344,14 @@ const Register = () => {
               <div className="flex flex-col w-full">
                 {" "}
                 <div className="mb-0 w-full">
-                  <Label htmlFor="phoneNumber" className="visually-hidden">
+                  <Label htmlFor="mobilePhone" className="visually-hidden">
                     Phone Number
                   </Label>
                   <TextInput
-                    required
-                    id="phoneNumber"
+                    required={true}
+                    id="mobilePhone"
                     type="tel"
-                    name="phone"
+                    name="mobilePhone"
                     icon={FaPhoneAlt}
                     placeholder="Phone Number *"
                     className="input"
@@ -144,6 +364,7 @@ const Register = () => {
                       fontSize: "1rem",
                       paddingLeft: "2.5rem",
                     }}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <p className="text-dark-gray">
@@ -157,17 +378,18 @@ const Register = () => {
               {/* email field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="emailAddress"
+                  htmlFor="email"
                   value="Email Address"
                   className="visually-hidden"
                 />
                 <TextInput
                   aria-label="Type your email address here"
-                  id="emailAddress"
+                  id="email"
                   icon={MdEmail}
                   type="email"
+                  name="email"
                   placeholder="Email Address *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -179,6 +401,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -196,8 +419,9 @@ const Register = () => {
                   id="password"
                   icon={MdOutlineKey}
                   type="password"
+                  name="password"
                   placeholder="Password *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -209,23 +433,25 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
 
               {/* confirm password field */}
               <div className="mb-2 w-full">
                 <Label
-                  htmlFor="passwordC"
+                  htmlFor="passwordConfirmation"
                   value="Confirm Password"
                   className="visually-hidden"
                 />
                 <TextInput
                   aria-label="Re-enter your password here"
-                  id="passwordC"
+                  id="passwordConfirmation"
                   icon={MdOutlineKey}
                   type="password"
+                  name="passwordConfirmation"
                   placeholder="Confirm Password *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -237,6 +463,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -244,7 +471,6 @@ const Register = () => {
             <div className="text-dark-gray">
               <p className="font-bold">Password Requirements:</p>
               <p>Minimum length of 6 characters</p>
-              <p>At least one number</p>
               <p>At least one number</p>
               <p>At least one capital letter</p>
               <p>At least one special symbol</p>
@@ -265,17 +491,18 @@ const Register = () => {
               {/* address line 1 field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="houseNumber"
+                  htmlFor="address1"
                   className="text-xs visually-hidden"
-                  value="House Number"
+                  value="Address Line 1"
                 />
                 <TextInput
-                  aria-label="Enter your house number here"
-                  id="houseNumber"
+                  aria-label="Address Line 1"
+                  id="address1"
                   type="text"
+                  name="address1"
                   icon={FaHouse}
                   placeholder="Addrss Line 1 *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -287,19 +514,21 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
               {/* address line 2 field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="street"
+                  htmlFor="address2"
                   className="text-xs visually-hidden"
-                  value="Street"
+                  value="Address Line 2"
                 />
                 <TextInput
                   aria-label="Enter your street name here"
-                  id="street"
+                  id="address2"
                   type="text"
+                  name="address2"
                   icon={SiGooglestreetview}
                   placeholder="Address Line 2 "
                   shadow
@@ -313,6 +542,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -328,9 +558,10 @@ const Register = () => {
                   aria-label="Enter your city name here"
                   id="city"
                   type="text"
+                  name="city"
                   icon={FaTreeCity}
                   placeholder="City *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -342,22 +573,25 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
+
               {/* Postcode */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="city"
+                  htmlFor="zipCode"
                   className="text-xs visually-hidden"
                   value="City"
                 />
                 <TextInput
                   aria-label="Enter your city name here"
-                  id="city"
+                  id="zipCode"
                   type="text"
+                  name="zipCode"
                   icon={GiPostOffice}
                   placeholder="Postcode *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -369,6 +603,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -376,14 +611,15 @@ const Register = () => {
               {/* state/country field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="country"
+                  htmlFor="state"
                   className="text-xs visually-hidden"
-                  value="Country"
+                  value="State"
                 />
                 <TextInput
                   aria-label="Enter your country name here"
-                  id="country"
+                  id="state"
                   type="text"
+                  name="state"
                   icon={FaMapLocation}
                   placeholder="State/Country"
                   shadow
@@ -397,8 +633,10 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
+
               {/* country field */}
               <div className="w-full">
                 <Label
@@ -409,10 +647,11 @@ const Register = () => {
                 <TextInput
                   aria-label="Enter your country name here"
                   id="country"
+                  name="country"
                   type="text"
                   icon={FaMapLocation}
                   placeholder="Country *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -424,6 +663,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -435,6 +675,8 @@ const Register = () => {
               <Checkbox
                 id="agree"
                 className=" border-font-family-color checked:border-none checked:outline-none checked:bg-secondary-color focus:ring-transparent dark:ring-offset-transparent !important cursor-pointer"
+                checked={formData.agree}
+                onChange={handleCheckboxChange}
               />
               <Label htmlFor="agree" className="text-font-family-color">
                 I agree with the&nbsp;
@@ -453,7 +695,7 @@ const Register = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </form>
       </div>{" "}
       <img
         src="src/assets/images/biobaum_about_footer_img.webp"
