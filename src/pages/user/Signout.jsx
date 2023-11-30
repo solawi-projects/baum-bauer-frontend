@@ -14,7 +14,7 @@ const Signout = () => {
   useEffect(() => {
     const handleLogout = async () => {
       try {
-        await axios.get("/api/logout");
+        await axios.get("/api/users/logout");
         setLoggedIn(false);
         setAuthUser({});
         navigate("/login");
