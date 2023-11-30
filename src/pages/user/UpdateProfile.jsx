@@ -5,11 +5,11 @@ import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
-
+import axios from '../../utils/axiosInstance'
 const UpdateProfile = () => {
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Update Profile" };
-
+const [user,setUser]=useState()
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
@@ -22,17 +22,43 @@ const UpdateProfile = () => {
     stateCountry: "",
     country: "",
   });
+   const showuser = async () => {
+    try {
+      const UId='65673cc189843980368351b0'
+      const response = await axios.get(`/api/users/find-by-id/${UId}`);
+      if (response.status === 200) {      console.log(response.data.user)
 
-  const handleInputChange = (fieldName, value) => {
-    setFormValues({
-      ...formValues,
-      [fieldName]: value,
-    });
+      setUser(response.data.user)
+      }
+    } catch (error) {
+      console.error("Error fetching Trees:", error.message);
+      throw error;
+    }
   };
+  useEffect(() => {
+    showuser();}, []);
+  
+  const handleUpdate = async() => {
+/*     console.log("Form values:", formValues);
 
-  const handleUpdate = () => {
-    console.log("Form values:", formValues);
-  };
+ */
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
+
+try {
+  const response = await axios.post(`/api/users/update-by-id/:uId`);
+  if (response.status === 200) {
+  }
+} catch (error) {
+  console.error("Error fetching Trees:", error.message);
+  throw error;
+}
+/* const handleInputChange = (fieldName, value) => {
+  setFormValues({
+    ...formValues,
+    [fieldName]: value,
+  });
+}; */};
 
   return (
     <main>
@@ -77,25 +103,23 @@ const UpdateProfile = () => {
                   className="w-[40px] h-[40px] mr-2"
                 />{" "}
                 <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                  Update Your Profil
+                  Edit Your Profile
                 </h3>
               </div>
               {/* Form Fields */}
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4 mt-10">
                 {/* First Row */}
                 <div className="mb-4">
-                  <Label htmlFor="firstName" className="visually-hidden">
+                  <Label htmlFor="firstName" className="">
                     First Name
-                  </Label>
+                 </Label>
                   <TextInput
-                    required
+                    
                     id="firstName"
                     type="text"
-                    placeholder="First Name *"
-                    value={formValues.firstName}
-                    onChange={(e) =>
-                      handleInputChange("firstName", e.target.value)
-                    }
+                    value={user?.firstName || ""}
+                    readOnly
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -108,18 +132,19 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="lastName" className="visually-hidden">
+                  <Label htmlFor="lastName" className="">
                     Last Name
                   </Label>
                   <TextInput
                     required
                     id="lastName"
                     type="text"
-                    placeholder="Last Name *"
-                    value={formValues.lastName}
-                    onChange={(e) =>
-                      handleInputChange("lastName", e.target.value)
-                    }
+                    value={user?.lastName || ""}
+
+readOnly     
+                    onChange={(e) =>console.log(e)
+/*                       handleInputChange("lastName", e.target.value)
+ */                    }
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -134,16 +159,17 @@ const UpdateProfile = () => {
 
                 {/* Second Row */}
                 <div className="mb-4">
-                  <Label htmlFor="email" className="visually-hidden">
+                  <Label htmlFor="email" className="">
                     Email Address
                   </Label>
                   <TextInput
                     required
                     id="email"
                     type="email"
-                    placeholder="Email Address *"
-                    value={formValues.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    value={user?.email || ""}
+
+                    readOnly
+                    onChange={(e) =>console.log(e) /* handleInputChange("email", e.target.value) */}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -156,19 +182,19 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="phoneNumber" className="visually-hidden">
-                    Phone Number
+                  <Label htmlFor="phoneNumber" className="">
+                    Phone Number *
                   </Label>
                   <TextInput
                     required
                     id="phoneNumber"
                     type="tel"
                     name="phone"
-                    placeholder="Phone Number *"
+                   placeholder={user?.mobilePhone || ""}
+
                     value={formValues.phoneNumber}
-                    onChange={(e) =>
-                      handleInputChange("phoneNumber", e.target.value)
-                    }
+                      onChange={(e) => setFormValues({ ...formValues, phoneNumber: e.target.value })}
+                                       
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -183,18 +209,18 @@ const UpdateProfile = () => {
 
                 {/* Third Row */}
                 <div className="mb-4">
-                  <Label htmlFor="addressLine1" className="visually-hidden">
-                    Address Line 1
+                  <Label htmlFor="addressLine1" className="">
+                    Address Line 1 *
                   </Label>
                   <TextInput
                     required
                     id="addressLine1"
                     type="text"
-                    placeholder="Address Line 1 *"
+                    placeholder={user?.address.address1 || ""}
                     value={formValues.addressLine1}
-                    onChange={(e) =>
-                      handleInputChange("addressLine1", e.target.value)
-                    }
+                    onChange={(e) =>console.log(e)
+/*                       handleInputChange("addressLine1", e.target.value)
+ */                    }
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -207,17 +233,17 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="addressLine2" className="visually-hidden">
+                  <Label htmlFor="addressLine2" className="">
                     Address Line 2
                   </Label>
                   <TextInput
                     id="addressLine2"
                     type="text"
-                    placeholder="Address Line 2"
+                    placeholder={user?.address.address2 || ""}
                     value={formValues.addressLine2}
-                    onChange={(e) =>
-                      handleInputChange("addressLine2", e.target.value)
-                    }
+                    onChange={(e) =>console.log(e)
+/*                       handleInputChange("addressLine2", e.target.value)
+ */                    }
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -232,16 +258,17 @@ const UpdateProfile = () => {
 
                 {/* Fourth Row */}
                 <div className="mb-4">
-                  <Label htmlFor="city" className="visually-hidden">
-                    City
+                  <Label htmlFor="city" className="">
+                    City *
                   </Label>
                   <TextInput
                     required
                     id="city"
                     type="text"
-                    placeholder="City *"
+                    placeholder={user?.address.city || ""}
+
                     value={formValues.city}
-                    onChange={(e) => handleInputChange("city", e.target.value)}
+                    onChange={(e) => console.log(e)/* handleInputChange("city", e.target.value) */}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -254,18 +281,18 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="postcode" className="visually-hidden">
-                    Postcode
+                  <Label htmlFor="postcode" className="">
+                    Postcode *
                   </Label>
                   <TextInput
                     required
                     id="postcode"
                     type="text"
-                    placeholder="Postcode *"
+                    placeholder={user?.address.placeholder || ""}
                     value={formValues.postcode}
-                    onChange={(e) =>
-                      handleInputChange("postcode", e.target.value)
-                    }
+                    onChange={(e) =>console.log(e)
+/*                       handleInputChange("postcode", e.target.value)
+ */                    }
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -280,17 +307,17 @@ const UpdateProfile = () => {
 
                 {/* Fifth Row */}
                 <div className="mb-4">
-                  <Label htmlFor="stateCountry" className="visually-hidden">
-                    State/Country
+                  <Label htmlFor="stateCountry" className="">
+                    State/Country *
                   </Label>
                   <TextInput
                     id="stateCountry"
                     type="text"
-                    placeholder="State/Country"
+                    placeholder={user?.address.state || ""}
                     value={formValues.stateCountry}
-                    onChange={(e) =>
-                      handleInputChange("stateCountry", e.target.value)
-                    }
+                    onChange={(e) =>console.log(e)
+/*                       handleInputChange("stateCountry", e.target.value)
+ */                    }
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -303,18 +330,18 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="country" className="visually-hidden">
-                    Country
+                  <Label htmlFor="country" className="">
+                    Country *
                   </Label>
                   <TextInput
                     required
                     id="country"
                     type="text"
-                    placeholder="Country *"
+                    placeholder={user?.address.country || ""}
                     value={formValues.country}
-                    onChange={(e) =>
-                      handleInputChange("country", e.target.value)
-                    }
+                    onChange={(e) =>console.log(e)
+/*                       handleInputChange("country", e.target.value)
+ */                    }
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
