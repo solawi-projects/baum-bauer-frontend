@@ -49,10 +49,11 @@ function Footer() {
                 </span>
               </p>
               <p className="text-justify font-sans antialiased whitespace-normal text-md sm:text-lg">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Deserunt iusto suscipit officiis id asperiores rerum, omnis
-                labore maxime. Ratione, magni quibusdam? Dolores facere minus
-                tempora dolorem veritatis doloremque, vel aspernatur?
+                Discover the essence of sustainable living with Bio Baum Bauer.
+                Join our journey of environmental stewardship, community
+                engagement, and the celebration of nature's bounty. Stay
+                connected and informed through our social channels and be part
+                of the change.
               </p>
               <p className="text-lg font-bold">Follow Us</p>
               <div className="flex justify-start gap-3 text-2xl pr-4 mt-2">

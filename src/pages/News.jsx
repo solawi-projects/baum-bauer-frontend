@@ -10,7 +10,7 @@ import { Fade } from "react-awesome-reveal";
 
 const News = () => {
   const titles = [
-    "Bio Blog News",
+    "Bio Baum News",
     "Discover the Latest Stories and Updates from Our Tree Sponsorship Program!",
   ];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
@@ -20,12 +20,12 @@ const News = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalNews, setTotalNews] = useState(0);
-  //pagination 
-   const [skip, setSkip] = useState(0);
+  //pagination
+  const [skip, setSkip] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(
     useMediaQuery({ query: "(max-width: 768px)" })
   );
-const limit= isSmallScreen ? 4:8;
+  const limit = isSmallScreen ? 4 : 8;
 
   const handleResize = () => {
     setIsSmallScreen(window.innerWidth <= 768);
@@ -49,16 +49,13 @@ const limit= isSmallScreen ? 4:8;
   const handleNex = () => {
     const newSkip = skip + limit;
     if (newSkip >= totalNews) {
-  
       setSkip(skip);
     } else {
       setSkip(newSkip);
     }
   };
   const getNewsArticles = () => {
-    
-    try { 
- 
+    try {
       axios
         .get(`/api/newsArticle/?limit=${limit}&skip=${skip}`)
         .then((response) => {
@@ -84,7 +81,7 @@ const limit= isSmallScreen ? 4:8;
     setIsLoading(true);
 
     getNewsArticles();
-  }, [skip,isSmallScreen]); // this func is updated based on changes in skip and isSmallScreen
+  }, [skip, isSmallScreen]); // this func is updated based on changes in skip and isSmallScreen
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
