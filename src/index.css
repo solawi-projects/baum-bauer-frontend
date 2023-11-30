@@ -208,3 +208,10 @@ input::placeholder {
   border: 3px solid var(--darker-secondary);
   color: var(--secondary-color);
 }
+.title-class {
+  font-family: "Chicle", "serif";
+  color: var(--secondary-color);
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  font-size: 2rem;
+}
