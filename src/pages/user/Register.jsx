@@ -406,14 +406,10 @@ const Register = () => {
 
             <div className="text-dark-gray">
               <p className="font-bold">Password Requirements:</p>
-              <p>Minimum length of 6 characters</p>
+              <p>Minimum length of 8 characters</p>
               <p>At least one number</p>
               <p>At least one capital letter</p>
               <p>At least one special symbol</p>
-              <p>
-                (&#33; &#64; &#35; &#36; &#37; &#94; &#38; &#42; &#95; &#43;
-                &#123; &#125; &#58; &lt; &gt; &#63;)
-              </p>
             </div>
           </div>
 
