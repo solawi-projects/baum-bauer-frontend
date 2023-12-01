@@ -11,7 +11,7 @@ const Home = () => {
       <section className="relative flex flex-col items-center justify-center p-0 md:flex-row md:justify-between md:p-10 xl:p-20">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-center bg-bg-header-footer"
+          className="absolute top-0 left-0 w-full h-[50%] bg-cover bg-no-repeat bg-center bg-bg-header-footer"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             opacity: 0.2,
@@ -20,8 +20,8 @@ const Home = () => {
 
         {/* Content */}
         {/* Article - Sponsor a Tree: Our Mission */}
-        <article className="w-full text-font-family-color flex flex-col justify-center z-[8] px-4 md:px-8 lg:px-12 xl:px-16 md:w-[50%]">
-          <h2 className="text-2xl lg:text-3xl py-6 lg:py-10 xl:py-14 text-center">
+        <article className="w-full text-font-family-color flex flex-col justify-center z-[8] px-4 md:px-8 lg:px-12 xl:px-16 md:w-[50%] pt-6 sm:pt-0">
+          <h2 className="text-2xl lg:text-3xl py-6  lg:py-10 xl:py-14 text-center">
             Sponsor a Tree: Our Mission
           </h2>
           <p className="font-semibold">

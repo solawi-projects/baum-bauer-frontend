@@ -215,3 +215,28 @@ input::placeholder {
   letter-spacing: 0.1rem;
   font-size: 2rem;
 }
+.btn-confirm-class {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  padding: 0.5rem .5rem;
+  border-radius: 10px;
+  transition: background-color 0.4s linear, border 0.4s linear,
+    color 0.4s linear;
+}
+.btn-deny-class {
+  background-color:  var(--darker-primary);
+  color: var(--white-color);
+  padding: 0.5rem .5rem;
+  border-radius: 10px;
+  transition: background-color 0.4s linear, border 0.4s linear,
+    color 0.4s linear;
+}
+.btn-cancel-class {
+  background-color: var(--red-color);
+  color: var(--white-color);
+  padding: 0.5rem .5rem;
+  border-radius: 10px;
+  transition: background-color 0.4s linear, border 0.4s linear,
+    color 0.4s linear;
+}
+

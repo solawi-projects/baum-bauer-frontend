@@ -63,7 +63,7 @@ const Faq = () => {
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <div className="faq-container">
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-        <div className="container mx-auto text-2xl">
+        <div className="container mx-auto text-xl sm:text-2xl pl-4">
           <h2>
             Showing {skip + 1} to {Math.min(skip + limit, total)} of {total} FAQ{" "}
           </h2>
@@ -87,7 +87,7 @@ const Faq = () => {
           </Accordion>
         ))}
         <br />
-        <div className="mx-auto text-2xl flex gap-7">
+        <div className="mx-auto text-lg md:text-2xl flex gap-7">
           <button onClick={handlePrev} disabled={skip === 0}>
             Previous
           </button>
