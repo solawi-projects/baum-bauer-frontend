@@ -1,3 +1,4 @@
+import backgroundImage from "../assets/images/leaves_background_03.webp";
 import React, { useEffect, useState } from "react";
 import axios from "../utils/axiosInstance";
 import { Link } from "react-router-dom";
@@ -89,6 +90,14 @@ const News = () => {
   return (
     <div className="bg-bg-page-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
+      {/* Overlay with background image and opacity */}
+      <div
+        className="absolute left-0 w-full h-[50%] bg-cover bg-no-repeat bg-center bg-bg-header-footer"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          opacity: 0.1,
+        }}
+      ></div>
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
       <div className="container mx-auto text-xl sm:text-2xl pl-4">
         <h2>
