@@ -1,54 +1,49 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Breadcrumb } from "flowbite-react";
 import axios from "../../utils/axiosInstance";
 import { HiHome } from "react-icons/hi";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Signout = () => {
   const { setLoggedIn, setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleLogout = async () => {
-      try {
-        await axios.get("/api/users/logout");
-        setLoggedIn(false);
-        setAuthUser({});
-        // Display success message
-        Swal.fire({
-          icon: "success",
-          title: "Logout Successful!",
-          text: "You have successfully logged out.",
-          customClass: {
-            confirmButton: "btn-custom-class",
-            title: "title-class",
-          },
-          buttonsStyling: false,
-        });
-        navigate("/login");
-      } catch (error) {
-        console.error("Logout failed", error);
-        // Display error message
-        Swal.fire({
-          icon: "error",
-          title: "Logout Failed",
-          text:
-            error.response?.data.message || "An error occurred during logout!",
-          customClass: {
-            confirmButton: "btn-custom-class",
-            title: "title-class",
-          },
-          buttonsStyling: false,
-        });
-      }
-    };
-
-    handleLogout();
-  }, [setLoggedIn, setAuthUser, navigate]);
+  const handleLogout = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      setLoggedIn(false);
+      setAuthUser({});
+      // Display success message
+      Swal.fire({
+        icon: "success",
+        title: "Logout Successful!",
+        text: "You have successfully logged out.",
+        customClass: {
+          confirmButton: "btn-custom-class",
+          title: "title-class",
+        },
+        buttonsStyling: false,
+      });
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed", error);
+      // Display error message
+      Swal.fire({
+        icon: "error",
+        title: "Logout Failed",
+        text:
+          error.response?.data.message || "An error occurred during logout!",
+        customClass: {
+          confirmButton: "btn-custom-class",
+          title: "title-class",
+        },
+        buttonsStyling: false,
+      });
+    }
+  };
 
   return (
     <main>
@@ -84,6 +79,7 @@ const Signout = () => {
           </p>
           <Link
             to="/login"
+            onClick={handleLogout} // Add onClick to trigger logout
             className="text-center my-2 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
             aria-label="Sign Out and go to the Login page"
           >
