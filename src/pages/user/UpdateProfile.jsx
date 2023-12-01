@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
+import 'sweetalert2/dist/sweetalert2.min.css';
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { AuthContext } from "../../contexts/AuthContext";
-
+import Swal from "sweetalert2";
 import axios from '../../utils/axiosInstance'
 const UpdateProfile = () => {
   const {loggedIn, authUser } = useContext(AuthContext)
@@ -51,7 +52,32 @@ const UpdateProfile = () => {
       });
     }
   }, [authUser]);
-
+  const handleswal = () => {
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+       denyButtonText: `Don't save`,
+       customClass: {
+        confirmButton: "btn-confirm-class",
+        denyButton: "btn-deny-class",
+        cancelButton: "btn-cancel-class",
+        title: "title-class",
+      },
+      buttonsStyling: false,   
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Saved!", "", "success");
+        
+        handleUpdate();
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
+  
   const handleUpdate = async () => {
     /*     console.log("Form values:", formValues);
     
@@ -86,6 +112,7 @@ const UpdateProfile = () => {
         console.log(updatedData.address.city)
         console.log(response.data)
       }
+     
     } catch (error) {
       console.error("Error fetching Trees:", error.message);
       throw error;
@@ -383,7 +410,7 @@ const UpdateProfile = () => {
               <div className="text-center flex justify-center mb-6">
                 <Button
                   className="custom-button-style"
-                  onClick={handleUpdate}
+                  onClick={handleswal}
                   aria-label="Update Profile"
                 >
                   Save Changes
