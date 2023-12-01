@@ -5,6 +5,7 @@ import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const PasswordChange = () => {
   // State to manage password values
@@ -13,6 +14,22 @@ const PasswordChange = () => {
     newPassword: "",
     confirmNewPassword: "",
   });
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+
+  const toggleCurrentPasswordVisibility = () => {
+    setShowCurrentPassword(!showCurrentPassword);
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+
+  const toggleConfirmNewPasswordVisibility = () => {
+    setShowConfirmNewPassword(!showConfirmNewPassword);
+  };
 
   const handlePasswordChange = () => {
     console.log("Password values:", passwords);
@@ -66,14 +83,14 @@ const PasswordChange = () => {
                 </h3>
               </div>
               <div className="grid grid-cols-1 gap:2 lg:gap-4 mt-10">
-                <div className="mb-4">
+                <div className="mb-4" style={{ position: "relative" }}>
                   <Label htmlFor="currentPassword" className="visually-hidden">
                     Current Password
                   </Label>
                   <TextInput
                     required
                     id="currentPassword"
-                    type="password"
+                    type={showCurrentPassword ? "text" : "password"}
                     placeholder="Current Password *"
                     value={passwords.currentPassword}
                     onChange={(e) =>
@@ -91,16 +108,32 @@ const PasswordChange = () => {
                       color: "var(--font-family-color)",
                       fontSize: "1rem",
                     }}
-                  />
+                  />{" "}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "10px",
+                      transform: "translateY(-50%)",
+                      cursor: "pointer",
+                    }}
+                    onClick={toggleCurrentPasswordVisibility}
+                  >
+                    {showCurrentPassword ? (
+                      <HiEyeOff className="text-2xl text-font-family-color" />
+                    ) : (
+                      <HiEye className="text-2xl text-font-family-color" />
+                    )}
+                  </div>
                 </div>
-                <div className="mb-4">
+                <div className="mb-4" style={{ position: "relative" }}>
                   <Label htmlFor="newPassword" className="visually-hidden">
                     New Password
                   </Label>
                   <TextInput
                     required
                     id="newPassword"
-                    type="password"
+                    type={showNewPassword ? "text" : "password"}
                     placeholder="New Password *"
                     value={passwords.newPassword}
                     onChange={(e) =>
@@ -118,9 +151,25 @@ const PasswordChange = () => {
                       color: "var(--font-family-color)",
                       fontSize: "1rem",
                     }}
-                  />
+                  />{" "}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "10px",
+                      transform: "translateY(-50%)",
+                      cursor: "pointer",
+                    }}
+                    onClick={toggleNewPasswordVisibility}
+                  >
+                    {showNewPassword ? (
+                      <HiEyeOff className="text-2xl text-font-family-color" />
+                    ) : (
+                      <HiEye className="text-2xl text-font-family-color" />
+                    )}
+                  </div>
                 </div>
-                <div className="mb-4">
+                <div className="mb-4" style={{ position: "relative" }}>
                   <Label
                     htmlFor="confirmNewPassword"
                     className="visually-hidden"
@@ -130,7 +179,7 @@ const PasswordChange = () => {
                   <TextInput
                     required
                     id="confirmNewPassword"
-                    type="password"
+                    type={showConfirmNewPassword ? "text" : "password"}
                     placeholder="Confirm New Password *"
                     value={passwords.confirmNewPassword}
                     onChange={(e) =>
@@ -148,7 +197,23 @@ const PasswordChange = () => {
                       color: "var(--font-family-color)",
                       fontSize: "1rem",
                     }}
-                  />
+                  />{" "}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "10px",
+                      transform: "translateY(-50%)",
+                      cursor: "pointer",
+                    }}
+                    onClick={toggleConfirmNewPasswordVisibility}
+                  >
+                    {showConfirmNewPassword ? (
+                      <HiEyeOff className="text-2xl text-font-family-color" />
+                    ) : (
+                      <HiEye className="text-2xl text-font-family-color" />
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="text-dark-gray">
