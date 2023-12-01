@@ -681,7 +681,7 @@ const Register = () => {
               <Label htmlFor="agree" className="text-font-family-color">
                 I agree with the&nbsp;
                 <Link
-                  href="#"
+                  to="/terms"
                   className="text-secondary-color font-bold underline"
                 >
                   terms and conditions.
