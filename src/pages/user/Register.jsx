@@ -15,6 +15,7 @@ import backgroundImage from "../../assets/images/leaves_background_02.webp";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -36,6 +37,18 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [errorMsgs, setErrorMsgs] = useState([]);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmationPassword, setShowConfirmationPassword] =
+    useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmationPasswordVisibility = () => {
+    setShowConfirmationPassword(!showConfirmationPassword);
+  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -344,7 +357,7 @@ const Register = () => {
 
             <div className="flex flex-col justify-center md:justify-between md:flex-row gap-[0.5rem] w-full">
               {/* password field */}
-              <div className="mb-2 w-full">
+              <div className="mb-2 w-full" style={{ position: "relative" }}>
                 <Label
                   htmlFor="password"
                   value="Password"
@@ -354,7 +367,7 @@ const Register = () => {
                   aria-label="Enter your password here"
                   id="password"
                   icon={MdOutlineKey}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Password *"
                   required={true}
@@ -370,11 +383,27 @@ const Register = () => {
                     paddingLeft: "2.5rem",
                   }}
                   onChange={handleInputChange}
-                />
+                />{" "}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <HiEyeOff className="text-2xl" />
+                  ) : (
+                    <HiEye className="text-2xl" />
+                  )}
+                </div>
               </div>
 
               {/* confirm password field */}
-              <div className="mb-2 w-full">
+              <div className="mb-2 w-full " style={{ position: "relative" }}>
                 <Label
                   htmlFor="passwordConfirmation"
                   value="Confirm Password"
@@ -384,7 +413,7 @@ const Register = () => {
                   aria-label="Re-enter your password here"
                   id="passwordConfirmation"
                   icon={MdOutlineKey}
-                  type="password"
+                  type={showConfirmationPassword ? "text" : "password"}
                   name="passwordConfirmation"
                   placeholder="Confirm Password *"
                   required={true}
@@ -400,7 +429,23 @@ const Register = () => {
                     paddingLeft: "2.5rem",
                   }}
                   onChange={handleInputChange}
-                />
+                />{" "}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={toggleConfirmationPasswordVisibility}
+                >
+                  {showConfirmationPassword ? (
+                    <HiEyeOff className="text-2xl" />
+                  ) : (
+                    <HiEye className="text-2xl" />
+                  )}
+                </div>
               </div>
             </div>
 

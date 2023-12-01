@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import axios from "../../utils/axiosInstance";
 import Swal from "sweetalert2";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const Login = () => {
   const { setLoggedIn, setAuthUser } = useContext(AuthContext);
@@ -15,6 +16,12 @@ const Login = () => {
 
   const [errors, setErrors] = useState([]);
   const [backError, setBackError] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -170,7 +177,7 @@ const Login = () => {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="your email address *"
+                placeholder="Email Address *"
                 style={{
                   backgroundColor: "var(--bg-white-color)",
                   borderColor: "var(--bg-header-footer)",
@@ -181,15 +188,15 @@ const Login = () => {
                 }}
               />
             </div>
-            <div>
+            <div style={{ position: "relative" }}>
               <Label
                 htmlFor="password"
-                value="your password"
+                value="Your password"
                 className="visually-hidden"
               />
               <TextInput
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Your Password *"
                 style={{
@@ -199,8 +206,25 @@ const Login = () => {
                   padding: "1.15rem",
                   color: "var(--font-family-color)",
                   fontSize: "1rem",
+                  paddingRight: "2.5rem", // Make room for the icon
                 }}
               />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  right: "10px",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer",
+                }}
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <HiEyeOff className="text-2xl" />
+                ) : (
+                  <HiEye className="text-2xl" />
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-2">
               {/* <Checkbox
