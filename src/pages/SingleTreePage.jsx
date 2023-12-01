@@ -68,7 +68,7 @@ const SingleTreePage = () => {
           {/* Tree Image */}
           <div className="w-[100%] sm:w-[50%] aspect-square mr-[2rem]">
             <img
-              className="w-full md:h-[500px] lg:h-full object-cover rounded-[10px]"
+              className="w-full h-full object-cover rounded-[10px]"
               src={tree.image}
               alt={tree.name}
             />
@@ -106,7 +106,7 @@ const SingleTreePage = () => {
               </div>
 
               <div
-                className="prose lg:prose-lg mb-6"
+                className="prose lg:prose-lg mb-6 text-left"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(tree.description),
                 }}
