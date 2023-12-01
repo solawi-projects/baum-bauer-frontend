@@ -92,7 +92,7 @@ const News = () => {
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       {/* Overlay with background image and opacity */}
       <div
-        className="absolute top-[-1] left-0 w-full h-[50%] bg-cover bg-no-repeat bg-center bg-bg-header-footer"
+        className="absolute left-0 w-full h-[50%] bg-cover bg-no-repeat bg-center bg-bg-header-footer"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           opacity: 0.1,

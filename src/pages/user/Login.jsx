@@ -1,12 +1,6 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Label,
-  TextInput,
-  Breadcrumb,
-  Tooltip,
-} from "flowbite-react";
+import { Button, Label, TextInput, Breadcrumb, Tooltip } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import backgroundImage from "../../assets/images/leaves_background_02.webp";
 import { AuthContext } from "../../contexts/AuthContext";
