@@ -38,15 +38,15 @@ const UpdateProfile = () => {
     // Set formValues based on user data when user data is available
     if (authUser) {
       setFormValues({
-        firstName: authUser.firstName || "",
-        lastName: authUser.lastName || "",
-        email: authUser.email || "",
+        firstName: authUser.firstName ,
+        lastName: authUser.lastName ,
+        email: authUser.email ,
         mobilePhone: authUser.mobilePhone || "",
         address1: authUser.address.address1 || "",
         address2: authUser.address?.address2 || "",
         city: authUser.address.city ,
         zipCode: authUser.address.zipCode || "",
-        state: authUser.address?.state || "",
+        state: authUser.address.state || "",
         country: authUser.address.country || "",
 
       });
@@ -84,7 +84,7 @@ const UpdateProfile = () => {
      */
     // eslint-disable-next-line react-hooks/rules-of-hooks
 
-    const updatedData = {
+    let updatedData = {
       // Include all the fields you want to update
       firstName: formValues.firstName,
       lastName: formValues.lastName,
@@ -107,10 +107,11 @@ const UpdateProfile = () => {
 
       console.log(updatedData.address.city)
       const response = await axios.patch(`/api/users/update-by-id/${authUser._id}`, updatedData);
-      console.log(updatedData)
+
       if (response.status === 200) {
         console.log(updatedData.address.city)
         console.log(response.data)
+        updatedData=response.data;
       }
      
     } catch (error) {
@@ -369,7 +370,7 @@ const UpdateProfile = () => {
                   <TextInput
                     id="stateCountry"
                     type="text"
-                    value={formValues.state || null || authUser?.address.state}
+                    value={formValues.state || authUser?.address.state}
 
                     onChange={(e) => setFormValues({ ...formValues, state: e.target.value })}
                     className="input"
