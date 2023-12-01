@@ -15,6 +15,7 @@ import backgroundImage from "../../assets/images/leaves_background_02.webp";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -35,7 +36,19 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const [errors, setErrors] = useState({});
+  const [errorMsgs, setErrorMsgs] = useState([]);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmationPassword, setShowConfirmationPassword] =
+    useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmationPasswordVisibility = () => {
+    setShowConfirmationPassword(!showConfirmationPassword);
+  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -51,98 +64,21 @@ const Register = () => {
     });
   };
 
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validateForm = (data) => {
-    const errors = {};
-
-    // User Details
-    if (!data.firstName.trim()) {
-      errors.firstName = "First Name is required";
-    }
-
-    if (!data.lastName.trim()) {
-      errors.lastName = "Last Name is required";
-    }
-
-    if (!data.mobilePhone.trim()) {
-      errors.mobilePhone = "Phone Number is required";
-    } else if (!/^\+?\d+$/.test(data.mobilePhone)) {
-      errors.mobilePhone = "Invalid phone number";
-    }
-
-    if (!data.email.trim()) {
-      errors.email = "Email Address is required";
-    } else if (!isValidEmail(data.email)) {
-      errors.email = "Invalid email address";
-    }
-
-    if (!data.password.trim()) {
-      errors.password = "Password is required";
-    } else if (data.password.length < 6) {
-      errors.password = "Password must be at least 6 characters long";
-    } else {
-      if (!/[A-Z]/.test(data.password)) {
-        errors.password = "Password must include at least one uppercase letter";
-      } else if (!/[a-z]/.test(data.password)) {
-        errors.password = "Password must include at least one lowercase letter";
-      } else if (!/\d/.test(data.password)) {
-        errors.password = "Password must include at least one number";
-      } else if (!/[! @ # $ % ^ & * _ + { } : < > ?]/.test(data.password)) {
-        errors.password =
-          "Password must include at least one special character (! @ # $ % ^ & * _ + { } : < > ?)";
-      }
-    }
-
-    if (data.password !== data.passwordConfirmation) {
-      errors.passwordConfirmation = "Passwords do not match";
-    }
-
-    // Address
-    if (!data.address1.trim()) {
-      errors.address1 = "Address Line 1 is required";
-    }
-
-    if (!data.city.trim()) {
-      errors.city = "City is required";
-    }
-
-    if (!data.zipCode.trim()) {
-      errors.zipCode = "Zip Code is required";
-    } else if (!/^\d+$/.test(data.zipCode)) {
-      errors.zipCode = "Invalid Zip Code";
-    }
-
-    // Terms and Conditions
-    if (!data.agree) {
-      errors.agree = "You must agree to the terms and conditions";
-    }
-
-    return errors;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const validationErrors = validateForm(formData);
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      // Display error messages
+    if (!formData.agree) {
       Swal.fire({
-        icon: "error",
-        title: "Error!",
-        html: formatErrorMessages(validationErrors),
+        icon: "warning",
+        title: "Agreement Required",
+        text: "Please agree to the terms and conditions before registering.",
         customClass: {
           confirmButton: "btn-custom-class",
           title: "title-class",
         },
         buttonsStyling: false,
       });
-      return;
+      return; // Stop further execution if not agreed
     }
 
     //  passwords match
@@ -168,6 +104,7 @@ const Register = () => {
       );
 
       if (response.status === 201) {
+        setErrorMsgs([]);
         // Display success message
         Swal.fire({
           icon: "success",
@@ -196,34 +133,46 @@ const Register = () => {
         });
       }
     } catch (error) {
-      console.error("Error creating user:", error);
+      setErrorMsgs([]);
 
-      Swal.fire({
-        icon: "error",
-        title: "Registration Failed",
-        text:
-          error.response?.data.message ||
-          "An error occurred during registration!",
-        customClass: {
-          confirmButton: "btn-custom-class",
-          title: "title-class",
-        },
-        buttonsStyling: false,
-      });
+      // Handle errors that occurred during the POST request
+      if (error.response && error.response.status === 400) {
+        setErrorMsgs(error.response.data.errors);
+
+        let errorMessage = "<ul>";
+
+        // Loop through error messages and append to the list
+        error.response.data.errors.forEach((error) => {
+          errorMessage += `<li>${error.msg}</li>`;
+        });
+
+        errorMessage += "</ul>";
+
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          html: errorMessage,
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text:
+            error.response?.data.message ||
+            "An error occurred during registration!",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      }
     }
-  };
-
-  // Function to format error messages
-  const formatErrorMessages = (errors) => {
-    let errorMessage = "<ul>";
-
-    for (const key in errors) {
-      errorMessage += `<li>${errors[key]}</li>`;
-    }
-
-    errorMessage += "</ul>";
-
-    return errorMessage;
   };
 
   return (
@@ -408,7 +357,7 @@ const Register = () => {
 
             <div className="flex flex-col justify-center md:justify-between md:flex-row gap-[0.5rem] w-full">
               {/* password field */}
-              <div className="mb-2 w-full">
+              <div className="mb-2 w-full" style={{ position: "relative" }}>
                 <Label
                   htmlFor="password"
                   value="Password"
@@ -418,7 +367,7 @@ const Register = () => {
                   aria-label="Enter your password here"
                   id="password"
                   icon={MdOutlineKey}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Password *"
                   required={true}
@@ -434,11 +383,27 @@ const Register = () => {
                     paddingLeft: "2.5rem",
                   }}
                   onChange={handleInputChange}
-                />
+                />{" "}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <HiEyeOff className="text-2xl" />
+                  ) : (
+                    <HiEye className="text-2xl" />
+                  )}
+                </div>
               </div>
 
               {/* confirm password field */}
-              <div className="mb-2 w-full">
+              <div className="mb-2 w-full " style={{ position: "relative" }}>
                 <Label
                   htmlFor="passwordConfirmation"
                   value="Confirm Password"
@@ -448,7 +413,7 @@ const Register = () => {
                   aria-label="Re-enter your password here"
                   id="passwordConfirmation"
                   icon={MdOutlineKey}
-                  type="password"
+                  type={showConfirmationPassword ? "text" : "password"}
                   name="passwordConfirmation"
                   placeholder="Confirm Password *"
                   required={true}
@@ -464,20 +429,32 @@ const Register = () => {
                     paddingLeft: "2.5rem",
                   }}
                   onChange={handleInputChange}
-                />
+                />{" "}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={toggleConfirmationPasswordVisibility}
+                >
+                  {showConfirmationPassword ? (
+                    <HiEyeOff className="text-2xl" />
+                  ) : (
+                    <HiEye className="text-2xl" />
+                  )}
+                </div>
               </div>
             </div>
 
             <div className="text-dark-gray">
               <p className="font-bold">Password Requirements:</p>
-              <p>Minimum length of 6 characters</p>
+              <p>Minimum length of 8 characters</p>
               <p>At least one number</p>
               <p>At least one capital letter</p>
               <p>At least one special symbol</p>
-              <p>
-                (&#33; &#64; &#35; &#36; &#37; &#94; &#38; &#42; &#95; &#43;
-                &#123; &#125; &#58; &lt; &gt; &#63;)
-              </p>
             </div>
           </div>
 
@@ -664,6 +641,8 @@ const Register = () => {
                     paddingLeft: "2.5rem",
                   }}
                   onChange={handleInputChange}
+                  disabled={true}
+                  value="Germany"
                 />
               </div>
             </div>

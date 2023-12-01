@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { Link } from "react-router-dom";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const DashboardContent = () => {
+  const { authUser } = useContext(AuthContext);
+
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Dashboard" };
 
@@ -45,7 +48,7 @@ const DashboardContent = () => {
             {/* Sponsorships */}
             <div className="w-[100%] md:w-[25%]">
               <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                Welcome, Milica
+                Welcome,&nbsp;{authUser.firstName}&nbsp;{authUser.lastName}
               </h3>
               <div className="flex flex-col justify-center items-center gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4">
                 <h3 className="text-3xl text-secondary-color font-main-font tracking-wide">
@@ -74,32 +77,36 @@ const DashboardContent = () => {
               </h3>
               <div className="flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 xs:p-2 p-4">
                 <p className="text-font-family-color italic">
-                  <span className="font-semibold">Full Name:</span>&nbsp;Milica
-                  Radulovic
+                  <span className="font-semibold">Full Name:</span>&nbsp;
+                  {authUser.firstName}&nbsp;{authUser.lastName}
                 </p>{" "}
                 <p className="text-font-family-color italic">
                   <span className="font-semibold">Email:</span>
-                  &nbsp;milicarad@hotmail.com
+                  &nbsp;{authUser.email}
                 </p>{" "}
                 <p className="text-font-family-color italic">
-                  <span className="font-semibold">Phone Number:</span>&nbsp;+381
-                  63 151 0848
+                  <span className="font-semibold">Phone Number:</span>&nbsp;
+                  {authUser.mobilePhone}
                 </p>{" "}
                 <p className="text-font-family-color italic">
-                  <span className="font-semibold">Address:</span>&nbsp;Dr.
-                  Momcilovica 4
+                  <span className="font-semibold">Address:</span>&nbsp;
+                  {authUser.address.address1};&nbsp;{authUser.address.address2}
                 </p>{" "}
                 <p className="text-font-family-color italic">
-                  <span className="font-semibold">City:</span>&nbsp;Belgrade
+                  <span className="font-semibold">City:</span>&nbsp;
+                  {authUser.address.city}
                 </p>{" "}
                 <p className="text-font-family-color italic">
-                  <span className="font-semibold">Postcode:</span>&nbsp;11271
+                  <span className="font-semibold">Postcode:</span>&nbsp;
+                  {authUser.address.zipCode}
                 </p>{" "}
                 <p className="text-font-family-color italic">
-                  <span className="font-semibold">State:</span>&nbsp;Serbia
+                  <span className="font-semibold">State:</span>&nbsp;
+                  {authUser.address.state}
                 </p>{" "}
                 <p className="text-font-family-color italic">
-                  <span className="font-semibold">Country:</span>&nbsp;Serbia
+                  <span className="font-semibold">Country:</span>&nbsp;
+                  {authUser.address.country}
                 </p>
               </div>
             </div>
