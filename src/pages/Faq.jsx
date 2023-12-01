@@ -73,11 +73,15 @@ const Faq = () => {
           <Accordion collapseAll className="Accord-container" key={index}>
             <Accordion.Panel className="Panel">
               <Accordion.Title className="texts title">
-                <img className="imageicon" src={treeicon}></img>
-                <div className="text-3xl font-thin">{item.Question}</div>
+                <div className="flex items-center gap-2">
+                  <img className="imageicon" src={treeicon}></img>
+                  <div className="text-3xl font-thin">{item.Question}</div>
+                </div>
               </Accordion.Title>
               <Accordion.Content>
-                <p className="mb-2 texts">{item.Answers}</p>
+                <p className="mb-2 texts text-xl text-justify p-2">
+                  {item.Answers}
+                </p>
               </Accordion.Content>
             </Accordion.Panel>
           </Accordion>
