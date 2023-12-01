@@ -99,14 +99,14 @@ const News = () => {
         }}
       ></div>
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-      <div className="container mx-auto text-2xl">
+      <div className="container mx-auto text-xl sm:text-2xl pl-4">
         <h2>
           Showing {skip + 1} to {Math.min(skip + limit, totalNews)} of{" "}
           {totalNews} News Articles
         </h2>
         <p>{error}</p>
       </div>
-      <div className="container mx-auto px-4 py-10">
+      <div className="container mx-auto px-4 py-4 md:py-6 lg:py-8">
         <Fade delay={100} cascade damping={0.1} duration={3000}>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
             {newsItems.map((item) => (
@@ -150,7 +150,7 @@ const News = () => {
         </Fade>
       </div>
       {/* pagination buttons */}
-      <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
+      <div className="text-lg md:text-2xl flex justify-center gap-7 m-4 text-font-family-color">
         <button onClick={handlePrev} disabled={skip === 0}>
           Previous
         </button>
@@ -160,7 +160,7 @@ const News = () => {
       </div>
       {/* Footer Image */}
       <img
-        className="bg-bg-page-color w-full"
+        className="bg-bg-page-color w-full "
         src="src/assets/images/news_images/leaves_background.png"
         alt="News Footer Image"
       />

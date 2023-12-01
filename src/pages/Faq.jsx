@@ -63,10 +63,10 @@ const Faq = () => {
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <div className="faq-container">
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-        <div className="container mx-auto text-2xl">
+        <div className="container mx-auto text-xl sm:text-2xl pl-4">
           <h2>
-          Showing {skip + 1} to {Math.min(skip + limit, total)} of{" "}
-          {total} FAQ         </h2>
+            Showing {skip + 1} to {Math.min(skip + limit, total)} of {total} FAQ{" "}
+          </h2>
           <p>{err}</p>
         </div>
         {faqs.map((item, index) => (
@@ -83,9 +83,13 @@ const Faq = () => {
           </Accordion>
         ))}
         <br />
-        <div className="mx-auto text-2xl flex gap-7">
-          <button onClick={handlePrev} disabled={skip === 0}>Previous</button>
-          <button onClick={handleNex} disabled={skip + limit >= total}>Next</button>
+        <div className="mx-auto text-lg md:text-2xl flex gap-7">
+          <button onClick={handlePrev} disabled={skip === 0}>
+            Previous
+          </button>
+          <button onClick={handleNex} disabled={skip + limit >= total}>
+            Next
+          </button>
         </div>
       </div>
 
@@ -100,14 +104,13 @@ const Faq = () => {
                 write us here!! we will contact shortly through Email !!{" "}
               </p>
               <div className="mt-6 flex justify-center max-w-md gap-x-4">
-               
-               
-                <Link type="submit"
+                <Link
+                  type="submit"
                   className="flex flex-row gap-1 rounded-md bg-bg-page-color px-4 py-4 text-xl font-semibold text-font-family-color shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                        to={`/contact`}
-                    >
-                 <IoIosSend className="text-2xl"/> Send a message
-                      </Link>
+                  to={`/contact`}
+                >
+                  <IoIosSend className="text-2xl" /> Send a message
+                </Link>
               </div>
             </div>
           </div>

@@ -7,6 +7,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import axios from "../../utils/axiosInstance";
+import Swal from "sweetalert2";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const Login = () => {
   const { setLoggedIn, setAuthUser } = useContext(AuthContext);
@@ -15,43 +17,96 @@ const Login = () => {
   const [errors, setErrors] = useState([]);
   const [backError, setBackError] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    const loginData = await new FormData(e.target);
+    const loginData = new FormData(e.target);
 
     const data = {
       email: loginData.get("email"),
       password: loginData.get("password"),
     };
+
     try {
-      await axios
-        .post("/api/users/login", data)
-        .then((response) => {
-          setErrors([]);
-          setBackError("");
-          setAuthUser(response.data.user);
-          setLoggedIn(true);
-          navigate("/dashboard");
-        })
-        .catch((err) => {
-          setErrors([]);
-          setBackError("");
-          if (err.response.status === 400) {
-            setErrors(err.response.data.errors);
-          } else if (
-            err.response.status === 404 ||
-            err.response.status === 401 ||
-            err.response.status === 500
-          ) {
-            setBackError(err.response.data.message);
-          } else {
-            setBackError("Server Error Happened, try later please!");
-          }
+      const response = await axios.post("/api/users/login", data);
+
+      setErrors([]);
+      setBackError("");
+
+      if (response.status === 200) {
+        setAuthUser(response.data.user);
+        setLoggedIn(true);
+        // Display success message
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          text: "You have successfully logged in.",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
         });
+        navigate("/dashboard");
+      } else {
+        // Handle other server response statuses
+        console.error("Error logging in:", response.data.message);
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: response.data.message || "An error occurred during login!",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      }
     } catch (error) {
       setErrors([]);
       setBackError("");
-      setBackError("Server Error Happened, try later please!");
+
+      // Handle errors that occurred during the POST request
+      if (error.response && error.response.status === 400) {
+        setErrors(error.response.data.errors);
+
+        let errorMessage = "<ul>";
+
+        // Loop through error messages and append to the list
+        error.response.data.errors.forEach((error) => {
+          errorMessage += `<li>${error.msg}</li>`;
+        });
+
+        errorMessage += "</ul>";
+
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          html: errorMessage,
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text:
+            error.response?.data.message || "An error occurred during login!",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      }
     }
   };
 
@@ -72,7 +127,7 @@ const Login = () => {
           className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
           style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
         ></div>
-        <div className="container mx-auto flex justify-center items-center ">
+        {/*       <div className="container mx-auto flex justify-center items-center ">
           <ul className="bg-white py-4 px-2 rounded-md text-red-700">
             {errors.map((error, index) => (
               <li key={error.path + index} className="flex items-center">
@@ -88,7 +143,7 @@ const Login = () => {
               ""
             )}
           </ul>
-        </div>
+        </div> */}
         <div className="flex flex-col justify-start items-start gap-[2rem] w-[100%] md:w-[60%] lg:w-[45%] xl:w-[40%] bg-white rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[10px] md:mt-[20px] lg:mt-[100px] xl:mt-[90px] xs:py-12 py-10">
           <div className="flex items-center">
             <img
@@ -122,7 +177,7 @@ const Login = () => {
                 id="email"
                 type="email"
                 name="email"
-                placeholder="your email address *"
+                placeholder="Email Address *"
                 style={{
                   backgroundColor: "var(--bg-white-color)",
                   borderColor: "var(--bg-header-footer)",
@@ -133,15 +188,15 @@ const Login = () => {
                 }}
               />
             </div>
-            <div>
+            <div style={{ position: "relative" }}>
               <Label
                 htmlFor="password"
-                value="your password"
+                value="Your password"
                 className="visually-hidden"
               />
               <TextInput
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Your Password *"
                 style={{
@@ -151,8 +206,25 @@ const Login = () => {
                   padding: "1.15rem",
                   color: "var(--font-family-color)",
                   fontSize: "1rem",
+                  paddingRight: "2.5rem", // Make room for the icon
                 }}
               />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  right: "10px",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer",
+                }}
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <HiEyeOff className="text-2xl" />
+                ) : (
+                  <HiEye className="text-2xl" />
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-2">
               {/* <Checkbox

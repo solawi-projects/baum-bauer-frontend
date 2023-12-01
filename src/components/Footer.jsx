@@ -181,7 +181,7 @@ function Footer() {
             ALL RIGHTS RESERVED
           </p>
         </div>
-      </div>
+      </div>{" "}
     </>
   );
 }

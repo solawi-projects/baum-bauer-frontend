@@ -20,8 +20,8 @@ const Home = () => {
 
         {/* Content */}
         {/* Article - Sponsor a Tree: Our Mission */}
-        <article className="w-full text-font-family-color flex flex-col justify-center z-[8] px-4 md:px-8 lg:px-12 xl:px-16 md:w-[50%]">
-          <h2 className="text-2xl lg:text-3xl py-6 lg:py-10 xl:py-14 text-center">
+        <article className="w-full text-font-family-color flex flex-col justify-center z-[8] px-4 md:px-8 lg:px-12 xl:px-16 md:w-[50%] pt-6 sm:pt-0">
+          <h2 className="text-2xl lg:text-3xl py-6  lg:py-10 xl:py-14 text-center">
             Sponsor a Tree: Our Mission
           </h2>
           <p className="font-semibold">
