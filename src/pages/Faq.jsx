@@ -65,27 +65,35 @@ const Faq = () => {
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />
         <div className="container mx-auto text-2xl">
           <h2>
-          Showing {skip + 1} to {Math.min(skip + limit, total)} of{" "}
-          {total} FAQ         </h2>
+            Showing {skip + 1} to {Math.min(skip + limit, total)} of {total} FAQ{" "}
+          </h2>
           <p>{err}</p>
         </div>
         {faqs.map((item, index) => (
           <Accordion collapseAll className="Accord-container" key={index}>
             <Accordion.Panel className="Panel">
               <Accordion.Title className="texts title">
-                <img className="imageicon" src={treeicon}></img>
-                <div className="text-3xl font-thin">{item.Question}</div>
+                <div className="flex items-center gap-2">
+                  <img className="imageicon" src={treeicon}></img>
+                  <div className="text-3xl font-thin">{item.Question}</div>
+                </div>
               </Accordion.Title>
               <Accordion.Content>
-                <p className="mb-2 texts">{item.Answers}</p>
+                <p className="mb-2 texts text-xl text-justify p-2">
+                  {item.Answers}
+                </p>
               </Accordion.Content>
             </Accordion.Panel>
           </Accordion>
         ))}
         <br />
         <div className="mx-auto text-2xl flex gap-7">
-          <button onClick={handlePrev} disabled={skip === 0}>Previous</button>
-          <button onClick={handleNex} disabled={skip + limit >= total}>Next</button>
+          <button onClick={handlePrev} disabled={skip === 0}>
+            Previous
+          </button>
+          <button onClick={handleNex} disabled={skip + limit >= total}>
+            Next
+          </button>
         </div>
       </div>
 
@@ -100,14 +108,13 @@ const Faq = () => {
                 write us here!! we will contact shortly through Email !!{" "}
               </p>
               <div className="mt-6 flex justify-center max-w-md gap-x-4">
-               
-               
-                <Link type="submit"
+                <Link
+                  type="submit"
                   className="flex flex-row gap-1 rounded-md bg-bg-page-color px-4 py-4 text-xl font-semibold text-font-family-color shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                        to={`/contact`}
-                    >
-                 <IoIosSend className="text-2xl"/> Send a message
-                      </Link>
+                  to={`/contact`}
+                >
+                  <IoIosSend className="text-2xl" /> Send a message
+                </Link>
               </div>
             </div>
           </div>

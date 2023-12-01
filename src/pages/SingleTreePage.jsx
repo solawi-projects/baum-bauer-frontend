@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
@@ -76,7 +76,7 @@ const SingleTreePage = () => {
 
           {/* Tree Details */}
           <div className="w-[100%] sm:w-[50%] flex flex-col">
-            <div className="flex flex-row w-full justify-center items-center bg-secondary-color rounded-[15px] p-4 mx-auto text-white">
+            <div className="flex w-full justify-center items-center bg-secondary-color rounded-[15px] p-4 mx-auto text-white">
               <div className="rounded-full bg-white w-[40px] h-[40px] mb-[10px] flex items-center justify-center mr-[10px]">
                 <img
                   src="/src/assets/images/tree_icon.svg"
@@ -106,7 +106,7 @@ const SingleTreePage = () => {
               </div>
 
               <div
-                className="prose lg:prose-lg mb-6"
+                className="prose lg:prose-lg mb-6 text-justify text-lg"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(tree.description),
                 }}
@@ -116,12 +116,16 @@ const SingleTreePage = () => {
               <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-2" />
 
               <p>
-                <span className="text-dark-gray">Category:</span>{" "}
+                <span className="text-dark-gray font-bold">
+                  Category:&nbsp;&nbsp;
+                </span>
                 {tree.category}
               </p>
 
               <p>
-                <span className="text-dark-gray">Stock:</span>{" "}
+                <span className="text-dark-gray font-bold">
+                  Stock:&nbsp;&nbsp;
+                </span>
                 {tree.availableQuantity}
               </p>
 

@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { HiHome } from "react-icons/hi";
 import { FaRegNewspaper } from "react-icons/fa";
+import { IoMdArrowBack } from "react-icons/io";
 import axios from "../utils/axiosInstance";
 import DOMPurify from "dompurify";
-import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import { Breadcrumb } from "flowbite-react";
 
@@ -112,9 +112,10 @@ const NewsArticle = () => {
               <button
                 onClick={goBack}
                 style={{ backgroundColor: "#5a6448" }}
-                className="inline-block text-white font-medium py-2 px-4 rounded hover:bg-opacity-90 transition duration-300"
+                className="flex items-center text-white font-medium py-2 px-4 rounded hover:bg-opacity-90 transition duration-300"
               >
-                ← Go Back
+                <IoMdArrowBack className="text-2xl" />
+                <span>&nbsp;Go Back</span>
               </button>
             </div>
           </>
