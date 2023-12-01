@@ -1,102 +1,95 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import axios from '../../utils/axiosInstance'
 const UpdateProfile = () => {
+  const {loggedIn, authUser } = useContext(AuthContext)
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Update Profile" };
 
-const [user,setUser]=useState()
-const UId='65673cc189843980368351b0'
+/*   const [user, setUser] = useState()
+  const UId = '65673cc189843980368351b0'
+ */  
 
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
     mobilePhone: "",
-    addressLine1: "",
-    addressLine2: "",
+    address1: "",
+    address2: "",
     city: "",
     zipCode: "",
     stateCountry: "",
     country: "",
-    state:'',
-  });
-   const showuser = async () => {
+    state: '',
+  })
+
+
+  
+  useEffect(() => {
+    // Set formValues based on user data when user data is available
+    if (authUser) {
+      setFormValues({
+        firstName: authUser.firstName || "",
+        lastName: authUser.lastName || "",
+        email: authUser.email || "",
+        mobilePhone: authUser.mobilePhone || "",
+        address1: authUser.address.address1 || "",
+        address2: authUser.address?.address2 || "",
+        city: authUser.address.city ,
+        zipCode: authUser.address.zipCode || "",
+        state: authUser.address?.state || "",
+        country: authUser.address.country || "",
+
+      });
+    }
+  }, [authUser]);
+
+  const handleUpdate = async () => {
+    /*     console.log("Form values:", formValues);
+    
+     */
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+
+    const updatedData = {
+      // Include all the fields you want to update
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      email: formValues.email,
+      mobilePhone: formValues.mobilePhone,
+      address: {
+        city: formValues.city,
+        zipCode: formValues.zipCode,
+        country: formValues.country,
+        state: formValues.state,
+        address1: formValues.address1,
+        address2: formValues.address2
+      }
+    };
     try {
-      const response = await axios.get(`/api/users/find-by-id/${UId}`);
-      if (response.status === 200) {      
-        console.log(response.data.user)
-      setUser(response.data.user)
+
+      // Add other address fields as needed
+
+      // ... add other fields as needed
+
+      console.log(updatedData.address.city)
+      const response = await axios.patch(`/api/users/update-by-id/${authUser._id}`, updatedData);
+      console.log(updatedData)
+      if (response.status === 200) {
+        console.log(updatedData.address.city)
+        console.log(response.data)
       }
     } catch (error) {
       console.error("Error fetching Trees:", error.message);
       throw error;
     }
-  };
-  useEffect(() => {
-    showuser();
-  }, []);
-
-  useEffect(() => {
-    // Set formValues based on user data when user data is available
-    if (user) {
-      setFormValues({
-        firstName: user.firstName || "",
-        lastName: user.lastName || "",
-        email: user.email || "",
-        mobilePhone: user.mobilePhone || "",
-        addressLine1: user.address?.address1 || "",
-        addressLine2: user.address?.address2 || "",
-        city: user.address?.city || "",
-        zipCode: user.address?.zipCode || "",
-        state: user.address?.state || "",
-        country: user.address?.country || "",
-
-      });
-    }
-  }, [user]);
-
-  const handleUpdate = async() => {
-/*     console.log("Form values:", formValues);
-
- */
-// eslint-disable-next-line react-hooks/rules-of-hooks
-
-const updatedData = {
-  // Include all the fields you want to update
-  firstName: formValues.firstName,
-  lastName: formValues.lastName,
-  email: formValues.email,
-  mobilePhone: formValues.mobilePhone,
-  address: {
-    city: formValues.city,
-    zipCode:formValues.zipCode,
-    country: formValues.country,
-    state:formValues.state,}
-  };
-try {
-
-    // Add other address fields as needed
-  
-  // ... add other fields as needed
-
-console.log(updatedData.city)
-  const response = await axios.patch(`/api/users/update-by-id/${user._id}`, updatedData);
-  console.log(updatedData)
-  if (response.status === 200) {
-    console.log(updatedData.address.city)
-    console.log(response.data)
-  }
-} catch (error) {
-  console.error("Error fetching Trees:", error.message);
-  throw error;
-}
 /* const handleInputChange = (fieldName, value) => {
   setFormValues({
     ...formValues,
@@ -138,7 +131,8 @@ console.log(updatedData.city)
             <DashboardLinks />
             <MobileDashboardLinks />
 
-            {/* Form */}
+            {/* Form */}              {loggedIn && (
+
             <div className="w-[100%] md:w-[75%]">
               <div className="flex items-center mb-4">
                 <img
@@ -151,18 +145,17 @@ console.log(updatedData.city)
                 </h3>
               </div>
               {/* Form Fields */}
-              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4 mt-10">
                 {/* First Row */}
                 <div className="mb-4">
                   <Label htmlFor="firstName" className="">
                     First Name
-                 </Label>
+                  </Label>
                   <TextInput
-                    
+
                     id="firstName"
                     type="text"
-                    value={user?.firstName || ""}
+                    value={authUser?.firstName || ""}
                     readOnly
                     className="input"
                     style={{
@@ -183,10 +176,10 @@ console.log(updatedData.city)
                     required
                     id="lastName"
                     type="text"
-                    value={user?.lastName || ""}
+                    value={authUser?.lastName || ""}
 
-readOnly     
-                    onChange={(e) =>console.log(e)
+                    readOnly
+                    onChange={(e) => console.log(e)
 /*                       handleInputChange("lastName", e.target.value)
  */                    }
                     className="input"
@@ -210,10 +203,10 @@ readOnly
                     required
                     id="email"
                     type="email"
-                    value={user?.email || ""}
+                    value={authUser?.email || ""}
 
                     readOnly
-                    onChange={(e) =>console.log(e) /* handleInputChange("email", e.target.value) */}
+                    onChange={(e) => console.log(e) /* handleInputChange("email", e.target.value) */}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -234,10 +227,10 @@ readOnly
                     id="phoneNumber"
                     type="text"
                     name="phone"
-                    value={formValues.mobilePhone || null ||user?.mobilePhone}
+                    value={formValues.mobilePhone || null || authUser?.mobilePhone}
 
                     onChange={(e) => setFormValues({ ...formValues, mobilePhone: e.target.value })}
-                                       
+
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -259,9 +252,9 @@ readOnly
                     required
                     id="addressLine1"
                     type="text"
-                    value={formValues.addressLine1  || null ||user?.address.address1}
+                    value={formValues.address1 || null || authUser?.address.address1}
 
-                    onChange={(e) => setFormValues({ ...formValues, addressLine1: e.target.value })}
+                    onChange={(e) => setFormValues({ ...formValues, address1: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -280,9 +273,9 @@ readOnly
                   <TextInput
                     id="addressLine2"
                     type="text"
-                    value={formValues.addressLine2  || null ||user?.address.address2}
+                    value={formValues.address2 || null || authUser?.address.address2}
 
-                    onChange={(e) => setFormValues({ ...formValues, addressLine2: e.target.value })}
+                    onChange={(e) => setFormValues({ ...formValues, address2: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -304,9 +297,9 @@ readOnly
                     required
                     id="city"
                     type="text"
-                    value={formValues.city  || null ||user?.address.city}
+                    value={formValues.city  || authUser?.address.city}
 
-                    onChange={(e) => setFormValues({ ...formValues, city: e.target.value })}
+                    onChange={(e) => setFormValues({ ...formValues,city: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -326,7 +319,7 @@ readOnly
                     required
                     id="postcode"
                     type="text"
-                    value={formValues.zipCode  || null ||user?.address.zipCode}
+                    value={formValues.zipCode || null || authUser?.address.zipCode}
 
                     onChange={(e) => setFormValues({ ...formValues, zipCode: e.target.value })}
                     className="input"
@@ -349,7 +342,7 @@ readOnly
                   <TextInput
                     id="stateCountry"
                     type="text"
-                    value={formValues.state  || null ||user?.address.state}
+                    value={formValues.state || null || authUser?.address.state}
 
                     onChange={(e) => setFormValues({ ...formValues, state: e.target.value })}
                     className="input"
@@ -371,7 +364,7 @@ readOnly
                     required
                     id="country"
                     type="text"
-                    value={formValues.country  || null ||user?.address.country}
+                    value={formValues.country || null || authUser?.address.country}
 
                     onChange={(e) => setFormValues({ ...formValues, country: e.target.value })}
                     className="input"
@@ -396,7 +389,7 @@ readOnly
                   Save Changes
                 </Button>
               </div>
-            </div>
+            </div>)}
           </div>
         </div>
       </div>
