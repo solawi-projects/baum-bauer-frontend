@@ -10,7 +10,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Swal from "sweetalert2";
 import axios from '../../utils/axiosInstance'
 const UpdateProfile = () => {
-  const {loggedIn, authUser } = useContext(AuthContext)
+  const {loggedIn, authUser,setAuthUser } = useContext(AuthContext)
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Update Profile" };
 
@@ -36,7 +36,7 @@ const UpdateProfile = () => {
   
   useEffect(() => {
     // Set formValues based on user data when user data is available
-    if (authUser) {
+   
       setFormValues({
         firstName: authUser.firstName ,
         lastName: authUser.lastName ,
@@ -50,7 +50,7 @@ const UpdateProfile = () => {
         country: authUser.address.country || "",
 
       });
-    }
+    
   }, [authUser]);
   const handleswal = () => {
     Swal.fire({
@@ -84,40 +84,21 @@ const UpdateProfile = () => {
      */
     // eslint-disable-next-line react-hooks/rules-of-hooks
 
-    let updatedData = {
-      // Include all the fields you want to update
-      firstName: formValues.firstName,
-      lastName: formValues.lastName,
-      email: formValues.email,
-      mobilePhone: formValues.mobilePhone,
-      address: {
-        city: formValues.city,
-        zipCode: formValues.zipCode,
-        country: formValues.country,
-        state: formValues.state,
-        address1: formValues.address1,
-        address2: formValues.address2
+      try {
+        const response = await axios.patch(`/api/users/update-by-id/${authUser._id}`, formValues);
+    
+        if (response.status === 200) {
+          console.log(response.data);
+          setAuthUser(response.data.user);
+          setFormValues(response.data);
+        }
+      } catch (error) {
+        console.error("Error updating user profile:", error.message);
+        // You can add additional error handling or alert the user about the issue
+        console.error("Error details:", error);
+
       }
-    };
-    try {
-
-      // Add other address fields as needed
-
-      // ... add other fields as needed
-
-      console.log(updatedData.address.city)
-      const response = await axios.patch(`/api/users/update-by-id/${authUser._id}`, updatedData);
-
-      if (response.status === 200) {
-        console.log(updatedData.address.city)
-        console.log(response.data)
-        updatedData=response.data;
-      }
-     
-    } catch (error) {
-      console.error("Error fetching Trees:", error.message);
-      throw error;
-    }
+    
 /* const handleInputChange = (fieldName, value) => {
   setFormValues({
     ...formValues,
