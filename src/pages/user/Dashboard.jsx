@@ -73,7 +73,7 @@ const DashboardContent = () => {
             {/* Delivery Address */}
             <div className="w-[100%] md:w-[50%]">
               <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                Delivery Address
+                User Details
               </h3>
               <div className="flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 xs:p-2 p-4">
                 <p className="text-font-family-color italic">
@@ -89,8 +89,12 @@ const DashboardContent = () => {
                   {authUser.mobilePhone}
                 </p>{" "}
                 <p className="text-font-family-color italic">
-                  <span className="font-semibold">Address:</span>&nbsp;
-                  {authUser.address.address1};&nbsp;{authUser.address.address2}
+                  <span className="font-semibold">Address Line 1:</span>&nbsp;
+                  {authUser.address.address1}
+                </p>{" "}
+                <p className="text-font-family-color italic">
+                  <span className="font-semibold">Address Line 2:</span>&nbsp;
+                  {authUser.address.address2}
                 </p>{" "}
                 <p className="text-font-family-color italic">
                   <span className="font-semibold">City:</span>&nbsp;
