@@ -1,4 +1,3 @@
-import backgroundImage from "../assets/images/leaves_background_03.webp";
 import React, { useEffect, useState } from "react";
 import axios from "../utils/axiosInstance";
 import { Link } from "react-router-dom";
@@ -9,9 +8,10 @@ import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import { Fade } from "react-awesome-reveal";
 
+
 const News = () => {
   const titles = [
-    "Bio Baum News",
+    "Bio Blog News",
     "Discover the Latest Stories and Updates from Our Tree Sponsorship Program!",
   ];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
@@ -21,12 +21,12 @@ const News = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalNews, setTotalNews] = useState(0);
-  //pagination
-  const [skip, setSkip] = useState(0);
+  //pagination 
+   const [skip, setSkip] = useState(0);
   const [isSmallScreen, setIsSmallScreen] = useState(
     useMediaQuery({ query: "(max-width: 768px)" })
   );
-  const limit = isSmallScreen ? 4 : 8;
+const limit= isSmallScreen ? 4:8;
 
   const handleResize = () => {
     setIsSmallScreen(window.innerWidth <= 768);
@@ -50,13 +50,16 @@ const News = () => {
   const handleNex = () => {
     const newSkip = skip + limit;
     if (newSkip >= totalNews) {
+  
       setSkip(skip);
     } else {
       setSkip(newSkip);
     }
   };
   const getNewsArticles = () => {
-    try {
+    
+    try { 
+ 
       axios
         .get(`/api/newsArticle/?limit=${limit}&skip=${skip}`)
         .then((response) => {
@@ -82,7 +85,7 @@ const News = () => {
     setIsLoading(true);
 
     getNewsArticles();
-  }, [skip, isSmallScreen]); // this func is updated based on changes in skip and isSmallScreen
+  }, [skip,isSmallScreen]); // this func is updated based on changes in skip and isSmallScreen
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -90,23 +93,15 @@ const News = () => {
   return (
     <div className="bg-bg-page-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
-      {/* Overlay with background image and opacity */}
-      <div
-        className="absolute left-0 w-full h-[50%] bg-cover bg-no-repeat bg-center bg-bg-header-footer"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          opacity: 0.1,
-        }}
-      ></div>
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-      <div className="container mx-auto text-xl sm:text-2xl pl-4">
+      <div className="container mx-auto text-2xl">
         <h2>
           Showing {skip + 1} to {Math.min(skip + limit, totalNews)} of{" "}
           {totalNews} News Articles
         </h2>
         <p>{error}</p>
       </div>
-      <div className="container mx-auto px-4 py-4 md:py-6 lg:py-8">
+      <div className="container mx-auto px-4 py-10">
         <Fade delay={100} cascade damping={0.1} duration={3000}>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
             {newsItems.map((item) => (
@@ -150,7 +145,7 @@ const News = () => {
         </Fade>
       </div>
       {/* pagination buttons */}
-      <div className="text-lg md:text-2xl flex justify-center gap-7 m-4 text-font-family-color">
+      <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
         <button onClick={handlePrev} disabled={skip === 0}>
           Previous
         </button>
@@ -160,7 +155,7 @@ const News = () => {
       </div>
       {/* Footer Image */}
       <img
-        className="bg-bg-page-color w-full "
+        className="bg-bg-page-color w-full"
         src="src/assets/images/news_images/leaves_background.png"
         alt="News Footer Image"
       />
