@@ -58,20 +58,25 @@ const UpdateProfile = () => {
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Save",
-       denyButtonText: `Don't save`,
-       customClass: {
-        confirmButton: "btn-confirm-class",
-        denyButton: "btn-deny-class",
-        cancelButton: "btn-cancel-class",
-        title: "title-class",
+      denyButtonText: `Don't save`,
+      customClass: {   confirmButton: "btn-confirm-class",
+      denyButton: "btn-deny-class",
+      cancelButton: "btn-cancel-class",
+        container: "custom-swal-container", // Add a custom class to the container
       },
-      buttonsStyling: false,   
+      buttonsStyling: false,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
+        Swal.fire({
+          title: "Profile updated successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: 'custom-confirm-button-class',
+          },
         
-        handleUpdate();
+        });        handleUpdate();
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }
