@@ -250,3 +250,9 @@ input::placeholder {
   border: 3px solid var(--red-color);
   color: var(--red-color);
 }
+.custom-swal-container .swal2-actions {
+  gap: 10px; /* Adjust the gap as needed */
+}
+.custom-confirm-button-class {
+  background-color: var(--secondary-color);
+}
