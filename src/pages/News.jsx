@@ -1,8 +1,9 @@
 import backgroundImage from "../assets/images/leaves_background_03.webp";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "../utils/axiosInstance";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import { GrNext, GrPrevious } from "react-icons/gr";
 import { HiHome } from "react-icons/hi";
 import { useMediaQuery } from "react-responsive";
 import PageBreadcrumb from "../components/PageBreadcrumb";
@@ -99,7 +100,7 @@ const News = () => {
         }}
       ></div>
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-      <div className="container mx-auto text-xl sm:text-2xl pl-4">
+      <div className="container mx-auto text-4xl sm:text-2xl pl-4">
         <h2>
           Showing {skip + 1} to {Math.min(skip + limit, totalNews)} of{" "}
           {totalNews} News Articles
@@ -150,12 +151,20 @@ const News = () => {
         </Fade>
       </div>
       {/* pagination buttons */}
-      <div className="text-lg md:text-2xl flex justify-center gap-7 m-4 text-font-family-color">
-        <button onClick={handlePrev} disabled={skip === 0}>
-          Previous
+      <div className="text-2xl md:text-2xl flex justify-center m-4 text-font-family-color gap-10">
+        <button
+          onClick={handlePrev}
+          disabled={skip === 0}
+          className={skip === 0 ? "disabledBtn" : "activeBtn"}
+        >
+          <GrPrevious />
         </button>
-        <button onClick={handleNex} disabled={skip + limit >= totalNews}>
-          Next
+        <button
+          onClick={handleNex}
+          disabled={skip + limit >= totalNews}
+          className={skip + limit >= totalNews ? "disabledBtn" : "activeBtn"}
+        >
+          <GrNext />
         </button>
       </div>
       {/* Footer Image */}

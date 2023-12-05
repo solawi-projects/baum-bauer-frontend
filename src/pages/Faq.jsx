@@ -2,6 +2,7 @@
 import { Accordion } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import axios from "../utils/axiosInstance";
+import { GrNext, GrPrevious } from "react-icons/gr";
 import "../assets/styles/Faq.css";
 import treeicon from "../assets/tree.png";
 import PageBreadcrumb from "../components/PageBreadcrumb";
@@ -63,7 +64,7 @@ const Faq = () => {
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <div className="faq-container">
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-        <div className="container mx-auto text-xl sm:text-2xl pl-4">
+        <div className="container mx-auto text-4xl sm:text-2xl pl-4">
           <h2>
             Showing {skip + 1} to {Math.min(skip + limit, total)} of {total} FAQ{" "}
           </h2>
@@ -88,11 +89,19 @@ const Faq = () => {
         ))}
         <br />
         <div className="mx-auto text-lg md:text-2xl flex gap-7">
-          <button onClick={handlePrev} disabled={skip === 0}>
-            Previous
+          <button
+            onClick={handlePrev}
+            disabled={skip === 0}
+            className={skip === 0 ? "disabledBtn" : "activeBtn"}
+          >
+            <GrPrevious />
           </button>
-          <button onClick={handleNex} disabled={skip + limit >= total}>
-            Next
+          <button
+            onClick={handleNex}
+            disabled={skip + limit >= total}
+            className={skip + limit >= total ? "disabledBtn" : "activeBtn"}
+          >
+            <GrNext />
           </button>
         </div>
       </div>

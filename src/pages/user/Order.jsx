@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../store/CartContext";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
+import { Button } from "flowbite-react";
+import axios from "../../utils/axiosInstance";
+import { loadStripe } from "@stripe/stripe-js";
 
 const Order = () => {
   const {
@@ -15,6 +18,33 @@ const Order = () => {
     calculateGrandTotal,
   } = useContext(CartContext);
 
+  const paymentProcess = async () => {
+    const stripe = await loadStripe(
+      "pk_test_51OJNzPEghw7w3GNSeOkjDgkOcM1DtxgH4n9RgFspfvlxDzomukHCfqCenHxoIFFrQ0MtAvBRYMiIjtGQUYUwM7Ax00xIiee67Q"
+    );
+
+    const treesInCart = cartProducts.map((tree) => ({
+      treeName: tree.name,
+      treeImage: tree.image,
+      treePrice: Number(tree.price.$numberDecimal),
+      qty: getTreeQuantity(tree._id),
+    }));
+    const trees = {
+      cart: treesInCart,
+    };
+    console.log("Data: ", cartProducts);
+    axios
+      .post("/api/payment/checkout", trees)
+      .then((response) => {
+        const session = response.data;
+        stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
+      })
+      .catch((error) => {
+        console.log("ERROR: ", error);
+      });
+  };
   return (
     <main>
       {cartProducts && (
@@ -28,7 +58,7 @@ const Order = () => {
             </Breadcrumb.Item>
             <Breadcrumb.Item href="/cart">Cart</Breadcrumb.Item>
             <Breadcrumb.Item href="/checkout">Checkout</Breadcrumb.Item>
-            <Breadcrumb.Item>Complte Sponsorship</Breadcrumb.Item>
+            <Breadcrumb.Item>Complete Sponsorship</Breadcrumb.Item>
           </Breadcrumb>
         </div>
       )}
@@ -186,13 +216,13 @@ const Order = () => {
                 </Link>
 
                 {/* Pay Now */}
-                <Link
-                  to=""
+                <Button
+                  onClick={paymentProcess}
                   className="text-center w-full my-2 px-4 py-2 bg-darker-secondary text-white-color rounded-[10px] hover:bg-lighter-secondary hover:text-secondary-color transition duration-4000 ease-linear"
                   aria-label="Pay Now"
                 >
                   Pay Now
-                </Link>
+                </Button>
 
                 {/* POWERED BY STRIPE */}
                 <div

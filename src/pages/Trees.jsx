@@ -173,11 +173,7 @@ const Tree = () => {
             <button
               onClick={handlePrev}
               disabled={skip === 0}
-              className={
-                skip === 0
-                  ? "border-lighter-secondary border-4 p-3 rounded-full shadow-2xl"
-                  : "bg-secondary-color border-darker-secondary border-4 text-white p-3 rounded-full hover:bg-lighter-secondary hover:text-secondary-color transition-all duration-400 ease-linear shadow-2xl"
-              }
+              className={skip === 0 ? "disabledBtn" : "activeBtn"}
             >
               <GrPrevious />
             </button>
@@ -185,9 +181,7 @@ const Tree = () => {
               onClick={handleNex}
               disabled={skip + limit >= totalTree}
               className={
-                skip + limit >= totalTree
-                  ? "border-lighter-secondary border-4 p-3 rounded-full shadow-xl"
-                  : "bg-secondary-color border-darker-secondary border-4 text-white p-3 rounded-full hover:bg-lighter-secondary hover:text-secondary-color transition-all duration-400 ease-linear shadow-2xl"
+                skip + limit >= totalTree ? "disabledBtn" : "activeBtn"
               }
             >
               <GrNext />
