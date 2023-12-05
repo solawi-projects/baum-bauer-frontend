@@ -7,6 +7,7 @@ import { HiHome } from "react-icons/hi";
 import { Button } from "flowbite-react";
 import axios from "../../utils/axiosInstance";
 import { loadStripe } from "@stripe/stripe-js";
+import { useLocation } from "react-router-dom";
 
 const Order = () => {
   const {
@@ -45,6 +46,16 @@ const Order = () => {
         console.log("ERROR: ", error);
       });
   };
+  // Get the state from the location
+  const location = useLocation();
+  const newPatron = location.state;
+
+  // Check if newPatron is defined
+  if (!newPatron) {
+    // Handle the case where newPatron is not available
+    return <div>No patron data found.</div>;
+  }
+
   return (
     <main>
       {cartProducts && (
@@ -84,14 +95,68 @@ const Order = () => {
                       className="w-[40px] h-[40px] mr-2"
                     />{" "}
                     <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                      Billing Address
+                      Patron Details{" "}
                     </h3>
+                  </div>{" "}
+                  <div className="flex flex-col">
+                    {" "}
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        Full Name:
+                      </span>
+                      &nbsp;
+                      {newPatron.firstName}&nbsp;{newPatron.lastName}
+                    </p>
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        Email:
+                      </span>
+                      &nbsp; {newPatron.email}
+                    </p>
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        Mobile Phone:
+                      </span>
+                      &nbsp; {newPatron.mobilePhone}
+                    </p>
+                    {/* Display address details */}
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        Address Line 1:
+                      </span>
+                      &nbsp; {newPatron.address.address1}
+                    </p>
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        Address Line 2:
+                      </span>
+                      &nbsp; {newPatron.address.address2}
+                    </p>
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        City:
+                      </span>
+                      &nbsp; City: {newPatron.address.city}
+                    </p>
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        Postcode:
+                      </span>
+                      &nbsp; {newPatron.address.zipCode}
+                    </p>
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        State/Country:
+                      </span>
+                      &nbsp; {newPatron.address.state}
+                    </p>
+                    <p className="text-dark-gray italic">
+                      <span className="font-semibold text-dark-gray">
+                        Country:
+                      </span>
+                      &nbsp; {newPatron.address.country}
+                    </p>
                   </div>
-                  <p>Milica Radulovic</p>
-                  <p>Jakobistrasse 6</p>
-                  <p>Oeding, 46354</p>
-                  <p>Germany</p>
-                  <p>milicarad@hotmail.com</p>
                 </div>
                 {/* Horizontal Line */}
                 <hr className="w-[100%] mx-auto border-t-2 border-bg-header-footer my-2" />

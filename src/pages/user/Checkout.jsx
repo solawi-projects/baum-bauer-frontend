@@ -1,9 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import treeIcon from "../../assets/images/tree_icon.svg";
 import footerImage from "../../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 import { TextInput, Label } from "flowbite-react";
 import { CartContext } from "../../store/CartContext";
+import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
@@ -11,30 +13,83 @@ import { HiHome } from "react-icons/hi";
 const Checkout = () => {
   const { cartProducts, getTreeQuantity, getItemTotalPrice } =
     useContext(CartContext);
+  const { authUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    phoneNumber: "",
-    addressLine1: "",
-    addressLine2: "",
+    mobilePhone: "",
+    address1: "",
+    address2: "",
     city: "",
-    postcode: "",
+    zipCode: "",
     stateCountry: "",
     country: "",
+    state: "",
   });
 
-  const handleInputChange = (fieldName, value) => {
-    setFormValues({
-      ...formValues,
-      [fieldName]: value,
+  const [newPatron, setNewPatron] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobilePhone: "",
+    address: {
+      city: "",
+      zipCode: "",
+      country: "",
+      state: "",
+      address1: "",
+      address2: "",
+    },
+    userId: "",
+  });
+
+  useEffect(() => {
+    // Set formValues based on user data when user data is available
+    if (authUser) {
+      setFormValues({
+        firstName: authUser.firstName || "",
+        lastName: authUser.lastName || "",
+        email: authUser.email || "",
+        mobilePhone: authUser.mobilePhone || "",
+        address1: authUser.address?.address1 || "",
+        address2: authUser.address?.address2 || "",
+        city: authUser.address?.city || "",
+        zipCode: authUser.address?.zipCode || "",
+        state: authUser.address?.state || "",
+        country: authUser.address?.country || "Germany",
+      });
+    }
+  }, [authUser]);
+
+  useEffect(() => {
+    // Update newPatron whenever formValues change
+    setNewPatron({
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      email: formValues.email,
+      mobilePhone: formValues.mobilePhone,
+      address: {
+        city: formValues.city,
+        zipCode: formValues.zipCode,
+        country: formValues.country,
+        state: formValues.state,
+        address1: formValues.address1,
+        address2: formValues.address2,
+      },
+      userId: authUser?._id || "",
     });
+  }, [formValues, authUser]);
+
+  const handleCompleteSponsorship = () => {
+    // Pass newPatron as a prop
+    navigate("/order/place_order", { state: newPatron });
   };
 
-  const handleUpdate = () => {
-    console.log("Form values:", formValues);
-  };
+  console.log("newPatron:", newPatron);
 
   return (
     <main>
@@ -84,7 +139,7 @@ const Checkout = () => {
                 <h3 className="text-4xl font-main-font">Checkout</h3>
               </div>{" "}
               {/* Form Fields */}
-              <div className="w-full grid grid-cols-1 gap-2 lg:gap-4 mt-10">
+              <form className="w-full grid grid-cols-1 gap-2 lg:gap-4 mt-10">
                 {/* User Details */}
                 <div className="flex items-center mb-4">
                   <img
@@ -93,7 +148,7 @@ const Checkout = () => {
                     className="w-[40px] h-[40px] mr-2"
                   />{" "}
                   <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                    Details
+                    Patron Details
                   </h3>
                 </div>
 
@@ -105,10 +160,18 @@ const Checkout = () => {
                   <TextInput
                     required
                     id="firstName"
+                    name="firstName"
                     placeholder="First Name *"
-                    value={formValues.firstName}
+                    value={
+                      formValues.firstName !== undefined
+                        ? formValues.firstName
+                        : ""
+                    }
                     onChange={(e) =>
-                      handleInputChange("firstName", e.target.value)
+                      setFormValues({
+                        ...formValues,
+                        firstName: e.target.value,
+                      })
                     }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -129,10 +192,15 @@ const Checkout = () => {
                   <TextInput
                     required
                     id="lastName"
+                    name="lastName"
                     placeholder="Last Name *"
-                    value={formValues.lastName}
+                    value={
+                      formValues.lastName !== undefined
+                        ? formValues.lastName
+                        : ""
+                    }
                     onChange={(e) =>
-                      handleInputChange("lastName", e.target.value)
+                      setFormValues({ ...formValues, lastName: e.target.value })
                     }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -153,9 +221,14 @@ const Checkout = () => {
                   <TextInput
                     required
                     id="email"
+                    name="email"
                     placeholder="Email Address *"
-                    value={formValues.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    value={
+                      formValues.email !== undefined ? formValues.email : ""
+                    }
+                    onChange={(e) =>
+                      setFormValues({ ...formValues, email: e.target.value })
+                    }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -175,22 +248,30 @@ const Checkout = () => {
                     className="w-[40px] h-[40px] mr-2"
                   />{" "}
                   <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                    Delivery
+                    Patron Address
                   </h3>
                 </div>
 
                 {/* Phone Number */}
                 <div className="mb-4">
-                  <Label htmlFor="phoneNumber" className="visually-hidden">
+                  <Label htmlFor="mobilePhone" className="visually-hidden">
                     Phone Number
                   </Label>
                   <TextInput
                     required
-                    id="phoneNumber"
+                    id="mobilePhone"
+                    name="mobilePhone"
                     placeholder="Phone Number *"
-                    value={formValues.phoneNumber}
+                    value={
+                      formValues.mobilePhone !== undefined
+                        ? formValues.mobilePhone
+                        : ""
+                    }
                     onChange={(e) =>
-                      handleInputChange("phoneNumber", e.target.value)
+                      setFormValues({
+                        ...formValues,
+                        mobilePhone: e.target.value,
+                      })
                     }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -205,16 +286,21 @@ const Checkout = () => {
 
                 {/* Address Line 1 */}
                 <div className="mb-4">
-                  <Label htmlFor="addressLine1" className="visually-hidden">
+                  <Label htmlFor="address1" className="visually-hidden">
                     Address Line 1
                   </Label>
                   <TextInput
                     required
-                    id="addressLine1"
+                    id="address1"
+                    name="address1"
                     placeholder="Address Line 1 *"
-                    value={formValues.addressLine1}
+                    value={
+                      formValues.address1 !== undefined
+                        ? formValues.address1
+                        : ""
+                    }
                     onChange={(e) =>
-                      handleInputChange("addressLine1", e.target.value)
+                      setFormValues({ ...formValues, address1: e.target.value })
                     }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -229,15 +315,20 @@ const Checkout = () => {
 
                 {/* Address Line 2 */}
                 <div className="mb-4">
-                  <Label htmlFor="addressLine2" className="visually-hidden">
+                  <Label htmlFor="address2" className="visually-hidden">
                     Address Line 2
                   </Label>
                   <TextInput
-                    id="addressLine2"
+                    id="address2"
+                    name="address2"
                     placeholder="Address Line 2"
-                    value={formValues.addressLine2}
+                    value={
+                      formValues.address2 !== undefined
+                        ? formValues.address2
+                        : ""
+                    }
                     onChange={(e) =>
-                      handleInputChange("addressLine2", e.target.value)
+                      setFormValues({ ...formValues, address2: e.target.value })
                     }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -258,9 +349,12 @@ const Checkout = () => {
                   <TextInput
                     required
                     id="city"
+                    name="city"
                     placeholder="City *"
-                    value={formValues.city}
-                    onChange={(e) => handleInputChange("city", e.target.value)}
+                    value={formValues.city !== undefined ? formValues.city : ""}
+                    onChange={(e) =>
+                      setFormValues({ ...formValues, city: e.target.value })
+                    }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -274,16 +368,19 @@ const Checkout = () => {
 
                 {/* Postcode */}
                 <div className="mb-4">
-                  <Label htmlFor="postcode" className="visually-hidden">
+                  <Label htmlFor="zipCode" className="visually-hidden">
                     Postcode
                   </Label>
                   <TextInput
                     required
-                    id="postcode"
+                    id="zipCode"
+                    name="zipCode"
                     placeholder="Postcode *"
-                    value={formValues.postcode}
+                    value={
+                      formValues.zipCode !== undefined ? formValues.zipCode : ""
+                    }
                     onChange={(e) =>
-                      handleInputChange("postcode", e.target.value)
+                      setFormValues({ ...formValues, zipCode: e.target.value })
                     }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -298,15 +395,18 @@ const Checkout = () => {
 
                 {/* State/Country */}
                 <div className="mb-4">
-                  <Label htmlFor="stateCountry" className="visually-hidden">
+                  <Label htmlFor="state" className="visually-hidden">
                     State/Country
                   </Label>
                   <TextInput
-                    id="stateCountry"
+                    id="state"
+                    name="state"
                     placeholder="State/Country"
-                    value={formValues.stateCountry}
+                    value={
+                      formValues.state !== undefined ? formValues.state : ""
+                    }
                     onChange={(e) =>
-                      handleInputChange("stateCountry", e.target.value)
+                      setFormValues({ ...formValues, state: e.target.value })
                     }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -327,11 +427,8 @@ const Checkout = () => {
                   <TextInput
                     required
                     id="country"
+                    name="country"
                     placeholder="Country *"
-                    value={formValues.country}
-                    onChange={(e) =>
-                      handleInputChange("country", e.target.value)
-                    }
                     style={{
                       backgroundColor: "var(--bg-white-color)",
                       borderColor: "var(--bg-header-footer)",
@@ -340,9 +437,11 @@ const Checkout = () => {
                       color: "var(--font-family-color)",
                       fontSize: "1rem",
                     }}
+                    disabled={true}
+                    value="Germany"
                   />
                 </div>
-              </div>
+              </form>
             </div>
             {/* Sponsorship Summary */}
             <div
@@ -440,13 +539,14 @@ const Checkout = () => {
               <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-2" />
 
               {/* Complete Sponsorship */}
-              <Link
-                to="/order/place_order"
+              <button
+                onClick={handleCompleteSponsorship}
                 className="text-center w-full px-4 py-2 bg-darker-secondary text-white-color rounded-[10px] hover:bg-lighter-secondary hover:text-secondary-color transition duration-4000 ease-linear mt-4 sm:mt-0"
                 aria-label="Complete Sponsorship page/Payment"
               >
                 Complete Sponsorship
-              </Link>
+              </button>
+
               {/* Back to Cart */}
               <Link
                 to="/cart"

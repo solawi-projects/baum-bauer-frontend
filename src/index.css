@@ -208,6 +208,7 @@ input::placeholder {
   border: 3px solid var(--darker-secondary);
   color: var(--secondary-color);
 }
+
 .title-class {
   font-family: "Chicle", "serif";
   color: var(--secondary-color);
@@ -215,28 +216,43 @@ input::placeholder {
   letter-spacing: 0.1rem;
   font-size: 2rem;
 }
-.btn-confirm-class {
-  background-color: var(--secondary-color);
-  color: var(--white-color);
-  padding: 0.5rem .5rem;
-  border-radius: 10px;
-  transition: background-color 0.4s linear, border 0.4s linear,
-    color 0.4s linear;
-}
+
 .btn-deny-class {
-  background-color:  var(--darker-primary);
+  background-color: var(--darker-primary);
+  border: 3px solid var(--bg-header-footer);
   color: var(--white-color);
-  padding: 0.5rem .5rem;
+  padding: 0.5rem 1rem;
   border-radius: 10px;
   transition: background-color 0.4s linear, border 0.4s linear,
     color 0.4s linear;
+  margin-right: 0.6rem;
+  margin-left: 0.6rem;
 }
+
+.btn-deny-class:hover {
+  background-color: var(--lighter-primary);
+  border: 3px solid var(--darker-primary);
+  color: var(--secondary-color);
+}
+
 .btn-cancel-class {
   background-color: var(--red-color);
   color: var(--white-color);
-  padding: 0.5rem .5rem;
+  border: 3px solid #ffbaba;
+  padding: 0.5rem 1rem;
   border-radius: 10px;
   transition: background-color 0.4s linear, border 0.4s linear,
     color 0.4s linear;
 }
 
+.btn-cancel-class:hover {
+  background-color: var(--light-bg);
+  border: 3px solid var(--red-color);
+  color: var(--red-color);
+}
+.custom-swal-container .swal2-actions {
+  gap: 10px; /* Adjust the gap as needed */
+}
+.custom-confirm-button-class {
+  background-color: var(--secondary-color);
+}
