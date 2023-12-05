@@ -190,7 +190,7 @@ const Register = () => {
       <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center text-font-family-color">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
+          className="absolute top-0 left-0 w-full h-[50%] bg-cover bg-no-repeat bg-top z-[-1]"
           style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
         ></div>
 
