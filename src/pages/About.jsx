@@ -17,7 +17,7 @@ const About = () => {
       <section className="relative flex flex-col items-center justify-center pt-[100px] md:pt-[160px] lg:pt-[180px] xl:pt-[220px]">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-[15%] bg-cover bg-no-repeat bg-center bg-bg-header-footer"
+          className="absolute top-0 left-0 w-full h-[15%] bg-cover bg-no-repeat bg-center"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             opacity: 0.2,

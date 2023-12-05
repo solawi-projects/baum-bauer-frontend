@@ -1,20 +1,43 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
+import { AuthContext } from "../../contexts/AuthContext";
+import axios from "../../utils/axiosInstance";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const PasswordChange = () => {
   // State to manage password values
+  const { loggedIn, authUser } = useContext(AuthContext);
   const [passwords, setPasswords] = useState({
     currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
   });
 
+  const handlePasswordChange = async (event) => {
+    event.preventDefault();
+    const { currentPassword, newPassword, confirmNewPassword } = passwords;
+    if (newPassword !== confirmNewPassword) {
+      alert("New password and confirm password do not match");
+      return;
+    }
+    try {
+      const response = await axios.post(
+        `/api/users/chang-password/${authUser._id}`,
+        { currentPassword, newPassword, confirmNewPassword }
+      );
+      // console.log(response.data);
+      // update localStorage
+    } catch (error) {
+      console.error("Password change failed:", error.response.data.message);
+    }
+
+    console.log("Password values:", passwords);
+  };
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
@@ -29,10 +52,6 @@ const PasswordChange = () => {
 
   const toggleConfirmNewPasswordVisibility = () => {
     setShowConfirmNewPassword(!showConfirmNewPassword);
-  };
-
-  const handlePasswordChange = () => {
-    console.log("Password values:", passwords);
   };
 
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
@@ -70,7 +89,7 @@ const PasswordChange = () => {
             {/* Dashboard Links */}
             <DashboardLinks />
             <MobileDashboardLinks />
-            {/* Change Password Form */}
+
             <div className="w-[100%] md:w-[75%]">
               <div className="flex items-center mb-4">
                 <img
@@ -82,157 +101,168 @@ const PasswordChange = () => {
                   Change Password
                 </h3>
               </div>
-              <div className="grid grid-cols-1 gap:2 lg:gap-4 mt-10">
-                <div className="mb-4" style={{ position: "relative" }}>
-                  <Label htmlFor="currentPassword" className="visually-hidden">
-                    Current Password
-                  </Label>
-                  <TextInput
-                    required
-                    id="currentPassword"
-                    type={showCurrentPassword ? "text" : "password"}
-                    placeholder="Current Password *"
-                    value={passwords.currentPassword}
-                    onChange={(e) =>
-                      setPasswords({
-                        ...passwords,
-                        currentPassword: e.target.value,
-                      })
-                    }
-                    className="input"
-                    style={{
-                      backgroundColor: "var(--bg-white-color)",
-                      borderColor: "var(--bg-header-footer)",
-                      outlineColor: "var(--secondary-color)",
-                      padding: "1.15rem",
-                      color: "var(--font-family-color)",
-                      fontSize: "1rem",
-                    }}
-                  />{" "}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "10px",
-                      transform: "translateY(-50%)",
-                      cursor: "pointer",
-                    }}
-                    onClick={toggleCurrentPasswordVisibility}
-                  >
-                    {showCurrentPassword ? (
-                      <HiEyeOff className="text-2xl text-font-family-color" />
-                    ) : (
-                      <HiEye className="text-2xl text-font-family-color" />
-                    )}
+              {/* change password form */}
+              <form onSubmit={handlePasswordChange}>
+                <div className="grid grid-cols-1 gap:2 lg:gap-4 mt-10">
+                  <div className="mb-4" style={{ position: "relative" }}>
+                    <Label
+                      htmlFor="currentPassword"
+                      className="visually-hidden"
+                    >
+                      Current Password
+                    </Label>
+                    <TextInput
+                      required
+                      id="currentPassword"
+                      type={showCurrentPassword ? "text" : "password"}
+                      placeholder="Current Password *"
+                      value={passwords.currentPassword}
+                      onChange={(e) =>
+                        setPasswords({
+                          ...passwords,
+                          currentPassword: e.target.value,
+                        })
+                      }
+                      className="input"
+                      style={{
+                        backgroundColor: "var(--bg-white-color)",
+                        borderColor: "var(--bg-header-footer)",
+                        outlineColor: "var(--secondary-color)",
+                        padding: "1.15rem",
+                        color: "var(--font-family-color)",
+                        fontSize: "1rem",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                      onClick={toggleCurrentPasswordVisibility}
+                    >
+                      {showCurrentPassword ? (
+                        <HiEyeOff className="text-2xl text-font-family-color" />
+                      ) : (
+                        <HiEye className="text-2xl text-font-family-color" />
+                      )}
+                    </div>
+                  </div>
+                  <div className="mb-4" style={{ position: "relative" }}>
+                    <Label htmlFor="newPassword" className="visually-hidden">
+                      New Password
+                    </Label>
+                    <TextInput
+                      required
+                      id="newPassword"
+                      type={showNewPassword ? "text" : "password"}
+                      placeholder="New Password *"
+                      value={passwords.newPassword}
+                      onChange={(e) =>
+                        setPasswords({
+                          ...passwords,
+                          newPassword: e.target.value,
+                        })
+                      }
+                      className="input"
+                      style={{
+                        backgroundColor: "var(--bg-white-color)",
+                        borderColor: "var(--bg-header-footer)",
+                        outlineColor: "var(--secondary-color)",
+                        padding: "1.15rem",
+                        color: "var(--font-family-color)",
+                        fontSize: "1rem",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                      onClick={toggleNewPasswordVisibility}
+                    >
+                      {showNewPassword ? (
+                        <HiEyeOff className="text-2xl text-font-family-color" />
+                      ) : (
+                        <HiEye className="text-2xl text-font-family-color" />
+                      )}
+                    </div>
+                  </div>
+                  <div className="mb-4" style={{ position: "relative" }}>
+                    <Label
+                      htmlFor="confirmNewPassword"
+                      className="visually-hidden"
+                    >
+                      Confirm New Password
+                    </Label>
+                    <TextInput
+                      required
+                      id="confirmNewPassword"
+                      type={showConfirmNewPassword ? "text" : "password"}
+                      placeholder="Confirm New Password *"
+                      value={passwords.confirmNewPassword}
+                      onChange={(e) =>
+                        setPasswords({
+                          ...passwords,
+                          confirmNewPassword: e.target.value,
+                        })
+                      }
+                      className="input"
+                      style={{
+                        backgroundColor: "var(--bg-white-color)",
+                        borderColor: "var(--bg-header-footer)",
+                        outlineColor: "var(--secondary-color)",
+                        padding: "1.15rem",
+                        color: "var(--font-family-color)",
+                        fontSize: "1rem",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                      onClick={toggleConfirmNewPasswordVisibility}
+                    >
+                      {showConfirmNewPassword ? (
+                        <HiEyeOff className="text-2xl text-font-family-color" />
+                      ) : (
+                        <HiEye className="text-2xl text-font-family-color" />
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className="mb-4" style={{ position: "relative" }}>
-                  <Label htmlFor="newPassword" className="visually-hidden">
-                    New Password
-                  </Label>
-                  <TextInput
-                    required
-                    id="newPassword"
-                    type={showNewPassword ? "text" : "password"}
-                    placeholder="New Password *"
-                    value={passwords.newPassword}
-                    onChange={(e) =>
-                      setPasswords({
-                        ...passwords,
-                        newPassword: e.target.value,
-                      })
-                    }
-                    className="input"
-                    style={{
-                      backgroundColor: "var(--bg-white-color)",
-                      borderColor: "var(--bg-header-footer)",
-                      outlineColor: "var(--secondary-color)",
-                      padding: "1.15rem",
-                      color: "var(--font-family-color)",
-                      fontSize: "1rem",
-                    }}
-                  />{" "}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "10px",
-                      transform: "translateY(-50%)",
-                      cursor: "pointer",
-                    }}
-                    onClick={toggleNewPasswordVisibility}
-                  >
-                    {showNewPassword ? (
-                      <HiEyeOff className="text-2xl text-font-family-color" />
-                    ) : (
-                      <HiEye className="text-2xl text-font-family-color" />
-                    )}
-                  </div>
+                <div className="text-dark-gray">
+                  <p className="font-bold">Password Requirements:</p>
+                  <p>Minimum length of 6 characters</p>
+                  <p>At least one number</p>
+                  <p>At least one number</p>
+                  <p>At least one capital letter</p>
+                  <p>At least one special symbol</p>
+                  <p>
+                    (&#33; &#64; &#35; &#36; &#37; &#94; &#38; &#42; &#95; &#43;
+                    &#123; &#125; &#58; &lt; &gt; &#63;)
+                  </p>
                 </div>
-                <div className="mb-4" style={{ position: "relative" }}>
-                  <Label
-                    htmlFor="confirmNewPassword"
-                    className="visually-hidden"
+                {/* Change Password Button */}
+                <div className="text-center flex justify-center mb-6 mt-6">
+                  <Button
+                    className="custom-button-style"
+                    type="submit"
+                    aria-label="Change Password"
                   >
-                    Confirm New Password
-                  </Label>
-                  <TextInput
-                    required
-                    id="confirmNewPassword"
-                    type={showConfirmNewPassword ? "text" : "password"}
-                    placeholder="Confirm New Password *"
-                    value={passwords.confirmNewPassword}
-                    onChange={(e) =>
-                      setPasswords({
-                        ...passwords,
-                        confirmNewPassword: e.target.value,
-                      })
-                    }
-                    className="input"
-                    style={{
-                      backgroundColor: "var(--bg-white-color)",
-                      borderColor: "var(--bg-header-footer)",
-                      outlineColor: "var(--secondary-color)",
-                      padding: "1.15rem",
-                      color: "var(--font-family-color)",
-                      fontSize: "1rem",
-                    }}
-                  />{" "}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "10px",
-                      transform: "translateY(-50%)",
-                      cursor: "pointer",
-                    }}
-                    onClick={toggleConfirmNewPasswordVisibility}
-                  >
-                    {showConfirmNewPassword ? (
-                      <HiEyeOff className="text-2xl text-font-family-color" />
-                    ) : (
-                      <HiEye className="text-2xl text-font-family-color" />
-                    )}
-                  </div>
+                    Change Password
+                  </Button>
                 </div>
-              </div>
-              <div className="text-dark-gray">
-                <p className="font-bold">Password Requirements:</p>
-                <p>Minimum length of 8 characters</p>
-                <p>At least one number</p>
-                <p>At least one capital letter</p>
-                <p>At least one special symbol</p>
-              </div>
-              {/* Change Password Button */}
-              <div className="text-center flex justify-center mb-6 mt-6">
-                <Button
-                  className="custom-button-style"
-                  onClick={handlePasswordChange}
-                  aria-label="Change Password"
-                >
-                  Change Password
-                </Button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
