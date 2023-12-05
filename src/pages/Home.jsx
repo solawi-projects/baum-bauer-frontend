@@ -11,7 +11,7 @@ const Home = () => {
       <section className="relative flex flex-col items-center justify-center p-0 md:flex-row md:justify-between md:p-10 xl:p-20">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-center bg-bg-header-footer"
+          className="absolute top-0 left-0 w-full h-[50%] bg-cover bg-no-repeat bg-center bg-bg-header-footer"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             opacity: 0.2,
@@ -20,23 +20,18 @@ const Home = () => {
 
         {/* Content */}
         {/* Article - Sponsor a Tree: Our Mission */}
-        <article className="w-full text-font-family-color flex flex-col justify-center z-[8] px-4 md:px-8 lg:px-12 xl:px-16 md:w-[50%]">
-          <h2 className="text-2xl lg:text-3xl py-6 lg:py-10 xl:py-14 text-center">
+        <article className="w-full text-font-family-color flex flex-col justify-center z-[8] px-4 md:px-8 lg:px-12 xl:px-16 md:w-[50%] pt-6 sm:pt-0">
+          <h2 className="text-2xl lg:text-3xl py-6  lg:py-10 xl:py-14 text-center">
             Sponsor a Tree: Our Mission
           </h2>
           <p className="font-semibold">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            Join us in a green revolution with a simple act that leaves a
+            lasting impact. Our mission is to enrich the South German landscape
+            by planting a tree for every sponsorship we receive. Each tree
+            contributes to the biodiversity of the region, supports local
+            ecosystems, and combats climate change. When you sponsor a tree,
+            you're not just planting roots in the ground; you're growing a
+            legacy that will flourish for generations to come.
           </p>
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
             <img
@@ -65,18 +60,15 @@ const Home = () => {
             About Us: Solawi Zabergäu
           </h2>
           <p className="font-semibold">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            At Solawi Zabergäu, we're more than just farmers; we're stewards of
+            the earth. Nestled in the lush valleys of Southern Germany, our
+            community-supported agriculture initiative is dedicated to
+            sustainable farming practices that respect and nourish the land. Our
+            collective efforts focus on producing organic, locally-sourced food
+            while strengthening the bond between the people and the planet. By
+            supporting us, you become a part of a movement that cherishes
+            nature's bounty and upholds the values of ecological responsibility
+            and harmony.
           </p>{" "}
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
             <img

@@ -11,22 +11,24 @@ export const AuthProvider = ({ children }) => {
   //receiving the login information from local storage
   const loginSession = JSON.parse(localStorage.getItem("login")) || {
     loggedIn: false,
-    email: "",
+    authUser: {},
   };
 
   const [loggedIn, setLoggedIn] = useState(loginSession.loggedIn);
-  const [email, setEmail] = useState(loginSession.email);
+  const [authUser, setAuthUser] = useState(loginSession.authUser);
 
-  // it will be called any time that the (loggedIn and email) changed
+  // it will be called any time that the (loggedIn and authUser) changed
   useEffect(() => {
     localStorage.setItem(
       "login",
-      JSON.stringify({ loggedIn: loggedIn, email: email })
+      JSON.stringify({ loggedIn: loggedIn, authUser: authUser })
     );
-  }, [loggedIn, email]);
+  }, [loggedIn, authUser]);
 
   return (
-    <AuthContext.Provider value={{ loggedIn, setLoggedIn, email, setEmail }}>
+    <AuthContext.Provider
+      value={{ loggedIn, setLoggedIn, authUser, setAuthUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

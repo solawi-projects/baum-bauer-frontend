@@ -1,38 +1,115 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
+import 'sweetalert2/dist/sweetalert2.min.css';
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
-
+import { AuthContext } from "../../contexts/AuthContext";
+import Swal from "sweetalert2";
+import axios from '../../utils/axiosInstance'
 const UpdateProfile = () => {
+  const {loggedIn, authUser,setAuthUser } = useContext(AuthContext)
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Update Profile" };
+
+/*   const [user, setUser] = useState()
+  const UId = '65673cc189843980368351b0'
+ */  
 
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    phoneNumber: "",
-    addressLine1: "",
-    addressLine2: "",
+    mobilePhone: "",
+    address1: "",
+    address2: "",
     city: "",
-    postcode: "",
+    zipCode: "",
     stateCountry: "",
     country: "",
-  });
+    state: '',
+  })
 
-  const handleInputChange = (fieldName, value) => {
-    setFormValues({
-      ...formValues,
-      [fieldName]: value,
+
+  
+  useEffect(() => {
+    // Set formValues based on user data when user data is available
+   
+      setFormValues({
+        firstName: authUser.firstName ,
+        lastName: authUser.lastName ,
+        email: authUser.email ,
+        mobilePhone: authUser.mobilePhone || "",
+        address1: authUser.address.address1 || "",
+        address2: authUser.address?.address2 || "",
+        city: authUser.address.city ,
+        zipCode: authUser.address.zipCode || "",
+        state: authUser.address.state || "",
+        country: authUser.address.country || "",
+
+      });
+    
+  }, [authUser]);
+  const handleswal = () => {
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+      customClass: {   confirmButton: "btn-confirm-class",
+      denyButton: "btn-deny-class",
+      cancelButton: "btn-cancel-class",
+        container: "custom-swal-container", // Add a custom class to the container
+      },
+      buttonsStyling: false,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Profile updated successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: 'custom-confirm-button-class',
+          },
+        
+        });        handleUpdate();
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
     });
   };
+  
+  const handleUpdate = async () => {
+    /*     console.log("Form values:", formValues);
+    
+     */
+    // eslint-disable-next-line react-hooks/rules-of-hooks
 
-  const handleUpdate = () => {
-    console.log("Form values:", formValues);
-  };
+      try {
+        const response = await axios.patch(`/api/users/update-by-id/${authUser._id}`, formValues);
+    
+        if (response.status === 200) {
+          console.log(response.data);
+          setAuthUser(response.data.user);
+          setFormValues(response.data);
+        }
+      } catch (error) {
+        console.error("Error updating user profile:", error.message);
+        // You can add additional error handling or alert the user about the issue
+        console.error("Error details:", error);
+
+      }
+    
+/* const handleInputChange = (fieldName, value) => {
+  setFormValues({
+    ...formValues,
+    [fieldName]: value,
+  });
+}; */};
 
   return (
     <main>
@@ -68,7 +145,8 @@ const UpdateProfile = () => {
             <DashboardLinks />
             <MobileDashboardLinks />
 
-            {/* Form */}
+            {/* Form */}              {loggedIn && (
+
             <div className="w-[100%] md:w-[75%]">
               <div className="flex items-center mb-4">
                 <img
@@ -77,25 +155,22 @@ const UpdateProfile = () => {
                   className="w-[40px] h-[40px] mr-2"
                 />{" "}
                 <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                  Update Your Profil
+                  Edit Your Profile
                 </h3>
               </div>
               {/* Form Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-4 mt-10">
                 {/* First Row */}
                 <div className="mb-4">
-                  <Label htmlFor="firstName" className="visually-hidden">
+                  <Label htmlFor="firstName" className="">
                     First Name
                   </Label>
                   <TextInput
-                    required
+
                     id="firstName"
                     type="text"
-                    placeholder="First Name *"
-                    value={formValues.firstName}
-                    onChange={(e) =>
-                      handleInputChange("firstName", e.target.value)
-                    }
+                    value={authUser?.firstName || ""}
+                    readOnly
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -108,18 +183,19 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="lastName" className="visually-hidden">
+                  <Label htmlFor="lastName" className="">
                     Last Name
                   </Label>
                   <TextInput
                     required
                     id="lastName"
                     type="text"
-                    placeholder="Last Name *"
-                    value={formValues.lastName}
-                    onChange={(e) =>
-                      handleInputChange("lastName", e.target.value)
-                    }
+                    value={authUser?.lastName || ""}
+
+                    readOnly
+                    onChange={(e) => console.log(e)
+/*                       handleInputChange("lastName", e.target.value)
+ */                    }
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -134,16 +210,17 @@ const UpdateProfile = () => {
 
                 {/* Second Row */}
                 <div className="mb-4">
-                  <Label htmlFor="email" className="visually-hidden">
+                  <Label htmlFor="email" className="">
                     Email Address
                   </Label>
                   <TextInput
                     required
                     id="email"
                     type="email"
-                    placeholder="Email Address *"
-                    value={formValues.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    value={authUser?.email || ""}
+
+                    readOnly
+                    onChange={(e) => console.log(e) /* handleInputChange("email", e.target.value) */}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -156,19 +233,18 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="phoneNumber" className="visually-hidden">
-                    Phone Number
+                  <Label htmlFor="phoneNumber" className="">
+                    Phone Number *
                   </Label>
                   <TextInput
                     required
                     id="phoneNumber"
-                    type="tel"
+                    type="text"
                     name="phone"
-                    placeholder="Phone Number *"
-                    value={formValues.phoneNumber}
-                    onChange={(e) =>
-                      handleInputChange("phoneNumber", e.target.value)
-                    }
+                    value={formValues.mobilePhone || null || authUser?.mobilePhone}
+
+                    onChange={(e) => setFormValues({ ...formValues, mobilePhone: e.target.value })}
+
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -183,18 +259,16 @@ const UpdateProfile = () => {
 
                 {/* Third Row */}
                 <div className="mb-4">
-                  <Label htmlFor="addressLine1" className="visually-hidden">
-                    Address Line 1
+                  <Label htmlFor="addressLine1" className="">
+                    Address Line 1 *
                   </Label>
                   <TextInput
                     required
                     id="addressLine1"
                     type="text"
-                    placeholder="Address Line 1 *"
-                    value={formValues.addressLine1}
-                    onChange={(e) =>
-                      handleInputChange("addressLine1", e.target.value)
-                    }
+                    value={formValues.address1 || null || authUser?.address.address1}
+
+                    onChange={(e) => setFormValues({ ...formValues, address1: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -207,17 +281,15 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="addressLine2" className="visually-hidden">
+                  <Label htmlFor="addressLine2" className="">
                     Address Line 2
                   </Label>
                   <TextInput
                     id="addressLine2"
                     type="text"
-                    placeholder="Address Line 2"
-                    value={formValues.addressLine2}
-                    onChange={(e) =>
-                      handleInputChange("addressLine2", e.target.value)
-                    }
+                    value={formValues.address2 || null || authUser?.address.address2}
+
+                    onChange={(e) => setFormValues({ ...formValues, address2: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -232,16 +304,16 @@ const UpdateProfile = () => {
 
                 {/* Fourth Row */}
                 <div className="mb-4">
-                  <Label htmlFor="city" className="visually-hidden">
-                    City
+                  <Label htmlFor="city" className="">
+                    City *
                   </Label>
                   <TextInput
                     required
                     id="city"
                     type="text"
-                    placeholder="City *"
-                    value={formValues.city}
-                    onChange={(e) => handleInputChange("city", e.target.value)}
+                    value={formValues.city  || authUser?.address.city}
+
+                    onChange={(e) => setFormValues({ ...formValues,city: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -254,18 +326,16 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="postcode" className="visually-hidden">
-                    Postcode
+                  <Label htmlFor="postcode" className="">
+                    Postcode *
                   </Label>
                   <TextInput
                     required
                     id="postcode"
                     type="text"
-                    placeholder="Postcode *"
-                    value={formValues.postcode}
-                    onChange={(e) =>
-                      handleInputChange("postcode", e.target.value)
-                    }
+                    value={formValues.zipCode || null || authUser?.address.zipCode}
+
+                    onChange={(e) => setFormValues({ ...formValues, zipCode: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -280,17 +350,15 @@ const UpdateProfile = () => {
 
                 {/* Fifth Row */}
                 <div className="mb-4">
-                  <Label htmlFor="stateCountry" className="visually-hidden">
-                    State/Country
+                  <Label htmlFor="stateCountry" className="">
+                    State
                   </Label>
                   <TextInput
                     id="stateCountry"
                     type="text"
-                    placeholder="State/Country"
-                    value={formValues.stateCountry}
-                    onChange={(e) =>
-                      handleInputChange("stateCountry", e.target.value)
-                    }
+                    value={formValues.state || authUser?.address.state}
+
+                    onChange={(e) => setFormValues({ ...formValues, state: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -303,18 +371,16 @@ const UpdateProfile = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Label htmlFor="country" className="visually-hidden">
-                    Country
+                  <Label htmlFor="country" className="">
+                    Country *
                   </Label>
                   <TextInput
                     required
                     id="country"
                     type="text"
-                    placeholder="Country *"
-                    value={formValues.country}
-                    onChange={(e) =>
-                      handleInputChange("country", e.target.value)
-                    }
+                    value={formValues.country || null || authUser?.address.country}
+
+                    onChange={(e) => setFormValues({ ...formValues, country: e.target.value })}
                     className="input"
                     style={{
                       backgroundColor: "var(--bg-white-color)",
@@ -331,13 +397,13 @@ const UpdateProfile = () => {
               <div className="text-center flex justify-center mb-6">
                 <Button
                   className="custom-button-style"
-                  onClick={handleUpdate}
+                  onClick={handleswal}
                   aria-label="Update Profile"
                 >
-                  Update Profile
+                  Save Changes
                 </Button>
               </div>
-            </div>
+            </div>)}
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ const About = () => {
       <section className="relative flex flex-col items-center justify-center pt-[100px] md:pt-[160px] lg:pt-[180px] xl:pt-[220px]">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-[25%] bg-cover bg-no-repeat bg-center"
+          className="absolute top-0 left-0 w-full h-[15%] bg-cover bg-no-repeat bg-center"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             opacity: 0.2,
@@ -26,7 +26,7 @@ const About = () => {
 
         {/* Content */}
         {/* Article - Sponsor a Tree: Our Mission */}
-        <article className="w-full flex flex-col items-center justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 shadow-lg ">
+        <article className="max-w-[75%] flex flex-col bg-white rounded-xl items-center justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 shadow-lg ">
           <div className="flex items-center mb-4">
             <img
               src="/src/assets/tree.png"
@@ -39,7 +39,7 @@ const About = () => {
           </div>
 
           <h3 className="text-xl lg:text-2xl py-2 text-center font-medium">
-            Etracing Nature, Enriching Lives
+            Embracing Nature, Enriching Lives
           </h3>
           <p className="text-md font-normal text-justify py-2">
             At the heart of our mission is a simple yet profound commitment: to
@@ -90,23 +90,23 @@ const About = () => {
             endeavor to make a positive impact on our planet and communities.
           </p>
           {/* Image section */}
-          <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
+          <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[5rem]">
             <img
               src="src/assets/images/biobaum_sapling_01.webp"
               alt="Sapling Tree"
-              className="w-[50%] border border-white"
-              style={{ borderWidth: "10px" }}
+              className="w-[50%] border border-[var(--darker-primary)]"
+              style={{ borderWidth: "5px" }}
             />
             <img
               src="src/assets/images/biobaum_sapling_02.webp"
               alt="Sapling Tree"
-              className="w-[50%] border border-white"
-              style={{ borderWidth: "10px" }}
+              className="w-[50%] border border-[var(--darker-primary)]"
+              style={{ borderWidth: "5px" }}
             />
           </div>
         </article>
         {/* Article - About Us: Solawi Zabergäu */}
-        <article className="w-full flex flex-col items-center justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 mt-10 shadow-lg">
+        <article className="max-w-[75%] flex flex-col items-center bg-white rounded-xl justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 mt-10 shadow-lg">
           <div className="flex items-center mb-4 pt-[0px] md:pt-[10px] lg:pt-[20px] xl:pt-[40px]">
             <img
               src="/src/assets/tree.png"
@@ -169,18 +169,18 @@ const About = () => {
             future.
           </p>
           {/* Image section */}
-          <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
+          <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[5rem]">
             <img
               src="src/assets/images/biobaum_sapling_03.webp"
               alt="Sapling Tree"
-              className="w-[50%] border border-white"
-              style={{ borderWidth: "10px" }}
+              className="w-[50%] border border-[var(--darker-primary)]"
+              style={{ borderWidth: "5px" }}
             />
             <img
               src="src/assets/images/biobaum_sapling_04.webp"
               alt="Sapling Tree"
-              className="w-[50%] border border-white"
-              style={{ borderWidth: "10px" }}
+              className="w-[50%] border border-[var(--darker-primary)]"
+              style={{ borderWidth: "5px" }}
             />
           </div>
         </article>

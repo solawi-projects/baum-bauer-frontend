@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Breadcrumb, Label, TextInput, Checkbox, Button } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
@@ -11,8 +12,169 @@ import { SiGooglestreetview } from "react-icons/si";
 import { FaHouse } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import backgroundImage from "../../assets/images/leaves_background_02.webp";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobilePhone: "",
+    password: "",
+    passwordConfirmation: "",
+    address1: "",
+    address2: "",
+    city: "",
+    zipCode: "",
+    state: "",
+    country: "",
+    agree: false,
+  });
+
+  const navigate = useNavigate();
+
+  const [errorMsgs, setErrorMsgs] = useState([]);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmationPassword, setShowConfirmationPassword] =
+    useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmationPasswordVisibility = () => {
+    setShowConfirmationPassword(!showConfirmationPassword);
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCheckboxChange = (e) => {
+    setFormData({
+      ...formData,
+      agree: e.target.checked,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!formData.agree) {
+      Swal.fire({
+        icon: "warning",
+        title: "Agreement Required",
+        text: "Please agree to the terms and conditions before registering.",
+        customClass: {
+          confirmButton: "btn-custom-class",
+          title: "title-class",
+        },
+        buttonsStyling: false,
+      });
+      return; // Stop further execution if not agreed
+    }
+
+    //  passwords match
+    if (formData.password !== formData.passwordConfirmation) {
+      // Display password mismatch
+      Swal.fire({
+        icon: "error",
+        title: "Password Mismatch",
+        text: "Passwords do not match!",
+        customClass: {
+          confirmButton: "btn-custom-class",
+          title: "title-class",
+        },
+        buttonsStyling: false,
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/users/create-user",
+        formData
+      );
+
+      if (response.status === 201) {
+        setErrorMsgs([]);
+        // Display success message
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful!",
+          text: "You have successfully registered.",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+        navigate("/login");
+      } else {
+        // Handle other server response statuses
+        console.error("Error creating user:", response.data.message);
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text:
+            response.data.message || "An error occurred during registration!",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      }
+    } catch (error) {
+      setErrorMsgs([]);
+
+      // Handle errors that occurred during the POST request
+      if (error.response && error.response.status === 400) {
+        setErrorMsgs(error.response.data.errors);
+
+        let errorMessage = "<ul>";
+
+        // Loop through error messages and append to the list
+        error.response.data.errors.forEach((error) => {
+          errorMessage += `<li>${error.msg}</li>`;
+        });
+
+        errorMessage += "</ul>";
+
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          html: errorMessage,
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text:
+            error.response?.data.message ||
+            "An error occurred during registration!",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+      }
+    }
+  };
+
   return (
     <main>
       <Breadcrumb
@@ -28,11 +190,14 @@ const Register = () => {
       <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center text-font-family-color">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
+          className="absolute top-0 left-0 w-full h-[50%] bg-cover bg-no-repeat bg-top z-[-1]"
           style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
         ></div>
 
-        <div className="flex flex-col justify-start items-start gap-[2rem] w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] bg-white rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] xs:py-12 py-10">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col justify-start items-start gap-[2rem] w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] bg-white rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] xs:py-12 py-10"
+        >
           <div className="flex items-center">
             <img
               src="/src/assets/tree.png"
@@ -65,17 +230,18 @@ const Register = () => {
               {/* first name field */}
               <div className="mb-4 w-full ">
                 <Label
-                  htmlFor="firstname"
+                  htmlFor="firstName"
                   value="First Name"
                   className="visually-hidden"
                 />
                 <TextInput
                   aria-label="Type your first name here"
-                  id="firstname"
+                  id="firstName"
                   type="text"
+                  name="firstName"
                   icon={IoMdPerson}
                   placeholder="First Name *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -87,23 +253,25 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
 
               {/* last name field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="lastname"
+                  htmlFor="lastName"
                   value="Last Name"
                   className="visually-hidden"
                 />
                 <TextInput
                   aria-label="Type your last name here"
-                  id="lastname"
+                  id="lastName"
                   type="text"
+                  name="lastName"
                   icon={IoMdPerson}
                   placeholder="Last Name *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -115,6 +283,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -124,14 +293,14 @@ const Register = () => {
               <div className="flex flex-col w-full">
                 {" "}
                 <div className="mb-0 w-full">
-                  <Label htmlFor="phoneNumber" className="visually-hidden">
+                  <Label htmlFor="mobilePhone" className="visually-hidden">
                     Phone Number
                   </Label>
                   <TextInput
-                    required
-                    id="phoneNumber"
+                    required={true}
+                    id="mobilePhone"
                     type="tel"
-                    name="phone"
+                    name="mobilePhone"
                     icon={FaPhoneAlt}
                     placeholder="Phone Number *"
                     className="input"
@@ -144,6 +313,7 @@ const Register = () => {
                       fontSize: "1rem",
                       paddingLeft: "2.5rem",
                     }}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <p className="text-dark-gray">
@@ -157,17 +327,18 @@ const Register = () => {
               {/* email field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="emailAddress"
+                  htmlFor="email"
                   value="Email Address"
                   className="visually-hidden"
                 />
                 <TextInput
                   aria-label="Type your email address here"
-                  id="emailAddress"
+                  id="email"
                   icon={MdEmail}
                   type="email"
+                  name="email"
                   placeholder="Email Address *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -179,13 +350,14 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
 
             <div className="flex flex-col justify-center md:justify-between md:flex-row gap-[0.5rem] w-full">
               {/* password field */}
-              <div className="mb-2 w-full">
+              <div className="mb-2 w-full" style={{ position: "relative" }}>
                 <Label
                   htmlFor="password"
                   value="Password"
@@ -195,9 +367,10 @@ const Register = () => {
                   aria-label="Enter your password here"
                   id="password"
                   icon={MdOutlineKey}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
                   placeholder="Password *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -209,23 +382,41 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
-                />
+                  onChange={handleInputChange}
+                />{" "}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <HiEyeOff className="text-2xl" />
+                  ) : (
+                    <HiEye className="text-2xl" />
+                  )}
+                </div>
               </div>
 
               {/* confirm password field */}
-              <div className="mb-2 w-full">
+              <div className="mb-2 w-full " style={{ position: "relative" }}>
                 <Label
-                  htmlFor="passwordC"
+                  htmlFor="passwordConfirmation"
                   value="Confirm Password"
                   className="visually-hidden"
                 />
                 <TextInput
                   aria-label="Re-enter your password here"
-                  id="passwordC"
+                  id="passwordConfirmation"
                   icon={MdOutlineKey}
-                  type="password"
+                  type={showConfirmationPassword ? "text" : "password"}
+                  name="passwordConfirmation"
                   placeholder="Confirm Password *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -237,21 +428,33 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
-                />
+                  onChange={handleInputChange}
+                />{" "}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "10px",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                  }}
+                  onClick={toggleConfirmationPasswordVisibility}
+                >
+                  {showConfirmationPassword ? (
+                    <HiEyeOff className="text-2xl" />
+                  ) : (
+                    <HiEye className="text-2xl" />
+                  )}
+                </div>
               </div>
             </div>
 
             <div className="text-dark-gray">
               <p className="font-bold">Password Requirements:</p>
-              <p>Minimum length of 6 characters</p>
-              <p>At least one number</p>
+              <p>Minimum length of 8 characters</p>
               <p>At least one number</p>
               <p>At least one capital letter</p>
               <p>At least one special symbol</p>
-              <p>
-                (&#33; &#64; &#35; &#36; &#37; &#94; &#38; &#42; &#95; &#43;
-                &#123; &#125; &#58; &lt; &gt; &#63;)
-              </p>
             </div>
           </div>
 
@@ -265,17 +468,18 @@ const Register = () => {
               {/* address line 1 field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="houseNumber"
+                  htmlFor="address1"
                   className="text-xs visually-hidden"
-                  value="House Number"
+                  value="Address Line 1"
                 />
                 <TextInput
-                  aria-label="Enter your house number here"
-                  id="houseNumber"
+                  aria-label="Address Line 1"
+                  id="address1"
                   type="text"
+                  name="address1"
                   icon={FaHouse}
                   placeholder="Addrss Line 1 *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -287,19 +491,21 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
               {/* address line 2 field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="street"
+                  htmlFor="address2"
                   className="text-xs visually-hidden"
-                  value="Street"
+                  value="Address Line 2"
                 />
                 <TextInput
                   aria-label="Enter your street name here"
-                  id="street"
+                  id="address2"
                   type="text"
+                  name="address2"
                   icon={SiGooglestreetview}
                   placeholder="Address Line 2 "
                   shadow
@@ -313,6 +519,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -328,9 +535,10 @@ const Register = () => {
                   aria-label="Enter your city name here"
                   id="city"
                   type="text"
+                  name="city"
                   icon={FaTreeCity}
                   placeholder="City *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -342,22 +550,25 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
+
               {/* Postcode */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="city"
+                  htmlFor="zipCode"
                   className="text-xs visually-hidden"
                   value="City"
                 />
                 <TextInput
                   aria-label="Enter your city name here"
-                  id="city"
+                  id="zipCode"
                   type="text"
+                  name="zipCode"
                   icon={GiPostOffice}
                   placeholder="Postcode *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -369,6 +580,7 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -376,14 +588,15 @@ const Register = () => {
               {/* state/country field */}
               <div className="mb-4 w-full">
                 <Label
-                  htmlFor="country"
+                  htmlFor="state"
                   className="text-xs visually-hidden"
-                  value="Country"
+                  value="State"
                 />
                 <TextInput
                   aria-label="Enter your country name here"
-                  id="country"
+                  id="state"
                   type="text"
+                  name="state"
                   icon={FaMapLocation}
                   placeholder="State/Country"
                   shadow
@@ -397,8 +610,10 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
                 />
               </div>
+
               {/* country field */}
               <div className="w-full">
                 <Label
@@ -409,10 +624,11 @@ const Register = () => {
                 <TextInput
                   aria-label="Enter your country name here"
                   id="country"
+                  name="country"
                   type="text"
                   icon={FaMapLocation}
                   placeholder="Country *"
-                  required
+                  required={true}
                   shadow
                   className="input"
                   style={{
@@ -424,6 +640,9 @@ const Register = () => {
                     fontSize: "1rem",
                     paddingLeft: "2.5rem",
                   }}
+                  onChange={handleInputChange}
+                  disabled={true}
+                  value="Germany"
                 />
               </div>
             </div>
@@ -435,11 +654,13 @@ const Register = () => {
               <Checkbox
                 id="agree"
                 className=" border-font-family-color checked:border-none checked:outline-none checked:bg-secondary-color focus:ring-transparent dark:ring-offset-transparent !important cursor-pointer"
+                checked={formData.agree}
+                onChange={handleCheckboxChange}
               />
               <Label htmlFor="agree" className="text-font-family-color">
                 I agree with the&nbsp;
                 <Link
-                  href="#"
+                  to="/terms"
                   className="text-secondary-color font-bold underline"
                 >
                   terms and conditions.
@@ -453,7 +674,7 @@ const Register = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </form>
       </div>{" "}
       <img
         src="src/assets/images/biobaum_about_footer_img.webp"

@@ -2,10 +2,10 @@ import PageBreadcrumb from "../components/PageBreadcrumb";
 import { Fade } from "react-awesome-reveal";
 import { HiHome } from "react-icons/hi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { IoIosSearch } from "react-icons/io";
+// import { IoIosSearch } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { TreeData } from "../components/TreeData";
-
+import { GrNext, GrPrevious } from "react-icons/gr";
 import footerImage from "../assets/images/biobaum_gallery_footer_img.webp";
 import Search from "../components/Search";
 import "../components/Trees.css";
@@ -80,13 +80,13 @@ const Tree = () => {
               className="w-[40px] h-[40px] mr-2"
             />
             <div className="sm:text-4xl text-3xl font-main-font text-secondary-color tracking-wide border-bg-header-footer inline-block ">
-              Stand with us for a greener world – sponsor a tree and grow a
+              Stand with us for a greener world - sponsor a tree and grow a
               legacy of environmental stewardship.
             </div>
           </div>
         </div>
 
-        <div className="relative w-full mx-auto p-4  md:pb-[40px] lg:pb-[100px] xl:pb-[120px]  border-t-2 border-bg-header-footer flex flex-col  justify-center flex-wrap gap-10 pt-40 pb-40">
+        <div className="relative w-full mx-auto p-4  md:pb-[40px] lg:pb-[100px] xl:pb-[120px] border-bg-header-footer flex flex-col  justify-center flex-wrap gap-10 pt-40 pb-40">
           {/* Overlay with background image and opacity */}
           <div
             className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
@@ -127,11 +127,11 @@ const Tree = () => {
             </div>
           </div>
 
-          <h2 className="container mx-auto my-5 pt-16 text-2xl flex justify-center items-center">
+          <h2 className="container mx-auto my-5 pt-16 text-4xl flex justify-center items-center">
             Showing {startvalue} to {endvalue} of {totalTree} Trees
           </h2>
           <Fade delay={100} cascade damping={0.1} duration={3000}>
-            <div className="flex justify-center items-center gap-8">
+            <div className="flex justify-center flex-wrap items-center gap-8">
               {tree.map((item, index) => (
                 <div key={index} className="flex items-center">
                   <div className=" w-60 p-4 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
@@ -158,9 +158,9 @@ const Tree = () => {
                       <div className="mt-2 mb-1 flex justify-start">
                         <Link
                           to={`/trees/${item._id}`}
-                          className="text-center w-full px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear mt-4 sm:mt-0"
+                          className="text-center w-full px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary hover:border-2 transition duration-4000 ease-linear mt-4 sm:mt-0"
                         >
-                          view more
+                          view in detail
                         </Link>
                       </div>
                     </div>
@@ -169,14 +169,30 @@ const Tree = () => {
               ))}
             </div>
           </Fade>
-        </div>
-        <div className="text-2xl flex justify-center gap-7 m-4 text-font-family-color">
-          <button onClick={handlePrev} disabled={skip === 0}>
-            Previous
-          </button>
-          <button onClick={handleNex} disabled={skip + limit >= totalTree}>
-            Next
-          </button>
+          <div className="text-2xl flex justify-center m-4 text-font-family-color gap-10">
+            <button
+              onClick={handlePrev}
+              disabled={skip === 0}
+              className={
+                skip === 0
+                  ? "border-lighter-secondary border-4 p-3 rounded-full shadow-2xl"
+                  : "bg-secondary-color border-darker-secondary border-4 text-white p-3 rounded-full hover:bg-lighter-secondary hover:text-secondary-color transition-all duration-400 ease-linear shadow-2xl"
+              }
+            >
+              <GrPrevious />
+            </button>
+            <button
+              onClick={handleNex}
+              disabled={skip + limit >= totalTree}
+              className={
+                skip + limit >= totalTree
+                  ? "border-lighter-secondary border-4 p-3 rounded-full shadow-xl"
+                  : "bg-secondary-color border-darker-secondary border-4 text-white p-3 rounded-full hover:bg-lighter-secondary hover:text-secondary-color transition-all duration-400 ease-linear shadow-2xl"
+              }
+            >
+              <GrNext />
+            </button>
+          </div>
         </div>
       </div>
       {/* pagination buttons */}

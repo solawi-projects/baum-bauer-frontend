@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
@@ -7,31 +7,51 @@ import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "../../utils/axiosInstance";
+import { HiEye, HiEyeOff } from "react-icons/hi";
+
 const PasswordChange = () => {
   // State to manage password values
-  const {loggedIn}=useContext(AuthContext)
+  const { loggedIn, authUser } = useContext(AuthContext);
   const [passwords, setPasswords] = useState({
     currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
   });
 
-
-  const handlePasswordChange = async(event) => {
-    event.preventDefault()
+  const handlePasswordChange = async (event) => {
+    event.preventDefault();
     const { currentPassword, newPassword, confirmNewPassword } = passwords;
-    if(newPassword!==confirmNewPassword){
-      alert('New password and confirm password do not match')
-      return
+    if (newPassword !== confirmNewPassword) {
+      alert("New password and confirm password do not match");
+      return;
     }
     try {
-      const response = await axios.post(`api/users/change-password/${loggedIn.id}`,{currentPassword,newPassword})
-      console.log(response.data)
+      const response = await axios.post(
+        `/api/users/chang-password/${authUser._id}`,
+        { currentPassword, newPassword, confirmNewPassword }
+      );
+      // console.log(response.data);
+      // update localStorage
     } catch (error) {
       console.error("Password change failed:", error.response.data.message);
     }
 
-     console.log("Password values:", passwords);
+    console.log("Password values:", passwords);
+  };
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
+
+  const toggleCurrentPasswordVisibility = () => {
+    setShowCurrentPassword(!showCurrentPassword);
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+
+  const toggleConfirmNewPasswordVisibility = () => {
+    setShowConfirmNewPassword(!showConfirmNewPassword);
   };
 
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
@@ -69,7 +89,7 @@ const PasswordChange = () => {
             {/* Dashboard Links */}
             <DashboardLinks />
             <MobileDashboardLinks />
-   
+
             <div className="w-[100%] md:w-[75%]">
               <div className="flex items-center mb-4">
                 <img
@@ -84,14 +104,17 @@ const PasswordChange = () => {
               {/* change password form */}
               <form onSubmit={handlePasswordChange}>
                 <div className="grid grid-cols-1 gap:2 lg:gap-4 mt-10">
-                  <div className="mb-4">
-                    <Label htmlFor="currentPassword" className="visually-hidden">
+                  <div className="mb-4" style={{ position: "relative" }}>
+                    <Label
+                      htmlFor="currentPassword"
+                      className="visually-hidden"
+                    >
                       Current Password
                     </Label>
                     <TextInput
                       required
                       id="currentPassword"
-                      type="password"
+                      type={showCurrentPassword ? "text" : "password"}
                       placeholder="Current Password *"
                       value={passwords.currentPassword}
                       onChange={(e) =>
@@ -110,15 +133,31 @@ const PasswordChange = () => {
                         fontSize: "1rem",
                       }}
                     />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                      onClick={toggleCurrentPasswordVisibility}
+                    >
+                      {showCurrentPassword ? (
+                        <HiEyeOff className="text-2xl text-font-family-color" />
+                      ) : (
+                        <HiEye className="text-2xl text-font-family-color" />
+                      )}
+                    </div>
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-4" style={{ position: "relative" }}>
                     <Label htmlFor="newPassword" className="visually-hidden">
                       New Password
                     </Label>
                     <TextInput
                       required
                       id="newPassword"
-                      type="password"
+                      type={showNewPassword ? "text" : "password"}
                       placeholder="New Password *"
                       value={passwords.newPassword}
                       onChange={(e) =>
@@ -137,8 +176,24 @@ const PasswordChange = () => {
                         fontSize: "1rem",
                       }}
                     />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                      onClick={toggleNewPasswordVisibility}
+                    >
+                      {showNewPassword ? (
+                        <HiEyeOff className="text-2xl text-font-family-color" />
+                      ) : (
+                        <HiEye className="text-2xl text-font-family-color" />
+                      )}
+                    </div>
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-4" style={{ position: "relative" }}>
                     <Label
                       htmlFor="confirmNewPassword"
                       className="visually-hidden"
@@ -148,7 +203,7 @@ const PasswordChange = () => {
                     <TextInput
                       required
                       id="confirmNewPassword"
-                      type="password"
+                      type={showConfirmNewPassword ? "text" : "password"}
                       placeholder="Confirm New Password *"
                       value={passwords.confirmNewPassword}
                       onChange={(e) =>
@@ -167,6 +222,22 @@ const PasswordChange = () => {
                         fontSize: "1rem",
                       }}
                     />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                      onClick={toggleConfirmNewPasswordVisibility}
+                    >
+                      {showConfirmNewPassword ? (
+                        <HiEyeOff className="text-2xl text-font-family-color" />
+                      ) : (
+                        <HiEye className="text-2xl text-font-family-color" />
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="text-dark-gray">
@@ -185,7 +256,7 @@ const PasswordChange = () => {
                 <div className="text-center flex justify-center mb-6 mt-6">
                   <Button
                     className="custom-button-style"
-                   type="submit"
+                    type="submit"
                     aria-label="Change Password"
                   >
                     Change Password
