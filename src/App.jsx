@@ -35,6 +35,9 @@ import AddToNewArticle from "./pages/AddToNewsArticle";
 import AddNewTree from "./pages/AddNewTree";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/TermsConditions";
+import "./assets/styles/PrevNext.css";
+import SuccessPage from "./pages/SuccessPage";
+import CancelPage from "./pages/CancelPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -82,6 +85,8 @@ function App() {
                 <Route path="/addImageToGallery" element={<AddToGallery />} />
                 <Route path="/addToNewArticle" element={<AddToNewArticle />} />
                 <Route path="/addNewTree" element={<AddNewTree />} />
+                <Route path="/success" element={<SuccessPage />} />
+                <Route path="/cancel" element={<CancelPage />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
