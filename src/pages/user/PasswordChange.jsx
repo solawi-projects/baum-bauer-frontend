@@ -16,8 +16,8 @@ const PasswordChange = () => {
     confirmNewPassword: "",
   });
 
+
   const handlePasswordChange = async(event) => {
-   
     event.preventDefault()
     const { currentPassword, newPassword, confirmNewPassword } = passwords;
     if(newPassword!==confirmNewPassword){
