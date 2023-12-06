@@ -72,7 +72,7 @@ const DashboardContent = () => {
             </div>{" "}
             {/* Delivery Address */}
             <div className="w-[100%] md:w-[50%]">
-              <h3 className="break-all text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block p-4">
+              <h3 className="break-all text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                 User Details
               </h3>
               <div className=" break-all flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 xs:p-2 p-4">
