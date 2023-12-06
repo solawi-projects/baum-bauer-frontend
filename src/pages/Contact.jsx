@@ -13,6 +13,7 @@ import backgroundImage from "../assets/images/gallery_images/leaves_background_0
 import axios from "../utils/axiosInstance";
 import EachPageHeader from "../components/EachPageHeader";
 import PageBreadcrumb from "../components/PageBreadcrumb";
+import footerImage from "../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 
 import { Link } from "react-router-dom";
 
@@ -112,9 +113,9 @@ const Contact = () => {
           ))}
         </ul>
       </div>
-      <div className="flex flex-col justify-start items-start gap-[2rem] w-[100%] sm:w-[90%] lg:w-[80%] xl:w-[80%] bg-bg-page-color rounded-[15px] p-4 sm:p-8 z-9 shadow-lg  py-4 mx-auto ">
+      <div className="flex flex-col justify-start items-start gap-[2rem] w-[95%] sm:w-[90%] lg:w-[80%] xl:w-[80%] bg-lighter-primary rounded-[15px] p-2 sm:p-8 z-9 shadow-lg  py-4 mx-auto">
         <div className=" flex flex-col lg:flex-row my-4 gap-[3rem] justify-center items-center w-[100%] xl:w-[90%] mx-auto">
-          <section className="flex flex-col  items-start gap-3 px-3 w-full lg:w-[50%]">
+          <section className="flex flex-col items-start gap-3 px-3 w-full lg:w-[50%]">
             <div className="flex items-center mb-4">
               <img
                 src="/src/assets/tree.png"
@@ -137,7 +138,7 @@ const Contact = () => {
               <span className="text-lg">
                 <AiTwotoneMail />
               </span>
-              <span className="text-lg">
+              <span className="xs:text-xs text-lg">
                 <a
                   href="mailto:solawi.biobaumbauer@gmail.com"
                   target="_blank"
@@ -153,7 +154,7 @@ const Contact = () => {
               </span>
               <span className="text-lg">+4917290838934</span>
             </p>
-            <p className="flex flex-row w-full justify-center items-center bg-white-color shadow-md rounded-md p-4 hover:shadow-lg hover:rounded-lg gap-5">
+            <p className="flex flex-row w-full justify-center items-center bg-white-color shadow-md rounded-md p-4 hover:shadow-lg hover:rounded-lg gap-2 sm:gap-5">
               <a
                 href="http://"
                 className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color transition duration-5000 ease-linear"
@@ -309,7 +310,7 @@ const Contact = () => {
                   name="message"
                   rows={4}
                   ref={messageRef}
-                  className="input focus:border-secondary-color dark:focus:border-secondary-color dark:focus:ring-secondary-color focus:ring-secondary-color !important"
+                  className="input focus:border-transparent dark:focus:border-transparent focus:ring-transparent dark:focus:ring-transparent !important"
                   style={{
                     borderColor: "var(--bg-header-footer)",
                     outlineColor: "var(--secondary-color)",
@@ -353,7 +354,10 @@ const Contact = () => {
           </section>
         </div>
       </div>
-      <EachPageHeader title={titles2[0]} subtitle={titles2[1]} />
+      <div className="px-4 text-center">
+        {" "}
+        <EachPageHeader title={titles2[0]} subtitle={titles2[1]} />
+      </div>
       <div className="">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2427.6327705419662!2d13.410731076522424!3d52.521984636082806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84e1f1ef51c1f%3A0x81d2865ac4d6253a!2sAlexanderstra%C3%9Fe%204%2C%2010178%20Berlin!5e0!3m2!1sen!2sde!4v1700057987685!5m2!1sen!2sde"
@@ -364,7 +368,15 @@ const Contact = () => {
           referrerPolicy="no-referrer-when-downgrade"
           title="Location Map"
         ></iframe>
-      </div>
+      </div>{" "}
+      {/* Footer Image */}
+      <img
+        src={footerImage}
+        alt="Footer Image"
+        width="100%"
+        height="100%"
+        loading="lazy"
+      />
     </div>
   );
 };

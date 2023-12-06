@@ -180,6 +180,12 @@ function Footer() {
             <span className="font-bold">BioBaumBauer. </span>
             ALL RIGHTS RESERVED
           </p>
+        </div>{" "}
+        {/* Icon ArrowUp, To the Top of the page */}
+        <div className="arrowUp">
+          <a className="iconArrowUp" href="#">
+            <img src={logoImage} style={{ width: "80px" }} />
+          </a>
         </div>
       </div>{" "}
     </>
