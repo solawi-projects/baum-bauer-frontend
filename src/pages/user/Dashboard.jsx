@@ -47,7 +47,7 @@ const DashboardContent = () => {
             <MobileDashboardLinks />
             {/* Sponsorships */}
             <div className="w-[100%] md:w-[25%]">
-              <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+              <h3 className="break-all text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                 Welcome,&nbsp;{authUser.firstName}&nbsp;{authUser.lastName}
               </h3>
               <div className="flex flex-col justify-center items-center gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4">
@@ -72,10 +72,10 @@ const DashboardContent = () => {
             </div>{" "}
             {/* Delivery Address */}
             <div className="w-[100%] md:w-[50%]">
-              <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+              <h3 className="break-all text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block p-4">
                 User Details
               </h3>
-              <div className="flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 xs:p-2 p-4">
+              <div className=" break-all flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 xs:p-2 p-4">
                 <p className="text-font-family-color italic">
                   <span className="font-semibold">Full Name:</span>&nbsp;
                   {authUser.firstName}&nbsp;{authUser.lastName}
