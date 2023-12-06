@@ -67,7 +67,11 @@ const Contact = () => {
               hideClass: {
                 popup: "animate__animated animate__fadeOutUp",
               },
-              confirmButtonColor: "#5cb85c",
+              customClass: {
+                confirmButton: "btn-custom-class",
+                title: "title-class",
+              },
+              buttonsStyling: false,
             });
 
             checkboxRef.current.checked = false;
