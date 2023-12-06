@@ -175,7 +175,10 @@ input:active {
 input::placeholder {
   color: var(--font-family-color);
 }
-
+.input {
+  background-color: white;
+  border-radius: 10px;
+}
 /* tree page animation 
 @keyframes moveText {
   from {

@@ -136,7 +136,7 @@ const Order = () => {
                       <span className="font-semibold text-dark-gray">
                         City:
                       </span>
-                      &nbsp; City: {newPatron.address.city}
+                      &nbsp; {newPatron.address.city}
                     </p>
                     <p className="text-dark-gray italic">
                       <span className="font-semibold text-dark-gray">

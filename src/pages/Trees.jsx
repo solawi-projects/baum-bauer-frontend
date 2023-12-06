@@ -72,19 +72,27 @@ const Tree = () => {
       <p>{err}</p>
       <Search updateTree={setTree} limit={limit} skip={skip} />
       <div className=" flex justify-center flex-wrap gap-10 pt-20 pb-40">
-        <div className="flex flex-row justify-start">
-          <div className="flex flex-row justify-start items-end">
-            <img
-              src="/src/assets/tree.png"
-              alt="Small Photo"
-              className="w-[40px] h-[40px] mr-2"
-            />
-            <div className="sm:text-4xl text-3xl font-main-font text-secondary-color tracking-wide border-bg-header-footer inline-block ">
-              Stand with us for a greener world - sponsor a tree and grow a
-              legacy of environmental stewardship.
+        <Fade
+          delay={100}
+          cascade
+          damping={0.1}
+          duration={2000}
+          direction="down"
+        >
+          <div className="flex flex-row justify-start">
+            <div className="flex flex-row justify-start items-end">
+              <img
+                src="/src/assets/tree.png"
+                alt="Small Photo"
+                className="w-[40px] h-[40px] mr-2"
+              />
+              <div className="sm:text-4xl text-3xl font-main-font text-secondary-color tracking-wide border-bg-header-footer inline-block ">
+                Stand with us for a greener world - sponsor a tree and grow a
+                legacy of environmental stewardship.
+              </div>
             </div>
           </div>
-        </div>
+        </Fade>
 
         <div className="relative w-full mx-auto p-4  md:pb-[40px] lg:pb-[100px] xl:pb-[120px] border-bg-header-footer flex flex-col  justify-center flex-wrap gap-10 pt-40 pb-40">
           {/* Overlay with background image and opacity */}
