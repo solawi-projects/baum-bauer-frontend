@@ -3,6 +3,7 @@ import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import { Link } from "react-router-dom";
+import { Button } from "flowbite-react";
 
 const Terms = () => {
   const titles = ["Terms and Conditions"];
@@ -351,13 +352,15 @@ const Terms = () => {
           </p>
 
           {/* Link going back to Registration page */}
-          <div className="text-center mt-10">
-            <Link
-              to="/register"
-              className="text-lg md:text-xl text-secondary-color font-bold underline"
-            >
-              Back to Registration page...
-            </Link>
+          <div className="flex justify-center mt-10">
+            <Button className="custom-button-style px-4 py-2 md:px-6 md:py-3">
+              <Link
+                to="/register"
+                className="text-md md:text-lg text-secondary-color font-bold"
+              >
+                Back to Registration Page...
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
