@@ -187,7 +187,7 @@ function Footer() {
             <span className="font-bold">BioBaumBauer. </span>
             ALL RIGHTS RESERVED
           </p>
-        </div>
+        </div>{" "}
       </div>{" "}
     </>
   );

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { CartContext } from "../store/CartContext";
+import { AuthContext } from "../contexts/AuthContext";
 import DOMPurify from "dompurify";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
@@ -12,6 +13,8 @@ const SingleTreePage = () => {
   const { id } = useParams();
   const [tree, setTree] = useState(null);
   const { addTree } = useContext(CartContext);
+  const { loggedIn } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -133,14 +136,16 @@ const SingleTreePage = () => {
               <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-2" />
 
               {/* Add to Cart Button */}
-              <button
-                to="/trees"
-                className="text-center w-full my-2 px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear"
-                aria-label="Sponsor page"
-                onClick={handleAddToCart}
-              >
-                Add to Cart
-              </button>
+              {loggedIn && (
+                <button
+                  to="/trees"
+                  className="text-center w-full my-2 px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear"
+                  aria-label="Sponsor page"
+                  onClick={handleAddToCart}
+                >
+                  Add to Cart
+                </button>
+              )}
             </div>
           </div>
         </div>

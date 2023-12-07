@@ -38,6 +38,7 @@ import Terms from "./pages/TermsConditions";
 import "./assets/styles/PrevNext.css";
 import SuccessPage from "./pages/SuccessPage";
 import CancelPage from "./pages/CancelPage";
+import ProtectedRoute from "./pages/user/ProtectedRoute";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -69,24 +70,91 @@ function App() {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/faq" element={<Faq />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/order/place_order" element={<Order />} />
+                <Route
+                  path="/cart"
+                  element={
+                    <ProtectedRoute>
+                      <Cart />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <ProtectedRoute>
+                      <Checkout />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/order/place_order"
+                  element={
+                    <ProtectedRoute>
+                      <Order />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/update_profile" element={<UpdateProfile />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/update_profile"
+                  element={
+                    <ProtectedRoute>
+                      <UpdateProfile />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/user_sponsorships"
-                  element={<UserSponsorships />}
+                  element={
+                    <ProtectedRoute>
+                      <UserSponsorships />
+                    </ProtectedRoute>
+                  }
                 />
-                <Route path="/password_change" element={<PasswordChange />} />
-                <Route path="/signout" element={<Signout />} />
-                <Route path="/addImageToGallery" element={<AddToGallery />} />
+                <Route
+                  path="/password_change"
+                  element={
+                    <ProtectedRoute>
+                      <PasswordChange />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/signout"
+                  element={
+                    <ProtectedRoute>
+                      <Signout />
+                    </ProtectedRoute>
+                  }
+                />
+                {/*     <Route path="/addImageToGallery" element={<AddToGallery />} />
                 <Route path="/addToNewArticle" element={<AddToNewArticle />} />
-                <Route path="/addNewTree" element={<AddNewTree />} />
-                <Route path="/success" element={<SuccessPage />} />
-                <Route path="/cancel" element={<CancelPage />} />
+                <Route path="/addNewTree" element={<AddNewTree />} /> */}
+                <Route
+                  path="/success"
+                  element={
+                    <ProtectedRoute>
+                      <SuccessPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/cancel"
+                  element={
+                    <ProtectedRoute>
+                      <CancelPage />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>

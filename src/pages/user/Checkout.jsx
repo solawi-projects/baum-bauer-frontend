@@ -445,8 +445,8 @@ const Checkout = () => {
             </div>
             {/* Sponsorship Summary */}
             <div
-              style={{ minHeight: 0 }}
-              className="w-full lg:w-[50%] flex flex-col sm:gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4 items-center"
+              style={{ alignSelf: "flex-start" }}
+              className="w-full h-auto lg:w-[50%] flex flex-col sm:gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4 items-center"
             >
               <div className="bg-secondary-color rounded-[15px] w-[100%] p-4 mx-auto text-white flex flex-row">
                 <div
