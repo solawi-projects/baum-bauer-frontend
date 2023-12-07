@@ -81,8 +81,8 @@ export function CartContextProvider({ children }) {
     }, 0);
   };
 
-  // Tax rate is 5%
-  const TAX_RATE = 0.05;
+  // Tax rate is 19%
+  const TAX_RATE = 0.19;
 
   // Calculate the overall total price including tax
   const calculateGrandTotal = () => {
@@ -145,6 +145,16 @@ export function CartContextProvider({ children }) {
     fetchData();
   }, [cartTrees]);
 
+  const getSelectedDataFromCart = () => {
+    return cartProducts.map((tree) => ({
+      treeId: tree._id,
+      treeName: tree.name,
+      treeImage: tree.image,
+      treePrice: Number(tree.price.$numberDecimal),
+      qty: getTreeQuantity(tree._id),
+    }));
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -162,6 +172,7 @@ export function CartContextProvider({ children }) {
         calculateTotalPrice,
         calculateGrandTotal,
         handleAddTree,
+        getSelectedDataFromCart
       }}
     >
       {children}
