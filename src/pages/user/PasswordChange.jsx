@@ -8,6 +8,7 @@ import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "../../utils/axiosInstance";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import Swal from "sweetalert2";
 
 const PasswordChange = () => {
   // State to manage password values
@@ -32,6 +33,30 @@ const PasswordChange = () => {
       );
       // console.log(response.data);
       // update localStorage
+      if (response.status === 200) {
+        // Update the user's password in local storage
+        console.log('the passord changed sunccessfully')
+        Swal.fire({
+          icon: "success",
+          title: "The Password changed successfully!",
+          text: "You have successfully changed your password.",
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        });
+        localStorage.setItem('user', JSON.stringify({
+          ...authUser,
+          password: newPassword
+        }));
+      
+        // Set the new password in the state
+        setAuthUser({
+          ...authUser,
+          password: newPassword
+        });
+      }
     } catch (error) {
       console.error("Password change failed:", error.response.data.message);
     }
