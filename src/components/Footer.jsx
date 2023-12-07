@@ -5,7 +5,7 @@ import { IoLogoTiktok } from "react-icons/io5";
 import { FaYoutube } from "react-icons/fa6";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { BsTwitterX } from "react-icons/bs";
-import logoImage from "../assets/images/BioBaumBauer_Logo.svg";
+import logoImage from "../assets/images/BioBaumBauer_Logo_Footer.svg";
 import { FaLinkedin } from "react-icons/fa6";
 
 function Footer() {
@@ -153,6 +153,13 @@ function Footer() {
                   <MdDoubleArrow />
 
                   <span>Contact</span>
+                </Link>
+                <Link
+                  to="/terms"
+                  className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
+                >
+                  <MdDoubleArrow />
+                  <span>Terms</span>
                 </Link>
                 <Link
                   to="/privacy"
