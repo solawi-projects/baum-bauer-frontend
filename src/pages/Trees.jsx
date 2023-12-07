@@ -1,7 +1,7 @@
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import { Fade } from "react-awesome-reveal";
 import { HiHome } from "react-icons/hi";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+// import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 // import { IoIosSearch } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { TreeData } from "../components/TreeData";
@@ -35,11 +35,11 @@ const Tree = () => {
     setSkip(limit + skip);
   };
 
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setDropdownOpen(!isDropdownOpen);
+  // };
 
   const getTrees = async () => {
     try {
@@ -101,7 +101,7 @@ const Tree = () => {
             style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.1 }}
           ></div>
 
-          <div className=" h-auto absolute top-[0px] right-[-80px] dropdown z-[8]">
+          {/* <div className=" h-auto absolute top-[0px] right-[-80px] dropdown z-[8]">
             <div
               id="dropdown-button "
               onClick={toggleDropdown}
@@ -133,7 +133,7 @@ const Tree = () => {
                 Price: High-Low
               </div>
             </div>
-          </div>
+          </div> */}
 
           <h2 className="container mx-auto mt-5 text-2xl lg:text-3xl flex justify-center items-center">
             Showing {startvalue} to {endvalue} of {totalTree} Trees

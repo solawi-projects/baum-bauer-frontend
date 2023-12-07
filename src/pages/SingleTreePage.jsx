@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { CartContext } from "../store/CartContext";
 import { AuthContext } from "../contexts/AuthContext";
@@ -20,9 +20,7 @@ const SingleTreePage = () => {
   useEffect(() => {
     const fetchTree = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:4000/api/tree/${id}`
-        );
+        const response = await axios.get(`/api/tree/${id}`);
         setTree(response.data);
       } catch (error) {
         console.error("Error fetching tree:", error);

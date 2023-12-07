@@ -243,12 +243,12 @@ const Cart = () => {
                   </Link>
 
                   {/* POWERED BY STRIPE */}
-                  <div
-                    className="text-center w-[70%] mx-auto my-2 px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px] border border-secondary-color"
+                  {/* <span
+                    className="text-center w-[70%] mx-auto my-2 px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px]"
                     aria-label="Powered by Stripe"
                   >
                     Powered by <span className="font-bold">stripe</span>
-                  </div>
+                  </span> */}
                 </div>
               </div>
             )}

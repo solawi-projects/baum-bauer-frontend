@@ -558,10 +558,10 @@ const Checkout = () => {
 
               {/* POWERED BY STRIPE */}
               <div
-                className="text-center w-[70%] mx-auto px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px] border border-secondary-color mt-4 sm:mt-0"
+                className="text-center w-[70%] mx-auto px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px] mt-4 sm:mt-0"
                 aria-label="Powered by Stripe"
               >
-                Powered by <span className="font-bold">stripe</span>
+                powered by <span className="font-bold">&nbsp;stripe</span>
               </div>
             </div>{" "}
           </div>

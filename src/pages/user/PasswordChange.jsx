@@ -11,7 +11,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const PasswordChange = () => {
   // State to manage password values
-  const { loggedIn, authUser } = useContext(AuthContext);
+  const { loggedIn, authUser,setAuthUser } = useContext(AuthContext);
   const [passwords, setPasswords] = useState({
     currentPassword: "",
     newPassword: "",
