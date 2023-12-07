@@ -445,8 +445,8 @@ const Checkout = () => {
             </div>
             {/* Sponsorship Summary */}
             <div
-              style={{ minHeight: 0 }}
-              className="w-full lg:w-[50%] flex flex-col sm:gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4 items-center"
+              style={{ alignSelf: "flex-start" }}
+              className="w-full h-auto lg:w-[50%] flex flex-col sm:gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4 items-center"
             >
               <div className="bg-secondary-color rounded-[15px] w-[100%] p-4 mx-auto text-white flex flex-row">
                 <div
@@ -558,10 +558,10 @@ const Checkout = () => {
 
               {/* POWERED BY STRIPE */}
               <div
-                className="text-center w-[70%] mx-auto px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px] border border-secondary-color mt-4 sm:mt-0"
+                className="text-center w-[70%] mx-auto px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px] mt-4 sm:mt-0"
                 aria-label="Powered by Stripe"
               >
-                Powered by <span className="font-bold">stripe</span>
+                powered by <span className="font-bold">&nbsp;stripe</span>
               </div>
             </div>{" "}
           </div>

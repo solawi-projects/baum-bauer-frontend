@@ -17,7 +17,7 @@ const About = () => {
       <section className="relative flex flex-col items-center justify-center pt-[100px] md:pt-[160px] lg:pt-[180px] xl:pt-[220px]">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-[15%] bg-cover bg-no-repeat bg-center"
+          className="absolute top-0 left-0 w-full h-[25%] bg-cover bg-no-repeat bg-center"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             opacity: 0.2,
@@ -26,12 +26,12 @@ const About = () => {
 
         {/* Content */}
         {/* Article - Sponsor a Tree: Our Mission */}
-        <article className="max-w-[75%] flex flex-col bg-white rounded-xl items-center justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 shadow-lg ">
-          <div className="flex items-center mb-4">
+        <article className="max-w-6xl mx-auto px-4 py-8 md:p-8 bg-white rounded-xl shadow-lg my-10 z-10">
+          <div className="text-center mb-10 pt-[0px] md:pt-[10px] lg:pt-[20px] xl:pt-[40px]">
             <img
               src="/src/assets/tree.png"
               alt="Tree Icon"
-              className="w-[40px] h-[40px] mr-2"
+              className="inline w-[40px] h-[40px] mr-2"
             />{" "}
             <h3 className="text-2xl sm:text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
               Sponsor a Tree: Our Mission
@@ -94,24 +94,24 @@ const About = () => {
             <img
               src="src/assets/images/biobaum_sapling_01.webp"
               alt="Sapling Tree"
-              className="w-[50%] border border-[var(--darker-primary)]"
+              className="w-[30%] border border-[var(--darker-primary)]"
               style={{ borderWidth: "5px" }}
             />
             <img
               src="src/assets/images/biobaum_sapling_02.webp"
               alt="Sapling Tree"
-              className="w-[50%] border border-[var(--darker-primary)]"
+              className="w-[30%] border border-[var(--darker-primary)]"
               style={{ borderWidth: "5px" }}
             />
           </div>
         </article>
         {/* Article - About Us: Solawi Zabergäu */}
-        <article className="max-w-[75%] flex flex-col items-center bg-white rounded-xl justify-center z-[8] px-6 md:px-10 lg:px-14 xl:px-20 py-8 mt-10 shadow-lg">
-          <div className="flex items-center mb-4 pt-[0px] md:pt-[10px] lg:pt-[20px] xl:pt-[40px]">
+        <article className="max-w-6xl mx-auto px-4 py-8 md:p-8 bg-white rounded-xl shadow-lg my-10 z-10">
+          <div className="text-center mb-10 pt-[0px] md:pt-[10px] lg:pt-[20px] xl:pt-[40px]">
             <img
               src="/src/assets/tree.png"
               alt="Tree Icon"
-              className="w-[40px] h-[40px] mr-2"
+              className="inline w-[40px] h-[40px] mr-2"
             />{" "}
             <h3 className="text-2xl sm:text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
               About Us: Solawi Zabergäu
@@ -173,13 +173,13 @@ const About = () => {
             <img
               src="src/assets/images/biobaum_sapling_03.webp"
               alt="Sapling Tree"
-              className="w-[50%] border border-[var(--darker-primary)]"
+              className="w-[30%] border border-[var(--darker-primary)]"
               style={{ borderWidth: "5px" }}
             />
             <img
               src="src/assets/images/biobaum_sapling_04.webp"
               alt="Sapling Tree"
-              className="w-[50%] border border-[var(--darker-primary)]"
+              className="w-[30%] border border-[var(--darker-primary)]"
               style={{ borderWidth: "5px" }}
             />
           </div>
@@ -188,8 +188,8 @@ const About = () => {
       {/* Footer Image */}
       <img
         src="src/assets/images/biobaum_about_footer_img.webp"
-        alt="Footer Image"
-        className="w-full mt-10"
+        alt="About BioBaumBauer Footer Image"
+        className="w-full mt-40"
       />
     </main>
   );

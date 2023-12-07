@@ -100,7 +100,7 @@ const News = () => {
         }}
       ></div>
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-      <div className="container mx-auto text-4xl sm:text-2xl pl-4">
+      <div className="container mx-auto text-2xl lg:text-3xl pl-4">
         <h2>
           Showing {skip + 1} to {Math.min(skip + limit, totalNews)} of{" "}
           {totalNews} News Articles

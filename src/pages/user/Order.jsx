@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../../store/CartContext";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
-import { Button } from "flowbite-react";
+import { MdLabelImportant } from "react-icons/md";
 import axios from "../../utils/axiosInstance";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLocation } from "react-router-dom";
-
+import { AuthContext } from "../../contexts/AuthContext";
+import { useState } from "react";
 const Order = () => {
+  const [payId, setPayId] = useState(null);
+  const [sponsorId, setSponsorId] = useState(null);
   const {
     cartProducts,
     getTreeQuantity,
@@ -17,30 +20,87 @@ const Order = () => {
     getItemTotalPrice,
     calculateTotalPrice,
     calculateGrandTotal,
+    getSelectedDataFromCart,
   } = useContext(CartContext);
+  const { authUser } = useContext(AuthContext);
+
+  // methods for inserting data
+  const addPayment = async (sessionId, totalGrundPay, userId, taxRate) => {
+    try {
+      const response = await axios.post("/api/payment/create", {
+        sessionId,
+        totalGrundPay,
+        userId,
+        taxRate,
+      });
+      if (response.status === 201) {
+        return response.data.newPayment._id;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const doSponsorShip = async (totalPrice, userId, payId) => {
+    try {
+      const response = await axios.post("/api/sponsorShip/newSponsorShip", {
+        totalPrice,
+        userId,
+        payId,
+      });
+      if (response.status === 201) {
+        return response.data.newSponsorShip._id;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  // const addOrderItems = (orderId, trees) => {
+  //   try {
+  //     const response = axios.patch(
+  //       `/api/sponsorShip/updateSponsorShip/${orderId}`,
+  //       {
+  //         trees,
+  //       }
+  //     );
+  //     if (response.status === 200) {
+  //       return response.data.updatedSponsor._id;
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const paymentProcess = async () => {
     const stripe = await loadStripe(
       "pk_test_51OJNzPEghw7w3GNSeOkjDgkOcM1DtxgH4n9RgFspfvlxDzomukHCfqCenHxoIFFrQ0MtAvBRYMiIjtGQUYUwM7Ax00xIiee67Q"
     );
 
-    const treesInCart = cartProducts.map((tree) => ({
-      treeName: tree.name,
-      treeImage: tree.image,
-      treePrice: Number(tree.price.$numberDecimal),
-      qty: getTreeQuantity(tree._id),
-    }));
+    const treesInCart = getSelectedDataFromCart();
     const trees = {
       cart: treesInCart,
     };
-    console.log("Data: ", cartProducts);
     axios
       .post("/api/payment/checkout", trees)
       .then((response) => {
         const session = response.data;
-        stripe.redirectToCheckout({
+        const result = stripe.redirectToCheckout({
           sessionId: session.id,
         });
+
+        if (result.error) {
+          console.error(result.error);
+        }
+        const totalPrice = calculateGrandTotal();
+        addPayment(session.id, totalPrice, authUser._id, TAX_RATE).then(
+          (paymentId) => {
+            setPayId(paymentId);
+          }
+        );
+        doSponsorShip(totalPrice, authUser._id, payId);
+        // const items = addOrderItems(sponsorId, trees);
+
+        // console.log("Session:", session);
+        // console.log("Trees", trees);
       })
       .catch((error) => {
         console.log("ERROR: ", error);
@@ -136,7 +196,7 @@ const Order = () => {
                       <span className="font-semibold text-dark-gray">
                         City:
                       </span>
-                      &nbsp; City: {newPatron.address.city}
+                      &nbsp; {newPatron.address.city}
                     </p>
                     <p className="text-dark-gray italic">
                       <span className="font-semibold text-dark-gray">
@@ -267,35 +327,35 @@ const Order = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Horizontal Line */}
-                <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-2" />
-
-                {/* Sponsor Tree Link */}
-                <Link
-                  to="/sponsor"
-                  className="text-center w-full my-2 px-4 py-4 bg-lighter-secondary border border-darker-secondary text-secondary-color rounded-[10px]"
-                  aria-label="Card Information"
-                >
-                  Card Number
-                </Link>
-
-                {/* Pay Now */}
-                <Button
-                  onClick={paymentProcess}
-                  className="text-center w-full my-2 px-4 py-2 bg-darker-secondary text-white-color rounded-[10px] hover:bg-lighter-secondary hover:text-secondary-color transition duration-4000 ease-linear"
-                  aria-label="Pay Now"
-                >
-                  Pay Now
-                </Button>
-
-                {/* POWERED BY STRIPE */}
-                <div
-                  className="text-center w-[70%] mx-auto my-2 px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px] border border-secondary-color"
+                <span
+                  className="flex items-center text-left text-lg w-[100%] mx-auto my-2 px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px]"
                   aria-label="Powered by Stripe"
                 >
-                  Powered by <span className="font-bold">stripe</span>
-                </div>
+                  <MdLabelImportant />
+                  <span>
+                    &nbsp;Tax will be applied later during payment by&nbsp;
+                  </span>
+                  <span className="font-bold">Stripe</span>
+                </span>
+                {/* Horizontal Line */}
+                <hr className="w-[40%] mx-auto border-t-2 border-bg-header-footer my-4" />
+
+                {/* Pay Now */}
+                <button
+                  onClick={paymentProcess}
+                  className="text-center border-2 border-darker-secondary w-full px-4 py-2 bg-darker-secondary text-white-color rounded-[10px] hover:bg-lighter-secondary hover:text-secondary-color transition duration-4000 ease-linear mt-4 sm:mt-0"
+                  aria-label="Pay Now"
+                >
+                  pay now
+                </button>
+
+                {/* POWERED BY STRIPE */}
+                {/* <span
+                  className="text-center w-[70%] mx-auto my-2 px-4 py-2 bg-[#f4f5f3] text-secondary-color rounded-[10px]"
+                  aria-label="Powered by Stripe"
+                >
+                  Powered by
+                </span> */}
               </div>
             </div>
           </div>
