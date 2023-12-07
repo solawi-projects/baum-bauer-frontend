@@ -71,22 +71,30 @@ const Tree = () => {
       />{" "}
       <p>{err}</p>
       <Search updateTree={setTree} limit={limit} skip={skip} />
-      <div className=" flex justify-center flex-wrap gap-10 pt-20 pb-40">
-        <div className="flex flex-row justify-start">
-          <div className="flex flex-row justify-start items-end">
-            <img
-              src="/src/assets/tree.png"
-              alt="Small Photo"
-              className="w-[40px] h-[40px] mr-2"
-            />
-            <div className="sm:text-4xl text-3xl font-main-font text-secondary-color tracking-wide border-bg-header-footer inline-block ">
-              Stand with us for a greener world - sponsor a tree and grow a
-              legacy of environmental stewardship.
+      <div className=" flex justify-center flex-wrap gap-10 pt-20 pb-4 md:pb-8 lg:pb-20">
+        <Fade
+          delay={100}
+          cascade
+          damping={0.1}
+          duration={2000}
+          direction="down"
+        >
+          <div className="flex flex-row justify-center px-4 text-center">
+            <div className="flex flex-row justify-center items-center">
+              <img
+                src="/src/assets/tree.png"
+                alt="Small Photo"
+                className="hidden 2xl:flex w-[40px] h-[40px] mr-2"
+              />
+              <div className="lg:text-4xl md:text-3xl text-2xl font-main-font text-secondary-color tracking-wide border-bg-header-footer">
+                Stand with us for a greener world - sponsor a tree and grow a
+                legacy of environmental stewardship.
+              </div>{" "}
             </div>
           </div>
-        </div>
+        </Fade>
 
-        <div className="relative w-full mx-auto p-4  md:pb-[40px] lg:pb-[100px] xl:pb-[120px] border-bg-header-footer flex flex-col  justify-center flex-wrap gap-10 pt-40 pb-40">
+        <div className="relative w-full mx-auto p-4  md:pb-[20px] lg:pb-[20px] xl:pb-[40px] border-bg-header-footer flex flex-col  justify-center flex-wrap gap-10 pt-20 pb-10">
           {/* Overlay with background image and opacity */}
           <div
             className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
@@ -127,7 +135,7 @@ const Tree = () => {
             </div>
           </div> */}
 
-          <h2 className="container mx-auto my-5 pt-16 text-4xl flex justify-center items-center">
+          <h2 className="container mx-auto mt-5 text-2xl lg:text-3xl flex justify-center items-center">
             Showing {startvalue} to {endvalue} of {totalTree} Trees
           </h2>
           <Fade delay={100} cascade damping={0.1} duration={3000}>

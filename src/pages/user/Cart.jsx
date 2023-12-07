@@ -34,7 +34,7 @@ const Cart = () => {
         ></div>
 
         <div className="w-[100%] xl:w-[90%] 2xl:w-[80%] bg-white rounded-[15px] p-6 xs:p-2 md:p-4 lg:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px]">
-          <div className="bg-secondary-color rounded-[15px] w-[100%] p-4 mx-auto text-white flex flex-row items-start justify-start">
+          <div className="bg-secondary-color rounded-[15px] w-[100%] p-4 mx-auto text-white flex flex-row items-center sm:items-start justify-start">
             <div
               className="rounded-full bg-white w-[40px] h-[40px] mr-[10px]"
               style={{
@@ -53,7 +53,7 @@ const Cart = () => {
           </div>
 
           {/* Sponsor Cart */}
-          <div className="flex flex-col-reverse items-start justify-start lg:flex-row mt-10 gap-[1rem] sm:gap-[2rem]">
+          <div className="flex flex-col-reverse items-start justify-start lg:flex-row mt-0 sm:mt-10 gap-[1rem] sm:gap-[2rem]">
             {/* Tree Image with Name, Qty, Price, Remove Tree Button */}
             {cartProducts.length > 0 && (
               <div className="w-full lg:w-[70%] flex flex-col items-start justify-start gap-[0.5rem] sm:gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4 ">

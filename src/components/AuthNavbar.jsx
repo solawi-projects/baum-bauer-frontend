@@ -49,19 +49,19 @@ const AuthNavbar = () => {
         )}
         {loggedIn && (
           <div className="flex items-center">
-            <span className="text-lg">Welcome,</span>
+            <span className="text-md sm:text-lg">Welcome,</span>
             <div className="h-auto dropdown">
               <div
                 id="dropdown-button"
                 onClick={toggleDropdown}
-                className="w-full select-none h-auto top-10 right-40  border-bg-header-footer rounded-[10px] px-5 py-4 cursor-pointer flex justify-between items-center text-font-family-color text-lg"
+                className="w-full select-none h-auto top-10 right-40  border-bg-header-footer rounded-[10px] px-2 py-4 cursor-pointer flex justify-between items-center text-font-family-color text-lg"
               >
                 <Tooltip content="click for seeing logout button">
                   <Link
                     to="/dashboard"
                     aria-label="user dashboard, link to dashboard"
                   >
-                    <span className="text-xl text-bg-header-footer font-bold">
+                    <span className="text-md sm:text-lg text-bg-header-footer font-bold">
                       {authUser.lastName}&nbsp;
                     </span>
                   </Link>
