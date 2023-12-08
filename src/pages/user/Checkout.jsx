@@ -13,7 +13,7 @@ import { HiHome } from "react-icons/hi";
 const Checkout = () => {
   const { cartProducts, getTreeQuantity, getItemTotalPrice } =
     useContext(CartContext);
-  const { authUser } = useContext(AuthContext);
+  const { authUser, handlePatronInfo } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -86,6 +86,7 @@ const Checkout = () => {
 
   const handleCompleteSponsorship = () => {
     // Pass newPatron as a prop
+    handlePatronInfo({ type: "ADD_PATRON", newPatron: newPatron });
     navigate("/order/place_order", { state: newPatron });
   };
 

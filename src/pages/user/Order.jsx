@@ -9,10 +9,7 @@ import axios from "../../utils/axiosInstance";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useState } from "react";
 const Order = () => {
-  const [payId, setPayId] = useState(null);
-  const [sponsorId, setSponsorId] = useState(null);
   const {
     cartProducts,
     getTreeQuantity,
@@ -22,53 +19,7 @@ const Order = () => {
     calculateGrandTotal,
     getSelectedDataFromCart,
   } = useContext(CartContext);
-  const { authUser } = useContext(AuthContext);
-
-  // methods for inserting data
-  const addPayment = async (sessionId, totalGrundPay, userId, taxRate) => {
-    try {
-      const response = await axios.post("/api/payment/create", {
-        sessionId,
-        totalGrundPay,
-        userId,
-        taxRate,
-      });
-      if (response.status === 201) {
-        return response.data.newPayment._id;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const doSponsorShip = async (totalPrice, userId, payId) => {
-    try {
-      const response = await axios.post("/api/sponsorShip/newSponsorShip", {
-        totalPrice,
-        userId,
-        payId,
-      });
-      if (response.status === 201) {
-        return response.data.newSponsorShip._id;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  // const addOrderItems = (orderId, trees) => {
-  //   try {
-  //     const response = axios.patch(
-  //       `/api/sponsorShip/updateSponsorShip/${orderId}`,
-  //       {
-  //         trees,
-  //       }
-  //     );
-  //     if (response.status === 200) {
-  //       return response.data.updatedSponsor._id;
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const { handleStripeSession } = useContext(AuthContext);
 
   const paymentProcess = async () => {
     const stripe = await loadStripe(
@@ -83,24 +34,14 @@ const Order = () => {
       .post("/api/payment/checkout", trees)
       .then((response) => {
         const session = response.data;
-        const result = stripe.redirectToCheckout({
-          sessionId: session.id,
-        });
+        // const result = stripe.redirectToCheckout({
+        //   sessionId: session.id,
+        // });
 
-        if (result.error) {
-          console.error(result.error);
-        }
-        const totalPrice = calculateGrandTotal();
-        addPayment(session.id, totalPrice, authUser._id, TAX_RATE).then(
-          (paymentId) => {
-            setPayId(paymentId);
-          }
-        );
-        doSponsorShip(totalPrice, authUser._id, payId);
-        // const items = addOrderItems(sponsorId, trees);
-
-        // console.log("Session:", session);
-        // console.log("Trees", trees);
+        // if (result.error) {
+        //   console.error(result.error);
+        // }
+        handleStripeSession({ type: "UPDATE_SESSION", sessionId: session.id });
       })
       .catch((error) => {
         console.log("ERROR: ", error);

@@ -1,16 +1,91 @@
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
+import axios from "../utils/axiosInstance";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import logoImage from "../assets/images/BioBaumBauer_Logo_ThankYou.svg";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
+import { useEffect, useContext, useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { CartContext } from "../store/CartContext";
 
 const SuccessPage = () => {
   const titles = ["Payment Successful"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Payment Successful" };
+  const { authUser, patron, handleStripeSession } = useContext(AuthContext);
+  const {
+    cartProducts,
+    getTreeQuantity,
+    TAX_RATE,
+    getItemTotalPrice,
+    calculateTotalPrice,
+    calculateGrandTotal,
+    getSelectedDataFromCart,
+  } = useContext(CartContext);
 
+  const [payId, setPayId] = useState(null);
+  const [sponsorId, setSponsorId] = useState(null);
+
+  // methods for inserting data
+  const addPayment = async (sessionId, totalGrundPay, userId, taxRate) => {
+    try {
+      const response = await axios.post("/api/payment/create", {
+        sessionId,
+        totalGrundPay,
+        userId,
+        taxRate,
+      });
+      if (response.status === 201) {
+        return response.data.newPayment._id;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const doSponsorShip = async (totalPrice, userId, payId) => {
+    try {
+      const response = await axios.post("/api/sponsorShip/newSponsorShip", {
+        totalPrice,
+        userId,
+        payId,
+      });
+      if (response.status === 201) {
+        return response.data.newSponsorShip._id;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const addOrderItems = (orderId, trees) => {
+    try {
+      const response = axios.patch(
+        `/api/sponsorShip/updateSponsorShip/${orderId}`,
+        {
+          trees,
+        }
+      );
+      if (response.status === 200) {
+        return response.data.updatedSponsor._id;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    // const totalPrice = calculateGrandTotal();
+    // addPayment(session.id, totalPrice, authUser._id, TAX_RATE).then(
+    //   (paymentId) => {
+    //     setPayId(paymentId);
+    //   }
+    // );
+    // doSponsorShip(totalPrice, authUser._id, payId);
+    // const items = addOrderItems(sponsorId, trees);
+    // console.log("Session:", session);
+    // console.log("Trees", trees);
+  }, []);
   return (
     <main className="relative text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />

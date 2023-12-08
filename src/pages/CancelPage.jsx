@@ -1,15 +1,19 @@
+import { useContext } from "react";
 import backgroundImage from "../assets/images/leaves_background_02.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const CancelPage = () => {
+  const { stripeSession, handleStripeSession } = useContext(AuthContext);
   const titles = ["Payment Unsuccessful"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Payment Unsuccessful" };
 
+  console.log("Session: ", stripeSession);
   return (
     <main className="relative text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
