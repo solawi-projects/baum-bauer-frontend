@@ -1,5 +1,5 @@
 // PatronContext.js
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const PatronContext = createContext();
 
@@ -12,7 +12,7 @@ export const usePatronContext = () => {
 };
 
 export const PatronProvider = ({ children }) => {
-  const [newPatron, setNewPatron] = useState({
+  const storedPatron = JSON.parse(localStorage.getItem("newPatron")) || {
     firstName: "",
     lastName: "",
     email: "",
@@ -26,7 +26,9 @@ export const PatronProvider = ({ children }) => {
       address2: "",
     },
     userId: "",
-  });
+  };
+
+  const [newPatron, setNewPatron] = useState(storedPatron);
 
   const updateNewPatron = (newValues) => {
     setNewPatron((prevPatron) => ({
@@ -34,6 +36,11 @@ export const PatronProvider = ({ children }) => {
       ...newValues,
     }));
   };
+
+  useEffect(() => {
+    // Save to localStorage whenever newPatron changes
+    localStorage.setItem("newPatron", JSON.stringify(newPatron));
+  }, [newPatron]);
 
   return (
     <PatronContext.Provider value={{ newPatron, updateNewPatron }}>
