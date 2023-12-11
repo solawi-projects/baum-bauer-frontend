@@ -5,8 +5,10 @@ import { IoLogoTiktok } from "react-icons/io5";
 import { FaYoutube } from "react-icons/fa6";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { BsTwitterX } from "react-icons/bs";
+import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 import logoImage from "../assets/images/BioBaumBauer_Logo_Footer.svg";
 import { FaLinkedin } from "react-icons/fa6";
+import { Fade } from "react-awesome-reveal";
 
 function Footer() {
   return (
@@ -191,7 +193,16 @@ function Footer() {
         {/* Icon ArrowUp, To the Top of the page */}
         <div className="arrowUp">
           <a className="iconArrowUp" href="#">
-            <img src={logoImage} alt="Logo Image" style={{ width: "80px" }} />
+            <img src={logoImage} alt="Logo Image" className="logoImage" />
+            <Fade
+              delay={100}
+              cascade
+              damping={0.1}
+              duration={2000}
+              direction="up"
+            >
+              <MdKeyboardDoubleArrowUp className="arrow" />
+            </Fade>
           </a>
         </div>
       </div>{" "}
