@@ -7,9 +7,10 @@ import { HiHome } from "react-icons/hi";
 import { MdLabelImportant } from "react-icons/md";
 import axios from "../../utils/axiosInstance";
 import { loadStripe } from "@stripe/stripe-js";
-import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { usePatronContext } from "../../store/PatronContext";
 import { useState } from "react";
+
 const Order = () => {
   const [payId, setPayId] = useState(null);
   const [sponsorId, setSponsorId] = useState(null);
@@ -22,7 +23,10 @@ const Order = () => {
     calculateGrandTotal,
     getSelectedDataFromCart,
   } = useContext(CartContext);
+
   const { authUser } = useContext(AuthContext);
+
+  const { newPatron } = usePatronContext();
 
   // methods for inserting data
   const addPayment = async (sessionId, totalGrundPay, userId, taxRate) => {
@@ -106,9 +110,6 @@ const Order = () => {
         console.log("ERROR: ", error);
       });
   };
-  // Get the state from the location
-  const location = useLocation();
-  const newPatron = location.state;
 
   // Check if newPatron is defined
   if (!newPatron) {
