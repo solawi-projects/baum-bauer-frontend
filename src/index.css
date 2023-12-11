@@ -264,7 +264,7 @@ input::placeholder {
 .arrowUp {
   width: 80px;
   height: 80px;
-  background-color: var(--secondary-color);
+  background-color: var(--bg-header-footer);
   border-radius: 100%;
   position: fixed;
   right: 1rem;
@@ -272,6 +272,8 @@ input::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 99999;
 }
 
 .iconArrowUp {

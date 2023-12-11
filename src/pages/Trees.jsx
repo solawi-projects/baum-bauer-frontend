@@ -135,7 +135,7 @@ const Tree = () => {
             </div>
           </div> */}
 
-          <h2 className="container mx-auto mt-5 text-2xl md:text-3xl lg:text-4xl flex justify-center items-center">
+          <h2 className="container mx-auto mt-5 text-2xl lg:text-3xl flex justify-center items-center">
             Showing {startvalue} to {endvalue} of {totalTree} Trees
           </h2>
           <Fade delay={100} cascade damping={0.1} duration={3000}>
