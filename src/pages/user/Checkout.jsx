@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import treeIcon from "../../assets/images/tree_icon.svg";
 import footerImage from "../../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 import { TextInput, Label } from "flowbite-react";
 import { CartContext } from "../../store/CartContext";
 import { AuthContext } from "../../contexts/AuthContext";
+import { usePatronContext } from "../../store/PatronContext";
 import { Link } from "react-router-dom";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
@@ -14,9 +14,9 @@ const Checkout = () => {
   document.title = "Checkout";
   const { cartProducts, getTreeQuantity, getItemTotalPrice } =
     useContext(CartContext);
-  const { authUser, handlePatronInfo } = useContext(AuthContext);
+  const { authUser} = useContext(AuthContext);
 
-  const navigate = useNavigate();
+  const { newPatron, updateNewPatron } = usePatronContext();
 
   const [formValues, setFormValues] = useState({
     firstName: "",
@@ -30,22 +30,6 @@ const Checkout = () => {
     stateCountry: "",
     country: "",
     state: "",
-  });
-
-  const [newPatron, setNewPatron] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    mobilePhone: "",
-    address: {
-      city: "",
-      zipCode: "",
-      country: "",
-      state: "",
-      address1: "",
-      address2: "",
-    },
-    userId: "",
   });
 
   useEffect(() => {
@@ -68,7 +52,7 @@ const Checkout = () => {
 
   useEffect(() => {
     // Update newPatron whenever formValues change
-    setNewPatron({
+    updateNewPatron({
       firstName: formValues.firstName,
       lastName: formValues.lastName,
       email: formValues.email,
@@ -85,11 +69,10 @@ const Checkout = () => {
     });
   }, [formValues, authUser]);
 
-  const handleCompleteSponsorship = () => {
-    // Pass newPatron as a prop
-    handlePatronInfo({ type: "ADD_PATRON", newPatron: newPatron });
-    navigate("/order/place_order", { state: newPatron });
-  };
+  // const handleCompleteSponsorship = () => {
+  //   // Pass newPatron as a prop
+  //   handlePatronInfo({ type: "ADD_PATRON", newPatron: newPatron });
+  // };
 
 
   return (
@@ -540,13 +523,13 @@ const Checkout = () => {
               <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-2" />
 
               {/* Complete Sponsorship */}
-              <button
-                onClick={handleCompleteSponsorship}
+              <Link
+                to="/order/place_order"
                 className="text-center w-full px-4 py-2 bg-darker-secondary text-white-color rounded-[10px] hover:bg-lighter-secondary hover:text-secondary-color transition duration-4000 ease-linear mt-4 sm:mt-0"
                 aria-label="Complete Sponsorship page/Payment"
               >
                 Complete Sponsorship
-              </button>
+              </Link>
 
               {/* Back to Cart */}
               <Link

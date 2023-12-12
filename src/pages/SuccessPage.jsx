@@ -10,6 +10,7 @@ import { Button } from "flowbite-react";
 import { useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../store/CartContext";
+import { PatronContext } from "../store/PatronContext";
 
 const SuccessPage = () => {
   const titles = ["Payment Successful"];
@@ -27,6 +28,7 @@ const SuccessPage = () => {
     handlePatronInfo,
   } = useContext(AuthContext);
   const { TAX_RATE, clearCart } = useContext(CartContext);
+  const { newPatron, updateNewPatron } = usePatronContext();
 
   useEffect(() => {
     document.title = "Payment Successful";
@@ -61,7 +63,7 @@ const SuccessPage = () => {
     if (
       (stripeSession.sid && stripeSession.sid !== "") ||
       orderGrandPrice.grand > 0 ||
-      Object.keys(patron.patronInfo).length > 0 ||
+      Object.keys(newPatron).length > 0 ||
       Object.keys(order.items).length > 0
     ) {
       insertData(
@@ -69,7 +71,7 @@ const SuccessPage = () => {
         orderGrandPrice.grand,
         authUser._id,
         TAX_RATE,
-        patron.patronInfo,
+        newPatron,
         order.items.cart
       );
     }

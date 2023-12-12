@@ -7,8 +7,10 @@ import { HiHome } from "react-icons/hi";
 import { MdLabelImportant } from "react-icons/md";
 import axios from "../../utils/axiosInstance";
 import { loadStripe } from "@stripe/stripe-js";
-import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { usePatronContext } from "../../store/PatronContext";
+import { useState } from "react";
+
 const Order = () => {
   document.title = "Order";
   const {
@@ -22,6 +24,8 @@ const Order = () => {
   } = useContext(CartContext);
   const { handleStripeSession, handleOrderGrandPrice, handleOrder } =
     useContext(AuthContext);
+
+  const { newPatron } = usePatronContext();
 
   const paymentProcess = async () => {
     const stripe = await loadStripe(
@@ -51,9 +55,6 @@ const Order = () => {
         console.log("ERROR: ", error);
       });
   };
-  // Get the state from the location
-  const location = useLocation();
-  const newPatron = location.state;
 
   // Check if newPatron is defined
   if (!newPatron) {
@@ -133,7 +134,7 @@ const Order = () => {
                     </p>
                     <p className="text-dark-gray italic">
                       <span className="font-semibold text-dark-gray">
-                        Address Line 2:
+                        Additional Address Details
                       </span>
                       &nbsp; {newPatron.address.address2}
                     </p>

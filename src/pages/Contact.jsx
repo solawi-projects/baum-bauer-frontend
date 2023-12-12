@@ -338,7 +338,7 @@ const Contact = () => {
                     I agree with the&nbsp;
                   </span>
                   <Link
-                    href="#"
+                    to="/terms"
                     className="text-secondary-color font-semibold underline"
                   >
                     terms and conditions
