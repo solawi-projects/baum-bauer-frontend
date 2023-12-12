@@ -39,6 +39,7 @@ import "./assets/styles/PrevNext.css";
 import SuccessPage from "./pages/SuccessPage";
 import CancelPage from "./pages/CancelPage";
 import ProtectedRoute from "./pages/user/ProtectedRoute";
+import { PatronProvider } from "./store/PatronContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -55,110 +56,112 @@ function App() {
     <div>
       <AuthProvider>
         <CartContextProvider>
-          <Router>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Index />}>
-                <Route index element={<Home />} />
-                <Route path="/trees" element={<Trees />} />
-                <Route path="/trees/:id" element={<SingleTreePage />} />
-                <Route path="/news" element={<News />} />
-                <Route path="/news/:id" element={<NewsArticle />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/Terms" element={<Terms />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/faq" element={<Faq />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route
-                  path="/cart"
-                  element={
-                    <ProtectedRoute>
-                      <Cart />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/checkout"
-                  element={
-                    <ProtectedRoute>
-                      <Checkout />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/order/place_order"
-                  element={
-                    <ProtectedRoute>
-                      <Order />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route
-                  path="/dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/update_profile"
-                  element={
-                    <ProtectedRoute>
-                      <UpdateProfile />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/user_sponsorships"
-                  element={
-                    <ProtectedRoute>
-                      <UserSponsorships />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/password_change"
-                  element={
-                    <ProtectedRoute>
-                      <PasswordChange />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/signout"
-                  element={
-                    <ProtectedRoute>
-                      <Signout />
-                    </ProtectedRoute>
-                  }
-                />
-                {/*     <Route path="/addImageToGallery" element={<AddToGallery />} />
+          <PatronProvider>
+            <Router>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Index />}>
+                  <Route index element={<Home />} />
+                  <Route path="/trees" element={<Trees />} />
+                  <Route path="/trees/:id" element={<SingleTreePage />} />
+                  <Route path="/news" element={<News />} />
+                  <Route path="/news/:id" element={<NewsArticle />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/Terms" element={<Terms />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/gallery" element={<Gallery />} />
+                  <Route path="/faq" element={<Faq />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route
+                    path="/cart"
+                    element={
+                      <ProtectedRoute>
+                        <Cart />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/checkout"
+                    element={
+                      <ProtectedRoute>
+                        <Checkout />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/order/place_order"
+                    element={
+                      <ProtectedRoute>
+                        <Order />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route
+                    path="/dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/update_profile"
+                    element={
+                      <ProtectedRoute>
+                        <UpdateProfile />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/user_sponsorships"
+                    element={
+                      <ProtectedRoute>
+                        <UserSponsorships />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/password_change"
+                    element={
+                      <ProtectedRoute>
+                        <PasswordChange />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/signout"
+                    element={
+                      <ProtectedRoute>
+                        <Signout />
+                      </ProtectedRoute>
+                    }
+                  />
+                  {/*     <Route path="/addImageToGallery" element={<AddToGallery />} />
                 <Route path="/addToNewArticle" element={<AddToNewArticle />} />
                 <Route path="/addNewTree" element={<AddNewTree />} /> */}
-                <Route
-                  path="/success"
-                  element={
-                    <ProtectedRoute>
-                      <SuccessPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/cancel"
-                  element={
-                    <ProtectedRoute>
-                      <CancelPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="*" element={<NotFound />} />
-              </Route>
-            </Routes>
-          </Router>
+                  <Route
+                    path="/success"
+                    element={
+                      <ProtectedRoute>
+                        <SuccessPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/cancel"
+                    element={
+                      <ProtectedRoute>
+                        <CancelPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+              </Routes>
+            </Router>
+          </PatronProvider>
         </CartContextProvider>
       </AuthProvider>
     </div>
