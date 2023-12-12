@@ -10,7 +10,7 @@ import { Button } from "flowbite-react";
 import { useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../store/CartContext";
-import { PatronContext } from "../store/PatronContext";
+import { usePatronContext } from "../store/PatronContext";
 
 const SuccessPage = () => {
   const titles = ["Payment Successful"];
@@ -25,7 +25,7 @@ const SuccessPage = () => {
     handleOrderGrandPrice,
     order,
     handleOrder,
-    handlePatronInfo,
+    // handlePatronInfo,
   } = useContext(AuthContext);
   const { TAX_RATE, clearCart } = useContext(CartContext);
   const { newPatron, updateNewPatron } = usePatronContext();
@@ -53,7 +53,22 @@ const SuccessPage = () => {
           handleStripeSession({ type: "RESET_SESSION" });
           handleOrderGrandPrice({ type: "RESET_GRAND_PRICE" });
           handleOrder({ type: "REMOVE_ITEMS" });
-          handlePatronInfo({ type: "REMOVE_PATRON" });
+          updateNewPatron({
+            firstName: "",
+            lastName: "",
+            email: "",
+            mobilePhone: "",
+            address: {
+              city: "",
+              zipCode: "",
+              country: "",
+              state: "",
+              address1: "",
+              address2: "",
+            },
+            userId: "",
+          });
+          // handlePatronInfo({ type: "REMOVE_PATRON" });
           clearCart();
         }
       } catch (error) {
