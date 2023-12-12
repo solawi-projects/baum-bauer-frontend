@@ -154,7 +154,7 @@ const DesktopNavbar = ({ isNavbarFixed, setIsNavbarFixed }) => {
               aria-label="FAQ page"
             >
               <FcFaq color="#5a6448" />
-              <span>FAQ</span>
+              <span>FAQs</span>
             </NavLink>
           </div>
           <div className="px-2 sm:px-4 lg:px-8 xl:px-14 flex items-center hover:scale-110 transition-transform duration-400 ease-linear hover:text-dark-gray">

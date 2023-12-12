@@ -7,6 +7,7 @@ import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 
 const Cart = () => {
+  document.title = "Cart";
   const {
     cartProducts,
     removeTree,

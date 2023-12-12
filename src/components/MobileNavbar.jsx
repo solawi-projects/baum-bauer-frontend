@@ -127,7 +127,7 @@ const MobileNavbar = () => {
           onClick={handleLinkClick}
           aria-label="FAQ page"
         >
-          FAQ
+          FAQs
         </Link>
         <Link
           to="/contact"

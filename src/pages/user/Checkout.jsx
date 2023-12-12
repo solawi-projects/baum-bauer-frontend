@@ -11,10 +11,10 @@ import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 
 const Checkout = () => {
+  document.title = "Checkout";
   const { cartProducts, getTreeQuantity, getItemTotalPrice } =
     useContext(CartContext);
-
-  const { authUser } = useContext(AuthContext);
+  const { authUser} = useContext(AuthContext);
 
   const { newPatron, updateNewPatron } = usePatronContext();
 
@@ -69,7 +69,11 @@ const Checkout = () => {
     });
   }, [formValues, authUser]);
 
-  console.log("newPatron:", newPatron);
+  // const handleCompleteSponsorship = () => {
+  //   // Pass newPatron as a prop
+  //   handlePatronInfo({ type: "ADD_PATRON", newPatron: newPatron });
+  // };
+
 
   return (
     <main>

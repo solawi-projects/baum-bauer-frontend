@@ -7,6 +7,7 @@ import PageBreadcrumb from "../components/PageBreadcrumb";
 import axios from "../utils/axiosInstance";
 
 const Gallery = () => {
+  document.title = "Gallery";
   const [selectedImg, setSelectedImg] = useState(null);
   const [showAllImages, setShowAllImages] = useState(window.innerWidth > 1000);
   const [selectedIndex, setSelectedIndex] = useState(null); // Add this line

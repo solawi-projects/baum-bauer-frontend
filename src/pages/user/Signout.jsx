@@ -8,6 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Swal from "sweetalert2";
 
 const Signout = () => {
+  document.title = "Signout";
   const { setLoggedIn, setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
