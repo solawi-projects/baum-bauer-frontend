@@ -262,8 +262,8 @@ input::placeholder {
 
 /* arrow Up - Footer */
 .arrowUp {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-color: var(--bg-header-footer);
   border-radius: 100%;
 
@@ -276,7 +276,11 @@ input::placeholder {
   box-shadow: 0 4px 6px var(--secondary-color);
   z-index: 99999;
   overflow: hidden;
-  transition: background-color 0.4s ease, box-shadow 0.3s ease;
+  transition: all 0.5s linear;
+}
+
+.arrowUp:hover {
+  transform: scale(1.2);
 }
 
 .iconArrowUp {
@@ -289,8 +293,8 @@ input::placeholder {
 }
 
 .logoImage {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -303,7 +307,7 @@ input::placeholder {
   opacity: 1;
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .arrowUp {
     width: 60px;
     height: 60px;
@@ -315,4 +319,4 @@ input::placeholder {
     width: 60px;
     height: 60px;
   }
-}
+} */
