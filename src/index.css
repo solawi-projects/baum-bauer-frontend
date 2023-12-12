@@ -283,6 +283,10 @@ input::placeholder {
   transform: scale(1.2);
 }
 
+.arrowUp:hover .arrow {
+  opacity: 0;
+}
+
 .iconArrowUp {
   color: var(--fontColorLight);
 }
