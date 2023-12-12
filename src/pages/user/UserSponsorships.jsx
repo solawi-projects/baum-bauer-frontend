@@ -6,6 +6,7 @@ import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 
 const UserSponsorships = () => {
+  document.title = "Sponsorship list";
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Sponsorships" };
 

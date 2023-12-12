@@ -10,6 +10,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 const Order = () => {
+  document.title = "Order";
   const {
     cartProducts,
     getTreeQuantity,
@@ -19,13 +20,14 @@ const Order = () => {
     calculateGrandTotal,
     getSelectedDataFromCart,
   } = useContext(CartContext);
-  const { handleStripeSession } = useContext(AuthContext);
+  const { handleStripeSession, handleOrderGrandPrice, handleOrder } =
+    useContext(AuthContext);
 
   const paymentProcess = async () => {
     const stripe = await loadStripe(
       "pk_test_51OJNzPEghw7w3GNSeOkjDgkOcM1DtxgH4n9RgFspfvlxDzomukHCfqCenHxoIFFrQ0MtAvBRYMiIjtGQUYUwM7Ax00xIiee67Q"
     );
-
+    const totalPrice = calculateGrandTotal().toFixed(2);
     const treesInCart = getSelectedDataFromCart();
     const trees = {
       cart: treesInCart,
@@ -34,14 +36,16 @@ const Order = () => {
       .post("/api/payment/checkout", trees)
       .then((response) => {
         const session = response.data;
-        // const result = stripe.redirectToCheckout({
-        //   sessionId: session.id,
-        // });
+        const result = stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
 
-        // if (result.error) {
-        //   console.error(result.error);
-        // }
+        if (result.error) {
+          console.error(result.error);
+        }
         handleStripeSession({ type: "UPDATE_SESSION", sessionId: session.id });
+        handleOrderGrandPrice({ type: "CALC_GRAND_PRICE", total: totalPrice });
+        handleOrder({ type: "ADD_ITEMS", items: trees });
       })
       .catch((error) => {
         console.log("ERROR: ", error);

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /**
  *
  * @param {*} state
@@ -22,12 +23,33 @@ export const paymentSessionReducer = (state, action) => {
  * @returns
  */
 export const patronReducer = (state, action) => {
-  console.log("ACTION", action);
   switch (action.type) {
     case "ADD_PATRON":
       return { ...state, patronInfo: action.newPatron };
     case "REMOVE_PATRON":
       return { ...state, patronInfo: {} };
+    default:
+      return state;
+  }
+};
+
+export const calculateGrandPrice = (state, action) => {
+  switch (action.type) {
+    case "CALC_GRAND_PRICE":
+      return { ...state, grand: Number(action.total) };
+    case "RESET_GRAND_PRICE":
+      return { ...state, grand: 0.0 };
+    default:
+      return state;
+  }
+};
+
+export const OrderItemsReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_ITEMS":
+      return { ...state, items: action.items };
+    case "REMOVE_ITEMS":
+      return { ...state, items: {} };
     default:
       return state;
   }

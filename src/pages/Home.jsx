@@ -4,6 +4,7 @@ import HeroSection from "../components/HeroSection";
 import backgroundImage from "../assets/images/leaves_background_03.png";
 
 const Home = () => {
+  document.title = "Home";
   return (
     <main>
       {/* Hero Section */}

@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const Login = () => {
+  document.title = "Login";
   const { setLoggedIn, setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
 

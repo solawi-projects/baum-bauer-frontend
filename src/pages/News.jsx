@@ -80,6 +80,7 @@ const News = () => {
   };
 
   useEffect(() => {
+    document.title = "News";
     setIsLoading(true);
 
     getNewsArticles();

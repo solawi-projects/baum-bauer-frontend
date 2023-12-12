@@ -59,6 +59,7 @@ const Tree = () => {
   }
 
   useEffect(() => {
+    document.title = "Trees";
     getTrees();
   }, [skip]);
 

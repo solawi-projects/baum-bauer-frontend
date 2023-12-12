@@ -11,8 +11,9 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import Swal from "sweetalert2";
 
 const PasswordChange = () => {
+  document.title = "Changing Password";
   // State to manage password values
-  const { loggedIn, authUser,setAuthUser } = useContext(AuthContext);
+  const { loggedIn, authUser, setAuthUser } = useContext(AuthContext);
   const [passwords, setPasswords] = useState({
     currentPassword: "",
     newPassword: "",
@@ -35,7 +36,7 @@ const PasswordChange = () => {
       // update localStorage
       if (response.status === 200) {
         // Update the user's password in local storage
-        console.log('the passord changed sunccessfully')
+        console.log("the passord changed sunccessfully");
         Swal.fire({
           icon: "success",
           title: "The Password changed successfully!",
@@ -46,15 +47,18 @@ const PasswordChange = () => {
           },
           buttonsStyling: false,
         });
-        localStorage.setItem('user', JSON.stringify({
-          ...authUser,
-          password: newPassword
-        }));
-      
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            ...authUser,
+            password: newPassword,
+          })
+        );
+
         // Set the new password in the state
         setAuthUser({
           ...authUser,
-          password: newPassword
+          password: newPassword,
         });
       }
     } catch (error) {

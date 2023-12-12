@@ -8,6 +8,7 @@ import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const DashboardContent = () => {
+  document.title = "Dashboard - User";
   const { authUser } = useContext(AuthContext);
 
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];

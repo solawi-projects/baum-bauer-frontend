@@ -1,12 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
-import axios from "../utils/axiosInstance";
+import { addSponsorAndPayment } from "../utils/apiMethods";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import logoImage from "../assets/images/BioBaumBauer_Logo_ThankYou.svg";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../store/CartContext";
 
@@ -14,78 +15,66 @@ const SuccessPage = () => {
   const titles = ["Payment Successful"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Payment Successful" };
-  const { authUser, patron, handleStripeSession } = useContext(AuthContext);
   const {
-    cartProducts,
-    getTreeQuantity,
-    TAX_RATE,
-    getItemTotalPrice,
-    calculateTotalPrice,
-    calculateGrandTotal,
-    getSelectedDataFromCart,
-  } = useContext(CartContext);
-
-  const [payId, setPayId] = useState(null);
-  const [sponsorId, setSponsorId] = useState(null);
-
-  // methods for inserting data
-  const addPayment = async (sessionId, totalGrundPay, userId, taxRate) => {
-    try {
-      const response = await axios.post("/api/payment/create", {
-        sessionId,
-        totalGrundPay,
-        userId,
-        taxRate,
-      });
-      if (response.status === 201) {
-        return response.data.newPayment._id;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const doSponsorShip = async (totalPrice, userId, payId) => {
-    try {
-      const response = await axios.post("/api/sponsorShip/newSponsorShip", {
-        totalPrice,
-        userId,
-        payId,
-      });
-      if (response.status === 201) {
-        return response.data.newSponsorShip._id;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const addOrderItems = (orderId, trees) => {
-    try {
-      const response = axios.patch(
-        `/api/sponsorShip/updateSponsorShip/${orderId}`,
-        {
-          trees,
-        }
-      );
-      if (response.status === 200) {
-        return response.data.updatedSponsor._id;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    authUser,
+    stripeSession,
+    handleStripeSession,
+    patron,
+    orderGrandPrice,
+    handleOrderGrandPrice,
+    order,
+    handleOrder,
+    handlePatronInfo,
+  } = useContext(AuthContext);
+  const { TAX_RATE, clearCart } = useContext(CartContext);
 
   useEffect(() => {
-    // const totalPrice = calculateGrandTotal();
-    // addPayment(session.id, totalPrice, authUser._id, TAX_RATE).then(
-    //   (paymentId) => {
-    //     setPayId(paymentId);
-    //   }
-    // );
-    // doSponsorShip(totalPrice, authUser._id, payId);
-    // const items = addOrderItems(sponsorId, trees);
-    // console.log("Session:", session);
-    // console.log("Trees", trees);
+    document.title = "Payment Successful";
+    async function insertData(
+      sId,
+      grandPrice,
+      userId,
+      taxRate,
+      patron,
+      orders
+    ) {
+      try {
+        const newSponsor = await addSponsorAndPayment(
+          sId,
+          grandPrice,
+          userId,
+          taxRate,
+          patron,
+          orders
+        );
+        if (newSponsor) {
+          handleStripeSession({ type: "RESET_SESSION" });
+          handleOrderGrandPrice({ type: "RESET_GRAND_PRICE" });
+          handleOrder({ type: "REMOVE_ITEMS" });
+          handlePatronInfo({ type: "REMOVE_PATRON" });
+          clearCart();
+        }
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    }
+    if (
+      (stripeSession.sid && stripeSession.sid !== "") ||
+      orderGrandPrice.grand > 0 ||
+      Object.keys(patron.patronInfo).length > 0 ||
+      Object.keys(order.items).length > 0
+    ) {
+      insertData(
+        stripeSession.sid,
+        orderGrandPrice.grand,
+        authUser._id,
+        TAX_RATE,
+        patron.patronInfo,
+        order.items.cart
+      );
+    }
   }, []);
+
   return (
     <main className="relative text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />

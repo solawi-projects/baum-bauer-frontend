@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
 
 const Terms = () => {
+  document.title ="Terms and Conditions"
   const titles = ["Terms and Conditions"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Terms and Conditions" };

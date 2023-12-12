@@ -4,6 +4,7 @@ import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 
 const Privacy = () => {
+  document.title = "Privacy Policy for Solawi Zabergäu";
   const titles = ["Privacy Policy for Solawi Zabergäu"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Privacy Policy" };

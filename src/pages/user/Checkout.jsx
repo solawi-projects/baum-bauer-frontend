@@ -11,6 +11,7 @@ import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 
 const Checkout = () => {
+  document.title = "Checkout";
   const { cartProducts, getTreeQuantity, getItemTotalPrice } =
     useContext(CartContext);
   const { authUser, handlePatronInfo } = useContext(AuthContext);
@@ -90,7 +91,6 @@ const Checkout = () => {
     navigate("/order/place_order", { state: newPatron });
   };
 
-  console.log("newPatron:", newPatron);
 
   return (
     <main>

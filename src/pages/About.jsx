@@ -4,6 +4,7 @@ import { HiHome } from "react-icons/hi";
 import EachPageHeader from "../components/EachPageHeader";
 
 const About = () => {
+  document.title = "About US";
   const titles = ["About Us", ""];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "About Page" };

@@ -1,4 +1,5 @@
-import { useContext } from "react";
+/* eslint-disable react/no-unescaped-entities */
+import { useContext, useEffect } from "react";
 import backgroundImage from "../assets/images/leaves_background_02.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
@@ -8,12 +9,24 @@ import { Button } from "flowbite-react";
 import { AuthContext } from "../contexts/AuthContext";
 
 const CancelPage = () => {
-  const { stripeSession, handleStripeSession } = useContext(AuthContext);
+  const {
+    handleStripeSession,
+    handleOrderGrandPrice,
+    handleOrder,
+    handlePatronInfo,
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    document.title = "Payment Unsuccessful";
+    handleStripeSession({ type: "RESET_SESSION" });
+    handleOrderGrandPrice({ type: "RESET_GRAND_PRICE" });
+    handleOrder({ type: "REMOVE_ITEMS" });
+    handlePatronInfo({ type: "REMOVE_PATRON" });
+  }, []);
   const titles = ["Payment Unsuccessful"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Payment Unsuccessful" };
 
-  console.log("Session: ", stripeSession);
   return (
     <main className="relative text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
