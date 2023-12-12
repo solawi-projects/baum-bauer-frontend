@@ -18,6 +18,7 @@ const SingleTreePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = "Tree Detail";
     const fetchTree = async () => {
       try {
         const response = await axios.get(`/api/tree/${id}`);

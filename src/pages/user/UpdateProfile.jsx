@@ -10,7 +10,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Swal from "sweetalert2";
 import axios from "../../utils/axiosInstance";
 const UpdateProfile = () => {
-  const {loggedIn, authUser,setAuthUser } = useContext(AuthContext)
+  const { loggedIn, authUser, setAuthUser } = useContext(AuthContext);
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Update Profile" };
 
@@ -33,21 +33,21 @@ const UpdateProfile = () => {
   });
 
   useEffect(() => {
+    document.title = "Update Profile";
     // Set formValues based on user data when user data is available
-   
-      setFormValues({
-        firstName: authUser.firstName,
-        lastName: authUser.lastName,
-        email: authUser.email,
-        mobilePhone: authUser.mobilePhone || "",
-        address1: authUser.address.address1 || "",
-        address2: authUser.address?.address2 || "",
-        city: authUser.address.city,
-        zipCode: authUser.address.zipCode || "",
-        state: authUser.address.state || "",
-        country: authUser.address.country || "",
-      });
-    
+
+    setFormValues({
+      firstName: authUser.firstName,
+      lastName: authUser.lastName,
+      email: authUser.email,
+      mobilePhone: authUser.mobilePhone || "",
+      address1: authUser.address.address1 || "",
+      address2: authUser.address?.address2 || "",
+      city: authUser.address.city,
+      zipCode: authUser.address.zipCode || "",
+      state: authUser.address.state || "",
+      country: authUser.address.country || "",
+    });
   }, [authUser]);
   const handleswal = () => {
     Swal.fire({
@@ -97,22 +97,24 @@ const UpdateProfile = () => {
      */
     // eslint-disable-next-line react-hooks/rules-of-hooks
 
-      try {
-        const response = await axios.patch(`/api/users/update-by-id/${authUser._id}`, formValues);
-    
-        if (response.status === 200) {
-          console.log(response.data);
-          setAuthUser(response.data.user);
-          setFormValues(response.data);
-        }
-      } catch (error) {
-        console.error("Error updating user profile:", error.message);
-        // You can add additional error handling or alert the user about the issue
-        console.error("Error details:", error);
+    try {
+      const response = await axios.patch(
+        `/api/users/update-by-id/${authUser._id}`,
+        formValues
+      );
 
+      if (response.status === 200) {
+        console.log(response.data);
+        setAuthUser(response.data.user);
+        setFormValues(response.data);
       }
-    
-/* const handleInputChange = (fieldName, value) => {
+    } catch (error) {
+      console.error("Error updating user profile:", error.message);
+      // You can add additional error handling or alert the user about the issue
+      console.error("Error details:", error);
+    }
+
+    /* const handleInputChange = (fieldName, value) => {
   setFormValues({
     ...formValues,
     [fieldName]: value,
@@ -176,7 +178,7 @@ const UpdateProfile = () => {
                     <TextInput
                       id="firstName"
                       type="text"
-                      value={authUser?.firstName || ""}
+                      value={authUser?.firstName ||" "}
                       disabled={true}
                       readOnly
                       className="input"
@@ -198,7 +200,7 @@ const UpdateProfile = () => {
                       required
                       id="lastName"
                       type="text"
-                      value={authUser?.lastName || ""}
+                      value={authUser?.lastName || " "}
                       readOnly
                       disabled={true}
                       onChange={
@@ -257,7 +259,7 @@ const UpdateProfile = () => {
                       type="text"
                       name="phone"
                       value={
-                        formValues.mobilePhone || null || authUser?.mobilePhone
+                        formValues.mobilePhone || " " || authUser?.mobilePhone
                       }
                       onChange={(e) =>
                         setFormValues({
@@ -288,7 +290,7 @@ const UpdateProfile = () => {
                       type="text"
                       value={
                         formValues.address1 ||
-                        null ||
+                        " " ||
                         authUser?.address.address1
                       }
                       onChange={(e) =>
@@ -317,7 +319,7 @@ const UpdateProfile = () => {
                       type="text"
                       value={
                         formValues.address2 ||
-                        null ||
+                        " " ||
                         authUser?.address.address2
                       }
                       onChange={(e) =>
@@ -347,7 +349,7 @@ const UpdateProfile = () => {
                       required
                       id="city"
                       type="text"
-                      value={formValues.city || authUser?.address.city}
+                      value={formValues.city ||" "|| authUser?.address.city}
                       onChange={(e) =>
                         setFormValues({ ...formValues, city: e.target.value })
                       }
@@ -371,7 +373,7 @@ const UpdateProfile = () => {
                       id="postcode"
                       type="text"
                       value={
-                        formValues.zipCode || null || authUser?.address.zipCode
+                        formValues.zipCode || " " || authUser?.address.zipCode
                       }
                       onChange={(e) =>
                         setFormValues({
@@ -423,7 +425,7 @@ const UpdateProfile = () => {
                       id="country"
                       type="text"
                       value={
-                        formValues.country || null || authUser?.address.country
+                        formValues.country || " " || authUser?.address.country
                       }
                       onChange={(e) =>
                         setFormValues({

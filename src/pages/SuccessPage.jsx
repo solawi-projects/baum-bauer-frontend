@@ -1,15 +1,96 @@
+/* eslint-disable react/no-unescaped-entities */
 import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
+import { addSponsorAndPayment } from "../utils/apiMethods";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import logoImage from "../assets/images/BioBaumBauer_Logo_ThankYou.svg";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
+import { useEffect, useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { CartContext } from "../store/CartContext";
+import { usePatronContext } from "../store/PatronContext";
 
 const SuccessPage = () => {
   const titles = ["Payment Successful"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Payment Successful" };
+  const {
+    authUser,
+    stripeSession,
+    handleStripeSession,
+    patron,
+    orderGrandPrice,
+    handleOrderGrandPrice,
+    order,
+    handleOrder,
+    // handlePatronInfo,
+  } = useContext(AuthContext);
+  const { TAX_RATE, clearCart } = useContext(CartContext);
+  const { newPatron, updateNewPatron } = usePatronContext();
+
+  useEffect(() => {
+    document.title = "Payment Successful";
+    async function insertData(
+      sId,
+      grandPrice,
+      userId,
+      taxRate,
+      patron,
+      orders
+    ) {
+      try {
+        const newSponsor = await addSponsorAndPayment(
+          sId,
+          grandPrice,
+          userId,
+          taxRate,
+          patron,
+          orders
+        );
+        if (newSponsor) {
+          handleStripeSession({ type: "RESET_SESSION" });
+          handleOrderGrandPrice({ type: "RESET_GRAND_PRICE" });
+          handleOrder({ type: "REMOVE_ITEMS" });
+          updateNewPatron({
+            firstName: "",
+            lastName: "",
+            email: "",
+            mobilePhone: "",
+            address: {
+              city: "",
+              zipCode: "",
+              country: "",
+              state: "",
+              address1: "",
+              address2: "",
+            },
+            userId: "",
+          });
+          // handlePatronInfo({ type: "REMOVE_PATRON" });
+          clearCart();
+        }
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    }
+    if (
+      (stripeSession.sid && stripeSession.sid !== "") ||
+      orderGrandPrice.grand > 0 ||
+      Object.keys(newPatron).length > 0 ||
+      Object.keys(order.items).length > 0
+    ) {
+      insertData(
+        stripeSession.sid,
+        orderGrandPrice.grand,
+        authUser._id,
+        TAX_RATE,
+        newPatron,
+        order.items.cart
+      );
+    }
+  }, []);
 
   return (
     <main className="relative text-font-family-color">

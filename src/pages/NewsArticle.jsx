@@ -17,6 +17,7 @@ const NewsArticle = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    document.title = "News Article - details";
     const fetchArticle = async () => {
       try {
         const response = await axios.get(`/api/newsArticle/${id}`);

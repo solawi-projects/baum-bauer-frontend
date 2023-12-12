@@ -18,11 +18,11 @@ import footerImage from "../assets/images/gallery_images/biobaum_gallery_footer_
 import { Link } from "react-router-dom";
 
 const Contact = () => {
+  document.title = "Contact US";
   const titles = ["Contact Page", "Below, our contact details provided!"];
   const titles2 = [
     "Locate Our Green Haven",
     "Finding Us: A Map to Sustainability!",
-    ,
   ];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Contact Page" };

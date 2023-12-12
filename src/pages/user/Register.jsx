@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
 const Register = () => {
+  document.title = "Register New User";
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

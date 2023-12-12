@@ -8,6 +8,9 @@ import { BsTwitterX } from "react-icons/bs";
 import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 import logoImage from "../assets/images/BioBaumBauer_Logo_Footer.svg";
 import { FaLinkedin } from "react-icons/fa6";
+import { Avatar } from "flowbite-react";
+import jamal from "../assets/images/contributors/jamal.jpg";
+import simon from "../assets/images/contributors/simon.jpeg";
 import { Fade } from "react-awesome-reveal";
 
 function Footer() {
@@ -114,7 +117,7 @@ function Footer() {
                   <span>Home</span>
                 </Link>
                 <Link
-                  to="/sponsor"
+                  to="/trees"
                   className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
@@ -142,11 +145,11 @@ function Footer() {
                   <span>Gallery</span>
                 </Link>
                 <Link
-                  to="/gap"
+                  to="/faq"
                   className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
                 >
                   <MdDoubleArrow />
-                  <span>FAQ</span>
+                  <span>FAQs</span>
                 </Link>
                 <Link
                   to="/contact"
@@ -156,6 +159,7 @@ function Footer() {
 
                   <span>Contact</span>
                 </Link>
+                <hr />
                 <Link
                   to="/terms"
                   className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
@@ -181,6 +185,21 @@ function Footer() {
                 10178 Berlin, Germany <br />
                 Alexanderstrasse. 4
               </p>
+              <hr />
+              <div className="flex flex-wrap gap-2 flex-col items-center">
+                <p className="text-lg font-sans font-bold text-darkgreen-color">
+                  Contributors
+                </p>
+                <Link to="/contributors">
+                  <Avatar.Group>
+                    <Avatar img={jamal} rounded stacked />
+                    <Avatar img={simon} rounded stacked />
+                    <Avatar placeholderInitials="R" rounded stacked />
+                    <Avatar placeholderInitials="S" rounded stacked />
+                    <Avatar placeholderInitials="M" rounded stacked />
+                  </Avatar.Group>
+                </Link>
+              </div>
             </div>
           </section>
           <hr />

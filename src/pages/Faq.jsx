@@ -56,6 +56,7 @@ const Faq = () => {
   };
 
   useEffect(() => {
+    document.title = "FAQs";
     getFaqs();
   }, [skip]);
 

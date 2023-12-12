@@ -11,6 +11,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import Swal from "sweetalert2";
 
 const PasswordChange = () => {
+  document.title = "Changing Password";
   // State to manage password values
   const { loggedIn, authUser, setAuthUser } = useContext(AuthContext);
   const [passwords, setPasswords] = useState({
