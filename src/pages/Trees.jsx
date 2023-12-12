@@ -71,7 +71,7 @@ const Tree = () => {
       />{" "}
       <p>{err}</p>
       <Search updateTree={setTree} limit={limit} skip={skip} />
-      <div className=" flex justify-center flex-wrap gap-10 pt-20 pb-4 md:pb-8 lg:pb-20">
+      <div className=" flex justify-center flex-wrap gap-10 pt-20 pb-4 md:pb-8 lg:pb-12 xl:p-16">
         <Fade
           delay={100}
           cascade
@@ -94,7 +94,7 @@ const Tree = () => {
           </div>
         </Fade>
 
-        <div className="relative w-full mx-auto p-4  md:pb-[20px] lg:pb-[20px] xl:pb-[40px] border-bg-header-footer flex flex-col  justify-center flex-wrap gap-10 pt-20 pb-10">
+        <div className="relative w-full mx-auto p-4 md:p-8 lg:p-12 xl:p-16 border-bg-header-footer flex flex-col justify-center flex-wrap gap-10 pt-20 pb-10">
           {/* Overlay with background image and opacity */}
           <div
             className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"

@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 const PasswordChange = () => {
   // State to manage password values
-  const { loggedIn, authUser,setAuthUser } = useContext(AuthContext);
+  const { loggedIn, authUser, setAuthUser } = useContext(AuthContext);
   const [passwords, setPasswords] = useState({
     currentPassword: "",
     newPassword: "",
@@ -22,20 +22,20 @@ const PasswordChange = () => {
   const handlePasswordChange = async (event) => {
     event.preventDefault();
     const { currentPassword, newPassword, confirmNewPassword } = passwords;
-    if (newPassword !== confirmNewPassword) {
+   /*  if (newPassword !== confirmNewPassword) {
       alert("New password and confirm password do not match");
       return;
-    }
+    } */
     try {
       const response = await axios.post(
         `/api/users/chang-password/${authUser._id}`,
         { currentPassword, newPassword, confirmNewPassword }
       );
-      // console.log(response.data);
+   
       // update localStorage
       if (response.status === 200) {
         // Update the user's password in local storage
-        console.log('the passord changed sunccessfully')
+        console.log("the password changed sunccessfully");
         Swal.fire({
           icon: "success",
           title: "The Password changed successfully!",
@@ -46,23 +46,44 @@ const PasswordChange = () => {
           },
           buttonsStyling: false,
         });
-        localStorage.setItem('user', JSON.stringify({
-          ...authUser,
-          password: newPassword
-        }));
-      
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            ...authUser,
+            password: newPassword,
+          })
+        );
+
         // Set the new password in the state
         setAuthUser({
           ...authUser,
-          password: newPassword
+          password: newPassword,
         });
       }
-    } catch (error) {
-      console.error("Password change failed:", error.response.data.message);
-    }
 
-    console.log("Password values:", passwords);
+  
+    } catch (error) {
+      
+console.log(error.response.data.errors[0].msg)
+const errorsList = error.response.data.errors.map((error) => error.msg).join(', ');
+console.log(errorsList);
+    Swal.fire({
+          icon: "error",
+          title: 'Failed to Change the Password',
+          text: errorsList,
+          customClass: {
+            confirmButton: "btn-custom-class",
+            title: "title-class",
+          },
+          buttonsStyling: false,
+        }); 
+   
+  
+      
+    }
   };
+
+
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
