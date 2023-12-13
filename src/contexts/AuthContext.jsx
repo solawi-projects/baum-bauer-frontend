@@ -15,7 +15,7 @@ export const AuthContext = createContext({});
 // our auth context provider
 export const AuthProvider = ({ children }) => {
   const lsRef = typeof window !== "undefined" ? window.localStorage : null;
-  //receiving the login information from local storage
+  // receiving the login information from local storage
   const loginSession = JSON.parse(lsRef.getItem("login")) || {
     loggedIn: false,
     authUser: {},
@@ -33,13 +33,11 @@ export const AuthProvider = ({ children }) => {
   }, [loggedIn, authUser]);
 
   // stripe session id
-  const stripSessionValue = JSON.parse(lsRef.getItem("ssid"));
+  const stripSessionValue = JSON.parse(lsRef.getItem("ssid")) || {};
   const [stripeSession, handleStripeSession] = useReducer(
     paymentSessionReducer,
     {
-      sid: stripSessionValue.stripeSession.sid
-        ? stripSessionValue.stripeSession.sid
-        : "",
+      sid: stripSessionValue.stripeSession?.sid || "",
     }
   );
   useEffect(() => {
@@ -47,25 +45,20 @@ export const AuthProvider = ({ children }) => {
   }, [stripeSession]);
 
   // patron details
-
-  const patronDataValue = JSON.parse(lsRef.getItem("patron"));
+  const patronDataValue = JSON.parse(lsRef.getItem("patron")) || {};
   const [patron, handlePatronInfo] = useReducer(patronReducer, {
-    patronInfo: patronDataValue.patron.patronInfo
-      ? patronDataValue.patron.patronInfo
-      : {},
+    patronInfo: patronDataValue.patron?.patronInfo || {},
   });
   useEffect(() => {
     lsRef.setItem("patron", JSON.stringify({ patron }));
   }, [patron]);
 
   // calculate total grand price
-  const grandValue = JSON.parse(lsRef.getItem("orderGrandPrice"));
+  const grandValue = JSON.parse(lsRef.getItem("orderGrandPrice")) || {};
   const [orderGrandPrice, handleOrderGrandPrice] = useReducer(
     calculateGrandPrice,
     {
-      grand: grandValue.orderGrandPrice.grand
-        ? grandValue.orderGrandPrice.grand
-        : 0.0,
+      grand: grandValue.orderGrandPrice?.grand || 0.0,
     }
   );
   useEffect(() => {
@@ -73,9 +66,9 @@ export const AuthProvider = ({ children }) => {
   }, [orderGrandPrice]);
 
   // save payment
-  const orderValue = JSON.parse(lsRef.getItem("items"));
+  const orderValue = JSON.parse(lsRef.getItem("items")) || {};
   const [order, handleOrder] = useReducer(OrderItemsReducer, {
-    items: orderValue.order.items ? orderValue.order.items : {},
+    items: orderValue.order?.items || {},
   });
   useEffect(() => {
     lsRef.setItem("items", JSON.stringify({ order }));
