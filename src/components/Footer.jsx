@@ -11,6 +11,9 @@ import { FaLinkedin } from "react-icons/fa6";
 import { Avatar } from "flowbite-react";
 import jamal from "../assets/images/contributors/jamal.jpg";
 import simon from "../assets/images/contributors/simon.jpg";
+import milica from "../assets/images/contributors/milica-rad.jpg";
+import shaqayeq from "../assets/images/contributors/shaqayeq.jpg";
+import roshini from "../assets/images/contributors/roshini.jpg";
 import { Fade } from "react-awesome-reveal";
 
 function Footer() {
@@ -194,9 +197,9 @@ function Footer() {
                   <Avatar.Group>
                     <Avatar img={jamal} rounded stacked />
                     <Avatar img={simon} rounded stacked />
-                    <Avatar placeholderInitials="R" rounded stacked />
-                    <Avatar placeholderInitials="S" rounded stacked />
-                    <Avatar placeholderInitials="M" rounded stacked />
+                    <Avatar img={milica} rounded stacked />
+                    <Avatar img={roshini} rounded stacked />
+                    <Avatar img={shaqayeq} rounded stacked />
                   </Avatar.Group>
                 </Link>
               </div>

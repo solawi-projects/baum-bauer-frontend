@@ -1,13 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import axios from "../../utils/axiosInstance";
 import logoIcon from "../../assets/images/tree_icon.svg";
-import { AuthContext } from "../../contexts/AuthContext";
-import { Link } from "react-router-dom";
 import { FaRegFilePdf } from "react-icons/fa6";
 import { MdEuroSymbol } from "react-icons/md";
 const SponsorShipDetails = () => {
