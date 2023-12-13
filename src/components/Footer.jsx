@@ -10,7 +10,7 @@ import logoImage from "../assets/images/BioBaumBauer_Logo_Footer.svg";
 import { FaLinkedin } from "react-icons/fa6";
 import { Avatar } from "flowbite-react";
 import jamal from "../assets/images/contributors/jamal.jpg";
-import simon from "../assets/images/contributors/simon.jpeg";
+import simon from "../assets/images/contributors/simon.jpg";
 import { Fade } from "react-awesome-reveal";
 
 function Footer() {
