@@ -166,10 +166,10 @@ const SponsorShipDetails = () => {
                 <div className="w-full pt-5 px-4 mb-8 mx-auto">
                   {Object.keys(patron).length > 0 ? (
                     <div className="w-[100%]">
-                      <h3 className="break-all text-xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+                      <h3 className="break-all text-2xl lg:text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                         Patron Details
                       </h3>
-                      <div className="break-all flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border-bg-header-footer mt-4  text-xs lg:text-md xl:text-xl ">
+                      <div className="break-all flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border-bg-header-footer mt-4 text-xs sm:text-sm md:text-md lg:text-lg xl:text-xl ">
                         <p className="text-font-family-color">
                           <span className="font-semibold">Full Name:</span>
                           &nbsp;
@@ -218,7 +218,7 @@ const SponsorShipDetails = () => {
                 </div>
                 <hr />
                 <br />
-                <h3 className="break-all text-xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+                <h3 className="break-all text-2xl xl:text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                   Items
                 </h3>
                 <br /> <br />
