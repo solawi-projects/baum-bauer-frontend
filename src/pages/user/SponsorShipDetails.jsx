@@ -89,74 +89,78 @@ const SponsorShipDetails = () => {
                 ) : (
                   <span></span>
                 )}
-                <table className="w-[90%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md">
-                  <thead className="pb-10 space-y-4">
-                    <tr className="bg-bg-header-footer">
-                      <th className="space-y-2 border-blue-gray-100 bg-blue-gray-50/50 p-4 g-3">
-                        <p className="block text-1.5xl antialiased font-sans text-secondary-color font-normal leading-none opacity-70">
-                          Certification No.
-                        </p>
-                      </th>
-                      <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                        <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
-                          Amount
-                        </p>
-                      </th>
-                      <th className="border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                        <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
-                          Date
-                        </p>
-                      </th>
-                      <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                        <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
-                          Certificate
-                        </p>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.keys(sponsorship).length > 0 ? (
-                      <tr className="rounded hover:bg-lighter-primary active:bg-bg-lighter-primary focus:bg-bg-lighter-primary">
-                        <td className="p-4 border-b border-blue-gray-10">
-                          <p className="block antialiased font-sans text-1xl text-secondary-color leading-normal  ">
-                            {sponsorship.certificationNo}
+                <div className="overflow-x-auto">
+                  <table className="w-[90%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md ">
+                    <thead className="pb-10 space-y-4">
+                      <tr className="bg-bg-header-footer">
+                        <th className="space-y-2 border-blue-gray-100 bg-blue-gray-50/50 p-4 g-3">
+                          <p className="block text-xs lg:text-md xl:text-xl  antialiased font-sans text-secondary-color font-normal leading-none opacity-70">
+                            Certification No.
                           </p>
-                        </td>
-                        <td className="p-4 border-b border-blue-gray-10">
-                          <p className="flex items-center justify-left antialiased font-sans text-1.5xl leading-normal text-secondary-color font-normal">
-                            <span>{sponsorship.amount.$numberDecimal}</span>
-                            <MdEuroSymbol />
+                        </th>
+                        <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl  text-secondary-color font-normal leading-none opacity-70">
+                            Amount
                           </p>
-                        </td>
-                        <td className="p-4 border-b border-blue-gray-10">
-                          <div className="w-max">
-                            <div
-                              className="relative grid items-center font-sans text-secondary-color text-1.5xl uppercase whitespace-nowrap select-none  px-2  rounded-md"
-                              style={{ opacity: 1 }}
-                            >
-                              <p className="text-secondary-color">
-                                {new Date(sponsorship.createdAt).toDateString()}
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="p-4 border-b border-blue-gray-50">
-                          <div className="flex items-center gap-3">
-                            <FaRegFilePdf className="text-2xl text-secondary-color" />
-                            <div className="flex flex-col">
-                              <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal capitalize"></p>
-                              <p className="block antialiased font-sans text-1.5xl text-secondary-color leading-normal text-blue-gray-900 font-normal opacity-70">
-                                Download
-                              </p>
-                            </div>
-                          </div>
-                        </td>
+                        </th>
+                        <th className="border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl  text-secondary-color font-normal leading-none opacity-70">
+                            Date
+                          </p>
+                        </th>
+                        <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl  text-secondary-color font-normal leading-none opacity-70">
+                            Certificate
+                          </p>
+                        </th>
                       </tr>
-                    ) : (
-                      <tr></tr>
-                    )}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {Object.keys(sponsorship).length > 0 ? (
+                        <tr className="rounded hover:bg-lighter-primary active:bg-bg-lighter-primary focus:bg-bg-lighter-primary">
+                          <td className="p-4 border-b border-blue-gray-10">
+                            <p className="block antialiased font-sans text-1xl text-secondary-color leading-normal  ">
+                              {sponsorship.certificationNo}
+                            </p>
+                          </td>
+                          <td className="p-4 border-b border-blue-gray-10">
+                            <p className="flex items-center justify-left antialiased font-sans text-xs lg:text-md xl:text-xl  leading-normal text-secondary-color font-normal">
+                              <span>{sponsorship.amount.$numberDecimal}</span>
+                              <MdEuroSymbol />
+                            </p>
+                          </td>
+                          <td className="p-4 border-b border-blue-gray-10">
+                            <div className="w-max">
+                              <div
+                                className="relative grid items-center font-sans text-secondary-color text-xs lg:text-md xl:text-xl  uppercase whitespace-nowrap select-none  px-2  rounded-md"
+                                style={{ opacity: 1 }}
+                              >
+                                <p className="text-secondary-color">
+                                  {new Date(
+                                    sponsorship.createdAt
+                                  ).toDateString()}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="p-4 border-b border-blue-gray-50">
+                            <div className="flex items-center gap-3">
+                              <FaRegFilePdf className="text-2xl text-secondary-color" />
+                              <div className="flex flex-col">
+                                <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal capitalize"></p>
+                                <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl  text-secondary-color leading-normal text-blue-gray-900 font-normal opacity-70">
+                                  Download
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      ) : (
+                        <tr></tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
                 <br />
                 <hr />
                 <div className="w-full pt-5 px-4 mb-8 mx-auto">
@@ -165,7 +169,7 @@ const SponsorShipDetails = () => {
                       <h3 className="break-all text-xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                         Patron Details
                       </h3>
-                      <div className="break-all flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border-bg-header-footer mt-4 xs:p-2 p-4">
+                      <div className="break-all flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border-bg-header-footer mt-4  text-xs lg:text-md xl:text-xl ">
                         <p className="text-font-family-color">
                           <span className="font-semibold">Full Name:</span>
                           &nbsp;
@@ -215,76 +219,78 @@ const SponsorShipDetails = () => {
                 <hr />
                 <br />
                 <h3 className="break-all text-xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                  items
+                  Items
                 </h3>
                 <br /> <br />
-                <table className="w-[90%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md">
-                  <thead className="pb-10 space-y-4">
-                    <tr className="bg-bg-header-footer">
-                      <th className="space-y-2 border-blue-gray-100 bg-blue-gray-50/50 p-4 g-3">
-                        <p className="block text-1.5xl antialiased font-sans text-secondary-color font-normal leading-none opacity-70">
-                          Image
-                        </p>
-                      </th>
-                      <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                        <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
-                          Name
-                        </p>
-                      </th>
-                      <th className="border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                        <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
-                          Price
-                        </p>
-                      </th>
-                      <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                        <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
-                          Quantity
-                        </p>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {sItems.map((item) => {
-                      return (
-                        <tr
-                          key={item._id}
-                          className="rounded hover:bg-lighter-primary active:bg-bg-lighter-primary focus:bg-bg-lighter-primary"
-                        >
-                          <td className="p-4 border-b border-blue-gray-10">
-                            <img
-                              src={item.treeImage}
-                              alt="Sapling Tree"
-                              className="w-[100px] border border-[var(--darker-primary)]"
-                            />
-                          </td>
-                          <td className="p-4 border-b border-blue-gray-10">
-                            <div className="w-max">
-                              <div
-                                className="relative grid items-center font-sans text-secondary-color text-1.5xl uppercase whitespace-nowrap select-none  px-2  rounded-md"
-                                style={{ opacity: 1 }}
-                              >
-                                <p className="text-secondary-color">
-                                  {item.treeName}
-                                </p>
+                <div className="overflow-x-auto">
+                  <table className="w-[90%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md">
+                    <thead className="pb-10 space-y-4">
+                      <tr className="bg-bg-header-footer">
+                        <th className="space-y-2 border-blue-gray-100 bg-blue-gray-50/50 p-4 g-3">
+                          <p className="block text-xs lg:text-md xl:text-xl  antialiased font-sans text-secondary-color font-normal leading-none opacity-70">
+                            Image
+                          </p>
+                        </th>
+                        <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl  text-secondary-color font-normal leading-none opacity-70">
+                            Name
+                          </p>
+                        </th>
+                        <th className="border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl  text-secondary-color font-normal leading-none opacity-70">
+                            Price
+                          </p>
+                        </th>
+                        <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl  text-secondary-color font-normal leading-none opacity-70">
+                            Quantity
+                          </p>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sItems.map((item) => {
+                        return (
+                          <tr
+                            key={item._id}
+                            className="rounded hover:bg-lighter-primary active:bg-bg-lighter-primary focus:bg-bg-lighter-primary"
+                          >
+                            <td className="p-4 border-b border-blue-gray-10">
+                              <img
+                                src={item.treeImage}
+                                alt="Sapling Tree"
+                                className="w-[100px] border border-[var(--darker-primary)]"
+                              />
+                            </td>
+                            <td className="p-4 border-b border-blue-gray-10">
+                              <div className="w-max">
+                                <div
+                                  className="relative grid items-center font-sans text-secondary-color text-xs lg:text-md xl:text-xl  uppercase whitespace-nowrap select-none  px-2  rounded-md"
+                                  style={{ opacity: 1 }}
+                                >
+                                  <p className="text-secondary-color">
+                                    {item.treeName}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td className="p-4 border-b border-blue-gray-10">
-                            <p className="flex items-center justify-left antialiased font-sans text-1.5xl leading-normal text-secondary-color font-normal">
-                              <span>{item.treePrice.$numberDecimal}</span>
-                              <MdEuroSymbol />
-                            </p>
-                          </td>
-                          <td className="p-4 border-b border-blue-gray-50">
-                            <div className="flex items-center gap-3">
-                              <span>{item.qty}</span>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                            </td>
+                            <td className="p-4 border-b border-blue-gray-10">
+                              <p className="flex items-center justify-left antialiased font-sans text-xs lg:text-md xl:text-xl  leading-normal text-secondary-color font-normal">
+                                <span>{item.treePrice.$numberDecimal}</span>
+                                <MdEuroSymbol />
+                              </p>
+                            </td>
+                            <td className="p-4 border-b border-blue-gray-50">
+                              <div className="flex items-center gap-3">
+                                <span>{item.qty}</span>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

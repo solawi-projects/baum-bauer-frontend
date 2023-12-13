@@ -87,7 +87,7 @@ const UserSponsorships = () => {
                 </h3>
               </div>
               <div className="w-[100%]   min-h-screen items-center  justify-center bg-white">
-                <div className="p-6 w-[100]  px-0">
+                <div className="w-full overflow-x-auto">
                   {error ? (
                     <div className=" text-red-500">{error}</div>
                   ) : (
@@ -95,30 +95,30 @@ const UserSponsorships = () => {
                   )}
 
                   <table className="w-[90%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md">
-                    <thead className="pb-10 space-y-4 h-20">
+                    <thead className="pb-10 space-y-4 h-10 lg:h-20">
                       <tr className="bg-bg-header-footer h-30">
                         <th className="space-y-4 border-blue-gray-100 bg-blue-gray-50/50 p-4 g-3 h-30">
-                          <p className="block text-1.5xl antialiased font-sans text-secondary-color font-normal leading-none opacity-70">
+                          <p className="block text-xs lg:text-md xl:text-xl antialiased font-sans text-secondary-color font-normal leading-none opacity-70">
                             Certification No.
                           </p>
                         </th>
                         <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                          <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl text-secondary-color font-normal leading-none opacity-70">
                             Amount
                           </p>
                         </th>
                         <th className="border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                          <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl text-secondary-color font-normal leading-none opacity-70">
                             Date
                           </p>
                         </th>
                         <th className=" border-blue-gray-100 bg-blue-gray-50/50 p-4">
-                          <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl text-secondary-color font-normal leading-none opacity-70">
                             Certificate
                           </p>
                         </th>
                         <th className=" border-blue-gray-100 bg-blue-gray-100 p-4">
-                          <p className="block antialiased font-sans text-1.5xl text-secondary-color font-normal leading-none opacity-70">
+                          <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl text-secondary-color font-normal leading-none opacity-70">
                             details
                           </p>
                         </th>
@@ -129,15 +129,15 @@ const UserSponsorships = () => {
                         return (
                           <tr
                             key={key}
-                            className="rounded h-40 hover:bg-lighter-primary active:bg-bg-lighter-primary focus:bg-bg-lighter-primary"
+                            className="rounded h-20 lg:h-40 hover:bg-lighter-primary active:bg-bg-lighter-primary focus:bg-bg-lighter-primary"
                           >
                             <td className="p-4 border-b border-blue-gray-10">
-                              <p className="block antialiased font-sans text-1xl text-secondary-color leading-normal  ">
+                              <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl text-secondary-color leading-normal  ">
                                 {e.certificationNo}
                               </p>
                             </td>
                             <td className="p-4 border-b border-blue-gray-10">
-                              <p className="flex items-center justify-left antialiased font-sans text-1.5xl leading-normal text-secondary-color font-normal">
+                              <p className="flex items-center justify-left antialiased font-sans text-xs lg:text-md xl:text-xl leading-normal text-secondary-color font-normal">
                                 <span>{e.amount.$numberDecimal}</span>
                                 <MdEuroSymbol />
                               </p>
@@ -145,7 +145,7 @@ const UserSponsorships = () => {
                             <td className="p-4 border-b border-blue-gray-10">
                               <div className="w-max">
                                 <div
-                                  className="relative grid items-center font-sans text-secondary-color text-1.5xl uppercase whitespace-nowrap select-none  px-2  rounded-md"
+                                  className="relative grid items-center font-sans text-secondary-color text-xs lg:text-md xl:text-xl uppercase whitespace-nowrap select-none  px-2  rounded-md"
                                   style={{ opacity: 1 }}
                                 >
                                   <p className="text-secondary-color">
@@ -159,7 +159,7 @@ const UserSponsorships = () => {
                                 <FaRegFilePdf className="text-2xl text-secondary-color" />
                                 <div className="flex flex-col">
                                   <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal capitalize"></p>
-                                  <p className="block antialiased font-sans text-1.5xl text-secondary-color leading-normal text-blue-gray-900 font-normal opacity-70">
+                                  <p className="block antialiased font-sans text-xs lg:text-md xl:text-xl text-secondary-color leading-normal text-blue-gray-900 font-normal opacity-70">
                                     Download
                                   </p>
                                 </div>
