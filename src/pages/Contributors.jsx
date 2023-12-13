@@ -1,5 +1,8 @@
 import EachPageHeader from "../components/EachPageHeader";
 import { Card } from "flowbite-react";
+import milica from "../assets/images/contributors/milica-rad.jpg";
+import shaqayeq from "../assets/images/contributors/shaqayeq.jpg";
+import roshini from "../assets/images/contributors/roshini.jpg";
 import jamal from "../assets/images/contributors/jamal.jpg";
 import simon from "../assets/images/contributors/simon.jpg";
 import defaultimg from "../assets/images/contributors/default.png";
@@ -72,7 +75,7 @@ const Contributors = () => {
                 <div className="mt-4 flex space-x-3 lg:mt-6">
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href=""
+                    href="http://www.linkedin.com/in/simon-murray-9a434b3"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -80,7 +83,7 @@ const Contributors = () => {
                   </a>
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href=""
+                    href="https://github.com/SimonDavidMurray"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -94,7 +97,7 @@ const Contributors = () => {
                 <img
                   alt="Shaqayeq Taheri"
                   height="96"
-                  src={defaultimg}
+                  src={shaqayeq}
                   width="96"
                   className="mb-3 rounded-full shadow-lg"
                 />
@@ -107,7 +110,7 @@ const Contributors = () => {
                 <div className="mt-4 flex space-x-3 lg:mt-6">
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href=""
+                    href="https://www.linkedin.com/in/shaqayeq-taheri-328697254/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -115,7 +118,7 @@ const Contributors = () => {
                   </a>
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href=""
+                    href="https://github.com/Shaqayeq-taheri"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -129,7 +132,7 @@ const Contributors = () => {
                 <img
                   alt="Milica Radulovic"
                   height="96"
-                  src={defaultimg}
+                  src={milica}
                   width="96"
                   className="mb-3 rounded-full shadow-lg"
                 />
@@ -142,7 +145,7 @@ const Contributors = () => {
                 <div className="mt-4 flex space-x-3 lg:mt-6">
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href=""
+                    href="https://www.linkedin.com/in/milica-radulovic-1b931780/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -150,7 +153,7 @@ const Contributors = () => {
                   </a>
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href=""
+                    href="https://github.com/Milica-Radulovic"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -164,7 +167,7 @@ const Contributors = () => {
                 <img
                   alt="Roshini Muralidharan"
                   height="96"
-                  src={defaultimg}
+                  src={roshini}
                   width="96"
                   className="mb-3 rounded-full shadow-lg"
                 />
@@ -177,7 +180,7 @@ const Contributors = () => {
                 <div className="mt-4 flex space-x-3 lg:mt-6">
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href=""
+                    href="https://www.linkedin.com/in/roshini-muralidharan/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -185,7 +188,7 @@ const Contributors = () => {
                   </a>
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href=""
+                    href="https://github.com/roshinimurali"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
