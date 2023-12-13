@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
 import "sweetalert2/dist/sweetalert2.min.css";
 import DashboardLinks from "../../components/DashboardLinks";
@@ -178,7 +178,7 @@ const UpdateProfile = () => {
                     <TextInput
                       id="firstName"
                       type="text"
-                      value={authUser?.firstName ||" "}
+                      value={authUser?.firstName || " "}
                       disabled={true}
                       readOnly
                       className="input"
@@ -289,9 +289,7 @@ const UpdateProfile = () => {
                       id="addressLine1"
                       type="text"
                       value={
-                        formValues.address1 ||
-                        " " ||
-                        authUser?.address.address1
+                        formValues.address1 || " " || authUser?.address.address1
                       }
                       onChange={(e) =>
                         setFormValues({
@@ -318,9 +316,7 @@ const UpdateProfile = () => {
                       id="addressLine2"
                       type="text"
                       value={
-                        formValues.address2 ||
-                        " " ||
-                        authUser?.address.address2
+                        formValues.address2 || " " || authUser?.address.address2
                       }
                       onChange={(e) =>
                         setFormValues({
@@ -349,7 +345,7 @@ const UpdateProfile = () => {
                       required
                       id="city"
                       type="text"
-                      value={formValues.city ||" "|| authUser?.address.city}
+                      value={formValues.city || " " || authUser?.address.city}
                       onChange={(e) =>
                         setFormValues({ ...formValues, city: e.target.value })
                       }
@@ -424,6 +420,7 @@ const UpdateProfile = () => {
                       required
                       id="country"
                       type="text"
+                      readOnly
                       value={
                         formValues.country || " " || authUser?.address.country
                       }

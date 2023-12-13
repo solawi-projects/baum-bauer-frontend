@@ -1,7 +1,7 @@
 import EachPageHeader from "../components/EachPageHeader";
 import { Card } from "flowbite-react";
 import jamal from "../assets/images/contributors/jamal.jpg";
-import simon from "../assets/images/contributors/simon.jpeg";
+import simon from "../assets/images/contributors/simon.jpg";
 import defaultimg from "../assets/images/contributors/default.png";
 import { FaLinkedin } from "react-icons/fa6";
 import { ImGithub } from "react-icons/im";

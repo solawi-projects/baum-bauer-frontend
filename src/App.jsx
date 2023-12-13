@@ -30,9 +30,9 @@ import SingleTreePage from "./pages/SingleTreePage";
 import NewsArticle from "./pages/NewsArticle";
 import Checkout from "./pages/user/Checkout";
 import Order from "./pages/user/Order";
-import AddToGallery from "./pages/AddToGallery";
-import AddToNewArticle from "./pages/AddToNewsArticle";
-import AddNewTree from "./pages/AddNewTree";
+// import AddToGallery from "./pages/AddToGallery";
+// import AddToNewArticle from "./pages/AddToNewsArticle";
+// import AddNewTree from "./pages/AddNewTree";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/TermsConditions";
 import "./assets/styles/PrevNext.css";
@@ -41,6 +41,7 @@ import CancelPage from "./pages/CancelPage";
 import ProtectedRoute from "./pages/user/ProtectedRoute";
 import Contributors from "./pages/Contributors";
 import { PatronProvider } from "./store/PatronContext";
+import SponsorShipDetails from "./pages/user/SponsorShipDetails";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -156,6 +157,14 @@ function App() {
                     element={
                       <ProtectedRoute>
                         <CancelPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/sponsorship-details/:id"
+                    element={
+                      <ProtectedRoute>
+                        <SponsorShipDetails />
                       </ProtectedRoute>
                     }
                   />

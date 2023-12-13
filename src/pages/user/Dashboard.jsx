@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
@@ -6,14 +6,37 @@ import { Link } from "react-router-dom";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { AuthContext } from "../../contexts/AuthContext";
+import axios from "../../utils/axiosInstance";
 
 const DashboardContent = () => {
   document.title = "Dashboard - User";
   const { authUser } = useContext(AuthContext);
+  const [sponsorshipsCount, setSponsorshipCount] = useState(0);
+  const [error, setError] = useState("");
 
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Dashboard" };
-
+  useEffect(() => {
+    const getAllSponsorShip = (user) => {
+      try {
+        axios
+          .get(`/api/payment/getTotalCount/${user._id}`)
+          .then((response) => {
+            if (response.status === 200) {
+              setSponsorshipCount(response.data);
+            }
+          })
+          .catch((error) => {
+            if (error.response.status === 500) {
+              setError("Data is not available");
+            }
+          });
+      } catch (error) {
+        setError("Server is down!");
+      }
+    };
+    getAllSponsorShip(authUser);
+  }, []);
   return (
     <main>
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
@@ -47,7 +70,7 @@ const DashboardContent = () => {
             <DashboardLinks />
             <MobileDashboardLinks />
             {/* Sponsorships */}
-            <div className="w-[100%] md:w-[25%]">
+            <div className="w-[100%] md:w-[45%]">
               <h3 className="break-all text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                 Welcome,&nbsp;{authUser.firstName}&nbsp;{authUser.lastName}
               </h3>
@@ -55,8 +78,11 @@ const DashboardContent = () => {
                 <h3 className="text-3xl text-secondary-color font-main-font tracking-wide">
                   Sponsorships
                 </h3>
+                <p className="text-red-500">{error ? error : ""}</p>
                 <div className="w-16 h-24 bg-secondary-color rounded-full flex items-center justify-center">
-                  <p className="text-white text-4xl font-main-font">0</p>
+                  <p className="text-white text-4xl font-main-font">
+                    {sponsorshipsCount}
+                  </p>
                 </div>{" "}
                 <Link
                   to="/user_sponsorships"
