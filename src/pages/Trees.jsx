@@ -9,6 +9,7 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import footerImage from "../assets/images/biobaum_gallery_footer_img.webp";
 import Search from "../components/Search";
 import "../components/Trees.css";
+import treeImg from "../assets/tree.png";
 
 import { Link } from "react-router-dom";
 import backgroundImage from "../assets/images/gallery_images/leaves_background_03.png";
@@ -83,14 +84,14 @@ const Tree = () => {
           <div className="flex flex-row justify-center px-4 text-center">
             <div className="flex flex-row justify-center items-center">
               <img
-                src="/src/assets/tree.png"
+                src={treeImg}
                 alt="Small Photo"
                 className="hidden 2xl:flex w-[40px] h-[40px] mr-2"
               />
               <div className="lg:text-4xl md:text-3xl text-2xl font-main-font text-secondary-color tracking-wide border-bg-header-footer">
                 Stand with us for a greener world - sponsor a tree and grow a
                 legacy of environmental stewardship.
-              </div>{" "}
+              </div>
             </div>
           </div>
         </Fade>
@@ -152,7 +153,7 @@ const Tree = () => {
                     <div className="mt-2">
                       <div className="flex items-center mb-4">
                         <img
-                          src="/src/assets/tree.png"
+                          src={treeImg}
                           alt="Tree Icon"
                           className="w-[30px] h-[30px] mr-2"
                         />{" "}

@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import backgroundImage from "../assets/images/gallery_images/leaves_background_03.png";
 import closeMenu from "../assets/images/close_menu.svg";
 import { Fade } from "react-awesome-reveal";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import axios from "../utils/axiosInstance";
+import footerGalleryImg from "../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 
 const Gallery = () => {
   document.title = "Gallery";
@@ -175,7 +176,7 @@ const Gallery = () => {
 
       {/* Footer Image */}
       <img
-        src="src/assets/images/gallery_images/biobaum_gallery_footer_img.webp"
+        src={footerGalleryImg}
         alt="Footer Image of Gallery "
         width="100%"
         height="100%"
