@@ -13,6 +13,7 @@ import backgroundImage from "../assets/images/gallery_images/leaves_background_0
 import axios from "../utils/axiosInstance";
 import EachPageHeader from "../components/EachPageHeader";
 import PageBreadcrumb from "../components/PageBreadcrumb";
+import treeicon from "../assets/tree.png";
 import footerImage from "../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 
 import { Link } from "react-router-dom";
@@ -122,7 +123,7 @@ const Contact = () => {
           <section className="flex flex-col items-start gap-3 px-3 w-full lg:w-[50%]">
             <div className="flex items-center mb-4">
               <img
-                src="/src/assets/tree.png"
+                src={treeicon}
                 alt="Tree Icon"
                 className="w-[40px] h-[40px] mr-2"
               />{" "}

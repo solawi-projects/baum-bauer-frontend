@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import logoImage from "../assets/images/BioBaumBauer_Logo.svg";
 import backgroundImage from "../assets/images/biobaum_landing_background_img.png";

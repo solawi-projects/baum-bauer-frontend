@@ -2,6 +2,12 @@ import backgroundImage from "../assets/images/leaves_background_02.webp";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import { HiHome } from "react-icons/hi";
 import EachPageHeader from "../components/EachPageHeader";
+import treeImg from "../assets/tree.png";
+import about1 from "../assets/images/biobaum_sapling_01.webp";
+import about2 from "../assets/images/biobaum_sapling_02.webp";
+import about3 from "../assets/images/biobaum_sapling_03.webp";
+import about4 from "../assets/images/biobaum_sapling_04.webp";
+import footerAboutImg from "../assets/images/biobaum_about_footer_img.webp";
 
 const About = () => {
   document.title = "About US";
@@ -30,7 +36,7 @@ const About = () => {
         <article className="max-w-6xl mx-auto px-4 py-8 md:p-8 bg-white rounded-xl shadow-lg my-10 z-10">
           <div className="text-center mb-10 pt-[0px] md:pt-[10px] lg:pt-[20px] xl:pt-[40px]">
             <img
-              src="/src/assets/tree.png"
+              src={treeImg}
               alt="Tree Icon"
               className="inline w-[40px] h-[40px] mr-2"
             />{" "}
@@ -93,13 +99,13 @@ const About = () => {
           {/* Image section */}
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[5rem]">
             <img
-              src="src/assets/images/biobaum_sapling_01.webp"
+              src={about1}
               alt="Sapling Tree"
               className="w-[30%] border border-[var(--darker-primary)]"
               style={{ borderWidth: "5px" }}
             />
             <img
-              src="src/assets/images/biobaum_sapling_02.webp"
+              src={about2}
               alt="Sapling Tree"
               className="w-[30%] border border-[var(--darker-primary)]"
               style={{ borderWidth: "5px" }}
@@ -110,7 +116,7 @@ const About = () => {
         <article className="max-w-6xl mx-auto px-4 py-8 md:p-8 bg-white rounded-xl shadow-lg my-10 z-10">
           <div className="text-center mb-10 pt-[0px] md:pt-[10px] lg:pt-[20px] xl:pt-[40px]">
             <img
-              src="/src/assets/tree.png"
+              src={treeImg}
               alt="Tree Icon"
               className="inline w-[40px] h-[40px] mr-2"
             />{" "}
@@ -172,13 +178,13 @@ const About = () => {
           {/* Image section */}
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[5rem]">
             <img
-              src="src/assets/images/biobaum_sapling_03.webp"
+              src={about3}
               alt="Sapling Tree"
               className="w-[30%] border border-[var(--darker-primary)]"
               style={{ borderWidth: "5px" }}
             />
             <img
-              src="src/assets/images/biobaum_sapling_04.webp"
+              src={about4}
               alt="Sapling Tree"
               className="w-[30%] border border-[var(--darker-primary)]"
               style={{ borderWidth: "5px" }}
@@ -188,7 +194,7 @@ const About = () => {
       </section>
       {/* Footer Image */}
       <img
-        src="src/assets/images/biobaum_about_footer_img.webp"
+        src={footerAboutImg}
         alt="About BioBaumBauer Footer Image"
         className="w-full mt-40"
       />

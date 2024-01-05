@@ -2,6 +2,11 @@
 import React from "react";
 import HeroSection from "../components/HeroSection";
 import backgroundImage from "../assets/images/leaves_background_03.png";
+import bs1 from "../assets/images/biobaum_sapling_01.png";
+import bs2 from "../assets/images/biobaum_sapling_02.png";
+import bs3 from "../assets/images/biobaum_sapling_03.png";
+import bs4 from "../assets/images/biobaum_sapling_04.png";
+import footerImg from "../assets/images/biobaum_landing_footer_img.png";
 
 const Home = () => {
   document.title = "Home";
@@ -36,8 +41,8 @@ const Home = () => {
           </p>
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
             <img
-              src="src/assets/images/biobaum_sapling_01.png"
-              alt="Sapling Tree"
+              src={bs1}
+              alt="Sapling Tree 1"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
               width="100%"
@@ -45,8 +50,8 @@ const Home = () => {
               loading="lazy"
             />
             <img
-              src="src/assets/images/biobaum_sapling_02.png"
-              alt="Sapling Tree"
+              src={bs2}
+              alt="Sapling Tree 2"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
               width="100%"
@@ -73,8 +78,8 @@ const Home = () => {
           </p>{" "}
           <div className="py-4 md:py-8 lg:py-12 xl:py-16 flex flex-row justify-center gap-[1rem]">
             <img
-              src="src/assets/images/biobaum_sapling_03.png"
-              alt="Sapling Tree"
+              src={bs3}
+              alt="Sapling Tree 03"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
               width="100%"
@@ -82,8 +87,8 @@ const Home = () => {
               loading="lazy"
             />
             <img
-              src="src/assets/images/biobaum_sapling_04.png"
-              alt="Sapling Tree"
+              src={bs4}
+              alt="Sapling Tree 04"
               className="w-[50%] border border-white"
               style={{ borderWidth: "10px" }}
               width="100%"
@@ -95,7 +100,7 @@ const Home = () => {
       </section>
       {/* Footer Image */}
       <img
-        src="src/assets/images/biobaum_landing_footer_img.png"
+        src={footerImg}
         alt="Footer Image"
         width="100%"
         height="100%"

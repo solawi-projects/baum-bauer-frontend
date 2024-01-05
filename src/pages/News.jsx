@@ -9,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import { Fade } from "react-awesome-reveal";
+import newSFooterImg from "../assets/images/news_images/leaves_background.png";
 
 const News = () => {
   const titles = [
@@ -171,7 +172,7 @@ const News = () => {
       {/* Footer Image */}
       <img
         className="bg-bg-page-color w-full "
-        src="src/assets/images/news_images/leaves_background.png"
+        src={newSFooterImg}
         alt="News Footer Image"
       />
     </div>
