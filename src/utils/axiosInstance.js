@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosApiInstance = axios.create();
-axiosApiInstance.defaults.baseURL = 'http://localhost:4000';
+axiosApiInstance.defaults.baseURL = 'https://bio-baum-bauer-backend.onrender.com';
 axiosApiInstance.defaults.withCredentials = true;
 
 //interceptor for request
