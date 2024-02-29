@@ -2,6 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../utils/axiosInstance";
 import backgroundImage from "../assets/images/leaves_background_01.webp";
+import treeIcon from "/src/assets/images/tree_icon.svg";
+import footerImg from "/src/assets/images/biobaum_contact_footer_img.webp";
+import treeIcon1 from "/src/assets/tree.png";
 import { CartContext } from "../store/CartContext";
 import { AuthContext } from "../contexts/AuthContext";
 import DOMPurify from "dompurify";
@@ -81,7 +84,7 @@ const SingleTreePage = () => {
             <div className="flex w-full justify-center items-center bg-secondary-color rounded-[15px] p-4 mx-auto text-white">
               <div className="rounded-full bg-white w-[40px] h-[40px] mb-[10px] flex items-center justify-center mr-[10px]">
                 <img
-                  src="/src/assets/images/tree_icon.svg"
+                  src={treeIcon}
                   alt=""
                   style={{ width: "35px", height: "35px", borderRadius: "50%" }}
                 />
@@ -98,7 +101,7 @@ const SingleTreePage = () => {
               <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-2" />
               <div className="flex items-center mb-4">
                 <img
-                  src="/src/assets/tree.png"
+                  src={treeIcon1}
                   alt="Tree Icon"
                   className="w-[40px] h-[40px] mr-2"
                 />{" "}
@@ -152,7 +155,7 @@ const SingleTreePage = () => {
 
       {/* Footer Image */}
       <img
-        src="/src/assets/images/biobaum_contact_footer_img.webp"
+        src={footerImg}
         alt="Footer Image"
         width="100%"
         height="100%"

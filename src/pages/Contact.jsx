@@ -96,7 +96,7 @@ const Contact = () => {
   return (
     <div className=" text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
-      <div className="relative w-full mx-auto p-4  flex justify-center">
+      <div className="relative w-full mx-auto p-4  flex justify-center flex-col items-center">
         {/* Overlay with background image and opacity */}
         <div
           className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-bottom z-[-1]  opacity-20 lg:opacity-75"
