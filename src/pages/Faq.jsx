@@ -61,7 +61,7 @@ const Faq = () => {
   }, [skip]);
 
   return (
-    <div className="bg-bg-page-color text-font-family-color p-2">
+    <div className="bg-bg-page-color text-font-family-color ">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <div className="faq-container">
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />

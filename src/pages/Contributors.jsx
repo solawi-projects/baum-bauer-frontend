@@ -32,7 +32,7 @@ const Contributors = () => {
                   className="mb-3 rounded-full shadow-lg"
                 />
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                  Jamal H. Ahmadi
+                 Sayed Jamal H. Ahmadi
                 </h5>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
                   Full Stack Web Developer
@@ -40,7 +40,7 @@ const Contributors = () => {
                 <div className="mt-4 flex space-x-3 lg:mt-6">
                   <a
                     className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
-                    href="https://www.linkedin.com/in/jamal-h-ahmadi-b358a4159/"
+                    href="https://www.linkedin.com/in/sayed-jamal-h-ahmadi-b358a4159/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
