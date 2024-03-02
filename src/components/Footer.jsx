@@ -81,14 +81,14 @@ function Footer() {
                 >
                   <FaYoutube />
                 </a>
-                <a
+                {/* <a
                   className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
                   href="http://"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <IoLogoWhatsapp />
-                </a>
+                </a> */}
                 <a
                   className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
                   href="http://"
@@ -185,8 +185,8 @@ function Footer() {
               </h3>
 
               <p>
-                10178 Berlin, Germany <br />
-                Alexanderstrasse. 4
+                Schulgasse 9, 74336 Brackenheim, <br /> Baden-Württemberg,
+                Germany
               </p>
               <hr />
               <div className="flex flex-wrap gap-2 flex-col items-center">

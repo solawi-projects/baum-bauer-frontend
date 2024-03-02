@@ -136,7 +136,8 @@ const Contact = () => {
                 <FaLocationDot />
               </span>
               <span className="text-lg">
-                10679 Berlin, Germany <br /> Rudolf-Str. 43
+                Schulgasse 9, 74336 Brackenheim, <br /> Baden-Württemberg,
+                Germany
               </span>
             </p>
             <p className="flex flex-row w-full items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-1">
@@ -145,20 +146,25 @@ const Contact = () => {
               </span>
               <span className="xs:text-xs text-lg">
                 <a
-                  href="mailto:solawi.biobaumbauer@gmail.com"
+                  href="mailto:hello@biobaumbauer.de"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  solawi.biobaumbauer@gmail.com
+                  hello@biobaumbauer.de
                 </a>
               </span>
             </p>
-            <p className="flex flex-row w-full items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-1">
-              <span className="text-lg">
-                <FaPhoneSquareAlt />
-              </span>
-              <span className="text-lg">+4917290838934</span>
-            </p>
+            {0 === 0 ? (
+              <span></span>
+            ) : (
+              <p className="flex flex-row w-full items-center bg-white-color shadow-md hover:shadow-lg hover:rounded-lg p-3 rounded-md gap-1">
+                <span className="text-lg">
+                  <FaPhoneSquareAlt />
+                </span>
+                <span className="text-lg">+49--------</span>
+              </p>
+            )}
+
             <p className="flex flex-row w-full justify-center items-center bg-white-color shadow-md rounded-md p-4 hover:shadow-lg hover:rounded-lg gap-2 sm:gap-5">
               <a
                 href="http://"
@@ -176,14 +182,18 @@ const Contact = () => {
               >
                 <FaYoutube />
               </a>
-              <a
-                href="http://"
-                className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color transition duration-5000 ease-linear"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IoLogoWhatsapp />
-              </a>
+              {0 === 0 ? (
+                <></>
+              ) : (
+                <a
+                  href="http://"
+                  className="rounded-full p-2 border-2 border-font-family-color text-font-family-color bg-white-color hover:bg-font-family-color hover:text-white-color transition duration-5000 ease-linear"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IoLogoWhatsapp />
+                </a>
+              )}
 
               <a
                 href="http://"
@@ -365,7 +375,7 @@ const Contact = () => {
       </div>
       <div className="">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2427.6327705419662!2d13.410731076522424!3d52.521984636082806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84e1f1ef51c1f%3A0x81d2865ac4d6253a!2sAlexanderstra%C3%9Fe%204%2C%2010178%20Berlin!5e0!3m2!1sen!2sde!4v1700057987685!5m2!1sen!2sde"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2613.430292021205!2d9.1054661!3d49.078463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47982a23427504e1%3A0xe8756bb1ba92dd7!2sSolawi%20Zaberg%C3%A4u!5e0!3m2!1sen!2sde!4v1709384848796!5m2!1sen!2sde"
           className="w-full h-[650px] border-0 rounded-sm"
           allowFullScreen={true}
           loading="lazy"
@@ -373,7 +383,7 @@ const Contact = () => {
           referrerPolicy="no-referrer-when-downgrade"
           title="Location Map"
         ></iframe>
-      </div>{" "}
+      </div>
       {/* Footer Image */}
       <img
         src={footerImage}

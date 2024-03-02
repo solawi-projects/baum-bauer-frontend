@@ -16,6 +16,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import treeIcon from "../../assets/tree.png";
+import LoginFooterImage from "../../assets/images/biobaum_about_footer_img.webp";
 
 const Register = () => {
   document.title = "Register New User";
@@ -201,7 +203,7 @@ const Register = () => {
         >
           <div className="flex items-center">
             <img
-              src="/src/assets/tree.png"
+              src={treeIcon}
               alt="Tree Icon"
               className="w-[40px] h-[40px] mr-2"
             />
@@ -677,11 +679,7 @@ const Register = () => {
           </div>
         </form>
       </div>{" "}
-      <img
-        src="src/assets/images/biobaum_about_footer_img.webp"
-        alt="Footer Image"
-        className="w-full"
-      />
+      <img src={LoginFooterImage} alt="Footer Image" className="w-full" />
     </main>
   );
 };
