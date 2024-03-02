@@ -4,6 +4,7 @@ import closeMenu from "../assets/images/close_menu.svg";
 import { Fade } from "react-awesome-reveal";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
+import DefaultLoader from "../components/DefaultLoader";
 import axios from "../utils/axiosInstance";
 import footerGalleryImg from "../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 
@@ -13,7 +14,8 @@ const Gallery = () => {
   const [showAllImages, setShowAllImages] = useState(window.innerWidth > 1000);
   const [selectedIndex, setSelectedIndex] = useState(null); // Add this line
   const [gallery, setGallery] = useState([]);
-  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("No image available yet!");
 
   /* Getting Gallery from Database! */
   const getGalleryImage = () => {
@@ -23,6 +25,8 @@ const Gallery = () => {
         .then((response) => {
           if (response.status === 200) {
             setGallery(response.data);
+            setIsLoading(false);
+            setError("");
           }
         })
         .catch((err) => {
@@ -68,6 +72,14 @@ const Gallery = () => {
 
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Gallery" };
+
+  if (isLoading) {
+    return (
+      <div className="h-96 flex justify-center items-center">
+        <DefaultLoader errorMsg={error} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-bg-page-color text-font-family-color">

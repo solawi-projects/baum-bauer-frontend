@@ -1,4 +1,3 @@
-import backgroundImage from "../assets/images/leaves_background_03.webp";
 import { useEffect, useState } from "react";
 import axios from "../utils/axiosInstance";
 import { Link } from "react-router-dom";
@@ -10,6 +9,8 @@ import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
 import { Fade } from "react-awesome-reveal";
 import newSFooterImg from "../assets/images/news_images/leaves_background.png";
+import backgroundImage from "../assets/images/leaves_background_03.webp";
+import DefaultLoader from "../components/DefaultLoader";
 
 const News = () => {
   const titles = [
@@ -21,7 +22,7 @@ const News = () => {
 
   const [newsItems, setNewsItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("No data available yet!");
   const [totalNews, setTotalNews] = useState(0);
   //pagination
   const [skip, setSkip] = useState(0);
@@ -62,33 +63,35 @@ const News = () => {
       axios
         .get(`/api/newsArticle/?limit=${limit}&skip=${skip}`)
         .then((response) => {
-          console.log("Response is:", response);
           if (response.status === 200) {
             setNewsItems(response.data.articles);
             setTotalNews(response.data.total);
+            setIsLoading(false);
+            setError("");
           }
         })
         .catch((error) => {
           if (error.response.status === 500) {
-            setError("Data was not fetched from the DB");
+            setError("No data available yet!");
           }
         });
     } catch (error) {
       console.error("Error fetching NewsArticles:", error.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     document.title = "News";
-    setIsLoading(true);
-
     getNewsArticles();
   }, [skip, isSmallScreen]); // this func is updated based on changes in skip and isSmallScreen
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading) {
+    return (
+      <div className="h-96 flex justify-center items-center">
+        <DefaultLoader errorMsg={error} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-bg-page-color">
