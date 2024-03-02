@@ -9,6 +9,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import axios from "../../utils/axiosInstance";
 import Swal from "sweetalert2";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import treeIcon from "../../assets/tree.png";
+import LoginFooterImage from "../../assets/images/biobaum_about_footer_img.webp";
 
 const Login = () => {
   document.title = "Login";
@@ -148,7 +150,7 @@ const Login = () => {
         <div className="flex flex-col justify-start items-start gap-[2rem] w-[100%] md:w-[60%] lg:w-[45%] xl:w-[40%] bg-white rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[10px] md:mt-[20px] lg:mt-[100px] xl:mt-[90px] xs:py-12 py-10">
           <div className="flex items-center">
             <img
-              src="/src/assets/tree.png"
+              src={treeIcon}
               alt="Tree Icon"
               className="w-[40px] h-[40px] mr-2"
             />
@@ -254,11 +256,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-      <img
-        src="src/assets/images/biobaum_about_footer_img.webp"
-        alt="Footer Image"
-        className="w-full"
-      />
+      <img src={LoginFooterImage} alt="Footer Image" className="w-full" />
     </main>
   );
 };

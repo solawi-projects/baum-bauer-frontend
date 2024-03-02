@@ -11,6 +11,7 @@ import DOMPurify from "dompurify";
 import { Breadcrumb } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import { FaTree } from "react-icons/fa";
+import { Button, Tooltip } from "flowbite-react";
 
 const SingleTreePage = () => {
   const { id } = useParams();
@@ -138,7 +139,7 @@ const SingleTreePage = () => {
               <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-2" />
 
               {/* Add to Cart Button */}
-              {loggedIn && (
+              {loggedIn ? (
                 <button
                   to="/trees"
                   className="text-center w-full my-2 px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px]   hover:bg-lighter-primary transition duration-4000 ease-linear"
@@ -147,6 +148,15 @@ const SingleTreePage = () => {
                 >
                   Add to Cart
                 </button>
+              ) : (
+                <Tooltip content="Login/Sign Up First" trigger="hover">
+                  <button
+                    className="text-center w-full my-2 px-4 py-2 bg-gray-300 text-font-family-color rounded-[10px]"
+                    aria-label="Sponsor page"
+                  >
+                    Add to Cart
+                  </button>
+                </Tooltip>
               )}
             </div>
           </div>
