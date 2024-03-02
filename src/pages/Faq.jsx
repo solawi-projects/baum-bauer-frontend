@@ -6,6 +6,7 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import "../assets/styles/Faq.css";
 import treeicon from "../assets/tree.png";
 import PageBreadcrumb from "../components/PageBreadcrumb";
+import DefaultLoader from "../components/DefaultLoader";
 import EachPageHeader from "../components/EachPageHeader";
 import { useState, useEffect } from "react";
 import { IoIosSend } from "react-icons/io";
@@ -21,6 +22,7 @@ const Faq = () => {
   const [faqs, setFaqs] = useState([]);
   const [err, setErr] = useState("");
   const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handlePrev = () => {
     const newSkip = skip - limit;
@@ -38,15 +40,16 @@ const Faq = () => {
       axios
         .get(`/api/faq/all?limit=${limit}&skip=${skip}`)
         .then((response) => {
-          console.log("Res:", response);
           if (response.status === 200) {
             setFaqs(response.data.data);
             setTotal(response.data.count);
+            setIsLoading(false);
+            setErr("");
           }
         })
         .catch((err) => {
           if (err.response.status === 500) {
-            setErr("Data was not brought");
+            setErr("No data available yet!");
           }
         });
     } catch (error) {
@@ -59,6 +62,13 @@ const Faq = () => {
     document.title = "FAQs";
     getFaqs();
   }, [skip]);
+  if (isLoading) {
+    return (
+      <div className="h-96 flex justify-center items-center">
+        <DefaultLoader errorMsg={err} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-bg-page-color text-font-family-color ">
@@ -69,7 +79,6 @@ const Faq = () => {
           <h2>
             Showing {skip + 1} to {Math.min(skip + limit, total)} of {total} FAQ{" "}
           </h2>
-          <p>{err}</p>
         </div>
         {faqs.map((item, index) => (
           <Accordion collapseAll className="Accord-container" key={index}>
