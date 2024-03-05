@@ -1,0 +1,30 @@
+.mImgDiv:hover .missionImage {
+  transform: scale(1.2);
+}
+.mImgDiv:hover .overlay {
+  opacity: 1;
+}
+
+.mission-more:hover:before {
+  width: 44px;
+}
+.mission-more:before {
+  display: inline-block;
+  content: "";
+  width: 10px;
+  height: 1px;
+  background-color: #456148;
+  margin-bottom: 4px;
+  margin-right: 8px;
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+}
+
+/* About CSS */
+
+.aboutSolawiImgDiv:hover .aboutSolawiImg {
+  transform: scale(1.2);
+}
+.aboutSolawiImgDiv:hover .overlay {
+  opacity: 1;
+}
