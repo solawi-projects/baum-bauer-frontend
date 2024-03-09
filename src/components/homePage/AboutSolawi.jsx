@@ -1,4 +1,4 @@
-import AboutImage from "../assets/images/aboutSolawi.webp";
+import AboutImage from "../../assets/images/aboutSolawi.webp";
 import { Button } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";
 

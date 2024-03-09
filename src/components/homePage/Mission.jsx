@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import LeftImg from "../assets/images/mission.jpeg";
-import "../assets/styles/homeComponents.css";
+import LeftImg from "../../assets/images/mission.jpeg";
+import "../../assets/styles/homeComponents.css";
 import { Button } from "flowbite-react";
 import { HiOutlineArrowRight } from "react-icons/hi";
 

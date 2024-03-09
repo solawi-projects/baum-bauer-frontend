@@ -18,6 +18,7 @@ Global variables for colors
   --darkgreen-color: #5a6448;
   --red-color: #ff6961;
   --light-bg: #f8f5f4;
+  --light-gray: #ededed;
 }
 *,
 ::after,
@@ -324,4 +325,3 @@ input::placeholder {
     height: 60px;
   }
 } */
-

@@ -21,6 +21,7 @@ export default {
         "lighter-secondary": "var(--lighter-secondary)",
         "lighter-primary": "var(--lighter-primary)",
         "darker-primary": "var(--darker-primary)",
+        "light-gray": "var(--light-gray)",
       },
       fontFamily: {
         "main-font": ["Chicle", "serif"],
