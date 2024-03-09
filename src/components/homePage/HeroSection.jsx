@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import logoImage from "../assets/images/BioBaumBauer_Logo.svg";
-import backgroundImage from "../assets/images/biobaum_landing_background_img.png";
-import heroBgImage from "../assets/images/home-hero-bg-image.jpg";
-import "../assets/styles/Hero.css";
+import logoImage from "../../assets/images/BioBaumBauer_Logo.svg";
+import heroBgImage from "../../assets/images/home-hero-bg-image.jpg";
+import { MdReadMore } from "react-icons/md";
+import "../../assets/styles/Hero.css";
 
 const HeroSection = () => {
   const heroSectionStyle = {
@@ -40,10 +40,10 @@ const HeroSection = () => {
           </p>
           <Link
             to="/trees"
-            className="mx-auto px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
+            className="mx-auto flex items-center gap-2 px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
             aria-label="Sponsor page"
           >
-            Learn More...
+            <MdReadMore size="1.7rem" /> <span>Read More...</span>
           </Link>
         </div>
       </div>

@@ -14,6 +14,7 @@ import footerImage from "../assets/images/biobaum_gallery_footer_img.webp";
 import treeImg from "../assets/tree.png";
 import backgroundImage from "../assets/images/gallery_images/leaves_background_03.png";
 import "../components/Trees.css";
+import TreeItem from "../components/TreeItem";
 
 const Tree = () => {
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
@@ -98,40 +99,15 @@ const Tree = () => {
               </h2>
               <Fade delay={100} cascade damping={0.1} duration={3000}>
                 <div className="flex justify-center flex-wrap items-center gap-8">
-                  {tree.map((item, index) => (
-                    <div key={index} className="flex items-center">
-                      <div className=" w-60 p-4 h-65 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
-                        <img
-                          className="w-full h-[220px] object-cover rounded-[10px] mb-10"
-                          src={item.image}
-                          alt={item.name}
-                        />
-                        <div className="mt-2">
-                          <div className="flex items-center mb-4">
-                            <img
-                              src={treeImg}
-                              alt="Tree Icon"
-                              className="w-[30px] h-[30px] mr-2"
-                            />{" "}
-                            <h3 className="text-2xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                              {item.name}
-                            </h3>
-                          </div>
-                          <button className="block text-md text-secondary-color cursor-auto">{`€ ${parseFloat(
-                            item.price.$numberDecimal
-                          )}`}</button>
-
-                          <div className="mt-2 mb-1 flex justify-start">
-                            <Link
-                              to={`/trees/${item._id}`}
-                              className="text-center w-full px-4 py-2 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary hover:border-2 transition duration-4000 ease-linear mt-4 sm:mt-0"
-                            >
-                              view in detail
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  {tree.map((item) => (
+                    <TreeItem
+                      key={item._id}
+                      image={item.image}
+                      name={item.name}
+                      treeImg={treeImg}
+                      price={item.price}
+                      id={item._id}
+                    />
                   ))}
                 </div>
               </Fade>
