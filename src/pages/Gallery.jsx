@@ -6,7 +6,6 @@ import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import DefaultLoader from "../components/DefaultLoader";
 import axios from "../utils/axiosInstance";
-import footerGalleryImg from "../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 
 const Gallery = () => {
   document.title = "Gallery";
@@ -106,7 +105,7 @@ const Gallery = () => {
           </p>
           {/* Image content */}
           <Fade delay={100} cascade damping={0.1} duration={3000}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:px-10 lg:px-20 xl:px-40">
+            <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4 md:px-10 lg:px-20 xl:px-40">
               {filteredGallery.map((image, index) => (
                 <div
                   key={index}
@@ -150,7 +149,7 @@ const Gallery = () => {
         {/* Modal for Selected Image */}
         {selectedImg && (
           <div
-            className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]"
+            className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center z-[99]"
             onClick={closeImage}
           >
             <Fade delay={100} cascade damping={0.1} duration={1000}>
@@ -171,7 +170,7 @@ const Gallery = () => {
                 <img
                   src={selectedImg.image}
                   alt={`Selected Image ${selectedImg.title}`}
-                  className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px]"
+                  className="w-full h-[400px] sm:h-[500px] md:h-[700px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px]"
                   onDoubleClick={closeImage}
                 />
                 {/* Image Title */}
@@ -185,15 +184,6 @@ const Gallery = () => {
           </div>
         )}
       </div>
-
-      {/* Footer Image */}
-      <img
-        src={footerGalleryImg}
-        alt="Footer Image of Gallery "
-        width="100%"
-        height="100%"
-        loading="lazy"
-      />
     </div>
   );
 };

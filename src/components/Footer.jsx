@@ -19,32 +19,9 @@ import { Fade } from "react-awesome-reveal";
 function Footer() {
   return (
     <>
-      {/* <div className="bg-bg-header-footer text-font-family-color ">
-        <h6 className="text-center pt-2 pb-6 ">Links</h6>
-        <div className="flex justify-center gap-10 underline mb-5 text-xs ">
-          <Link to="/">Home</Link>
-          <Link to="/about">About Us</Link>
-          <Link to="/sponsor">Sponsor</Link>
-          <Link to="/contact">Contact</Link>
-        </div>
-        <div className="flex justify-center gap-3 text-2xl p-4">
-          <FaFacebook className="" />
-          <FaInstagramSquare />
-          <AiFillTwitterCircle />
-          <IoLogoTiktok />
-        </div>
-        <p
-          className="text-center text-xs pt-4
-        pb-4"
-        >
-          COPYRIGHT<span> &copy;</span> 2023{" "}
-          <span className="font-bold">BioBaumBauer. </span>
-          ALL RIGHTS RESERVED
-        </p>
-      </div> */}
       <div className="bg-bg-header-footer text-font-family-color">
         <div className="container mx-auto flex flex-col py-10">
-          <section className="flex flex-row flex-wrap justify-center py-4 px-5 gap-[2rem] md:gap-16">
+          <section className="w-full flex flex-col lg:flex-row items-center justify-between py-4 mb-4 px-9 gap-[3.2rem]">
             <div className="flex flex-col gap-5 max-w-md grow-2 w-full">
               <p className="flex justify-start items-center gap-2">
                 <img
@@ -63,8 +40,8 @@ function Footer() {
                 connected and informed through our social channels and be part
                 of the change.
               </p>
-              <p className="text-lg font-bold">Follow Us</p>
-              <div className="flex justify-start gap-[0.2rem] md:gap-3 text-md md:text-lg pr-4 mt-2">
+              <p className=" self-center text-lg font-bold">Follow Us</p>
+              <div className="flex self-center lg:justify-start gap-[0.2rem] md:gap-3 text-md md:text-lg pr-4 mt-2">
                 <a
                   className="mr-2 border-2 p-2 rounded-md text-darkgreen-color bg-bg-page-color shadow-sm hover:shadow-md hover:bg-darkgreen-color hover:text-white-color transition duration-5000 ease-linear "
                   href="http://"
@@ -107,11 +84,11 @@ function Footer() {
                 </a>
               </div>
             </div>
-            <div className="flex flex-col justify-center items-start lg:items-center gap-5 max-w-md grow-1 w-full text-sm lg:text-lg ">
-              <h3 className="flex items-center gap-1 text-md md:text-lg font-sans font-bold text-darkgreen-color">
+            <div className="flex flex-col justify-center items-center gap-5 max-w-md grow-1 w-full text-sm lg:text-lg ">
+              <h2 className="flex items-center gap-1 text-base md:text-lg font-sans font-bold text-darkgreen-color">
                 <FaExternalLinkAlt /> <span>Links to Pages</span>
-              </h3>
-              <div className="flex flex-col gap-3">
+              </h2>
+              <div className="flex flex-row lg:flex-col flex-wrap text-base gap-5 max-w-md items-center lg:items-start justify-center">
                 <Link
                   to="/"
                   className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear  "
@@ -162,7 +139,6 @@ function Footer() {
 
                   <span>Contact</span>
                 </Link>
-                <hr />
                 <Link
                   to="/terms"
                   className="flex items-center gap-1  transform hover:translate-x-2 motion-reduce:transition-none motion-reduce:hover:transform-none hover:text-white-color transition duration-5000 ease-linear "
@@ -179,16 +155,19 @@ function Footer() {
                 </Link>
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center gap-3 max-w-md grow-1 w-full">
-              <h3 className="flex items-center gap-1 text-sm md:text-lg font-sans font-bold text-darkgreen-color">
-                <FaAddressBook /> <span>Address</span>
-              </h3>
+            <div className="flex justify-center lg:justify-end items-center gap-3 max-w-md grow-1 w-full">
+              <div className="flex flex-col justify-center items-center gap-3 grow-1">
+                <h3 className="flex items-center gap-1 text-sm md:text-lg font-sans font-bold text-darkgreen-color">
+                  <FaAddressBook /> <span>Address</span>
+                </h3>
 
-              <p>
-                Schulgasse 9, 74336 Brackenheim, <br /> Baden-Württemberg,
-                Germany
-              </p>
-              <hr />
+                <p>
+                  Schulgasse 9, 74336 Brackenheim, <br /> Baden-Württemberg,
+                  Germany
+                </p>
+              </div>
+
+              {/* <hr />
               <div className="flex flex-wrap gap-2 flex-col items-center">
                 <p className="text-lg font-sans font-bold text-darkgreen-color">
                   Contributors
@@ -202,7 +181,7 @@ function Footer() {
                     <Avatar img={shaqayeq} rounded stacked />
                   </Avatar.Group>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </section>
           <hr />
@@ -211,7 +190,7 @@ function Footer() {
             <span className="font-bold">BioBaumBauer. </span>
             ALL RIGHTS RESERVED
           </p>
-        </div>{" "}
+        </div>
         {/* Icon ArrowUp, To the Top of the page */}
         <div className="arrowUp">
           <a className="iconArrowUp" href="#">
@@ -227,7 +206,7 @@ function Footer() {
             </Fade>
           </a>
         </div>
-      </div>{" "}
+      </div>
     </>
   );
 }

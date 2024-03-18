@@ -14,7 +14,6 @@ import axios from "../utils/axiosInstance";
 import EachPageHeader from "../components/EachPageHeader";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import treeicon from "../assets/tree.png";
-import footerImage from "../assets/images/gallery_images/biobaum_gallery_footer_img.webp";
 
 import { Link } from "react-router-dom";
 
@@ -94,7 +93,7 @@ const Contact = () => {
   };
 
   return (
-    <div className=" text-font-family-color">
+    <div className="text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <div className="relative w-full mx-auto p-4  flex justify-center flex-col items-center">
         {/* Overlay with background image and opacity */}
@@ -370,7 +369,6 @@ const Contact = () => {
         </div>
       </div>
       <div className="px-4 text-center">
-        {" "}
         <EachPageHeader title={titles2[0]} subtitle={titles2[1]} />
       </div>
       <div className="">
@@ -384,14 +382,6 @@ const Contact = () => {
           title="Location Map"
         ></iframe>
       </div>
-      {/* Footer Image */}
-      <img
-        src={footerImage}
-        alt="Footer Image"
-        width="100%"
-        height="100%"
-        loading="lazy"
-      />
     </div>
   );
 };

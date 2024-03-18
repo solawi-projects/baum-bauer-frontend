@@ -43,7 +43,7 @@ const HeroSection = () => {
             className="mx-auto flex items-center gap-2 px-8 py-2 mt-4 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
             aria-label="Sponsor page"
           >
-            <MdReadMore size="1.7rem" /> <span>Read More...</span>
+            <MdReadMore size="1.4rem" /> <span>read more...</span>
           </Link>
         </div>
       </div>

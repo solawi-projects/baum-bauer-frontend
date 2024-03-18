@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import FeatureTreeItem from "./FeatureTreeItem";
 import DefaultLoader from "../../components/DefaultLoader";
-import treeImg from "../../assets/images/trees_images/apfelbaum.webp";
 import "../../assets/styles/homeComponents.css";
 import { FeaturedTreeData } from "../../components/TreeData";
 
@@ -14,7 +12,6 @@ const FeaturedTrees = () => {
       const data = await FeaturedTreeData();
       setFeaturedTree(data.featuredTrees);
       setErr("");
-      console.log("Featured: ", data.featuredTrees);
     } catch (error) {
       setErr("No data available yet!");
     }

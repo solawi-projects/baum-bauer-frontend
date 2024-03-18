@@ -10,7 +10,7 @@ const Privacy = () => {
   const daLinkValues = { linkText: "Privacy Policy" };
 
   return (
-    <main className="relative text-font-family-color">
+    <div className="relative text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       {/* Privacy title, positioned absolutely */}
       <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 py-10 text-center z-10">
@@ -291,7 +291,7 @@ const Privacy = () => {
         src="src/assets/images/news_images/leaves_background.png"
         alt="Privacy Policy Footer Image"
       />
-    </main>
+    </div>
   );
 };
 

@@ -10,7 +10,6 @@ import { HiHome } from "react-icons/hi";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { TreeData } from "../components/TreeData";
 
-import footerImage from "../assets/images/biobaum_gallery_footer_img.webp";
 import treeImg from "../assets/tree.png";
 import backgroundImage from "../assets/images/gallery_images/leaves_background_03.png";
 import "../components/Trees.css";
@@ -63,7 +62,7 @@ const Tree = () => {
     <div>
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       <Search updateTree={setTree} limit={limit} skip={skip} />
-      <div className=" flex justify-center flex-wrap gap-10 pt-20 pb-4 md:pb-8 lg:pb-12 xl:p-16">
+      <div className="flex justify-center flex-wrap gap-10 pt-20 pb-4 md:pb-8 lg:pb-12 xl:p-16">
         <Fade
           delay={100}
           cascade
@@ -136,13 +135,6 @@ const Tree = () => {
         </div>
       </div>
       {/* pagination buttons */}
-      <img
-        src={footerImage}
-        alt="Footer Image"
-        width="100%"
-        height="100%"
-        loading="lazy"
-      />
     </div>
   );
 };

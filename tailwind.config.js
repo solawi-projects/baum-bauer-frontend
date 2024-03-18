@@ -18,10 +18,12 @@ export default {
         "red-color": "var(--red-color)",
         "light-bg": "var(--light-bg)",
         "darker-secondary": "var(--darker-secondary)",
+        "light-secondary": "var(--light-secondary)",
         "lighter-secondary": "var(--lighter-secondary)",
         "lighter-primary": "var(--lighter-primary)",
         "darker-primary": "var(--darker-primary)",
         "light-gray": "var(--light-gray)",
+
       },
       fontFamily: {
         "main-font": ["Chicle", "serif"],

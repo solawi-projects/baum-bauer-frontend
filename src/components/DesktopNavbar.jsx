@@ -13,7 +13,6 @@ import { FcFaq } from "react-icons/fc";
 import { MdContacts } from "react-icons/md";
 
 const DesktopNavbar = ({ isNavbarFixed, setIsNavbarFixed }) => {
-
   /* Handle DesktopNavbar on Scroll */
   useEffect(() => {
     const handleScroll = () => {
@@ -29,20 +28,17 @@ const DesktopNavbar = ({ isNavbarFixed, setIsNavbarFixed }) => {
 
   const desktopNavbarStyle = {
     position: isNavbarFixed ? "fixed" : "static",
-    top: "0",
-    width: "100%",
-    zIndex: 1000,
   };
 
   return (
     <>
       <AuthNavbar />
       <nav
-        className="flex justify-center items-center bg-bg-header-footer h-[70px] font-general-font text-font-family-color text-[1rem]"
+        className="desktop-nav flex w-full top-0 justify-center items-center bg-bg-header-footer h-[70px] font-general-font text-font-family-color text-[1rem]"
         style={desktopNavbarStyle}
       >
         {/* DesktopNavbar Links */}
-        <div className="flex justify-center items-center h-[60px] w-[90%] bg-white-color rounded-[50px]">
+        <div className="flex justify-center items-center h-full w-full bg-bg-header-footer ">
           <div className="border-r p-2 sm:px-4 lg:px-8 xl:px-14 flex items-center hover:scale-110 transition-transform duration-400 ease-linear hover:text-dark-gray">
             <NavLink
               className="flex gap-1 justify-center items-center hover:border-b-2"

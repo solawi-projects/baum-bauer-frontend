@@ -23,9 +23,6 @@ const MobileNavbar = () => {
 
   const mobileNavbarStyle = {
     position: isNavbarVisible ? "sticky" : "fixed",
-    top: "0",
-    width: "100%",
-    zIndex: 9,
   };
 
   const toggleMenu = () => {
@@ -40,7 +37,7 @@ const MobileNavbar = () => {
     <nav id="outer-container">
       {isNavbarVisible && <AuthNavbar />}
       <div
-        className="w-full h-[60px] bg-bg-header-footer flex justify-start items-center px-2 z-[999999]"
+        className="mobile-nav w-full top-0 h-[60px] bg-bg-header-footer flex justify-start items-center px-2"
         style={mobileNavbarStyle}
       >
         {/* Open Menu Button */}
@@ -55,7 +52,7 @@ const MobileNavbar = () => {
 
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-10"
+          className="mobile-menu-bg fixed inset-0 bg-black bg-opacity-50"
           onClick={toggleMenu}
         ></div>
       )}
@@ -68,7 +65,7 @@ const MobileNavbar = () => {
         customCrossIcon={false}
         width={"60%"}
         pageWrapId={"page-wrap"}
-        className="bg-bg-header-footer fixed top-0 left-0 h-screen overflow-y-auto p-4 z-20"
+        className="bg-bg-header-footer fixed top-0 left-0 h-screen overflow-y-auto p-4 "
       >
         {/* Close Menu Button */}
         <div className="absolute top-6 right-6">

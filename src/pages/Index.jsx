@@ -21,19 +21,20 @@ const Index = () => {
   }, []);
 
   const mainStyle = {
-    paddingTop: isNavbarFixed ? "70px" : "0"
+    paddingTop: isNavbarFixed ? "70px" : "0",
   };
 
   return (
     <div>
       <header>
-        { isMobileScreen 
-            ? <MobileNavbar /> 
-            : <DesktopNavbar 
-                isNavbarFixed={isNavbarFixed} 
-                setIsNavbarFixed={setIsNavbarFixed} 
-              />
-        }
+        {isMobileScreen ? (
+          <MobileNavbar />
+        ) : (
+          <DesktopNavbar
+            isNavbarFixed={isNavbarFixed}
+            setIsNavbarFixed={setIsNavbarFixed}
+          />
+        )}
       </header>
       <main className="page" style={mainStyle}>
         <Outlet />

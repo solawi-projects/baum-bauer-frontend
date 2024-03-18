@@ -24,14 +24,6 @@ const Home = () => {
       <section className="container-fluid">
         <AdditionalLinks />
       </section>
-      {/* Footer Image */}
-      {/* <img
-        src={footerImg}
-        alt="Footer Image"
-        width="100%"
-        height="100%"
-        loading="lazy"
-      /> */}
     </>
   );
 };
