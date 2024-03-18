@@ -35,6 +35,14 @@ const News = () => {
     setIsSmallScreen(window.innerWidth <= 768);
   };
 
+  const humanReadableDate = (date) => {
+    const newDate = new Date(date).toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+    return newDate;
+  };
   useEffect(() => {
     window.addEventListener("resize", handleResize); // add an event listener for the resize event on the window object.
     return () => {
@@ -105,7 +113,7 @@ const News = () => {
         }}
       ></div>
       <EachPageHeader title={titles[0]} subtitle={titles[1]} />
-      <div className="container mx-auto text-2xl lg:text-3xl pl-4">
+      <div className="container flex justify-center mx-auto text-2xl lg:text-3xl pl-4">
         <h2>
           Showing {skip + 1} to {Math.min(skip + limit, totalNews)} of{" "}
           {totalNews} News Articles
@@ -114,7 +122,7 @@ const News = () => {
       </div>
       <div className="container mx-auto px-4 py-4 md:py-6 lg:py-8">
         <Fade delay={100} cascade damping={0.1} duration={3000}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {newsItems.map((item) => (
               <div
                 key={item._id}
@@ -134,10 +142,10 @@ const News = () => {
                         {item.title}
                       </h5>
                     </Link>
-                    <p className="text-s py-2 text-gray-600 pt-1">
-                      {new Date(item.dateCreated).toLocaleDateString()}
+                    <p className="text-s text-lg font-bold py-2 text-gray-400 pt-1">
+                      {humanReadableDate(item.dateCreated)}
                     </p>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    <p className="hidden lg:flex mb-3 font-normal text-gray-700 dark:text-gray-400">
                       {item.description.length > 100
                         ? `${item.description.slice(0, 100)}...`
                         : item.description}

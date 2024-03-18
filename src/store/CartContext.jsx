@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import Swal from "sweetalert2";
 
 export const CartContext = createContext({});
@@ -126,10 +126,9 @@ export function CartContextProvider({ children }) {
         if (cartTrees.length > 0) {
           setLoading(true);
 
-          const response = await axios.post(
-            "http://localhost:4000/api/tree/cart",
-            { ids: cartTrees }
-          );
+          const response = await axios.post("/api/tree/cart", {
+            ids: cartTrees,
+          });
 
           setCartProducts(response.data);
           setLoading(false);
@@ -172,7 +171,7 @@ export function CartContextProvider({ children }) {
         calculateTotalPrice,
         calculateGrandTotal,
         handleAddTree,
-        getSelectedDataFromCart
+        getSelectedDataFromCart,
       }}
     >
       {children}

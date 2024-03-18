@@ -12,7 +12,7 @@ import { SiGooglestreetview } from "react-icons/si";
 import { FaHouse } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import backgroundImage from "../../assets/images/leaves_background_02.webp";
-import axios from "axios";
+import axios from "../../utils/axiosInstance";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
@@ -101,10 +101,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/users/create-user",
-        formData
-      );
+      const response = await axios.post("/api/users/create-user", formData);
 
       if (response.status === 201) {
         setErrorMsgs([]);

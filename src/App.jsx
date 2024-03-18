@@ -39,7 +39,7 @@ import "./assets/styles/PrevNext.css";
 import SuccessPage from "./pages/SuccessPage";
 import CancelPage from "./pages/CancelPage";
 import ProtectedRoute from "./pages/user/ProtectedRoute";
-import Contributors from "./pages/Contributors";
+// import Contributors from "./pages/Contributors";
 import { PatronProvider } from "./store/PatronContext";
 import SponsorShipDetails from "./pages/user/SponsorShipDetails";
 
@@ -74,7 +74,7 @@ function App() {
                   <Route path="/gallery" element={<Gallery />} />
                   <Route path="/faq" element={<Faq />} />
                   <Route path="/contact" element={<Contact />} />
-                  <Route path="/contributors" element={<Contributors />} />
+                  {/* <Route path="/contributors" element={<Contributors />} /> */}
                   <Route
                     path="/cart"
                     element={
