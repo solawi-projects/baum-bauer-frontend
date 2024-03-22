@@ -1,24 +1,37 @@
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { Button, Label, TextInput, Breadcrumb, Tooltip } from "flowbite-react";
+import { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Button,
+  Label,
+  TextInput,
+  Breadcrumb,
+  Tooltip,
+  Spinner,
+} from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import backgroundImage from "../../assets/images/leaves_background_02.webp";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import axios from "../../utils/axiosInstance";
 import Swal from "sweetalert2";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import treeIcon from "../../assets/tree.png";
+import { AiOutlineLogin } from "react-icons/ai";
 import LoginFooterImage from "../../assets/images/biobaum_about_footer_img.webp";
 
 const Login = () => {
   document.title = "Login";
-  const { setLoggedIn, setAuthUser } = useContext(AuthContext);
+  const { loggedIn, setLoggedIn, setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/dashboard");
+    }
+  }, [loggedIn, navigate]);
 
   const [errors, setErrors] = useState([]);
   const [backError, setBackError] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -34,16 +47,15 @@ const Login = () => {
       email: loginData.get("email"),
       password: loginData.get("password"),
     };
-
+    setLoggingIn(true);
     try {
       const response = await axios.post("/api/users/login", data);
-
       setErrors([]);
       setBackError("");
-
       if (response.status === 200) {
         setAuthUser(response.data.user);
         setLoggedIn(true);
+        setLoggingIn(false);
         // Display success message
         Swal.fire({
           icon: "success",
@@ -59,6 +71,7 @@ const Login = () => {
       } else {
         // Handle other server response statuses
         console.error("Error logging in:", response.data.message);
+        setLoggingIn(false);
         Swal.fire({
           icon: "error",
           title: "Login Failed",
@@ -73,7 +86,7 @@ const Login = () => {
     } catch (error) {
       setErrors([]);
       setBackError("");
-
+      setLoggingIn(false);
       // Handle errors that occurred during the POST request
       if (error.response && error.response.status === 400) {
         setErrors(error.response.data.errors);
@@ -128,7 +141,7 @@ const Login = () => {
         {/* Overlay with background image and opacity */}
         <div
           className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
-          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
+          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.4 }}
         ></div>
         {/*       <div className="container mx-auto flex justify-center items-center ">
           <ul className="bg-white py-4 px-2 rounded-md text-red-700">
@@ -147,12 +160,16 @@ const Login = () => {
             )}
           </ul>
         </div> */}
-        <div className="flex flex-col justify-start items-start gap-[2rem] w-[100%] md:w-[60%] lg:w-[45%] xl:w-[40%] bg-white rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[10px] md:mt-[20px] lg:mt-[100px] xl:mt-[90px] xs:py-12 py-10">
+        <div
+          className={`flex flex-col justify-start items-start gap-[2rem] w-full md:w-[80%] lg:w-[45%] xl:w-[40%] rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[10px] md:mt-[20px] lg:mt-[100px] xl:mt-[90px] xs:py-12 py-10 ${
+            loggingIn ? "bg-light-gray text-gray-400 opacity-80" : "bg-white "
+          }`}
+        >
           <div className="flex items-center">
             <img
               src={treeIcon}
               alt="Tree Icon"
-              className="w-[40px] h-[40px] mr-2"
+              className="w-[30px] h-[30px] mr-2"
             />
             <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
               Login
@@ -230,18 +247,6 @@ const Login = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              {/* <Checkbox
-                id="remember"
-                checked={rememberMe}
-                onChange={() => setRememberMe(!rememberMe)}
-                className=" border-font-family-color checked:border-none checked:outline-none checked:bg-secondary-color focus:ring-transparent dark:ring-offset-transparent !important cursor-pointer"
-              />
-              <Label
-                htmlFor="remember"
-                className="text-font-family-color text-"
-              >
-                Remember me
-              </Label> */}
               <span>We will remember you until you logout!</span>
               <Tooltip content="click here to reset your password">
                 <Link to="" className="ml-10 text-secondary-color underline">
@@ -249,14 +254,25 @@ const Login = () => {
                 </Link>
               </Tooltip>
             </div>
-
-            <Button type="submit" className="custom-button-style">
-              Login
-            </Button>
+            <div className="flex flex-row gap-3">
+              {loggingIn ? (
+                <Button className="custom-button-style">
+                  <Spinner
+                    aria-label="Alternate spinner button example"
+                    size="sm"
+                  />
+                  <span className="pl-3">Logging in...</span>
+                </Button>
+              ) : (
+                <Button type="submit" className="custom-button-style">
+                  <AiOutlineLogin />
+                  <span>&nbsp;Login</span>
+                </Button>
+              )}
+            </div>
           </form>
         </div>
       </div>
-      <img src={LoginFooterImage} alt="Footer Image" className="w-full" />
     </main>
   );
 };

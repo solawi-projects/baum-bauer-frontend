@@ -13,6 +13,7 @@ import { usePatronContext } from "../../store/PatronContext";
 import { BiSolidUserDetail } from "react-icons/bi";
 import treeIcon from "../../assets/tree.png";
 import { FaAmazonPay } from "react-icons/fa";
+import SponsorList from "./SponsorList";
 
 const Order = () => {
   document.title = "Order";
@@ -106,129 +107,72 @@ const Order = () => {
                   <div className="flex flex-col">
                     {" "}
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
+                      <span className="font-semibold text-lg text-dark-gray">
                         Full Name:
                       </span>
-                      &nbsp;
-                      {newPatron.firstName}&nbsp;{newPatron.lastName}
+                      <span>
+                        &nbsp;&nbsp;{newPatron.firstName}&nbsp;
+                        {newPatron.lastName}
+                      </span>
                     </p>
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
+                      <span className="font-semibold text-lg text-dark-gray">
                         Email:
                       </span>
-                      &nbsp; {newPatron.email}
+                      <span>&nbsp;&nbsp;{newPatron.email}</span>
                     </p>
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
+                      <span className="font-semibold text-lg text-dark-gray">
                         Mobile Phone:
                       </span>
-                      &nbsp; {newPatron.mobilePhone}
+                      <span>&nbsp;&nbsp;{newPatron.mobilePhone}</span>
                     </p>
                     {/* Display address details */}
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
+                      <span className="font-semibold text-lg text-dark-gray">
                         Address Line 1:
                       </span>
-                      &nbsp; {newPatron.address.address1}
+                      <span>&nbsp;&nbsp;{newPatron.address.address1}</span>
                     </p>
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
-                        Additional Address Details
+                      <span className="font-semibold text-lg text-dark-gray">
+                        Additional Address Details:
                       </span>
-                      &nbsp; {newPatron.address.address2}
+                      <span>&nbsp;&nbsp;{newPatron.address.address2}</span>
                     </p>
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
+                      <span className="font-semibold text-lg text-dark-gray">
                         City:
                       </span>
-                      &nbsp; {newPatron.address.city}
+                      <span>&nbsp;&nbsp;{newPatron.address.city}</span>
                     </p>
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
+                      <span className="font-semibold text-lg text-dark-gray">
                         Postcode:
                       </span>
-                      &nbsp; {newPatron.address.zipCode}
+                      <span>&nbsp;&nbsp;{newPatron.address.zipCode}</span>
                     </p>
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
+                      <span className="font-semibold text-lg text-dark-gray">
                         State/Country:
                       </span>
-                      &nbsp; {newPatron.address.state}
+                      <span>&nbsp;&nbsp;{newPatron.address.state}</span>
                     </p>
                     <p className="text-dark-gray ">
-                      <span className="font-semibold text-dark-gray">
+                      <span className="font-semibold text-lg text-dark-gray">
                         Country:
                       </span>
-                      &nbsp; {newPatron.address.country}
+                      <span>&nbsp;&nbsp;{newPatron.address.country}</span>
                     </p>
                   </div>
                 </div>
                 {/* Horizontal Line */}
                 <hr className="w-[100%] mx-auto border-t-2 border-bg-header-footer my-2" />
-                {cartProducts.map((product) => (
-                  <div
-                    key={product._id}
-                    className="w-full flex flex-col justify-between items-center bg-light-gray rounded-md md:flex-row md:gap-[1.5rem] py-3 mt-6 md:mt-0"
-                  >
-                    {/* Tree Photo and Name */}
-                    <div className="w-full flex flex-col items-center pb-2">
-                      <div className="hidden md:flex flex-row items-center md:self-start md:pl-6 text-xl font-main-font text-secondary-color tracking-wide p-2">
-                        <img
-                          src={treeIcon}
-                          alt="Tree Icon"
-                          className="w-[30px] h-[30px] mr-2"
-                        />
-                        Tree
-                      </div>
-                      <Link to={`/trees/${product._id}`}>
-                        <div className="flex flex-col-reverse items-center md:flex-row ">
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className="w-full h-[200px] md:w-[80px] md:h-[80px] object-cover mr-0 md:mr-2 rounded-md mt-2 mb-1 sm:mb-0"
-                          />
-                          <div
-                            className={`text-2xl sm:text-[1rem] font-main-font sm:font-general-font text-secondary-color sm:text-dark-gray text-center sm:text-start`}
-                          >
-                            {product.name}
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-
-                    {/* Tree Qty */}
-                    <div className="w-full flex flex-col items-start">
-                      <div className="hidden sm:flex-1 sm:block flex-row justify-center items-center text-xl font-main-font text-secondary-color tracking-wide pb-0 sm:pb-2">
-                        Qty
-                      </div>
-                      <div className="flex flex-row p-[0px] sm:p-[4px] text-dark-gray mx-auto sm:mx-0">
-                        <span className="mx-2 text-xl font-bold">
-                          {getTreeQuantity(product._id)}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Tree Price */}
-                    <div className="w-full flex flex-col items-start">
-                      <div className="hidden sm:flex text-xl font-main-font text-secondary-color tracking-wide pb-2">
-                        Price
-                      </div>
-                      <div className="flex flex-col mx-auto sm:mx-0 text-center sm:text-left">
-                        <div className="text-dark-gray text-lg">
-                          € {getItemTotalPrice(product).toFixed(2)}
-                        </div>
-                        <div className="text-md">
-                          {" "}
-                          €{" "}
-                          {product.price && product.price.$numberDecimal
-                            ? product.price.$numberDecimal
-                            : "N/A"}{" "}
-                          each
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                <SponsorList
+                  cartProducts={cartProducts}
+                  getTreeQuantity={getTreeQuantity}
+                  getItemTotalPrice={getItemTotalPrice}
+                />
               </div>
             ) : (
               <p>Your cart is empty</p>
@@ -236,7 +180,7 @@ const Order = () => {
 
             {/* Payment Information */}
             <div className="w-full lg:w-2/5 ">
-              <div className="flex flex-col border-l-4 border-lighter-secondary gap-[0.4rem] bg-light-gray rounded-md py-4 px-3">
+              <div className="flex flex-col lg:border-l-4 lg:border-lighter-secondary gap-[0.4rem] bg-light-gray rounded-md py-4 px-3">
                 {/* Total Price */}
                 <div className="flex flex-col">
                   <div className="flex flex-row justify-between">

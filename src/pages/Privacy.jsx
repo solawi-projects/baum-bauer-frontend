@@ -2,6 +2,9 @@ import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
+import { Link } from "react-router-dom";
+import BottomImg from "../assets/images/news_images/leaves_background.png";
+import { RiArrowGoBackLine } from "react-icons/ri";
 
 const Privacy = () => {
   document.title = "Privacy Policy for Solawi Zabergäu";
@@ -13,13 +16,13 @@ const Privacy = () => {
     <div className="relative text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       {/* Privacy title, positioned absolutely */}
-      <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 py-10 text-center z-10">
+      <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 py-10 text-center">
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />
       </h2>
       <section className="relative flex flex-col items-center justify-center pt-[100px] md:pt-[160px] lg:pt-[180px] xl:pt-[220px]">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-[25%] bg-cover bg-no-repeat bg-center"
+          className="cart-page-bg absolute top-0 left-0 w-full h-[25%] bg-cover bg-no-repeat bg-center"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             opacity: 0.2,
@@ -27,7 +30,7 @@ const Privacy = () => {
         ></div>
 
         {/* Privacy Policy Content */}
-        <div className="max-w-6xl mx-auto px-4 py-8 md:p-8 bg-white rounded-xl shadow-lg my-10 z-10">
+        <div className="max-w-6xl mx-auto px-4 py-8 md:p-8 bg-white rounded-xl shadow-lg my-10">
           <p>
             At <b>Bio Baum Bauer</b>, accessible from{" "}
             <b>www.biobaumbauer.com</b>, one of our main priorities is the
@@ -283,12 +286,23 @@ const Privacy = () => {
             If you have any questions or suggestions about our Privacy Policy,
             do not hesitate to contact us.
           </p>
+          <br />
+          {/* Link going back to Home page */}
+          <div className="flex justify-center mt-10">
+            <Link
+              to="/"
+              className="flex items-center w-max px-4 py-2 justify-center gap-2 text-md bg-bg-header-footer border-2 md:text-lg text-secondary-color font-bold rounded-md hover:bg-lighter-primary transition duration-4000 ease-linear"
+            >
+              <RiArrowGoBackLine />
+              <span>Back to Home Page</span>
+            </Link>
+          </div>
         </div>
       </section>
       {/* Footer Image */}
       <img
         className="w-full"
-        src="src/assets/images/news_images/leaves_background.png"
+        src={BottomImg}
         alt="Privacy Policy Footer Image"
       />
     </div>

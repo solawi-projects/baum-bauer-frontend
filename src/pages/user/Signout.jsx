@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Breadcrumb } from "flowbite-react";
 import axios from "../../utils/axiosInstance";
 import { HiHome } from "react-icons/hi";
@@ -6,13 +6,17 @@ import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import Swal from "sweetalert2";
+import { LiaSignOutAltSolid } from "react-icons/lia";
+import treeImage from "../../assets/tree.png";
 
 const Signout = () => {
   document.title = "Signout";
   const { setLoggedIn, setAuthUser } = useContext(AuthContext);
+  const [signingOut, setSigningOut] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    setSigningOut(true);
     try {
       await axios.get("/api/users/logout");
       setLoggedIn(false);
@@ -67,7 +71,7 @@ const Signout = () => {
         <div className="flex flex-col justify-center items-center gap-[2rem] xs:w-[100%] sm:w-[60%] md:w-[50%] lg:w-[40%] xl:w-[30%] bg-white rounded-[15px] p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px]">
           <div className="flex items-center mb-4">
             <img
-              src="/src/assets/tree.png"
+              src={treeImage}
               alt="Tree Icon"
               className="w-[40px] h-[40px] mr-2"
             />{" "}
@@ -81,22 +85,14 @@ const Signout = () => {
           <Link
             to="/login"
             onClick={handleLogout} // Add onClick to trigger logout
-            className="text-center my-2 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
+            className="flex items-center my-2 gap-2 px-8 py-2 bg-bg-header-footer text-font-family-color rounded-[10px] hover:bg-lighter-primary transition duration-4000 ease-linear"
             aria-label="Sign Out and go to the Login page"
           >
-            Sign Out
+            <LiaSignOutAltSolid size="1.2rem" />
+            <span>Sign Out</span>
           </Link>
         </div>
       </div>
-
-      {/* Footer Image */}
-      <img
-        src="src/assets/images/biobaum_news_footer_img.webp"
-        alt="Footer Image"
-        width="100%"
-        height="100%"
-        loading="lazy"
-      />
     </main>
   );
 };

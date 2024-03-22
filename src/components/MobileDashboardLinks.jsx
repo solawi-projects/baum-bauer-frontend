@@ -20,25 +20,33 @@ const MobileDashboardLinks = () => {
   }, [location.pathname]);
 
   return (
-    <div className="md:hidden pb-[60px] relative">
+    <div className="flex md:hidden p-4 relative">
       <button
         onClick={handleToggleMobile}
-        className="bg-bg-header-footer w-[60px] h-[60px] rounded-[15px] absolute xs:top-[-20px] top-[-20px]  xs:left-0 left-0 z-20 flex justify-center items-center"
+        className="flex justify-center items-center w-8 h-8 rounded-lg absolute top-[-5px] left-0 z-20 "
       >
-        <FaGear className="text-[3rem] text-white-color" />
+        <FaGear
+          className={
+            isMobile
+              ? `text-[3rem] text-secondary-color`
+              : `text-[1.8rem] text-darker-secondary `
+          }
+        />
       </button>
 
       {/* Mobile dropdown menu */}
       {isMobile && (
         <>
-          <div className="w-[50%] absolute xs:top-[40px] top-[40px] xs:left-0 left-0 bg-white rounded-[10px] border border-bg-header-footer z-[1]">
+          <div className="w-[50%] absolute top-[40px] xs:left-0 left-0 bg-white rounded-md border border-bg-header-footer dashboard-nav-index">
             <div className="flex flex-col w-full">
               <NavLink
                 aria-label="Dashboard"
                 to="/dashboard"
-                activeClassName="bg-bg-header-footer"
-                className={`text-font-family-color block border-b rounded-t-[10px] border-bg-header-footer py-4 text-start pl-4 hover:bg-bg-header-footer ${
-                  activeLink === "/dashboard" ? "bg-bg-header-footer" : ""
+                activeClassName="bg-lighter-secondary"
+                className={`text-font-family-color block border-b rounded-t-md border-bg-header-footer py-4 text-start pl-4 hover:bg-light-gray ${
+                  activeLink === "/dashboard"
+                    ? "border-l-4 border-l-darker-secondary bg-lighter-secondary"
+                    : ""
                 }`}
               >
                 Dashboard
@@ -47,8 +55,10 @@ const MobileDashboardLinks = () => {
                 aria-label="Update Profile"
                 to="/update_profile"
                 activeClassName="bg-bg-header-footer"
-                className={`text-font-family-color block border-b  border-bg-header-footer py-4 text-start pl-4 hover:bg-bg-header-footer ${
-                  activeLink === "/update_profile" ? "bg-bg-header-footer" : ""
+                className={`text-font-family-color block border-b  border-bg-header-footer py-4 text-start pl-4 hover:bg-light-gray ${
+                  activeLink === "/update_profile"
+                    ? "border-l-4 border-l-darker-secondary bg-lighter-secondary"
+                    : ""
                 }`}
               >
                 Profile
@@ -57,9 +67,9 @@ const MobileDashboardLinks = () => {
                 aria-label="Sponsorships"
                 to="/user_sponsorships"
                 activeClassName="bg-bg-header-footer"
-                className={`text-font-family-color block border-b  border-bg-header-footer py-4 text-start pl-4 hover:bg-bg-header-footer ${
+                className={`text-font-family-color block border-b  border-bg-header-footer py-4 text-start pl-4 hover:bg-light-gray ${
                   activeLink === "/user_sponsorships"
-                    ? "bg-bg-header-footer"
+                    ? "border-l-4 border-l-darker-secondary bg-lighter-secondary"
                     : ""
                 }`}
               >
@@ -69,8 +79,10 @@ const MobileDashboardLinks = () => {
                 aria-label="Change Password"
                 to="/password_change"
                 activeClassName="bg-bg-header-footer"
-                className={`text-font-family-color block border-b  border-bg-header-footer py-4 text-start pl-4 hover:bg-bg-header-footer ${
-                  activeLink === "/password_change" ? "bg-bg-header-footer" : ""
+                className={`text-font-family-color block border-b border-bg-header-footer py-4 text-start pl-4 hover:bg-light-gray ${
+                  activeLink === "/password_change"
+                    ? "border-l-4 border-l-darker-secondary bg-lighter-secondary"
+                    : ""
                 }`}
               >
                 Change Password
@@ -79,8 +91,10 @@ const MobileDashboardLinks = () => {
                 aria-label="Sign Out"
                 to="/signout"
                 activeClassName="bg-bg-header-footer"
-                className={`text-font-family-color py-4 text-start pl-4 rounded-b-[10px] hover:bg-bg-header-footer ${
-                  activeLink === "/signout" ? "bg-bg-header-footer" : ""
+                className={`text-font-family-color py-4 text-start pl-4 rounded-b-md hover:bg-light-gray ${
+                  activeLink === "/signout"
+                    ? "border-l-4 border-l-darker-secondary bg-lighter-secondary"
+                    : ""
                 }`}
               >
                 Sign Out

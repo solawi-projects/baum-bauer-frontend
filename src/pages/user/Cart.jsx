@@ -10,7 +10,6 @@ import { CartContext } from "../../store/CartContext";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { GoSponsorTiers } from "react-icons/go";
-import treeImg from "../../assets/images/tree_icon.svg";
 import treeIcon from "../../assets/tree.png";
 
 const Cart = () => {

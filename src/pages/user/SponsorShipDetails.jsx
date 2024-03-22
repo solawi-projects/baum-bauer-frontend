@@ -5,9 +5,12 @@ import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import DashboardLinks from "../../components/DashboardLinks";
 import MobileDashboardLinks from "../../components/MobileDashboardLinks";
 import axios from "../../utils/axiosInstance";
-import logoIcon from "../../assets/images/tree_icon.svg";
+import logoIcon from "../../assets/tree.png";
+import DashboardHeader from "./DashboardHeader";
 import { FaRegFilePdf } from "react-icons/fa6";
 import { MdEuroSymbol } from "react-icons/md";
+import { RiArrowGoBackLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 const SponsorShipDetails = () => {
   document.title = "Sponsorship details";
   const { id } = useParams();
@@ -40,57 +43,50 @@ const SponsorShipDetails = () => {
     getItems(id);
   }, []);
   return (
-    <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center">
+    <div className="cart-page-container relative bg-light-gray w-full mx-auto p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center">
       {/* Overlay with background image and opacity */}
       <div
-        className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
-        style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
+        className="cart-page-bg hidden lg:block absolute top-0 left-0 w-full h-full bg-contain bg-no-repeat bg-top"
+        style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.6 }}
       ></div>
 
-      <div className="w-[100%] lg:w-[90%] xl:w-[80%] bg-white rounded-[15px] p-6 xs:p-2 md:p-4 lg:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px]">
-        <div className="bg-secondary-color rounded-[15px] w-[100%] p-4 mx-auto text-white flex flex-row">
-          <div
-            className="rounded-full bg-white w-[40px] h-[40px] mr-[10px]"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src={logoIcon}
-              alt=""
-              style={{ width: "35px", height: "35px", borderRadius: "50%" }}
-            />
-          </div>{" "}
-          <h3 className="text-4xl font-main-font"> Dashboard</h3>
-        </div>
-        <div className="flex flex-col md:flex-row mt-10 gap-[1rem] md:gap-[2rem]">
+      <div className="w-[100%] lg:w-[100%] xl:w-[80%] bg-white rounded-[15px] p-6 xs:p-2 md:p-4 lg:p-8 shadow-lg lg:mt-[100px] xl:mt-[120px]">
+        <DashboardHeader subtitle={`sponsorships details`} />
+        <MobileDashboardLinks />
+        <div className="flex flex-col md:flex-row mt-4 gap-[1rem] md:gap-[2rem]">
           {/* Dashboard Links */}
-          <DashboardLinks />
-          <MobileDashboardLinks />
-
+          {/* <DashboardLinks /> */}
           {/* Sponsorships */}
           <div className="w-[100%] ">
-            <div className="flex items-center mb-4">
-              <img
-                src="/src/assets/tree.png"
-                alt="Tree Icon"
-                className="w-[40px] h-[40px] mr-2"
-              />
-              <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                <span>Sponsorship's Details</span>
-              </h3>
+            <div className="flex items-center mb-4 justify-between">
+              <div className=" flex items-center">
+                <img
+                  src={logoIcon}
+                  alt="Tree Icon"
+                  className="w-[30px] h-[30px] mr-2"
+                />
+                <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
+                  <span><span className="hidden md:inline">Sponsorship's</span> Details</span>
+                </h3>
+              </div>
+              <Link
+                to="/user_sponsorships"
+                className="flex items-center justify-center gap-2 w-max px-4 py-2 bg-bg-header-footer border-2 text-font-family-color rounded-md hover:bg-lighter-primary transition duration-4000 ease-linear sm:mt-0"
+                aria-label="Sponsor Tree page"
+              >
+                <RiArrowGoBackLine />
+                <span>Back to List</span>
+              </Link>
             </div>
-            <div className="w-[100%]   min-h-screen items-center  justify-center bg-white">
-              <div className="p-6 w-[100] px-0">
+            <div className="w-[100%] min-h-screen items-center justify-center bg-white">
+              <div className="px-0 w-[100]">
                 {error ? (
                   <span className=" text-red-500">{error}</span>
                 ) : (
                   <span></span>
                 )}
                 <div className="overflow-x-auto">
-                  <table className="w-[90%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md ">
+                  <table className="w-[100%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md ">
                     <thead className="pb-10 space-y-4">
                       <tr className="bg-bg-header-footer">
                         <th className="space-y-2 border-blue-gray-100 bg-blue-gray-50/50 p-4 g-3">
@@ -162,7 +158,6 @@ const SponsorShipDetails = () => {
                   </table>
                 </div>
                 <br />
-                <hr />
                 <div className="w-full pt-5 px-4 mb-8 mx-auto">
                   {Object.keys(patron).length > 0 ? (
                     <div className="w-[100%]">
@@ -223,7 +218,7 @@ const SponsorShipDetails = () => {
                 </h3>
                 <br /> <br />
                 <div className="overflow-x-auto">
-                  <table className="w-[90%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md">
+                  <table className="w-[100%] min-w-max table-auto text-left  border border-white rounded-tl-lg rounded-br-md shadow-md">
                     <thead className="pb-10 space-y-4">
                       <tr className="bg-bg-header-footer">
                         <th className="space-y-2 border-blue-gray-100 bg-blue-gray-50/50 p-4 g-3">
@@ -253,7 +248,7 @@ const SponsorShipDetails = () => {
                         return (
                           <tr
                             key={item._id}
-                            className="rounded hover:bg-lighter-primary active:bg-bg-lighter-primary focus:bg-bg-lighter-primary"
+                            className=" w-full rounded hover:bg-lighter-primary active:bg-bg-lighter-primary focus:bg-bg-lighter-primary"
                           >
                             <td className="p-4 border-b border-blue-gray-10">
                               <img

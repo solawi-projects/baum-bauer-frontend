@@ -7,8 +7,12 @@ import backgroundImage from "../../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { AuthContext } from "../../contexts/AuthContext";
+import DashboardHeader from "./DashboardHeader";
 import Swal from "sweetalert2";
 import axios from "../../utils/axiosInstance";
+import { BsSave } from "react-icons/bs";
+import treePng from "../../assets/tree.png";
+
 const UpdateProfile = () => {
   const { loggedIn, authUser, setAuthUser } = useContext(AuthContext);
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
@@ -125,44 +129,27 @@ const UpdateProfile = () => {
   return (
     <main>
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
-      <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center">
+      <div className="cart-page-container bg-light-gray relative w-full mx-auto p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
-          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
+          className="cart-page-bg hidden lg:block absolute top-0 left-0 w-full h-full bg-contain bg-no-repeat bg-top"
+          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.6 }}
         ></div>
 
-        <div className="w-[100%] lg:w-[90%] xl:w-[80%] bg-white rounded-[15px] p-6 xs:p-2 md:p-4 lg:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px]">
-          <div className="bg-secondary-color rounded-[15px] w-[100%] p-4 mx-auto text-white flex flex-row">
-            <div
-              className="rounded-full bg-white w-[40px] h-[40px] mr-[10px]"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="src/assets/images/tree_icon.svg"
-                alt=""
-                style={{ width: "35px", height: "35px", borderRadius: "50%" }}
-              />
-            </div>{" "}
-            <h3 className="text-4xl font-main-font"> Dashboard</h3>
-          </div>
-
-          <div className="flex flex-col md:flex-row mt-10 gap-[1rem] md:gap-[2rem]">
+        <div className="w-[100%] lg:w-[90%] xl:w-[80%] bg-white rounded-[15px] p-6 xs:p-2 md:p-4 lg:p-8 shadow-lg lg:mt-[100px] xl:mt-[120px]">
+          <DashboardHeader subtitle={`update profile`} />
+          <MobileDashboardLinks />
+          <div className="flex flex-col md:flex-row mt-4 gap-[1rem] md:gap-[2rem]">
             {/* Dashboard Links */}
             <DashboardLinks />
-            <MobileDashboardLinks />
             {/* Form */}{" "}
             {loggedIn && (
               <div className="w-[100%] md:w-[75%]">
                 <div className="flex items-center mb-4">
                   <img
-                    src="/src/assets/tree.png"
+                    src={treePng}
                     alt="Tree Icon"
-                    className="w-[40px] h-[40px] mr-2"
+                    className="w-[30px] h-[30px] mr-2"
                   />{" "}
                   <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                     Edit Your Profile
@@ -443,13 +430,14 @@ const UpdateProfile = () => {
                   </div>
                 </div>
                 {/* Update Button */}
-                <div className="text-center flex justify-center mb-6">
+                <div className="flex justify-center items-center  mb-6">
                   <Button
-                    className="custom-button-style"
+                    className=" custom-button-style"
                     onClick={handleswal}
                     aria-label="Update Profile"
                   >
-                    Save Changes
+                    <BsSave />
+                    <span>&nbsp;&nbsp;Save Changes</span>
                   </Button>
                 </div>
               </div>
@@ -457,15 +445,6 @@ const UpdateProfile = () => {
           </div>
         </div>
       </div>
-
-      {/* Footer Image */}
-      <img
-        src="src/assets/images/biobaum_contact_footer_img.webp"
-        alt="Footer Image"
-        width="100%"
-        height="100%"
-        loading="lazy"
-      />
     </main>
   );
 };
