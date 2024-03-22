@@ -4,7 +4,7 @@ import { HiHome } from "react-icons/hi";
 import axios from "../utils/axiosInstance";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import "../assets/styles/Faq.css";
-
+import backgroundImage from "../assets/images/leaves_background_02.webp";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import DefaultLoader from "../components/DefaultLoader";
 import EachPageHeader from "../components/EachPageHeader";
@@ -72,8 +72,15 @@ const Faq = () => {
   }
 
   return (
-    <div className="bg-bg-page-color text-font-family-color ">
+    <div className="relative bg-bg-page-color text-font-family-color ">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
+      <div
+        className="absolute top-[2.6rem] left-0 right-0 w-full h-[25%] bg-cover bg-no-repeat bg-center"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          opacity: 0.2,
+        }}
+      ></div>
       <div className="flex flex-col justify-center items-center gap-8 h-full pb-16 lg:pb-56 bg-white">
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />
         <div className="container flex items-center justify-center mx-auto text-2xl lg:text-3xl pl-4">

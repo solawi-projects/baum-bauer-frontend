@@ -9,6 +9,9 @@ import { AuthContext } from "../../contexts/AuthContext";
 import axios from "../../utils/axiosInstance";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import Swal from "sweetalert2";
+import DashboardHeader from "./DashboardHeader";
+import { BsSave } from "react-icons/bs";
+import treePng from "../../assets/tree.png";
 
 const PasswordChange = () => {
   document.title = "Changing Password";
@@ -23,7 +26,7 @@ const PasswordChange = () => {
   const handlePasswordChange = async (event) => {
     event.preventDefault();
     const { currentPassword, newPassword, confirmNewPassword } = passwords;
-   /*  if (newPassword !== confirmNewPassword) {
+    /*  if (newPassword !== confirmNewPassword) {
       alert("New password and confirm password do not match");
       return;
     } */
@@ -32,7 +35,7 @@ const PasswordChange = () => {
         `/api/users/chang-password/${authUser._id}`,
         { currentPassword, newPassword, confirmNewPassword }
       );
-   
+
       // update localStorage
       if (response.status === 200) {
         // Update the user's password in local storage
@@ -61,29 +64,24 @@ const PasswordChange = () => {
           password: newPassword,
         });
       }
-
-  
     } catch (error) {
-      
-console.log(error.response.data.errors[0].msg)
-const errorsList = error.response.data.errors.map((error) => error.msg).join(', ');
-console.log(errorsList);
-    Swal.fire({
-          icon: "error",
-          title: 'Failed to Change the Password',
-          text: errorsList,
-          customClass: {
-            confirmButton: "btn-custom-class",
-            title: "title-class",
-          },
-          buttonsStyling: false,
-        }); 
-   
-  
-      
+      console.log(error.response.data.errors[0].msg);
+      const errorsList = error.response.data.errors
+        .map((error) => error.msg)
+        .join(", ");
+      console.log(errorsList);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to Change the Password",
+        text: errorsList,
+        customClass: {
+          confirmButton: "btn-custom-class",
+          title: "title-class",
+        },
+        buttonsStyling: false,
+      });
     }
   };
-
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -105,44 +103,27 @@ console.log(errorsList);
   const daLinkValues = { linkText: "Change Password" };
 
   return (
-    <main>
+    <div>
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
-      <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center">
+      <div className="cart-page-container relative w-full bg-light-gray mx-auto p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
-          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
+          className="cart-page-bg hidden lg:block absolute top-0 left-0 w-full h-full bg-contain bg-no-repeat bg-top"
+          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.6 }}
         ></div>
 
-        <div className="w-[100%] lg:w-[90%] xl:w-[80%] bg-white rounded-[15px] p-6 xs:p-2 md:p-4 lg:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px]">
-          <div className="bg-secondary-color rounded-[15px] w-[100%] p-4 mx-auto text-white flex flex-row">
-            <div
-              className="rounded-full bg-white w-[40px] h-[40px] mr-[10px]"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="src/assets/images/tree_icon.svg"
-                alt=""
-                style={{ width: "35px", height: "35px", borderRadius: "50%" }}
-              />
-            </div>{" "}
-            <h3 className="text-4xl font-main-font"> Dashboard</h3>
-          </div>
-          <div className="flex flex-col md:flex-row mt-10 gap-[1rem] md:gap-[2rem]">
+        <div className="w-[100%] lg:w-[90%] xl:w-[80%] bg-white rounded-[15px] p-6 xs:p-2 md:p-4 lg:p-8 shadow-lg lg:mt-[100px] xl:mt-[120px]">
+          <DashboardHeader subtitle={`changing password`} />
+          <MobileDashboardLinks />
+          <div className="flex flex-col md:flex-row mt-4 gap-[1rem] md:gap-[2rem]">
             {/* Dashboard Links */}
             <DashboardLinks />
-            <MobileDashboardLinks />
-
-            <div className="w-[100%] md:w-[75%]">
+            <div className="w-full md:w-[75%]">
               <div className="flex items-center mb-4">
                 <img
-                  src="/src/assets/tree.png"
+                  src={treePng}
                   alt="Tree Icon"
-                  className="w-[40px] h-[40px] mr-2"
+                  className="w-[30px] h-[30px] mr-2"
                 />{" "}
                 <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                   Change Password
@@ -301,7 +282,8 @@ console.log(errorsList);
                     type="submit"
                     aria-label="Change Password"
                   >
-                    Change Password
+                    <BsSave />
+                    <span>&nbsp;&nbsp;Change Password</span>
                   </Button>
                 </div>
               </form>
@@ -309,16 +291,7 @@ console.log(errorsList);
           </div>
         </div>
       </div>
-
-      {/* Footer Image */}
-      <img
-        src="src/assets/images/biobaum_landing_footer_img.webp"
-        alt="Footer Image"
-        width="100%"
-        height="100%"
-        loading="lazy"
-      />
-    </main>
+    </div>
   );
 };
 

@@ -2,26 +2,28 @@ import backgroundImage from "../assets/images/leaves_background_01.webp";
 import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../components/PageBreadcrumb";
 import EachPageHeader from "../components/EachPageHeader";
+import ButtmImg from "../assets/images/news_images/leaves_background.png";
 import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
+import { RiArrowGoBackLine } from "react-icons/ri";
 
 const Terms = () => {
-  document.title ="Terms and Conditions"
+  document.title = "Terms and Conditions";
   const titles = ["Terms and Conditions"];
   const aLinkValues = [{ linkTo: "/", linkIcon: HiHome, linkText: "Home" }];
   const daLinkValues = { linkText: "Terms and Conditions" };
 
   return (
-    <main className="relative text-font-family-color">
+    <div className="relative text-font-family-color">
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
       {/* Terms and Conditions title, positioned absolutely */}
-      <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 py-10 text-center z-10">
+      <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 py-10 text-center">
         <EachPageHeader title={titles[0]} subtitle={titles[1]} />
       </h2>
       <section className="relative flex flex-col items-center justify-center pt-[100px] md:pt-[160px] lg:pt-[180px] xl:pt-[220px]">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-[25%] bg-cover bg-no-repeat bg-center"
+          className="cart-page-bg absolute top-0 left-0 w-full h-[25%] bg-cover bg-no-repeat bg-center"
           style={{
             backgroundImage: `url(${backgroundImage})`,
             opacity: 0.2,
@@ -29,7 +31,7 @@ const Terms = () => {
         ></div>
 
         {/* Terms and Conditions Content */}
-        <div className="max-w-6xl mx-auto px-4 py-8 md:p-8 bg-white rounded-xl shadow-lg my-10 z-10">
+        <div className="max-w-6xl mx-auto px-4 py-8 md:p-8 bg-white rounded-xl shadow-lg my-10">
           <h2 className="text-5xl font-semibold mt-6 mb-16 flex justify-center my-5">
             Welcome to Bio Baum Bauer!
           </h2>
@@ -352,26 +354,25 @@ const Terms = () => {
             loss or damage of any nature.
           </p>
 
-          {/* Link going back to Registration page */}
+          {/* Link going back to Home page */}
           <div className="flex justify-center mt-10">
-            <Button className="custom-button-style px-4 py-2 md:px-6 md:py-3">
-              <Link
-                to="/register"
-                className="text-md md:text-lg text-secondary-color font-bold"
-              >
-                Back to Registration Page...
-              </Link>
-            </Button>
+            <Link
+              to="/"
+              className="flex items-center w-max px-4 py-2 justify-center gap-2 text-md bg-bg-header-footer border-2 md:text-lg text-secondary-color font-bold rounded-md hover:bg-lighter-primary transition duration-4000 ease-linear"
+            >
+              <RiArrowGoBackLine />
+              <span>Back to Home Page</span>
+            </Link>
           </div>
         </div>
       </section>
       {/* Footer Image */}
       <img
         className="w-full"
-        src="src/assets/images/news_images/leaves_background.png"
+        src={ButtmImg}
         alt="Terms and Conditions Footer Image"
       />
-    </main>
+    </div>
   );
 };
 

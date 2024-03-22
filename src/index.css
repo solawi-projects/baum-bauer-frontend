@@ -20,6 +20,7 @@ Global variables for colors
   --red-color: #ff6961;
   --light-bg: #f8f5f4;
   --light-gray: #ededed;
+  --dark-gray: #c3c0c0;
 }
 
 *,
@@ -340,6 +341,9 @@ input::placeholder {
 } */
 
 /* z-index stack */
+.dashboard-nav-index {
+  z-index: var(--z-index-v-2);
+}
 .desktop-nav {
   z-index: var(--z-index-v-10);
 }

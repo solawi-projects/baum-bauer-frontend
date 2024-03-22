@@ -1,26 +1,33 @@
-import { useState, useEffect } from "react";
-import { Breadcrumb, Label, TextInput, Checkbox, Button } from "flowbite-react";
-import { HiHome } from "react-icons/hi";
-import { MdEmail } from "react-icons/md";
+import { useState, useEffect, useContext } from "react";
+import { GiArchiveRegister } from "react-icons/gi";
+import {
+  Breadcrumb,
+  Label,
+  TextInput,
+  Checkbox,
+  Button,
+  Spinner,
+} from "flowbite-react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { HiEye, HiEyeOff, HiHome } from "react-icons/hi";
+import { MdEmail, MdOutlineKey } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
 import { FaPhoneAlt } from "react-icons/fa";
-import { MdOutlineKey } from "react-icons/md";
-import { FaMapLocation } from "react-icons/fa6";
+import { FaMapLocation, FaTreeCity, FaHouse } from "react-icons/fa6";
 import { GiPostOffice } from "react-icons/gi";
-import { FaTreeCity } from "react-icons/fa6";
 import { SiGooglestreetview } from "react-icons/si";
-import { FaHouse } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/images/leaves_background_02.webp";
 import axios from "../../utils/axiosInstance";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import { HiEye, HiEyeOff } from "react-icons/hi";
+
 import treeIcon from "../../assets/tree.png";
 import LoginFooterImage from "../../assets/images/biobaum_about_footer_img.webp";
 
 const Register = () => {
   document.title = "Register New User";
+  const { loggedIn } = useContext(AuthContext);
+  const [loggingIn, setLoggingIn] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -39,8 +46,13 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const [errorMsgs, setErrorMsgs] = useState([]);
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/dashboard");
+    }
+  }, [loggedIn, navigate]);
 
+  const [errorMsgs, setErrorMsgs] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmationPassword, setShowConfirmationPassword] =
     useState(false);
@@ -99,12 +111,13 @@ const Register = () => {
       });
       return;
     }
-
+    setLoggingIn(true);
     try {
       const response = await axios.post("/api/users/create-user", formData);
 
       if (response.status === 201) {
         setErrorMsgs([]);
+        setLoggingIn(false);
         // Display success message
         Swal.fire({
           icon: "success",
@@ -119,6 +132,7 @@ const Register = () => {
         navigate("/login");
       } else {
         // Handle other server response statuses
+        setLoggingIn(false);
         console.error("Error creating user:", response.data.message);
         Swal.fire({
           icon: "error",
@@ -134,7 +148,7 @@ const Register = () => {
       }
     } catch (error) {
       setErrorMsgs([]);
-
+      setLoggingIn(false);
       // Handle errors that occurred during the POST request
       if (error.response && error.response.status === 400) {
         setErrorMsgs(error.response.data.errors);
@@ -159,6 +173,7 @@ const Register = () => {
           buttonsStyling: false,
         });
       } else {
+        setLoggingIn(false);
         Swal.fire({
           icon: "error",
           title: "Registration Failed",
@@ -187,22 +202,22 @@ const Register = () => {
         <Breadcrumb.Item>Registration Form</Breadcrumb.Item>
       </Breadcrumb>
       {/* registration form */}
-      <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center text-font-family-color">
+      <div className="cart-page-container relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center text-font-family-color">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-[50%] bg-cover bg-no-repeat bg-top z-[-1]"
-          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
+          className="cart-page-bg absolute top-0 left-0 w-full h-[50%] bg-cover bg-no-repeat bg-top"
+          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.4 }}
         ></div>
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col justify-start items-start gap-[2rem] w-[100%] md:w-[80%] lg:w-[70%] xl:w-[60%] bg-white rounded-[15px] p-4 sm:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] xs:py-12 py-10"
+          className="flex flex-col justify-start items-start gap-[2rem] w-full md:w-[90%] lg:w-[70%] xl:w-[60%] bg-white rounded-[15px] p-4 sm:p-8 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px] xs:py-12 py-10"
         >
           <div className="flex items-center">
             <img
               src={treeIcon}
               alt="Tree Icon"
-              className="w-[40px] h-[40px] mr-2"
+              className="w-[30px] h-[30px] mr-2"
             />
             <h3 className="text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
               Register
@@ -669,14 +684,24 @@ const Register = () => {
             </div>
 
             <div className="flex justify-start mt-6">
-              <Button className="custom-button-style" type="submit">
-                Register
-              </Button>
+              {loggingIn ? (
+                <Button className="custom-button-style">
+                  <Spinner
+                    aria-label="Alternate spinner button example"
+                    size="sm"
+                  />
+                  <span className="pl-3">Registering...</span>
+                </Button>
+              ) : (
+                <Button className="custom-button-style" type="submit">
+                  <GiArchiveRegister size="1.7rem" />
+                  <span className=" text-lg">&nbsp;Register</span>
+                </Button>
+              )}
             </div>
           </div>
         </form>
-      </div>{" "}
-      <img src={LoginFooterImage} alt="Footer Image" className="w-full" />
+      </div>
     </main>
   );
 };

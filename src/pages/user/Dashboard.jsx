@@ -7,6 +7,8 @@ import { HiHome } from "react-icons/hi";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "../../utils/axiosInstance";
+import DashboardHeader from "./DashboardHeader";
+import treePng from "../../assets/tree.png";
 
 const DashboardContent = () => {
   document.title = "Dashboard - User";
@@ -38,104 +40,94 @@ const DashboardContent = () => {
     getAllSponsorShip(authUser);
   }, []);
   return (
-    <main>
+    <div>
       <PageBreadcrumb activeLinks={aLinkValues} deActiveLink={daLinkValues} />
-      <div className="relative w-full mx-auto xs:p-0 p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center text-font-family-color">
+      <div className="cart-page-container bg-light-gray relative w-full mx-auto p-4 pb-[25px] md:pb-[40px] lg:pb-[100px] xl:pb-[120px] flex items-center justify-center text-font-family-color">
         {/* Overlay with background image and opacity */}
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat bg-top z-[-1]"
-          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.2 }}
+          className="cart-page-bg hidden lg:block absolute top-0 left-0 w-full h-full bg-contain bg-no-repeat bg-top"
+          style={{ backgroundImage: `url(${backgroundImage})`, opacity: 0.6 }}
         ></div>
 
-        <div className="w-[100%] lg:w-[90%] xl:w-[80%] bg-white rounded-[15px] p-6 xs:p-2 md:p-4 lg:p-8 z-9 shadow-lg mt-[50px] md:mt-[80px] lg:mt-[100px] xl:mt-[120px]">
-          <div className="bg-secondary-color rounded-[15px] w-[100%] p-4 mx-auto text-white flex flex-row">
-            <div
-              className="rounded-full bg-white w-[40px] h-[40px] mr-[10px]"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="src/assets/images/tree_icon.svg"
-                alt=""
-                style={{ width: "35px", height: "35px", borderRadius: "50%" }}
-              />
-            </div>{" "}
-            <h3 className="text-4xl font-main-font"> Dashboard</h3>
-          </div>
-          <div className="flex flex-col md:flex-row mt-10 gap-[1rem] lg:gap-[2rem]">
+        <div className="w-full lg:w-[90%] xl:w-[80%] bg-white rounded-[15px] p-6 md:p-4 lg:p-8 shadow-lg  lg:mt-[100px] xl:mt-[120px]">
+          <DashboardHeader subtitle={`main`} />
+          <MobileDashboardLinks />
+          <div className="flex flex-col md:flex-row mt-4 gap-[1rem] lg:gap-[2rem]">
             {/* Dashboard Links */}
             <DashboardLinks />
-            <MobileDashboardLinks />
             {/* Sponsorships */}
-            <div className="w-[100%] md:w-[45%]">
-              <h3 className="break-all text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
-                Welcome,&nbsp;{authUser.firstName}&nbsp;{authUser.lastName}
+            <div className="w-full md:w-[25%]">
+              <h3 className="break-all text-2xl md:text-3xl text-secondary-color font-main-font tracking-wide md:border-b-2 md:border-bg-header-footer inline-block">
+                <span>Hi,</span>
+                <span className=" text-dark1-gray">
+                  <span className=" inline-block md:hidden lg:inline-block">
+                    &nbsp;{authUser.firstName}
+                  </span>
+                  &nbsp;{authUser.lastName}
+                </span>
               </h3>
-              <div className="flex flex-col justify-center items-center gap-[2rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 p-4">
+              <div className="flex flex-col justify-center items-center gap-[2rem] bg-light-gray rounded-md  mt-4 p-4">
                 <h3 className="text-3xl text-secondary-color font-main-font tracking-wide">
                   Sponsorships
                 </h3>
                 <p className="text-red-500">{error ? error : ""}</p>
-                <div className="w-16 h-24 bg-secondary-color rounded-full flex items-center justify-center">
+                <div className="w-24 h-24 md:w-20 md:h-20 bg-secondary-color rounded-full flex items-center justify-center">
                   <p className="text-white text-4xl font-main-font">
                     {sponsorshipsCount}
                   </p>
-                </div>{" "}
+                </div>
                 <Link
                   to="/user_sponsorships"
                   className="underline hover:scale-110 transition-transform duration-400 ease-linear hover:text-dark-gray"
                 >
                   <img
-                    src="/src/assets/tree.png"
+                    src={treePng}
                     alt="Tree Icon"
-                    className="w-[40px] h-[40px] block mx-auto"
+                    className="w-[30px] h-[30px] block mx-auto"
                   />
                   View Sponsorships
                 </Link>
               </div>
             </div>{" "}
             {/* Delivery Address */}
-            <div className="w-[100%] md:w-[50%]">
+            <div className="w-full md:w-[45%]">
               <h3 className="break-all text-3xl text-secondary-color font-main-font tracking-wide border-b-2 border-bg-header-footer inline-block">
                 User Details
               </h3>
-              <div className=" break-all flex flex-col justify-center items-start gap-[0.4rem] bg-white rounded-[10px] border border-bg-header-footer mt-4 xs:p-2 p-4">
-                <p className="text-font-family-color italic">
+              <div className=" break-all flex flex-col bg-light-gray justify-center items-start gap-[0.4rem] rounded-md mt-4 p-4">
+                <p className="text-font-family-color">
                   <span className="font-semibold">Full Name:</span>&nbsp;
                   {authUser.firstName}&nbsp;{authUser.lastName}
                 </p>{" "}
-                <p className="text-font-family-color italic">
+                <p className="text-font-family-color">
                   <span className="font-semibold">Email:</span>
                   &nbsp;{authUser.email}
                 </p>{" "}
-                <p className="text-font-family-color italic">
+                <p className="text-font-family-color">
                   <span className="font-semibold">Phone Number:</span>&nbsp;
                   {authUser.mobilePhone}
                 </p>{" "}
-                <p className="text-font-family-color italic">
+                <p className="text-font-family-color">
                   <span className="font-semibold">Address Line 1:</span>&nbsp;
                   {authUser.address.address1}
                 </p>{" "}
-                <p className="text-font-family-color italic">
+                <p className="text-font-family-color">
                   <span className="font-semibold">Address Line 2:</span>&nbsp;
                   {authUser.address.address2}
                 </p>{" "}
-                <p className="text-font-family-color italic">
+                <p className="text-font-family-color">
                   <span className="font-semibold">City:</span>&nbsp;
                   {authUser.address.city}
                 </p>{" "}
-                <p className="text-font-family-color italic">
+                <p className="text-font-family-color">
                   <span className="font-semibold">Postcode:</span>&nbsp;
                   {authUser.address.zipCode}
                 </p>{" "}
-                <p className="text-font-family-color italic">
+                <p className="text-font-family-color">
                   <span className="font-semibold">State:</span>&nbsp;
                   {authUser.address.state}
                 </p>{" "}
-                <p className="text-font-family-color italic">
+                <p className="text-font-family-color">
                   <span className="font-semibold">Country:</span>&nbsp;
                   {authUser.address.country}
                 </p>
@@ -144,16 +136,7 @@ const DashboardContent = () => {
           </div>
         </div>
       </div>
-
-      {/* Footer Image */}
-      <img
-        src="src/assets/images/biobaum_gallery_footer_img.webp"
-        alt="Footer Image"
-        width="100%"
-        height="100%"
-        loading="lazy"
-      />
-    </main>
+    </div>
   );
 };
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import backgroundImage from "../../assets/images/leaves_background_01.webp";
-import treeIcon from "../../assets/images/tree_icon.svg";
 import { TextInput, Label } from "flowbite-react";
 import { CartContext } from "../../store/CartContext";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -15,6 +14,7 @@ import { MdFileDownloadDone } from "react-icons/md";
 import { RiUserReceived2Fill } from "react-icons/ri";
 import { ImAddressBook } from "react-icons/im";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
+import SponsorList from "./SponsorList";
 
 const Checkout = () => {
   document.title = "Checkout";
@@ -106,10 +106,6 @@ const Checkout = () => {
         <div className="w-full xl:w-[90%] 2xl:w-[80%] bg-white rounded-lg p-3 lg:p-8 shadow-lg lg:mt-[100px] xl:mt-[120px]">
           <div className="flex flex-col-reverse lg:flex-row gap-[2rem] md:gap-[1rem]">
             <div className="w-full flex flex-col items-center lg:w-[50%] bg-white gap-[2rem] rounded-md px-2 ">
-              {/* <div className="bg-white gap-2 rounded-md w-full py-4 mx-auto text-secondary-color flex flex-row">
-                <MdOutlineShoppingCartCheckout size="1.9rem"/>
-                <h3 className="text-3xl font-main-font">Checkout</h3>
-              </div> */}
               {/* Form Fields */}
               <form className="w-full grid grid-cols-1 gap-2 lg:gap-4 mt-3">
                 {/* User Details */}
@@ -410,92 +406,14 @@ const Checkout = () => {
             {/* Sponsorship Summary */}
             <div className="w-full flex flex-col items-center lg:w-[50%] bg-white gap-[2rem] rounded-[10px] self-start h-auto mt-2">
               <div className="flex flex-row items-center mx-auto gap-2 w-full py-2 text-secondary-color ">
-                {/* <div
-                  className="rounded-full bg-white w-[40px] h-[40px] mr-[10px]"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <img
-                    src={treeIcon}
-                    alt=""
-                    style={{
-                      width: "35px",
-                      height: "35px",
-                      borderRadius: "50%",
-                    }}
-                  />
-                </div> */}
                 <MdOutlineSummarize size="1.9rem" />
                 <h3 className="text-3xl font-main-font">Sponsorship Summary</h3>
               </div>
-
-              {cartProducts.map((product) => (
-                <div
-                  key={product._id}
-                  className="w-full flex flex-col justify-between items-center bg-light-gray rounded-md md:flex-row gap-[0.9rem] md:gap-[1.5rem] py-3 "
-                >
-                  {/* Tree Photo and Name */}
-                  <div className="w-full flex flex-col items-center pb-2">
-                    <div className="hidden md:flex flex-row items-center md:self-start md:pl-6 text-xl font-main-font text-secondary-color tracking-wide p-2">
-                      <img
-                        src={treeIcon1}
-                        alt="Tree Icon"
-                        className="w-[30px] h-[30px] mr-2"
-                      />
-                      Tree
-                    </div>
-                    <Link to={`/trees/${product._id}`}>
-                      <div className="flex flex-col-reverse items-center md:flex-row ">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-[200px] md:w-[80px] md:h-[80px] object-cover mr-0 md:mr-2 rounded-md mt-2 mb-1 sm:mb-0"
-                        />
-                        <div
-                          className={`text-2xl sm:text-[1rem] font-main-font sm:font-general-font text-secondary-color sm:text-dark-gray text-center sm:text-start`}
-                        >
-                          {product.name}
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-
-                  {/* Tree Qty */}
-                  <div className="w-full flex flex-col items-start">
-                    <div className="hidden sm:flex-1 sm:block flex-row justify-center items-center text-xl font-main-font text-secondary-color tracking-wide pb-0 sm:pb-2">
-                      Qty
-                    </div>
-                    <div className="flex flex-row p-[0px] sm:p-[4px] text-dark-gray mx-auto sm:mx-0">
-                      <span className="mx-2 text-xl font-bold">
-                        {getTreeQuantity(product._id)}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Tree Price */}
-                  <div className="w-full flex flex-col items-start">
-                    <div className="hidden sm:flex text-xl font-main-font text-secondary-color tracking-wide pb-2">
-                      Price
-                    </div>
-                    <div className="flex flex-col mx-auto sm:mx-0 text-center sm:text-left">
-                      <div className="text-dark-gray text-lg">
-                        € {getItemTotalPrice(product).toFixed(2)}
-                      </div>
-                      <div className="text-md">
-                        {" "}
-                        €{" "}
-                        {product.price && product.price.$numberDecimal
-                          ? product.price.$numberDecimal
-                          : "N/A"}{" "}
-                        each
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              <SponsorList
+                cartProducts={cartProducts}
+                getTreeQuantity={getTreeQuantity}
+                getItemTotalPrice={getItemTotalPrice}
+              />
 
               {/* Horizontal Line */}
               <hr className="w-[70%] mx-auto border-t-2 border-bg-header-footer my-1" />

@@ -80,10 +80,10 @@ const AuthNavbar = () => {
                     isDropdownOpen ? "block " : "hidden"
                   } absolute top-[71px] h-auto bg-lighter-primary right-20 md:right-24 lg:right-64 w-auto rounded-[6px] border-2 border-bg-header-footer shadow-2xl mt-2 transition-all duration-300 text-font-family-color`}
                 >
-                  <div className="py-4 px-6 cursor-pointer hover:bg-lighter-secondary border-b border-bg-header-footer rounded-t-[2px] text-lg">
+                  <div className=" cursor-pointer hover:bg-lighter-secondary border-b border-bg-header-footer rounded-t-[2px] text-lg">
                     <Link
                       to="/dashboard"
-                      className="navIcon w-full h-full flex items-center transition-transform duration-75 ease-linear"
+                      className="py-4 px-6 navIcon w-full h-full flex items-center transition-transform duration-75 ease-linear"
                       aria-label="dashboard page"
                     >
                       <div className="flex items-center gap-3">
@@ -92,10 +92,10 @@ const AuthNavbar = () => {
                       </div>
                     </Link>
                   </div>
-                  <div className="py-4 px-6 cursor-pointer hover:bg-lighter-secondary border-b border-bg-header-footer text-lg">
+                  <div className=" cursor-pointer hover:bg-lighter-secondary border-b border-bg-header-footer text-lg">
                     <Link
                       to="/signout"
-                      className="navIcon w-full h-full flex items-center transition-transform duration-75 ease-linear"
+                      className="py-4 px-6 navIcon w-full h-full flex items-center transition-transform duration-75 ease-linear"
                       aria-label="Sign Out page"
                     >
                       <div className="flex items-center transition-transform duration-75 ease-linear">
@@ -115,19 +115,22 @@ const AuthNavbar = () => {
               >
                 <div className="flex items-center justify-center rounded-full bg-white w-[50px] h-[50px] relative">
                   <FaCartArrowDown size="1.9rem" />
-                  <div
-                    className="absolute top-[0.2rem] right-[0.2rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
-                    style={{ transform: "translate(50%, -50%)" }}
-                  >
-                    {cartTrees.length}
-                  </div>
+                  {cartTrees.length > 0 ? (
+                    <div
+                      className="absolute top-[0.2rem] right-[0.2rem] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                      style={{ transform: "translate(50%, -50%)" }}
+                    >
+                      {cartTrees.length}
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </Link>
             </div>
           )}
         </div>
       </div>
-
     </nav>
   );
 };
