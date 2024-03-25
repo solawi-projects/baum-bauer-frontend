@@ -21,7 +21,8 @@ import LoginFooterImage from "../../assets/images/biobaum_about_footer_img.webp"
 
 const Login = () => {
   document.title = "Login";
-  const { loggedIn, setLoggedIn, setAuthUser } = useContext(AuthContext);
+  const { loggedIn, setLoggedIn, setAuthUser, setExpiredTime } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
     if (loggedIn) {
@@ -54,6 +55,7 @@ const Login = () => {
       setBackError("");
       if (response.status === 200) {
         setAuthUser(response.data.user);
+        setExpiredTime(Date.now() + 3600000);
         setLoggedIn(true);
         setLoggingIn(false);
         // Display success message

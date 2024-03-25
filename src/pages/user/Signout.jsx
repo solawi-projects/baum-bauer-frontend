@@ -11,7 +11,7 @@ import treeImage from "../../assets/tree.png";
 
 const Signout = () => {
   document.title = "Signout";
-  const { setLoggedIn, setAuthUser } = useContext(AuthContext);
+  const { setLoggedIn, setAuthUser, setExpiredTime } = useContext(AuthContext);
   const [signingOut, setSigningOut] = useState(false);
   const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ const Signout = () => {
     try {
       await axios.get("/api/users/logout");
       setLoggedIn(false);
+      setExpiredTime(null);
       setAuthUser({});
       // Display success message
       Swal.fire({
