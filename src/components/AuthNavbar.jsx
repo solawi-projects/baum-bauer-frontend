@@ -15,7 +15,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Tooltip } from "flowbite-react";
 
 const AuthNavbar = () => {
-  const { loggedIn, authUser } = useContext(AuthContext);
+  const { loggedIn, authUser, expiredTime } = useContext(AuthContext);
   const { cartTrees } = useContext(CartContext);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => {
@@ -30,11 +30,10 @@ const AuthNavbar = () => {
             className="h-12 w-12 md:h-16 md:w-16 shadow-lg rounded-full"
             alt="Logo"
           />
-          {
-            <p className=" hidden text-white font-main-font text-2xl md:block">
-              Bio Baum Bauer
-            </p>
-          }
+
+          <p className=" hidden text-white font-main-font text-2xl md:block">
+            Bio Baum Bauer&nbsp;
+          </p>
         </div>
         <div className="flex space-x-4 items-center">
           {!loggedIn && (
